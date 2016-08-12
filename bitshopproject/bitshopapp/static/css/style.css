@@ -1,0 +1,296 @@
+/*===============================================
+*BitShooping MAIN CSS
+*Aguest 11 2016
+==================================================*/
+/*
+==================================================
+ Table of Content
+==================================================
+#	
+#
+#  
+#
+===================================================*/
+
+
+/*--------------------*/
+/* BASIC TYPOGRAPHY */
+/*--------------------*/
+
+@import url(https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic);
+body,html {
+	margin:0px;
+	padding: 0px;
+	font-family: 'Lato', sans-serif;
+	font-size: 100%;
+	overflow-x: hidden;
+	color: #272727;
+	background: #fff;
+	height: 100%;
+	z-index: -1;
+}
+/*=======
+navbar start
+==========*/
+.navbar-default {
+    background-color: #fff;
+    border-color: #000;
+    border-radius: 0;
+	margin-bottom: 0px;
+	padding: 0 62px;
+}
+.navbar {
+    position: relative;
+    min-height: 50px;
+    border: 1px solid #ddd;
+}
+.navbar-default .navbar-brand {
+    color: #000;
+	font-weight: 800;
+	font-size: 22px;
+}
+.navbar-default .navbar-brand:hover {
+    color: #000;
+}
+.navbar-default .navbar-nav>li>a {
+    color: #000;
+    background-color: transparent;
+	font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+}
+.navbar-default .navbar-nav>li>a:hover {
+    color: #000;
+    background-color: transparent;
+}
+.navbar-default .navbar-nav>li:hover {
+    color: #fff !important;
+	/*background-color: hsla(0,0%,100%,.2);*/
+	background-color: hsla(170, 50%, 45%, 1);
+}
+.search-top .navbar-form .input-group {
+	width: 678px;
+    max-width: 100%;
+}
+.search-top .form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 20px 14px;
+    font-size: 16px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+.search-top .input-group-btn .btn {
+	border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    display: inline-block;
+    padding: 10px 24px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.btn-default {
+   color: #fff;
+    background-color: #4D87EF;
+    border-color: #ccc;
+}
+.btn-default:hover {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+.search-top .fa-search {
+	font-size: 18px;
+    font-weight: 500;
+    line-height: 14px;
+}
+.search-top img {
+	width: 138px;
+	max-width: 100%;
+    height: 110px;
+}
+/*=======
+navbar END
+==========*/
+
+/*=======
+section css start
+==========*/
+
+.main-wrap {
+	width: 650px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+.search-top {
+	display: block;
+    margin-top: 40px;
+	text-align: center;
+}
+.main-products {
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+.main-products .thumbnail {
+    height: 64px;
+    max-height: 100%;
+    min-height: 20px;
+    padding: 0px;
+    margin-bottom: 0px;
+    background-color: #fff;
+    border: 1px solid #bbb;
+    border-radius: 0px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    overflow: hidden;
+}
+
+.main-products  .thumbnail img {
+	max-height: 68px;
+    max-width: 68px;
+    float: left;
+    margin-right: 10px;
+}
+.main-products .thumbnail .caption {
+    padding: 0;
+    color: #333;
+}
+.bit-info {
+    margin-left: 116px;
+    width: 213px;
+    max-width: 100%;
+    margin-top: 8px;
+}
+.bit-info .bit-title {
+    color: #212121;
+    font-size: 20px;
+    line-height: 24px;
+    text-decoration: none;
+}
+.bit-descript {
+    max-height: 54px;
+    min-height: 20px;
+    overflow: hidden;
+    color: #8d8d8d;
+    display: block;
+    font-size: 13px;
+    line-height: 18px;
+    margin-top: 10px;
+    padding: 0 10px;
+    position: relative;
+    word-wrap: break-word;
+}
+.item-name-desc {
+	font-size: 14px;
+    font-weight: 300;
+    line-height: 20px;
+    margin-bottom: 0px;
+    width: 134px;
+    overflow: hidden;
+    color: #272727;
+	margin-top: -11px;
+}
+.news-details .thumbnail {
+    display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+	margin-right: 10px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #bbb;
+    border-radius: 0;
+    -webkit-transition: border .2s ease-in-out;
+    -o-transition: border .2s ease-in-out;
+    transition: border .2s ease-in-out;
+}
+.similar-content {
+	
+}
+.similar-content .panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #bbb;
+    border-radius: 0px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+.similar-content .panel-body {
+    padding: 8px;
+}
+.similar-content .thumbnail {
+    height: 72px;
+    max-height: 100%;   
+    min-height: 20px;
+    padding: 0px;
+    margin-bottom: 0px;
+    background-color: #fff;
+    border: 1px solid #bbb;
+    border-radius: 0px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+}
+.similar-content .thumbnail img {
+    max-height: 68px;
+    max-width: 50px;
+    float: left;
+    margin-right: 10px;
+}
+.similar-content .thumbnail .badge {
+	margin-right: 20px;
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #777;
+    border-radius: 2px;
+}
+.thumbnail .announce {
+    padding: 0px;
+    color: #333;
+}
+.announce  h5 {
+    color: #000 !important;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    margin: 12px 0px;
+    overflow: hidden;
+    text-decoration: none !important;
+    position: relative;
+    white-space: nowrap;
+    width: 215px;
+    text-overflow: ellipsis;
+}
+/*========
+section css End
+=========*/
