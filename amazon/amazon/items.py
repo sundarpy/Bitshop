@@ -5,7 +5,8 @@ from scrapy.item import Field
 
 class AmazonItem(scrapy.Item):
 	title = scrapy.Field()
-	sellingprice = scrapy.Field()
+	brand = scrapy.Field()
+	feature = scrapy.Field()
 	offerprice = scrapy.Field()
 	saleprice = scrapy.Field()
 	description = scrapy.Field()

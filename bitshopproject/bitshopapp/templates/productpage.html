@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+{% load static from staticfiles %}
+	<html lang="en">
+		<head>
+			<title>BitShopping</title>
+			<!-- meta name -->
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<meta name="keywords" content="">
+			<meta name="author" content="">
+			<!-- Favicon -->
+			<link rel="shortcut icon" type="images/icon" href="{% static "images/favicon.ico" %}"/>
+			<!-- Bootstrap -->
+			<link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet"> 
+			<!--<link href="css/bootstrap.css" rel="stylesheet"> -->
+			<!-- Font Awesome -->
+			<link href="{% static "css/font-awesome.css" %}" rel="stylesheet">
+			<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+			<!-- Main Style -->
+			<link href="{% static "css/owl.carousel.css" %}" rel="stylesheet">
+			<link href="{% static "css/owl.theme.css" %}" rel="stylesheet">
+			<link href="{% static "css/style.css" %}" rel="stylesheet">
+			<script type="text/javascript">var switchTo5x=true;</script>
+			<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+			<script type="text/javascript">stLight.options({publisher: "0d8788c3-362d-4766-bfd6-b4fb0f354c84", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+		</head>
+		
+		<body>
+			<div class="wrapper" id="wrapper">
+				<header>
+					<div class="header-main">
+						<nav class="navbar navbar-default">
+							<div class="container-fluid">
+								<!-- Brand and toggle get grouped for better mobile display -->
+								<div class="navbar-header">
+								  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								  </button>
+								  <a class="navbar-brand" href="{% url 'home' %}"><b>BitShopping</b></a>
+								</div>
+
+								<!-- Collect the nav links, forms, and other content for toggling -->
+								<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+								  <!--<ul class="nav navbar-nav">
+									<li>
+										<a href="#"></a>
+									</li>
+									<li>
+										<a href="#"></a>
+									</li>
+								  </ul>-->
+								  <ul class="nav navbar-nav navbar-right">
+									{% for cat in navbar_category|slice:":5" %}
+									<li><a href="{% url 'categorydetail' cat.id %}">{{cat.category_name}}</a></li>
+									{% endfor %}
+								  </ul>
+								</div>
+							</div>
+						</nav>
+					</div>
+				</header>
+				<section class="Bishopping-main">
+					<div class="container">
+						<div class="search-top">
+								<form class="navbar-form" action="{% url 'results'  %}" method="get" role="search">
+								<div class="input-group">
+									<input class="form-control" type="search" value="Search" name="q" placeholder="Search..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}" required="">
+									<span class="input-group-btn" style="text-align: left;">
+										<button type="search" value="Search" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></button>
+								  	</span>
+								</div>
+							</form>
+						</div>
+						
+						<div class="row">
+							<div class="col-md-8">
+								<div class="news-details-wrap">
+									<div class="news-details-content">
+										<div class="row panel panel-default">
+											<div class="panel-default">
+												<div class="product-slider-details">
+													<div class="left-slider">
+														<div class="">
+															<ol class="breadcrumb">
+															  <li><a href="{% url 'home' %}">Home</a></li>
+															  <li><a href="{% url 'categorydetail' product.category.id %}">{{product.category}}</a></li>
+															  <li class="active">{{product.subcategory}}</li>
+															</ol>
+														</div>
+														<div class="row">
+															<div class=" col-sm-4 col-xs-4">
+																<div id='carousel-custom' class='carousel slide' data-ride='carousel'>
+																	<div class='carousel-outer'>
+																		<!-- me art lab slider -->
+																		<div class='carousel-inner '>
+																			<div class='item active'>
+																				<img src={{product.mainimage}} alt=''id="zoom_05"  data-zoom-image={{product.mainimage}}/>
+																			</div>
+																			{% for img in image|slice:"1:" %}
+																			<div class='item'  id="zoom_05">
+																				<img src={{img.image_url}} alt='' data-zoom-image={{img.image_url}} />
+																			</div>
+																			{% endfor %}
+																			<script>
+																			  $("#zoom_05").elevateZoom({ zoomType    : "inner", cursor: "crosshair" });
+																			</script>
+																		</div>
+																			
+																		<!-- sag sol -->
+																		<a class='left carousel-control' href='#carousel-custom' data-slide='prev'>
+																			<span class='glyphicon glyphicon-chevron-left'></span>
+																		</a>
+																		<a class='right carousel-control' href='#carousel-custom' data-slide='next'>
+																			<span class='glyphicon glyphicon-chevron-right'></span>
+																		</a>
+																	</div>
+																	
+																	<!-- thumb -->
+																	<ol class='carousel-indicators mCustomScrollbar meartlab'>
+																		{% for img in image %}
+																		<li data-target='#carousel-custom' data-slide-to='1'><img src={{img.image_url}} alt='' /></li>
+																		{% endfor %}
+																	</ol>
+																</div>
+															</div>
+															<div class="col-md-8">
+																<div class="info-products">
+																	<div class="title-item">
+																		<h4>{{product.title}}</h4>
+																	</div>
+																	<div class="price-item">
+																		{% if product.offer_price %}
+																		<h4> &#x20B9; {{product.offer_price}}</h4>
+																		{% else %}
+																		<h4> &#x20B9; {{product.sale_price}}</h4>
+																		{% endif %}
+																	</div>
+																	<div class="sold-item">
+																		{% if product.seller %}
+																		<h5> SOLD BY 
+																			<span class="seller-name">{{product.seller}}</span>&nbsp; &nbsp;
+																			{% if product.seller_rating != "Sol" %}
+																			<span class="badge"><b>{{product.seller_rating}}</b>/5</span>
+																			{% endif %}
+																		</h5>
+																		{% endif %}
+																	</div>
+																	<div class="cash-item">
+																		<h5> Cash On Delivery <b>:</b> &nbsp; &nbsp; 
+																			<span class="avail-name">{{product.COD}}</span>
+																		</h5>
+																	</div>
+																	{% if product.star_rating != "Fac" %}
+																	<div class="cash-item">
+																		<h5> Rating <b>:</b> &nbsp; &nbsp; 
+																			<span class="avail-name">{{product.star_rating}}</span>
+																		</h5>
+																	</div>
+																	{% endif %}
+																	{% if product.feature %}
+																	<div class="cash-item">
+																		<h5> Features <b>:</b> &nbsp; &nbsp; 
+																			<span class="avail-name">{{product.feature|safe}}</span>
+																		</h5>
+																	</div>
+																	{% endif %}
+																	<div class="select-item">
+																		<h5> 
+																			<a href={{product.link}}><button class="btn btn-sm btn-success buy">Buy</button></a>
+																		</h5>
+																	</div>
+																	<div class="share-social">
+																		<h5>share it</h5>
+																			<span class='st_facebook_large' displayText='Facebook'></span>
+																			<span class='st_twitter_large' displayText='Tweet'></span>
+																			<span class='st_linkedin_large' displayText='LinkedIn'></span>
+																			<span class='st_pinterest_large' displayText='Pinterest'></span>
+																	</div>
+																</div>
+															</div>
+														</div>
+														
+														{% if product.description %}
+														<div class="descrip">
+															<!--<ul class="list-unstyled"> 
+																<li><b>-</b> &nbsp;Trendiest collection.Lowest prices. COD. Easy returns. Quality material</li>
+																<li><b>-</b> &nbsp;Trendiest collection.Lowest prices. COD. Easy returns. Quality material</li>
+																<li><b>-</b> &nbsp;Trendiest collection.Lowest prices. COD. Easy returns. Quality material</li>
+																<li><b>-</b> &nbsp;Trendiest collection.Lowest prices. COD. Easy returns. Quality material</li>
+																<li><b>-</b> &nbsp;Trendiest collection.Lowest prices. COD. Easy returns. Quality material</li>
+															</ul>-->
+															{{product.description|safe}}
+														</div>
+														{% endif %}
+														
+														<div class="row">
+															<div class="col-md-12">
+																<!-- UI 40 Starts -->
+																<!--<div class="comment-box">
+																	<h2 class="comment-section-header">{{comments.count}} Comments</h2>
+																	<div class="comment-space">
+																		<div class="row">
+																			<div class="col-md-2">
+																				<div class="comment-img">
+																					<img src="http://mcq.incevio.com/user-avatar/avatar-placeholder.jpg" class="" alt=""/>
+																				</div>
+																			</div>
+																			<div class="col-md-10">
+																				<div class="comment-post">
+																					<textarea class="form-control" rows="3"></textarea>
+																				</div>
+																				<div class="comment-post comment-submit">
+																					<button class="btn btn-danger" type="submit">Post</button>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	
+																	<div class="comment-space">
+																		<div class="row">
+																			<div class="col-md-2">
+																				<div class="comment-img">
+																					<img src="http://mcq.incevio.com/user-avatar/avatar-placeholder.jpg" class="" alt=""/>
+																				</div>
+																			</div>
+																			<div class="col-md-10">
+																				<div class="comment-post">
+																					<h4 class="commenter"><a href="#">Selena</a>
+																						<span class="points">
+																							<a href="#">2 Points</span></a>
+																						<span class="comment-hr pull-right">
+																							<a href="#">2h</span></a>
+																					</h4>
+																					<p>This is Awesome..!!!</p>
+																					
+																					<div class="comment-reply">
+																						<ul class="list-unstyled">
+																							<li>
+																								<a href="#">Reply</a>
+																							</li>
+																							
+																							<li>
+																								<a href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
+																							</li>
+																							<li>
+																								<a href="#"><i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
+																							</li>
+																						</ul>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																		
+																		<div class="reply-comment">
+																			<div class="row">
+																				<div class="col-md-2">
+																					<div class="comment-img">
+																						<img src="http://mcq.incevio.com/user-avatar/avatar-placeholder.jpg" class="" alt=""/>
+																					</div>
+																				</div>
+																				<div class="col-md-10">
+																					<div class="comment-post">
+																						<h4 class="commenter"><a href="#">Selena</a>
+																							<span class="points">
+																								<a href="#">2 Points</span></a>
+																							<span class="comment-hr">
+																								<a href="#">2d</span></a>
+																						</h4>
+																						<p><a href="#">@zelfsilverwolf</a> So...you read like Sean Connery speaks. Interesting.</p>
+																						
+																						<div class="comment-reply">
+																							<ul class="list-unstyled">
+																								<li>
+																									<a href="#">Reply</a>
+																								</li>
+																								
+																								<li>
+																									<a href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
+																								</li>
+																								<li>
+																									<a href="#"><i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
+																								</li>
+																							</ul>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																		
+																	</div>
+																	
+																	<div class="comment-space" style="border-bottom: transparent;">
+																		<div class="row">
+																			<div class="col-md-2">
+																				<div class="comment-img">
+																					<img src="http://mcq.incevio.com/user-avatar/avatar-placeholder.jpg" class="" alt=""/>
+																				</div>
+																			</div>
+																			<div class="col-md-10">
+																				<div class="comment-post">
+																					<h4 class="commenter"><a href="#">Selena</a>
+																						<span class="points">
+																							<a href="#">2 Points</span></a>
+																						<span class="comment-hr pull-right">
+																							<a href="#">2h</span></a>
+																					</h4>
+																					<p>This is Awesome..!!!</p>
+																					
+																					<div class="comment-reply">
+																						<ul class="list-unstyled">
+																							<li>
+																								<a href="#">Reply</a>
+																							</li>
+																							
+																							<li>
+																								<a href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
+																							</li>
+																							<li>
+																								<a href="#"><i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
+																							</li>
+
+																						</ul>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>-->
+																<!-- UI 40 Ends -->
+															</div>	
+														</div>	
+													</div>
+												</div>
+											</div>
+										</div>
+										<div clas="clearfix"></div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-md-4">
+								<div class="similar-content">
+									<div class="similar-content" style="margin-top: 40px;">
+										<div class="panel panel-default">
+											<div class="panel-body">Men</div>
+											{% for data in data1|slice:":3" %}
+											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
+												<div class="thumbnail">
+														<img src={{data.mainimage}} alt="item-imgs"/>
+													
+													<div class="caption announce">
+														<span class="badge pull-right"> &#8377; {{data.price}} </span>
+														<a href="{% url 'productdetail' data.id %}"><h5>{{data.title}}</h5></a>	
+													</div>
+												</div>
+											</a>
+											{% endfor %}
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="similar-content">
+									<div class="similar-content">
+										<div class="panel panel-default">
+											<div class="panel-body">Women</div>
+											{% for data in data2|slice:":3" %}
+											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
+												<div class="thumbnail">
+														<img src={{data.mainimage}} alt="item-imgs"/>
+													
+													<div class="caption announce">
+														<span class="badge pull-right"> &#8377; {{data.price}} </span>
+														<a href="{% url 'productdetail' data.id %}"><h5>{{data.title}}</h5></a>	
+													</div>
+												</div>
+											</a>
+											{% endfor %}
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="similar-content">
+									<div class="similar-content">
+										<div class="panel panel-default">
+											<div class="panel-body">Appliances</div>
+											{% for data in data3|slice:":7" %}
+											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
+												<div class="thumbnail">
+														<img src={{data.mainimage}} alt="item-imgs"/>
+													
+													<div class="caption announce">
+														<span class="badge pull-right"> &#8377; {{data.price}} </span>
+														<a href="{% url 'productdetail' data.id %}"><h5>{{data.title}}</h5></a>	
+													</div>
+												</div>
+											</a>
+											{% endfor %}
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="similar-content">
+									<div class="similar-content">
+										<div class="panel panel-default">
+											<div class="panel-body">Home</div>
+											{% for data in data4|slice:":7" %}
+											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
+												<div class="thumbnail">
+														<img src={{data.mainimage}} alt="item-imgs"/>
+													
+													<div class="caption announce">
+														<span class="badge pull-right"> &#8377; {{data.price}} </span>
+														<a href="{% url 'productdetail' data.id %}"><h5>{{data.title}}</h5></a>	
+													</div>
+												</div>
+											</a>
+											{% endfor %}
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="similar-content">
+									<div class="similar-content">
+										<div class="panel panel-default">
+											<div class="panel-body">Electronics</div>
+											{% for data in data5|slice:":7" %}
+											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
+												<div class="thumbnail">
+														<img src={{data.mainimage}} alt="item-imgs"/>
+													
+													<div class="caption announce">
+														<span class="badge pull-right"> &#8377; {{data.price}} </span>
+														<a href="{% url 'productdetail' data.id %}"><h5>{{data.title}}</h5></a>	
+													</div>
+												</div>
+											</a>
+											{% endfor %}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</section>
+				<!-- Start Footer -->    
+				<!--	<footer id="footer">
+					<div class="footer-main">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="footer-top-area">                        
+										
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="footer-top-area rights">                        
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</footer>-->
+				<!-- End Footer -->
+			</div>
+			<!-- initialize jQuery Library --> 
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+			<!-- jquery -->
+			<script src="{% static "js/jquery.min.js" %}"></script>
+			<!-- Bootstrap -->
+			<script src="{% static "js/bootstrap.min.js" %}"></script>
+			<script src="{% static "js/owl.carousel.min.js" %}"></script>
+			<script src="{% static "js/slider.min.js" %}"></script>
+			<script type="text/javascript">
+			$(document).ready(function() {
+				$(".mCustomScrollbar").mCustomScrollbar({axis:"x"});
+			});
+			</script>
+		</body>
+	</html>

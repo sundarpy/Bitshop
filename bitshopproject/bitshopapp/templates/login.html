@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% load socialaccount %}
+{% load static from staticfiles %}
+{% load crispy_forms_tags %}
+	<html lang="en">
+		<head>
+			<title>BitShopping</title>
+			<!-- meta name -->
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<meta name="keywords" content="">
+			<meta name="author" content="">
+			<!-- Favicon -->
+			<link rel="shortcut icon" type="images/icon" href="{% static "images/favicon.ico" %}"/>
+			<!-- Bootstrap -->
+			<link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet"> 
+			<!--<link href="css/bootstrap.css" rel="stylesheet"> -->
+			<!-- Font Awesome -->
+			<link href="{% static "css/font-awesome.css" %}" rel="stylesheet">
+			<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+			<!-- Main Style -->
+			<link href="{% static "css/owl.carousel.css" %}" rel="stylesheet">
+			<link href="{% static "css/owl.theme.css" %}" rel="stylesheet">
+			<link href="{% static "css/style.css" %}" rel="stylesheet">
+		</head>
+		
+		<body>
+			<div class="wrapper" id="wrapper">
+					<!-- Signin part Start -->
+					<div class="container">
+						<div class="row">
+							<div class="main">
+							  <h3>Please Log In, or <a href="{% url 'signup' %}" style="text-decoration: none;">Sign Up</a></h3>
+								<div class="row">
+									<div class="col-xs-6 col-sm-6 col-md-12">
+										<div class="social">
+										  <a href="{% provider_login_url "facebook" method="oauth2" %}" class="btn btn-lg btn-primary btn-block facebk">Facebook</a>
+										  <a href="{% provider_login_url "google" method="oauth2" %}" class="btn btn-lg btn-info btn-block google">Google</a>
+										</div>
+									</div>
+								</div>
+								<div class="login-or">
+									<hr class="hr-or">
+									<span class="span-or">or</span>
+								</div>
+								<form role="form" method="POST" action="." enctype='mutipart/form-data'>{% csrf_token %}
+									<div class="form-group">
+										<div>{{form.username|as_crispy_field:"bootstrap"}}</div>
+									</div>
+									<div class="form-group">
+										<div>{{form.password|as_crispy_field:"bootstrap"}}</div>
+									</div>
+									<p class="forgot-pswrd block-center"><a href="{% url 'account_reset_password' %}">Forgot Password?</a></p>
+									<div class="form-group">
+										<input type="submit" class="btn btn-primary btn-sm pull-right btn-submit" style="display: block;margin: 0 auto;" value='{{title}}' />
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<!-- Signin part end 	-->
+			</div>
+			<!-- initialize jQuery Library --> 
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+			<!-- jquery -->
+			<script src="{% static "js/jquery.min.js" %}"></script>
+			<!-- Bootstrap -->
+			<script src="{% static "js/bootstrap.min.js" %}"></script>
+			<script src="{% static "js/owl.carousel.min.js" %}"></script>
+		
+		</body>
+	</html>

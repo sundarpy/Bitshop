@@ -1,14 +1,17 @@
 from django.contrib import admin
-from .models import SerfoProduct, Product, ProductImage, Category, SubCategory, UserProfile, Review, Post, Comment, SubComment, UserActivity, New
+from .models import Brand, SerfoProduct, Product, ProductImage, Category, SubCategory, UserProfile, Review, Comment, SubComment, New
 
 # Register your models here.
 class ProductAdmin(admin.ModelAdmin):
-	list_display = ('title', 'offer_price', 'seller', 'category')
+	list_display = ('title', 'offer_price', 'sale_price', 'seller', 'category')
 	search_fields = ('title',)
 
 class ProductImageAdmin(admin.ModelAdmin):
 	list_display = ('product_name',)
 	search_fields = ('product_name__title',)
+
+class BrandAdmin(admin.ModelAdmin):
+	list_display = ('brand_name',)
 
 class CategoryAdmin(admin.ModelAdmin):
 	list_display = ('category_name',)
@@ -29,12 +32,11 @@ class NewAdmin(admin.ModelAdmin):
 admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductImage, ProductImageAdmin)
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Brand, BrandAdmin)
 admin.site.register(SubCategory, SubCategoryAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(Review)
-admin.site.register(Post)
 admin.site.register(New, NewAdmin)
 admin.site.register(SerfoProduct, SerfoProductAdmin)
 admin.site.register(Comment)
 admin.site.register(SubComment)
-admin.site.register(UserActivity)

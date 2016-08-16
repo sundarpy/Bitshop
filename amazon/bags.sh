@@ -1,0 +1,13 @@
+scrapy crawl bags1 -o bags1.json
+scrapy crawl bags2 -o bags2.json
+scrapy crawl bags3 -o bags3.json
+scrapy crawl bags4 -o bags4.json
+scrapy crawl bags5 -o bags5.json
+scrapy crawl bags6 -o bags6.json
+scrapy crawl bags7 -o bags7.json
+scrapy crawl bags8 -o bags8.json
+scrapy crawl bags9 -o bags9.json
+scrapy crawl bags10 -o bags10.json
+scrapy crawl bags11 -o bags11.json
+scrapy crawl bags12 -o bags12.json
+scrapy crawl bags13 -o bags13.json

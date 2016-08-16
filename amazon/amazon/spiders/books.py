@@ -24,25 +24,28 @@ class LiteratureFiction(scrapy.Spider):
 
 	def parse(self, response):
 		ulink = response.xpath('//div[@class="a-column a-span12 a-text-center"]/a/@href')
-		for href in ulink:
-			uRl = response.urljoin(href.extract())
-			yield scrapy.Request(uRl, callback=self.parse_products, meta={'url':href.extract()})
-		self.next_page += 1
-		yield self.create_ajax_request(self.next_page)
+		if self.next_page <= 50:
+			for href in ulink:
+				uRl = response.urljoin(href.extract())
+				yield scrapy.Request(uRl, callback=self.parse_products, meta={'url':href.extract()})
+			self.next_page += 1
+			yield self.create_ajax_request(self.next_page)
 
 	def parse_products(self, response):
 		hxs = HtmlXPathSelector(response)
 		items = []
 		item = AmazonItem()
 		item['title'] = hxs.select('//div[@class="a-section a-spacing-none"]/h1/span[@id="productTitle"]/text()').extract()
-		item['sellingprice'] = hxs.select('//span[@class="a-color-secondary a-text-strike"]/text()').extract()
+		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
 		item['offerprice'] = hxs.select('//span[@class="a-size-medium a-color-price inlineBlock-display offer-price a-text-normal price3P"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
-		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
-		item['image'] = hxs.select('//div[@id="img-canvas"]/img/@src').extract()
+		item['description'] = hxs.select('//div[@id="productDescription"]/p[1]/text()').extract()
+		item['feature'] = hxs.select('//ul[@class="a-vertical a-spacing-none"]/li/span/text()').extract()
+		item['image'] = hxs.select('//span[@class="a-button-text"]/img/@src').extract()
 		item['link'] = response.meta["url"]
 		item['seller'] = hxs.select('//div[@id="merchant-info"]/a[1]/text()').extract()
 		item['sellrating'] = hxs.select('//div[@id="merchant-info"]/text()').extract()
+		item['starating'] = hxs.select('//a[@class="a-link-normal"]/i/span/text()').extract()[0]
 		item['COD'] = "Available"
 		item['category'] = "Books"
 		item['subcategory'] = "Literature & Fiction"
@@ -67,25 +70,28 @@ class ChildrensYoungAdult(scrapy.Spider):
 
 	def parse(self, response):
 		ulink = response.xpath('//div[@class="a-column a-span12 a-text-center"]/a/@href')
-		for href in ulink:
-			uRl = response.urljoin(href.extract())
-			yield scrapy.Request(uRl, callback=self.parse_products, meta={'url':href.extract()})
-		self.next_page += 1
-		yield self.create_ajax_request(self.next_page)
+		if self.next_page <= 50:
+			for href in ulink:
+				uRl = response.urljoin(href.extract())
+				yield scrapy.Request(uRl, callback=self.parse_products, meta={'url':href.extract()})
+			self.next_page += 1
+			yield self.create_ajax_request(self.next_page)
 
 	def parse_products(self, response):
 		hxs = HtmlXPathSelector(response)
 		items = []
 		item = AmazonItem()
 		item['title'] = hxs.select('//div[@class="a-section a-spacing-none"]/h1/span[@id="productTitle"]/text()').extract()
-		item['sellingprice'] = hxs.select('//span[@class="a-color-secondary a-text-strike"]/text()').extract()
+		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
 		item['offerprice'] = hxs.select('//span[@class="a-size-medium a-color-price inlineBlock-display offer-price a-text-normal price3P"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
-		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
-		item['image'] = hxs.select('//div[@id="img-canvas"]/img/@src').extract()
+		item['description'] = hxs.select('//div[@id="productDescription"]/p[1]/text()').extract()
+		item['feature'] = hxs.select('//ul[@class="a-vertical a-spacing-none"]/li/span/text()').extract()
+		item['image'] = hxs.select('//span[@class="a-button-text"]/img/@src').extract()
 		item['link'] = response.meta["url"]
 		item['seller'] = hxs.select('//div[@id="merchant-info"]/a[1]/text()').extract()
 		item['sellrating'] = hxs.select('//div[@id="merchant-info"]/text()').extract()
+		item['starating'] = hxs.select('//a[@class="a-link-normal"]/i/span/text()').extract()[0]
 		item['COD'] = "Available"
 		item['category'] = "Books"
 		item['subcategory'] = "Children's & Young Adult"
@@ -110,25 +116,28 @@ class Textbooks(scrapy.Spider):
 
 	def parse(self, response):
 		ulink = response.xpath('//div[@class="a-column a-span12 a-text-center"]/a/@href')
-		for href in ulink:
-			uRl = response.urljoin(href.extract())
-			yield scrapy.Request(uRl, callback=self.parse_products, meta={'url':href.extract()})
-		self.next_page += 1
-		yield self.create_ajax_request(self.next_page)
+		if self.next_page <= 50:
+			for href in ulink:
+				uRl = response.urljoin(href.extract())
+				yield scrapy.Request(uRl, callback=self.parse_products, meta={'url':href.extract()})
+			self.next_page += 1
+			yield self.create_ajax_request(self.next_page)
 
 	def parse_products(self, response):
 		hxs = HtmlXPathSelector(response)
 		items = []
 		item = AmazonItem()
 		item['title'] = hxs.select('//div[@class="a-section a-spacing-none"]/h1/span[@id="productTitle"]/text()').extract()
-		item['sellingprice'] = hxs.select('//span[@class="a-color-secondary a-text-strike"]/text()').extract()
+		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
 		item['offerprice'] = hxs.select('//span[@class="a-size-medium a-color-price inlineBlock-display offer-price a-text-normal price3P"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
-		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
-		item['image'] = hxs.select('//div[@id="img-canvas"]/img/@src').extract()
+		item['description'] = hxs.select('//div[@id="productDescription"]/p[1]/text()').extract()
+		item['feature'] = hxs.select('//ul[@class="a-vertical a-spacing-none"]/li/span/text()').extract()
+		item['image'] = hxs.select('//span[@class="a-button-text"]/img/@src').extract()
 		item['link'] = response.meta["url"]
 		item['seller'] = hxs.select('//div[@id="merchant-info"]/a[1]/text()').extract()
 		item['sellrating'] = hxs.select('//div[@id="merchant-info"]/text()').extract()
+		item['starating'] = hxs.select('//a[@class="a-link-normal"]/i/span/text()').extract()[0]
 		item['COD'] = "Available"
 		item['category'] = "Books"
 		item['subcategory'] = "Textbooks"
@@ -153,25 +162,28 @@ class ExamCentral(scrapy.Spider):
 
 	def parse(self, response):
 		ulink = response.xpath('//div[@class="a-column a-span12 a-text-center"]/a/@href')
-		for href in ulink:
-			uRl = response.urljoin(href.extract())
-			yield scrapy.Request(uRl, callback=self.parse_products, meta={'url':href.extract()})
-		self.next_page += 1
-		yield self.create_ajax_request(self.next_page)
+		if self.next_page <= 50:
+			for href in ulink:
+				uRl = response.urljoin(href.extract())
+				yield scrapy.Request(uRl, callback=self.parse_products, meta={'url':href.extract()})
+			self.next_page += 1
+			yield self.create_ajax_request(self.next_page)
 
 	def parse_products(self, response):
 		hxs = HtmlXPathSelector(response)
 		items = []
 		item = AmazonItem()
 		item['title'] = hxs.select('//div[@class="a-section a-spacing-none"]/h1/span[@id="productTitle"]/text()').extract()
-		item['sellingprice'] = hxs.select('//span[@class="a-color-secondary a-text-strike"]/text()').extract()
+		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
 		item['offerprice'] = hxs.select('//span[@class="a-size-medium a-color-price inlineBlock-display offer-price a-text-normal price3P"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
-		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
-		item['image'] = hxs.select('//div[@id="img-canvas"]/img/@src').extract()
+		item['description'] = hxs.select('//div[@id="productDescription"]/p[1]/text()').extract()
+		item['feature'] = hxs.select('//ul[@class="a-vertical a-spacing-none"]/li/span/text()').extract()
+		item['image'] = hxs.select('//span[@class="a-button-text"]/img/@src').extract()
 		item['link'] = response.meta["url"]
 		item['seller'] = hxs.select('//div[@id="merchant-info"]/a[1]/text()').extract()
 		item['sellrating'] = hxs.select('//div[@id="merchant-info"]/text()').extract()
+		item['starating'] = hxs.select('//a[@class="a-link-normal"]/i/span/text()').extract()[0]
 		item['COD'] = "Available"
 		item['category'] = "Books"
 		item['subcategory'] = "Exam Central"
@@ -196,25 +208,28 @@ class EducationalSoftware(scrapy.Spider):
 
 	def parse(self, response):
 		ulink = response.xpath('//div[@class="a-column a-span12 a-text-center"]/a/@href')
-		for href in ulink:
-			uRl = response.urljoin(href.extract())
-			yield scrapy.Request(uRl, callback=self.parse_products, meta={'url':href.extract()})
-		self.next_page += 1
-		yield self.create_ajax_request(self.next_page)
+		if self.next_page <= 50:
+			for href in ulink:
+				uRl = response.urljoin(href.extract())
+				yield scrapy.Request(uRl, callback=self.parse_products, meta={'url':href.extract()})
+			self.next_page += 1
+			yield self.create_ajax_request(self.next_page)
 
 	def parse_products(self, response):
 		hxs = HtmlXPathSelector(response)
 		items = []
 		item = AmazonItem()
 		item['title'] = hxs.select('//div[@class="a-section a-spacing-none"]/h1/span[@id="productTitle"]/text()').extract()
-		item['sellingprice'] = hxs.select('//span[@class="a-color-secondary a-text-strike"]/text()').extract()
+		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
 		item['offerprice'] = hxs.select('//span[@class="a-size-medium a-color-price inlineBlock-display offer-price a-text-normal price3P"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
-		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
-		item['image'] = hxs.select('//div[@id="img-canvas"]/img/@src').extract()
+		item['description'] = hxs.select('//div[@id="productDescription"]/p[1]/text()').extract()
+		item['feature'] = hxs.select('//ul[@class="a-vertical a-spacing-none"]/li/span/text()').extract()
+		item['image'] = hxs.select('//span[@class="a-button-text"]/img/@src').extract()
 		item['link'] = response.meta["url"]
 		item['seller'] = hxs.select('//div[@id="merchant-info"]/a[1]/text()').extract()
 		item['sellrating'] = hxs.select('//div[@id="merchant-info"]/text()').extract()
+		item['starating'] = hxs.select('//a[@class="a-link-normal"]/i/span/text()').extract()[0]
 		item['COD'] = "Available"
 		item['category'] = "Books"
 		item['subcategory'] = "Educational Software"
@@ -239,25 +254,28 @@ class IndianLanguages(scrapy.Spider):
 
 	def parse(self, response):
 		ulink = response.xpath('//div[@class="a-column a-span12 a-text-center"]/a/@href')
-		for href in ulink:
-			uRl = response.urljoin(href.extract())
-			yield scrapy.Request(uRl, callback=self.parse_products, meta={'url':href.extract()})
-		self.next_page += 1
-		yield self.create_ajax_request(self.next_page)
+		if self.next_page <= 50:
+			for href in ulink:
+				uRl = response.urljoin(href.extract())
+				yield scrapy.Request(uRl, callback=self.parse_products, meta={'url':href.extract()})
+			self.next_page += 1
+			yield self.create_ajax_request(self.next_page)
 
 	def parse_products(self, response):
 		hxs = HtmlXPathSelector(response)
 		items = []
 		item = AmazonItem()
 		item['title'] = hxs.select('//div[@class="a-section a-spacing-none"]/h1/span[@id="productTitle"]/text()').extract()
-		item['sellingprice'] = hxs.select('//span[@class="a-color-secondary a-text-strike"]/text()').extract()
+		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
 		item['offerprice'] = hxs.select('//span[@class="a-size-medium a-color-price inlineBlock-display offer-price a-text-normal price3P"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
-		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
-		item['image'] = hxs.select('//div[@id="img-canvas"]/img/@src').extract()
+		item['description'] = hxs.select('//div[@id="productDescription"]/p[1]/text()').extract()
+		item['feature'] = hxs.select('//ul[@class="a-vertical a-spacing-none"]/li/span/text()').extract()
+		item['image'] = hxs.select('//span[@class="a-button-text"]/img/@src').extract()
 		item['link'] = response.meta["url"]
 		item['seller'] = hxs.select('//div[@id="merchant-info"]/a[1]/text()').extract()
 		item['sellrating'] = hxs.select('//div[@id="merchant-info"]/text()').extract()
+		item['starating'] = hxs.select('//a[@class="a-link-normal"]/i/span/text()').extract()[0]
 		item['COD'] = "Available"
 		item['category'] = "Books"
 		item['subcategory'] = "Books in Indian Language"
@@ -282,25 +300,28 @@ class Hindi(scrapy.Spider):
 
 	def parse(self, response):
 		ulink = response.xpath('//div[@class="a-column a-span12 a-text-center"]/a/@href')
-		for href in ulink:
-			uRl = response.urljoin(href.extract())
-			yield scrapy.Request(uRl, callback=self.parse_products, meta={'url':href.extract()})
-		self.next_page += 1
-		yield self.create_ajax_request(self.next_page)
+		if self.next_page <= 50:
+			for href in ulink:
+				uRl = response.urljoin(href.extract())
+				yield scrapy.Request(uRl, callback=self.parse_products, meta={'url':href.extract()})
+			self.next_page += 1
+			yield self.create_ajax_request(self.next_page)
 
 	def parse_products(self, response):
 		hxs = HtmlXPathSelector(response)
 		items = []
 		item = AmazonItem()
 		item['title'] = hxs.select('//div[@class="a-section a-spacing-none"]/h1/span[@id="productTitle"]/text()').extract()
-		item['sellingprice'] = hxs.select('//span[@class="a-color-secondary a-text-strike"]/text()').extract()
+		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
 		item['offerprice'] = hxs.select('//span[@class="a-size-medium a-color-price inlineBlock-display offer-price a-text-normal price3P"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
-		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
-		item['image'] = hxs.select('//div[@id="img-canvas"]/img/@src').extract()
+		item['description'] = hxs.select('//div[@id="productDescription"]/p[1]/text()').extract()
+		item['feature'] = hxs.select('//ul[@class="a-vertical a-spacing-none"]/li/span/text()').extract()
+		item['image'] = hxs.select('//span[@class="a-button-text"]/img/@src').extract()
 		item['link'] = response.meta["url"]
 		item['seller'] = hxs.select('//div[@id="merchant-info"]/a[1]/text()').extract()
 		item['sellrating'] = hxs.select('//div[@id="merchant-info"]/text()').extract()
+		item['starating'] = hxs.select('//a[@class="a-link-normal"]/i/span/text()').extract()[0]
 		item['COD'] = "Available"
 		item['category'] = "Books"
 		item['subcategory'] = "Hindi"
@@ -325,25 +346,28 @@ class Marathi(scrapy.Spider):
 
 	def parse(self, response):
 		ulink = response.xpath('//div[@class="a-column a-span12 a-text-center"]/a/@href')
-		for href in ulink:
-			uRl = response.urljoin(href.extract())
-			yield scrapy.Request(uRl, callback=self.parse_products, meta={'url':href.extract()})
-		self.next_page += 1
-		yield self.create_ajax_request(self.next_page)
+		if self.next_page <= 50:
+			for href in ulink:
+				uRl = response.urljoin(href.extract())
+				yield scrapy.Request(uRl, callback=self.parse_products, meta={'url':href.extract()})
+			self.next_page += 1
+			yield self.create_ajax_request(self.next_page)
 
 	def parse_products(self, response):
 		hxs = HtmlXPathSelector(response)
 		items = []
 		item = AmazonItem()
 		item['title'] = hxs.select('//div[@class="a-section a-spacing-none"]/h1/span[@id="productTitle"]/text()').extract()
-		item['sellingprice'] = hxs.select('//span[@class="a-color-secondary a-text-strike"]/text()').extract()
+		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
 		item['offerprice'] = hxs.select('//span[@class="a-size-medium a-color-price inlineBlock-display offer-price a-text-normal price3P"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
-		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
-		item['image'] = hxs.select('//div[@id="img-canvas"]/img/@src').extract()
+		item['description'] = hxs.select('//div[@id="productDescription"]/p[1]/text()').extract()
+		item['feature'] = hxs.select('//ul[@class="a-vertical a-spacing-none"]/li/span/text()').extract()
+		item['image'] = hxs.select('//span[@class="a-button-text"]/img/@src').extract()
 		item['link'] = response.meta["url"]
 		item['seller'] = hxs.select('//div[@id="merchant-info"]/a[1]/text()').extract()
 		item['sellrating'] = hxs.select('//div[@id="merchant-info"]/text()').extract()
+		item['starating'] = hxs.select('//a[@class="a-link-normal"]/i/span/text()').extract()[0]
 		item['COD'] = "Available"
 		item['category'] = "Books"
 		item['subcategory'] = "Marathi"
@@ -368,25 +392,28 @@ class Tamil(scrapy.Spider):
 
 	def parse(self, response):
 		ulink = response.xpath('//div[@class="a-column a-span12 a-text-center"]/a/@href')
-		for href in ulink:
-			uRl = response.urljoin(href.extract())
-			yield scrapy.Request(uRl, callback=self.parse_products, meta={'url':href.extract()})
-		self.next_page += 1
-		yield self.create_ajax_request(self.next_page)
+		if self.next_page <= 50:
+			for href in ulink:
+				uRl = response.urljoin(href.extract())
+				yield scrapy.Request(uRl, callback=self.parse_products, meta={'url':href.extract()})
+			self.next_page += 1
+			yield self.create_ajax_request(self.next_page)
 
 	def parse_products(self, response):
 		hxs = HtmlXPathSelector(response)
 		items = []
 		item = AmazonItem()
 		item['title'] = hxs.select('//div[@class="a-section a-spacing-none"]/h1/span[@id="productTitle"]/text()').extract()
-		item['sellingprice'] = hxs.select('//span[@class="a-color-secondary a-text-strike"]/text()').extract()
+		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
 		item['offerprice'] = hxs.select('//span[@class="a-size-medium a-color-price inlineBlock-display offer-price a-text-normal price3P"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
-		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
-		item['image'] = hxs.select('//div[@id="img-canvas"]/img/@src').extract()
+		item['description'] = hxs.select('//div[@id="productDescription"]/p[1]/text()').extract()
+		item['feature'] = hxs.select('//ul[@class="a-vertical a-spacing-none"]/li/span/text()').extract()
+		item['image'] = hxs.select('//span[@class="a-button-text"]/img/@src').extract()
 		item['link'] = response.meta["url"]
 		item['seller'] = hxs.select('//div[@id="merchant-info"]/a[1]/text()').extract()
 		item['sellrating'] = hxs.select('//div[@id="merchant-info"]/text()').extract()
+		item['starating'] = hxs.select('//a[@class="a-link-normal"]/i/span/text()').extract()[0]
 		item['COD'] = "Available"
 		item['category'] = "Books"
 		item['subcategory'] = "Tamil"

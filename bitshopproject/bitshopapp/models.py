@@ -60,6 +60,14 @@ class UserProfile(models.Model):
 """==========PRODUCT MODELS=========="""
 """=================================="""
 
+class Brand(models.Model):
+	"""Product Categories Class"""
+	brand_name = models.CharField(max_length=100, null=True)
+
+	def __unicode__(self):
+		"""Unicode class."""
+		return str(self.brand_name)
+
 class Category(models.Model):
 	"""Product Categories Class"""
 	category_name = models.CharField(max_length=100, null=True)
@@ -90,13 +98,11 @@ class SubCategory(models.Model):
 class Product(models.Model):
 	"""Product Class"""
 	title = models.CharField(max_length=255, null=True)
-	# selling_price = models.DecimalField(max_digits=10, decimal_places=0, null=True)
-	# offer_price = models.DecimalField(max_digits=10, decimal_places=0, null=True)
-	# sale_price = models.DecimalField(max_digits=10, decimal_places=0, null=True)  
-	selling_price = models.CharField(max_length=255, null=True)
+	brand = models.ForeignKey(Brand, default="")
 	offer_price = models.CharField(max_length=255, null=True)
 	sale_price = models.CharField(max_length=255, null=True)								
-	description = models.TextField(null=True)		
+	description = models.TextField(null=True)
+	feature = models.TextField(null=True)			
 	link = models.TextField(null=True)    									
 	seller = models.CharField(max_length=50, null=True)									
 	seller_rating = models.CharField(max_length=10, null=True)	
@@ -136,71 +142,45 @@ class Review(models.Model):
 """===========FORUMS MODELS=========="""
 """=================================="""
 
-class Post(models.Model):
-	"""Post Class"""
-	popularity = models.FloatField(default=0.0)
-	timestamp = models.DateTimeField(auto_now_add=True, blank=True)
-	title = models.CharField(max_length = 200)
-	upvotes = models.IntegerField(default=0)
-	downvotes = models.IntegerField(default=0)
-	upvoted_by = models.ManyToManyField(User,  related_name='%(class)s_requests_created', blank = True)
-	downvoted_by = models.ManyToManyField(User,  related_name='downvotes_request', blank = True)
-	user = models.ForeignKey(User)
-	width = models.IntegerField(default=0,blank = True)
-	height = models.IntegerField(default=0,blank = True)
-	img_url = models.ImageField(upload_to = 'post/')
-	last_mod = models.DateTimeField(auto_now_add=True, blank = True)
-
-	class Meta:
-		ordering = ('-popularity','id')
-
-	def __unicode__(self):
-		return " " + str(self.id) + " " + self.title
-
-	def set_popularity(self):
-		now = datetime.datetime.utcnow().replace(tzinfo=utc)
-		activ_period = abs((self.last_mod - self.timestamp).seconds)
-		inactiv_period = abs((now - self.last_mod).seconds)
-		#  = (Comments.objects.filter(post = self).count() * 0.5 + self.upvotes * 0.5 - self.downvotes * 0.5 * 
-		self.popularity = float(pow(activ_period,2) / (pow(inactiv_period, 1)))
-		self.save()
-
 class Comment(models.Model):
-	user = models.ForeignKey(User, on_delete = models.CASCADE)
-	upvotes = models.IntegerField(default = 0)
-	downvotes = models.IntegerField(default = 0)
-	post = models.ForeignKey(Post)
-	upvoted_by = models.ManyToManyField(User,  related_name='%(class)s_requests_created_comment', blank = True)
-	downvoted_by = models.ManyToManyField(User,  related_name='downvotes_request_comment', blank = True)
-	timestamp = models.DateTimeField(auto_now_add=True, blank=True)
-	content = models.TextField()
+	user = models.ForeignKey(User, on_delete = models.CASCADE, blank=True, null=True)
+	# upvotes = models.IntegerField(default = 0)
+	# downvotes = models.IntegerField(default = 0)
+	product = models.ForeignKey(Product, blank=True, null=True)
+	# upvoted_by = models.ManyToManyField(User,  related_name='%(class)s_requests_created_comment', blank = True)
+	# downvoted_by = models.ManyToManyField(User,  related_name='downvotes_request_comment', blank = True)
+	timestamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+	content = models.TextField(blank=True, null=True)
 
 	def __unicode__(self):
 		return self.content
+
+	def getsubs(self):
+		return SubComment.objects.filter(comment=self)
 
 class SubComment(models.Model):
-	user = models.ForeignKey(User, on_delete = models.CASCADE)
-	receiver = models.ForeignKey(User, related_name='%(class)s_requests_created')
-	timestamp = models.DateTimeField(auto_now_add=True, blank=True)
-	comment = models.ForeignKey(Comment)
-	upvoted_by = models.ManyToManyField(User,  related_name='%(class)s_requests_created_sub_comment', blank = True)
-	downvoted_by = models.ManyToManyField(User,  related_name='downvotes_request_sub_comment', blank = True)
-	upvotes = models.IntegerField(default = 0)
-	downvotes = models.IntegerField(default = 0)
-	content = models.TextField()
+	user = models.ForeignKey(User, on_delete = models.CASCADE, blank=True, null=True)
+	receiver = models.ForeignKey(User, related_name='%(class)s_requests_created', blank=True, null=True)
+	timestamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+	comment = models.ForeignKey(Comment, blank=True, null=True)
+	# upvoted_by = models.ManyToManyField(User,  related_name='%(class)s_requests_created_sub_comment', blank = True)
+	# downvoted_by = models.ManyToManyField(User,  related_name='downvotes_request_sub_comment', blank = True)
+	# upvotes = models.IntegerField(default = 0)
+	# downvotes = models.IntegerField(default = 0)
+	content = models.TextField(blank=True, null=True)
 
 	def __unicode__(self):
 		return self.content
 
-class UserActivity(models.Model):
-	upvoted = models.IntegerField(default = 0)	
-	downvoted = models.IntegerField(default = 0)	
-	uploaded = models.IntegerField(default = 0)	
-	comment = models.IntegerField(default = 0)	
-	subcomment = models.IntegerField(default = 0)
-	post = models.ForeignKey(Post)
-	timestamp = models.DateTimeField(auto_now_add = True)
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
+# class UserActivity(models.Model):
+# 	upvoted = models.IntegerField(default = 0)	
+# 	downvoted = models.IntegerField(default = 0)	
+# 	uploaded = models.IntegerField(default = 0)	
+# 	comment = models.IntegerField(default = 0)	
+# 	subcomment = models.IntegerField(default = 0)
+# 	post = models.ForeignKey(Post)
+# 	timestamp = models.DateTimeField(auto_now_add = True)
+# 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 """==================================="""
 """===========SERFO PRODUCTS=========="""
@@ -213,7 +193,7 @@ class SerfoProduct(models.Model):
 		('M', 'Men'),
 		('W', 'Women'),
 		('A', 'Appliances'),
-		('H', 'Home & Furniture'),
+		('H', 'Home'),
 		('E', 'Electronics'),
 	)
 	super_category = models.CharField(max_length=2, choices=PRODUCT_CATEGORY, blank=True, null=True)
@@ -230,7 +210,7 @@ class New(models.Model):
 	title = models.CharField(max_length=255, null=True)
 	subtitle = models.TextField(null=True, blank=True)
 	main_content = models.TextField(null=True, blank=True)
-	product = models.ManyToManyField(Product, blank=True)
+	product_link = models.CharField(max_length=255, null=True, blank=True)
 
 	def __str__(self):
 		return str(self.title)

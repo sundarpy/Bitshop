@@ -1,0 +1,11 @@
+scrapy crawl home1 -o home1.json
+scrapy crawl home2 -o home2.json
+scrapy crawl home3 -o home3.json
+scrapy crawl home4 -o home4.json
+scrapy crawl home5 -o home5.json
+scrapy crawl home6 -o home6.json
+scrapy crawl home7 -o home7.json
+scrapy crawl home8 -o home8.json
+scrapy crawl home9 -o home9.json
+scrapy crawl home10 -o home10.json
+scrapy crawl home11 -o home11.json
