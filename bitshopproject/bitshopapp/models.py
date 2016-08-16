@@ -210,7 +210,17 @@ class New(models.Model):
 	title = models.CharField(max_length=255, null=True)
 	subtitle = models.TextField(null=True, blank=True)
 	main_content = models.TextField(null=True, blank=True)
-	product_link = models.CharField(max_length=255, null=True, blank=True)
+	timestamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+	product_link1 = models.CharField(max_length=255, null=True, blank=True)
+	product_link2 = models.CharField(max_length=255, null=True, blank=True)
+	product_link3 = models.CharField(max_length=255, null=True, blank=True)
+	product_link4 = models.CharField(max_length=255, null=True, blank=True)
+	product_link5 = models.CharField(max_length=255, null=True, blank=True)
+	product_link6 = models.CharField(max_length=255, null=True, blank=True)
+	product_link7 = models.CharField(max_length=255, null=True, blank=True)
+	product_link8 = models.CharField(max_length=255, null=True, blank=True)
+	product_link9 = models.CharField(max_length=255, null=True, blank=True)
+	product_link10 = models.CharField(max_length=255, null=True, blank=True)
 
 	def __str__(self):
 		return str(self.title)
