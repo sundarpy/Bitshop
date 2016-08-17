@@ -265,7 +265,7 @@ def CategoryPage(request, c_id):
 	brands = Brand.objects.all().order_by('?')
 	category = Category.objects.get(pk=c_id)
 	subcategory = SubCategory.objects.filter(category=category).order_by('id')
-	products_list = Product.objects.filter(category=category).exclude(offer_price="", sale_price="").order_by('id')
+	products_list = Product.objects.filter(category=category).order_by('id')
 	paginator = Paginator(products_list, 18)
 	page = request.GET.get('page')
 	try:
@@ -289,7 +289,7 @@ def BrandsPage(request, b_id):
 	brands = Brand.objects.all().order_by('?')
 	prime_brand = Brand.objects.get(pk=b_id)
 	category = Category.objects.all()
-	products_list = Product.objects.filter(brand=prime_brand).exclude(offer_price="", sale_price="").order_by('id')
+	products_list = Product.objects.filter(brand=prime_brand).order_by('id')
 	paginator = Paginator(products_list, 18)
 	page = request.GET.get('page')
 	try:
@@ -314,7 +314,7 @@ def SubCategoryPage(request, c_id, s_id):
 	category = Category.objects.get(pk=c_id)
 	subcategory = SubCategory.objects.filter(category=category).order_by('id')
 	subcat = SubCategory.objects.get(pk=s_id, category=category)
-	products_list = Product.objects.filter(subcategory=subcat).exclude(offer_price="", sale_price="").order_by('id')
+	products_list = Product.objects.filter(subcategory=subcat).order_by('id')
 	paginator = Paginator(products_list, 18)
 	page = request.GET.get('page')
 	try:

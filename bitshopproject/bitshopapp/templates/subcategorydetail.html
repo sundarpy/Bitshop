@@ -145,6 +145,7 @@
 											<div class="panel-body">Products > {{category.category_name}} > {{subcat.subcategory_name}}</div>
 											<div class="row">
 												{% for product in products|slice:":18" %}
+												{% if product.offer_price or product.sale_price %}
 												<div class="col-md-4">
 													<a href="{% url 'productdetail' product.id %}" style="text-decoration: none;">
 														<div class="thumbnail">
@@ -161,6 +162,7 @@
 														</div>
 													</a>
 												</div>
+												{% endif %}
 												{% endfor %}
 											</div>
 											<nav style="text-align: center;margin: 0 auto;">
