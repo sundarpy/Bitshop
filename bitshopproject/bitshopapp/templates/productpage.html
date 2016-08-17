@@ -159,6 +159,13 @@
 																		</h5>
 																	</div>
 																	{% endif %}
+																	{% if product.brand %}
+																	<div class="cash-item">
+																		<h5> Brand <b>:</b> &nbsp; &nbsp; 
+																			<a href="{% url 'brandetail' product.brand.id %}"><span class="avail-name">{{product.brand}}</span></a>
+																		</h5>
+																	</div>
+																	{% endif %}
 																	{% if product.feature %}
 																	<div class="cash-item">
 																		<h5> Features <b>:</b> &nbsp; &nbsp; 
