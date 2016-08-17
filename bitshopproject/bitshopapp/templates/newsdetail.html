@@ -78,28 +78,16 @@
 										<div class="news-details-main-page">
 											<div class="row">
 												<div class="details-page panel panel-default">
-													<img src="http://www.thehindu.com/multimedia/dynamic/02969/RAJNATH_2969594e.jpg" alt="img"/>
+													<img src={{product1.mainimage}} alt="img"/>
 													<div class="news-info">
 														<div class="news-sub">
-																<h4>Govt. working on strengthening anti-terror laws: Rajnath</h4>
+																<h4>{{news.title}}</h4>
 														</div>
 														<div class="news-time">
-															<span>The Indian Express- &nbsp; 1 hour ago‎</span>
+															<span>{{news.timestamp}}</span>
 														</div>
 														<div class="news-desc">
-															<p>“We are considering legal protection for undercover operations, use of intelligence collected as evidence and entire gamut of issues relevant to combating terrorism,” he said.
-
-																Due to widespread use of social media by terrorists, new threats were emerging.
-
-																“To face these challenges, the present capabilities of specialised organisations like the Indian Computer Emergency Response Team (CERT-IN) and the Centre for Development of Advanced Computing (C-DAC) need to be strengthened,” he said.
-
-																The the government is also examining enactment of Mutual Legal Assistance in Criminal Matters Act to provide legal sanction for evidence obtained through Mutual Legal Assistance Treaties and remove doubts about admissibility of such evidence.
-
-																The Central government is committed to empowerment and development of Dalits and has created an atmosphere where the community could approach police without hesitation if they are victimised.
-
-																The NDA government had strengthened Scheduled Caste and Scheduled Tribe (Prevention of Atrocities) Act by amending it in 2014 and adding a new category of offences, he said.
-
-																The government had taken various steps to improve the quality of investigation. It had revamped the Crime and Criminal Tracking Network Systems (CCTNS) project for complete computerisation of the working of police and extended it to court, jail, prosecution and forensic laboratories.</p>
+															<p>{{news.main_content}}</p>
 														</div>
 													</div>
 													<div class="clearfix"></div>
@@ -109,107 +97,180 @@
 										<div class="row">
 											<div class="Slider-images">
 												<div id="owl-demo" class="owl-carousel owl-theme">
- 
-												  <div class="item"><a href="#"><img src="images/screen1.jpg" alt="The Last of us"></a></div>
-												  <div class="item"><a href="#"><img src="images/screen2.jpg" alt="GTA V"></a></div>
-												  <div class="item"><a href="#"><img src="images/screen3.jpg" alt="Mirror Edge"></a></div>
-												  <div class="item"><a href="#"><img src="images/screen4.jpg" alt="The Last of us"></a></div>
-												  <div class="item"><a href="#"><img src="images/screen5.jpg" alt="GTA V"></a></div>
-												  <div class="item"><a href="#"><img src="images/screen1.jpg" alt="Mirror Edge"></a></div>
-												  <div class="item"><a href="#"><img src="images/screen2.jpg" alt="The Last of us"></a></div>
-												  <div class="item"><a href="#"><img src="images/screen3.jpg" alt="GTA V"></a></div>
-												  <div class="item"><a href="#"><img src="images/screen4.jpg" alt="Mirror Edge"></a></div>
-												  <div class="item"><a href="#"><img src="images/screen5.jpg" alt="The Last of us"></a></div>
-												  <div class="item"><a href="#"><img src="images/screen1.jpg" alt="GTA V"></a></div>
-												  <div class="item"><a href="#"><img src="images/screen2.jpg" alt="Mirror Edge"></a></div>
-												 
-												 
+
+												  <div class="col-md-4">
+													<a href="{% url 'productdetail' product1.id %}" style="text-decoration: none;">
+														<div class="thumbnail">
+																<img src={{product1.mainimage}} alt="item-imgs"/>
+															<div class="caption">
+																<a href="{% url 'productdetail' product1.id %}" style="text-decoration: none;"><h5>{{product1.title}}</h5></a>
+																{% if product1.offer_price != "" %}
+																<p class="item-name-desc"> &#x20B9; {{product1.offer_price}}</p>
+																{% else %}
+																<p class="item-name-desc"> &#x20B9; {{product1.sale_price}}</p>
+																{% endif %}
+															</div>
+														</div>
+													</a>
+												</div>
+												<div class="col-md-4">
+													<a href="{% url 'productdetail' product2.id %}" style="text-decoration: none;">
+														<div class="thumbnail">
+																<img src={{product2.mainimage}} alt="item-imgs"/>
+															<div class="caption">
+																<a href="{% url 'productdetail' product2.id %}" style="text-decoration: none;"><h5>{{product2.title}}</h5></a>
+																{% if product2.offer_price != "" %}
+																<p class="item-name-desc"> &#x20B9; {{product2.offer_price}}</p>
+																{% else %}
+																<p class="item-name-desc"> &#x20B9; {{product2.sale_price}}</p>
+																{% endif %}
+															</div>
+														</div>
+													</a>
+												</div>
+												<div class="col-md-4">
+													<a href="{% url 'productdetail' product3.id %}" style="text-decoration: none;">
+														<div class="thumbnail">
+																<img src={{product3.mainimage}} alt="item-imgs"/>
+															<div class="caption">
+																<a href="{% url 'productdetail' product3.id %}" style="text-decoration: none;"><h5>{{product3.title}}</h5></a>
+																{% if product3.offer_price != "" %}
+																<p class="item-name-desc"> &#x20B9; {{product3.offer_price}}</p>
+																{% else %}
+																<p class="item-name-desc"> &#x20B9; {{product3.sale_price}}</p>
+																{% endif %}
+															</div>
+														</div>
+													</a>
+												</div>
+												<div class="col-md-4">
+													<a href="{% url 'productdetail' product4.id %}" style="text-decoration: none;">
+														<div class="thumbnail">
+																<img src={{product4.mainimage}} alt="item-imgs"/>
+															<div class="caption">
+																<a href="{% url 'productdetail' product4.id %}" style="text-decoration: none;"><h5>{{product4.title}}</h5></a>
+																{% if product4.offer_price != "" %}
+																<p class="item-name-desc"> &#x20B9; {{product4.offer_price}}</p>
+																{% else %}
+																<p class="item-name-desc"> &#x20B9; {{product4.sale_price}}</p>
+																{% endif %}
+															</div>
+														</div>
+													</a>
+												</div>
+												<div class="col-md-4">
+													<a href="{% url 'productdetail' product5.id %}" style="text-decoration: none;">
+														<div class="thumbnail">
+																<img src={{product5.mainimage}} alt="item-imgs"/>
+															<div class="caption">
+																<a href="{% url 'productdetail' product5.id %}" style="text-decoration: none;"><h5>{{product5.title}}</h5></a>
+																{% if product5.offer_price != "" %}
+																<p class="item-name-desc"> &#x20B9; {{product5.offer_price}}</p>
+																{% else %}
+																<p class="item-name-desc"> &#x20B9; {{product5.sale_price}}</p>
+																{% endif %}
+															</div>
+														</div>
+													</a>
+												</div>
+												<div class="col-md-4">
+													<a href="{% url 'productdetail' product6.id %}" style="text-decoration: none;">
+														<div class="thumbnail">
+																<img src={{product6.mainimage}} alt="item-imgs"/>
+															<div class="caption">
+																<a href="{% url 'productdetail' product6.id %}" style="text-decoration: none;"><h5>{{product6.title}}</h5></a>
+																{% if product6.offer_price != "" %}
+																<p class="item-name-desc"> &#x20B9; {{product6.offer_price}}</p>
+																{% else %}
+																<p class="item-name-desc"> &#x20B9; {{product6.sale_price}}</p>
+																{% endif %}
+															</div>
+														</div>
+													</a>
+												</div>
+												<div class="col-md-4">
+													<a href="{% url 'productdetail' product7.id %}" style="text-decoration: none;">
+														<div class="thumbnail">
+																<img src={{product7.mainimage}} alt="item-imgs"/>
+															<div class="caption">
+																<a href="{% url 'productdetail' product7.id %}" style="text-decoration: none;"><h5>{{product7.title}}</h5></a>
+																{% if product7.offer_price != "" %}
+																<p class="item-name-desc"> &#x20B9; {{product7.offer_price}}</p>
+																{% else %}
+																<p class="item-name-desc"> &#x20B9; {{product7.sale_price}}</p>
+																{% endif %}
+															</div>
+														</div>
+													</a>
+												</div>
+												<div class="col-md-4">
+													<a href="{% url 'productdetail' product8.id %}" style="text-decoration: none;">
+														<div class="thumbnail">
+																<img src={{product8.mainimage}} alt="item-imgs"/>
+															<div class="caption">
+																<a href="{% url 'productdetail' product8.id %}" style="text-decoration: none;"><h5>{{product8.title}}</h5></a>
+																{% if product8.offer_price != "" %}
+																<p class="item-name-desc"> &#x20B9; {{product8.offer_price}}</p>
+																{% else %}
+																<p class="item-name-desc"> &#x20B9; {{product8.sale_price}}</p>
+																{% endif %}
+															</div>
+														</div>
+													</a>
+												</div>
+												<div class="col-md-4">
+													<a href="{% url 'productdetail' product9.id %}" style="text-decoration: none;">
+														<div class="thumbnail">
+																<img src={{product9.mainimage}} alt="item-imgs"/>
+															<div class="caption">
+																<a href="{% url 'productdetail' product9.id %}" style="text-decoration: none;"><h5>{{product9.title}}</h5></a>
+																{% if product9.offer_price != "" %}
+																<p class="item-name-desc"> &#x20B9; {{product9.offer_price}}</p>
+																{% else %}
+																<p class="item-name-desc"> &#x20B9; {{product9.sale_price}}</p>
+																{% endif %}
+															</div>
+														</div>
+													</a>
+												</div>
+												<div class="col-md-4">
+													<a href="{% url 'productdetail' product10.id %}" style="text-decoration: none;">
+														<div class="thumbnail">
+																<img src={{product10.mainimage}} alt="item-imgs"/>
+															<div class="caption">
+																<a href="{% url 'productdetail' product10.id %}" style="text-decoration: none;"><h5>{{product10.title}}</h5></a>
+																{% if product10.offer_price != "" %}
+																<p class="item-name-desc"> &#x20B9; {{product10.offer_price}}</p>
+																{% else %}
+																<p class="item-name-desc"> &#x20B9; {{product10.sale_price}}</p>
+																{% endif %}
+															</div>
+														</div>
+													</a>
+												</div>
+
 												</div>	
 											</div>
 										</div>
 										
 										<div class="row panel panel-default">
 											<div class="panel-default">
-												<div class="panel-body">News <span class="badge pull-right">See More</span></div>
+												<div class="panel-body">News <a href="{% url 'news' %}"><span class="badge pull-right">Show More</span></a></div>
 												<div class="main-products-details news-page">
+													{% for new in multi_news|slice:":6" %}
 													<div class="col-md-4">
-														<a href="#" style="text-decoration: none;">
+														<a href="{% url 'newsdetail' new.id %}" style="text-decoration: none;">
 															<div class="thumbnail">
-																	<img src="http://images.all-free-download.com/images/graphicthumb/abstract_led_tv_blank_screen_realistic_reflection_blue_wave_stylish_colorful_vector_6818232.jpg" alt="item-imgs"/>
+																	<img src={{new.image_url}} alt="item-imgs"/>
 																
-																<div class="caption details">
-																	<h5>News Heading</h5>
-																	<p class="item-name-desc">At all-party meet on Jammu and Kashmir, PM Narendra Modi says POK is a part of J&K</p>
-																	
+																<div class="caption">
+																	<h5>{{new.title}}</h5>
+																	<p class="item-name-desc"></p>
 																</div>
 															</div>
 														</a>
 													</div>
-													<div class="col-md-4">
-														<a href="#" style="text-decoration: none;">
-															<div class="thumbnail">
-																	<img src="http://images.all-free-download.com/images/graphicthumb/abstract_led_tv_blank_screen_realistic_reflection_blue_wave_stylish_colorful_vector_6818232.jpg" alt="item-imgs"/>
-																
-																<div class="caption details">
-																	<h5>News Heading</h5>
-																	<p class="item-name-desc">At all-party meet on Jammu and Kashmir, PM Narendra Modi says POK is a part of J&K</p>
-																	
-																</div>
-															</div>
-														</a>
-													</div>
-													<div class="col-md-4">
-														<a href="#" style="text-decoration: none;">
-															<div class="thumbnail">
-																	<img src="http://images.all-free-download.com/images/graphicthumb/abstract_led_tv_blank_screen_realistic_reflection_blue_wave_stylish_colorful_vector_6818232.jpg" alt="item-imgs"/>
-																
-																<div class="caption details">
-																	<h5>News Heading</h5>
-																	<p class="item-name-desc">At all-party meet on Jammu and Kashmir, PM Narendra Modi says POK is a part of J&K</p>
-																	
-																</div>
-															</div>
-														</a>
-													</div>
-													<div class="col-md-4">
-														<a href="#" style="text-decoration: none;">
-															<div class="thumbnail">
-																	<img src="http://images.all-free-download.com/images/graphicthumb/abstract_led_tv_blank_screen_realistic_reflection_blue_wave_stylish_colorful_vector_6818232.jpg" alt="item-imgs"/>
-																
-																<div class="caption details">
-																	<h5>News Heading</h5>
-																	<p class="item-name-desc">At all-party meet on Jammu and Kashmir, PM Narendra Modi says POK is a part of J&K</p>
-																	
-																</div>
-															</div>
-														</a>
-													</div>
-													<div class="col-md-4">
-														<a href="#" style="text-decoration: none;">
-															<div class="thumbnail">
-																	<img src="http://images.all-free-download.com/images/graphicthumb/abstract_led_tv_blank_screen_realistic_reflection_blue_wave_stylish_colorful_vector_6818232.jpg" alt="item-imgs"/>
-																
-																<div class="caption details">
-																	<h5>News Heading</h5>
-																	<p class="item-name-desc">At all-party meet on Jammu and Kashmir, PM Narendra Modi says POK is a part of J&K</p>
-																	
-																</div>
-															</div>
-														</a>
-													</div>
-													<div class="col-md-4">
-														<a href="#" style="text-decoration: none;">
-															<div class="thumbnail">
-																	<img src="http://images.all-free-download.com/images/graphicthumb/abstract_led_tv_blank_screen_realistic_reflection_blue_wave_stylish_colorful_vector_6818232.jpg" alt="item-imgs"/>
-																
-																<div class="caption details">
-																	<h5>News Heading</h5>
-																	<p class="item-name-desc">At all-party meet on Jammu and Kashmir, PM Narendra Modi says POK is a part of J&K</p>
-																	
-																</div>
-															</div>
-														</a>
-													</div>
+													{% endfor %}
 												</div>
 											</div>
 										</div>

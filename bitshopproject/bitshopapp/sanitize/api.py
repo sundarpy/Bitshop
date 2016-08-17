@@ -37,15 +37,15 @@ def read_file(request):
 		# 'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/beauty/beauty6.json',
 		# 'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/beauty/beauty7.json',
 		# 'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/beauty/beauty8.json',
-		'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/books/books1.json',
-		'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/books/books2.json',
-		'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/books/books3.json',
-		'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/books/books4.json',
+		# 'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/books/books1.json',
+		# 'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/books/books2.json',
+		# 'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/books/books3.json',
+		# 'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/books/books4.json',
 		# 'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/books/books5.json',
-		'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/books/books6.json',
-		'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/books/books7.json',
-		'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/books/books8.json',
-		'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/books/books9.json',
+		# 'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/books/books6.json',
+		# 'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/books/books7.json',
+		# 'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/books/books8.json',
+		# 'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/books/books9.json',
 		# 'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/cameras/cameras1.json',
 		# 'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/cameras/cameras2.json',
 		# 'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/cameras/cameras3.json',
@@ -141,8 +141,8 @@ def read_file(request):
 		# 'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/toys/toys6.json',
 		# 'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/toys/toys7.json',
 		# 'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/toys/toys8.json',
-		'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/movies/movies1.json',
-		'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/movies/movies2.json',
+		# 'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/movies/movies1.json',
+		# 'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/movies/movies2.json',
 		# 'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/movies/movies3.json',
 		# 'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/movies/movies4.json',
 		# 'https://s3.ap-south-1.amazonaws.com/bitshopping/json+files/movies/movies5.json',
@@ -275,10 +275,10 @@ def read_file(request):
 				prod_subcategory.save()
 
 			# if product_title != "[]" and product_brand != "[]":
-			if product_title != "[]":
+			if product_title != "[]" and imagelist != []:
 				prod_obj=Product(
 						title = product_title,
-						# brand = prod_brand,
+						brand = prod_brand,
 						offer_price = product_offerprice, 
 						sale_price = product_saleprice,
 						description = product_desc, 

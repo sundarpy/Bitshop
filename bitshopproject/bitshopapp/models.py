@@ -210,6 +210,7 @@ class New(models.Model):
 	title = models.CharField(max_length=255, null=True)
 	main_content = models.TextField(null=True, blank=True)
 	timestamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+	image_url = models.CharField(max_length=255, null=True, blank=True)
 	product_link1 = models.CharField(max_length=255, null=True, blank=True)
 	product_link2 = models.CharField(max_length=255, null=True, blank=True)
 	product_link3 = models.CharField(max_length=255, null=True, blank=True)

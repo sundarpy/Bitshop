@@ -96,78 +96,20 @@
 										<div class="row panel panel-default">
 											<div class="panel-body">News <a href="{% url 'news' %}"><span class="badge pull-right">Show More</span></a></div>
 											<div class="news-details">
+												{% for new in news|slice:":6" %}
 												<div class="col-md-4">
-													<a href="#" style="text-decoration: none;">
+													<a href="{% url 'newsdetail' new.id %}" style="text-decoration: none;">
 														<div class="thumbnail">
-																<img src="http://images.all-free-download.com/images/graphicthumb/abstract_led_tv_blank_screen_realistic_reflection_blue_wave_stylish_colorful_vector_6818232.jpg" alt="item-imgs"/>
+																<img src={{new.image_url}} alt="item-imgs"/>
 															
 															<div class="caption">
-																<h5>Batman the Killing</h5>
-																<p class="item-name-desc">Micromax 127cm (50) Full HD LED TV</p>
+																<h5>{{new.title}}</h5>
+																<p class="item-name-desc"></p>
 															</div>
 														</div>
 													</a>
 												</div>
-												<div class="col-md-4">
-													<a href="#" style="text-decoration: none;">
-														<div class="thumbnail">
-																<img src="http://images.all-free-download.com/images/graphicthumb/abstract_led_tv_blank_screen_realistic_reflection_blue_wave_stylish_colorful_vector_6818232.jpg" alt="item-imgs"/>
-															
-															<div class="caption">
-																<h5>Batman the Killing</h5>
-																<p class="item-name-desc">Micromax 127cm (50) Full HD LED TV</p>
-															</div>
-														</div>
-													</a>
-												</div>
-												<div class="col-md-4">
-													<a href="#" style="text-decoration: none;">
-														<div class="thumbnail">
-																<img src="http://images.all-free-download.com/images/graphicthumb/abstract_led_tv_blank_screen_realistic_reflection_blue_wave_stylish_colorful_vector_6818232.jpg" alt="item-imgs"/>
-															
-															<div class="caption">
-																<h5>Batman the Killing</h5>
-																<p class="item-name-desc">Micromax 127cm (50) Full HD LED TV</p>
-															</div>
-														</div>
-													</a>
-												</div>
-												<div class="col-md-4">
-													<a href="#" style="text-decoration: none;">
-														<div class="thumbnail">
-																<img src="http://images.all-free-download.com/images/graphicthumb/abstract_led_tv_blank_screen_realistic_reflection_blue_wave_stylish_colorful_vector_6818232.jpg" alt="item-imgs"/>
-															
-															<div class="caption">
-																<h5>Batman the Killing</h5>
-																<p class="item-name-desc">Micromax 127cm (50) Full HD LED TV</p>
-															</div>
-														</div>
-													</a>
-												</div>
-												<div class="col-md-4">
-													<a href="#" style="text-decoration: none;">
-														<div class="thumbnail">
-																<img src="http://images.all-free-download.com/images/graphicthumb/abstract_led_tv_blank_screen_realistic_reflection_blue_wave_stylish_colorful_vector_6818232.jpg" alt="item-imgs"/>
-															
-															<div class="caption">
-																<h5>Batman the Killing</h5>
-																<p class="item-name-desc">Micromax 127cm (50) Full HD LED TV</p>
-															</div>
-														</div>
-													</a>
-												</div>
-												<div class="col-md-4">
-													<a href="#" style="text-decoration: none;">
-														<div class="thumbnail">
-																<img src="http://images.all-free-download.com/images/graphicthumb/abstract_led_tv_blank_screen_realistic_reflection_blue_wave_stylish_colorful_vector_6818232.jpg" alt="item-imgs"/>
-															
-															<div class="caption">
-																<h5>Batman the Killing</h5>
-																<p class="item-name-desc">Micromax 127cm (50) Full HD LED TV</p>
-															</div>
-														</div>
-													</a>
-												</div>
+												{% endfor %}
 											</div>
 										</div>
 										<div clas="clearfix"></div>

@@ -79,162 +79,20 @@
 											<div class="panel-default">
 												<div class="panel-body">News</div>
 												<div class="main-products-details news-page">
+													{% for new in news|slice:":20" %}
 													<div class="col-md-4">
-														<a href="#" style="text-decoration: none;">
+														<a href="{% url 'newsdetail' new.id %}" style="text-decoration: none;">
 															<div class="thumbnail">
-																	<img src="http://images.all-free-download.com/images/graphicthumb/abstract_led_tv_blank_screen_realistic_reflection_blue_wave_stylish_colorful_vector_6818232.jpg" alt="item-imgs"/>
+																	<img src={{new.image_url}} alt="item-imgs"/>
 																
-																<div class="caption details">
-																	<h5>News Heading</h5>
-																	<p class="item-name-desc">At all-party meet on Jammu and Kashmir, PM Narendra Modi says POK is a part of J&K</p>
-																	
+																<div class="caption">
+																	<h5>{{new.title}}</h5>
+																	<p class="item-name-desc"></p>
 																</div>
 															</div>
 														</a>
 													</div>
-													<div class="col-md-4">
-														<a href="#" style="text-decoration: none;">
-															<div class="thumbnail">
-																	<img src="http://images.all-free-download.com/images/graphicthumb/abstract_led_tv_blank_screen_realistic_reflection_blue_wave_stylish_colorful_vector_6818232.jpg" alt="item-imgs"/>
-																
-																<div class="caption details">
-																	<h5>News Heading</h5>
-																	<p class="item-name-desc">At all-party meet on Jammu and Kashmir, PM Narendra Modi says POK is a part of J&K</p>
-																	
-																</div>
-															</div>
-														</a>
-													</div>
-													<div class="col-md-4">
-														<a href="#" style="text-decoration: none;">
-															<div class="thumbnail">
-																	<img src="http://images.all-free-download.com/images/graphicthumb/abstract_led_tv_blank_screen_realistic_reflection_blue_wave_stylish_colorful_vector_6818232.jpg" alt="item-imgs"/>
-																
-																<div class="caption details">
-																	<h5>News Heading</h5>
-																	<p class="item-name-desc">At all-party meet on Jammu and Kashmir, PM Narendra Modi says POK is a part of J&K</p>
-																	
-																</div>
-															</div>
-														</a>
-													</div>
-													<div class="col-md-4">
-														<a href="#" style="text-decoration: none;">
-															<div class="thumbnail">
-																	<img src="http://images.all-free-download.com/images/graphicthumb/abstract_led_tv_blank_screen_realistic_reflection_blue_wave_stylish_colorful_vector_6818232.jpg" alt="item-imgs"/>
-																
-																<div class="caption details">
-																	<h5>News Heading</h5>
-																	<p class="item-name-desc">At all-party meet on Jammu and Kashmir, PM Narendra Modi says POK is a part of J&K</p>
-																	
-																</div>
-															</div>
-														</a>
-													</div>
-													<div class="col-md-4">
-														<a href="#" style="text-decoration: none;">
-															<div class="thumbnail">
-																	<img src="http://images.all-free-download.com/images/graphicthumb/abstract_led_tv_blank_screen_realistic_reflection_blue_wave_stylish_colorful_vector_6818232.jpg" alt="item-imgs"/>
-																
-																<div class="caption details">
-																	<h5>News Heading</h5>
-																	<p class="item-name-desc">At all-party meet on Jammu and Kashmir, PM Narendra Modi says POK is a part of J&K</p>
-																	
-																</div>
-															</div>
-														</a>
-													</div>
-													<div class="col-md-4">
-														<a href="#" style="text-decoration: none;">
-															<div class="thumbnail">
-																	<img src="http://images.all-free-download.com/images/graphicthumb/abstract_led_tv_blank_screen_realistic_reflection_blue_wave_stylish_colorful_vector_6818232.jpg" alt="item-imgs"/>
-																
-																<div class="caption details">
-																	<h5>News Heading</h5>
-																	<p class="item-name-desc">At all-party meet on Jammu and Kashmir, PM Narendra Modi says POK is a part of J&K</p>
-																	
-																</div>
-															</div>
-														</a>
-													</div>
-													<div class="col-md-4">
-														<a href="#" style="text-decoration: none;">
-															<div class="thumbnail">
-																	<img src="http://images.all-free-download.com/images/graphicthumb/abstract_led_tv_blank_screen_realistic_reflection_blue_wave_stylish_colorful_vector_6818232.jpg" alt="item-imgs"/>
-																
-																<div class="caption details">
-																	<h5>News Heading</h5>
-																	<p class="item-name-desc">At all-party meet on Jammu and Kashmir, PM Narendra Modi says POK is a part of J&K</p>
-																	
-																</div>
-															</div>
-														</a>
-													</div>
-													<div class="col-md-4">
-														<a href="#" style="text-decoration: none;">
-															<div class="thumbnail">
-																	<img src="http://images.all-free-download.com/images/graphicthumb/abstract_led_tv_blank_screen_realistic_reflection_blue_wave_stylish_colorful_vector_6818232.jpg" alt="item-imgs"/>
-																
-																<div class="caption details">
-																	<h5>News Heading</h5>
-																	<p class="item-name-desc">At all-party meet on Jammu and Kashmir, PM Narendra Modi says POK is a part of J&K</p>
-																	
-																</div>
-															</div>
-														</a>
-													</div>
-													<div class="col-md-4">
-														<a href="#" style="text-decoration: none;">
-															<div class="thumbnail">
-																	<img src="http://images.all-free-download.com/images/graphicthumb/abstract_led_tv_blank_screen_realistic_reflection_blue_wave_stylish_colorful_vector_6818232.jpg" alt="item-imgs"/>
-																
-																<div class="caption details">
-																	<h5>News Heading</h5>
-																	<p class="item-name-desc">At all-party meet on Jammu and Kashmir, PM Narendra Modi says POK is a part of J&K</p>
-																	
-																</div>
-															</div>
-														</a>
-													</div>
-													<div class="col-md-4">
-														<a href="#" style="text-decoration: none;">
-															<div class="thumbnail">
-																	<img src="http://images.all-free-download.com/images/graphicthumb/abstract_led_tv_blank_screen_realistic_reflection_blue_wave_stylish_colorful_vector_6818232.jpg" alt="item-imgs"/>
-																
-																<div class="caption details">
-																	<h5>News Heading</h5>
-																	<p class="item-name-desc">At all-party meet on Jammu and Kashmir, PM Narendra Modi says POK is a part of J&K</p>
-																	
-																</div>
-															</div>
-														</a>
-													</div>
-													<div class="col-md-4">
-														<a href="#" style="text-decoration: none;">
-															<div class="thumbnail">
-																	<img src="http://images.all-free-download.com/images/graphicthumb/abstract_led_tv_blank_screen_realistic_reflection_blue_wave_stylish_colorful_vector_6818232.jpg" alt="item-imgs"/>
-																
-																<div class="caption details">
-																	<h5>News Heading</h5>
-																	<p class="item-name-desc">At all-party meet on Jammu and Kashmir, PM Narendra Modi says POK is a part of J&K</p>
-																	
-																</div>
-															</div>
-														</a>
-													</div>
-													<div class="col-md-4">
-														<a href="#" style="text-decoration: none;">
-															<div class="thumbnail">
-																	<img src="http://images.all-free-download.com/images/graphicthumb/abstract_led_tv_blank_screen_realistic_reflection_blue_wave_stylish_colorful_vector_6818232.jpg" alt="item-imgs"/>
-																
-																<div class="caption details">
-																	<h5>News Heading</h5>
-																	<p class="item-name-desc">At all-party meet on Jammu and Kashmir, PM Narendra Modi says POK is a part of J&K</p>
-																	
-																</div>
-															</div>
-														</a>
-													</div>
+													{% endfor %}
 												</div>
 											</div>
 										</div>

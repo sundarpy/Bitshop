@@ -148,8 +148,8 @@ def HomePage(request):
 	sub_category = SubCategory.objects.all()
 	subcategory = SubCategory.objects.filter(category=category)
 	products = Product.objects.filter(subcategory=subcategory)
-	news = New.objects.all()
-	
+	news = New.objects.all().order_by('-id')
+
 	item1 = []
 	item2 = []
 	item3 = []
@@ -251,6 +251,7 @@ def HomePage(request):
 				"data4" : data4,
 				"data5" : data5, 
 				"navbar_category" : navbar_category,
+				"news" : news,
 				}
 	template = 'home.html'
 	return render(request, template, context)
@@ -275,7 +276,9 @@ def CategoryPage(request, c_id):
 	except EmptyPage:
 		products = paginator.page(paginator.num_pages)
 	total_pages = products.paginator.num_pages+1
-	context = {"category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category, "brands":brands}
+
+	news = New.objects.all().order_by('-id')
+	context = {"category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category, "brands":brands,  "news" : news,}
 	template = 'categorydetail.html'
 	return render(request, template, context)
 
@@ -299,7 +302,9 @@ def BrandsPage(request, b_id):
 	except EmptyPage:
 		products = paginator.page(paginator.num_pages)
 	total_pages = products.paginator.num_pages+1
-	context = {"category":category, "products":products, "navbar_category":navbar_category, "brands":brands, "prime_brand":prime_brand}
+
+	news = New.objects.all().order_by('-id')
+	context = {"category":category, "products":products, "navbar_category":navbar_category, "brands":brands, "prime_brand":prime_brand, "news" : news,}
 	template = 'brandetail.html'
 	return render(request, template, context)
 
@@ -324,7 +329,9 @@ def SubCategoryPage(request, c_id, s_id):
 	except EmptyPage:
 		products = paginator.page(paginator.num_pages)
 	total_pages = products.paginator.num_pages+1
-	context = {"category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category,"subcat":subcat, "brands":brands}
+
+	news = New.objects.all().order_by('-id')
+	context = {"category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category,"subcat":subcat, "brands":brands,  "news" : news,}
 	template = 'subcategorydetail.html'
 	return render(request, template, context)
 
@@ -336,6 +343,49 @@ def NewsPage(request, n_id):
 	"""Product News Detail Page"""
 	navbar_category = Category.objects.all().order_by('?')
 	news = New.objects.get(pk=n_id)
+	multi_news = New.objects.all().order_by('-id')
+
+	if news.product_link1:
+		link1 = news.product_link1
+		id1 = link1.rsplit('/', 1)[-1]
+	if news.product_link2:
+		link2 = news.product_link2
+		id2 = link2.rsplit('/', 1)[-1]
+	if news.product_link3:
+		link3 = news.product_link3
+		id3 = link3.rsplit('/', 1)[-1]
+	if news.product_link4:
+		link4 = news.product_link4
+		id4 = link4.rsplit('/', 1)[-1]
+	if news.product_link5:
+		link5 = news.product_link5
+		id5 = link5.rsplit('/', 1)[-1]
+	if news.product_link6:
+		link6 = news.product_link6
+		id6 = link6.rsplit('/', 1)[-1]
+	if news.product_link7:
+		link7 = news.product_link7
+		id7 = link7.rsplit('/', 1)[-1]
+	if news.product_link8:
+		link8 = news.product_link8
+		id8 = link8.rsplit('/', 1)[-1]
+	if news.product_link9:
+		link9 = news.product_link9
+		id9 = link9.rsplit('/', 1)[-1]
+	if news.product_link10:
+		link10 = news.product_link10
+		id10 = link10.rsplit('/', 1)[-1]
+	product1 = Product.objects.get(pk=id1)
+	product2 = Product.objects.get(pk=id2)
+	product3 = Product.objects.get(pk=id3)
+	product4 = Product.objects.get(pk=id4)
+	product5 = Product.objects.get(pk=id5)
+	product6 = Product.objects.get(pk=id6)
+	product7 = Product.objects.get(pk=id7)
+	product8 = Product.objects.get(pk=id8)
+	product9 = Product.objects.get(pk=id9)
+	product10 = Product.objects.get(pk=id10)
+
 	item1 = []
 	item2 = []
 	item3 = []
@@ -432,6 +482,17 @@ def NewsPage(request, n_id):
 				"data3" : data3,
 				"data4" : data4,
 				"data5" : data5,
+				"product1" : product1,
+				"product2" : product2,
+				"product3" : product3,
+				"product4" : product4,
+				"product5" : product5,
+				"product6" : product6,
+				"product7" : product7,
+				"product8" : product8,
+				"product9" : product9,
+				"product10" : product10,
+				"multi_news" : multi_news,
 				}
 	template = 'newsdetail.html'
 	return render(request, template, context)
@@ -443,7 +504,8 @@ def NewsPage(request, n_id):
 def News(request):
 	"""Product News Detail Page"""
 	navbar_category = Category.objects.all().order_by('?')
-	news = New.objects.all()
+	news = New.objects.all().order_by('-id')
+
 	item1 = []
 	item2 = []
 	item3 = []
@@ -540,16 +602,11 @@ def News(request):
 				"data2" : data2,
 				"data3" : data3,
 				"data4" : data4,
-				"data5" : data5, 
+				"data5" : data5,
+				"news" : news,
 				}
 	template = 'news.html'
 	return render(request, template, context)
-
-"""========================="""
-"""=====NEWS API METHOD====="""
-"""========================="""
-
-# def EmbedNews(request, n_id):
 
 """==========================="""
 """=====ALL BRANDS METHOD====="""
