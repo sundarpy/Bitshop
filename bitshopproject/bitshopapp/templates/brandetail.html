@@ -76,10 +76,10 @@
 								<div class="product-content-list">
 									<div class="product-content">
 										<div class="panel panel-default">
-											<div class="panel-body">Sub-Categories</div>
+											<div class="panel-body">Categories</div>
 											<ul class="list-unstyled product-list">
-												{% for sub in subcategory %}
-												<li><a href="{% url 'subcategorydetail' category.id sub.id %}" style="text-decoration: none;">{{sub.subcategory_name}}</a></li>
+												{% for cat in category %}
+												<li><a href="{% url 'categorydetail' cat.id %}" style="text-decoration: none;">{{cat.category_name}}</a></li>
 												{% endfor %}												
 											</ul>
 										</div>
@@ -127,7 +127,7 @@
 								<div class="main-wrap-details">
 									<div class="main-content-details">
 										<div class="main-products-details panel panel-default">
-											<div class="panel-body">Products > {{category.category_name}}</div>
+											<div class="panel-body">Products > Brands > {{prime_brand.brand_name}}</div>
 											<div class="row">
 												{% for product in products|slice:":18" %}
 												<div class="col-md-4">

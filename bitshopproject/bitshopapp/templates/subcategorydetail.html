@@ -114,15 +114,10 @@
 										<div class="panel panel-default">
 											<div class="filter-content">
 												<div class="panel-body">Brand</div>
-												<form class="check-brand">
-													{% for brand in brands|slice:":10" %}
-													<label class="checkbox">
-														<input type="checkbox" value="">
-														{{brand.brand_name}}
-													</label>
-													{% endfor %}
-												</form>
-												<a href=""><div class="panel-body">All Brands</div></a>
+												{% for brand in brands|slice:":10" %}
+												<a href="{% url 'brandetail' brand.id %}"><div class="panel-body">{{brand.brand_name}}</div></a>
+												{% endfor %}
+												<a href="{% url 'brands' %}"><div class="panel-body">All Brands</div></a>
 											</div>
 										</div>
 										
@@ -150,7 +145,6 @@
 											<div class="panel-body">Products > {{category.category_name}} > {{subcat.subcategory_name}}</div>
 											<div class="row">
 												{% for product in products|slice:":18" %}
-												{% if product.offer_price or product.sale_price %}
 												<div class="col-md-4">
 													<a href="{% url 'productdetail' product.id %}" style="text-decoration: none;">
 														<div class="thumbnail">
@@ -167,8 +161,8 @@
 														</div>
 													</a>
 												</div>
-												{% endif %}
 												{% endfor %}
+											</div>
 											<nav style="text-align: center;margin: 0 auto;">
 										  	<ul class="pagination">
 											    <li>
@@ -190,7 +184,6 @@
 											    </li>
 										  	</ul>
 										</nav>
-											</div>
 										</div>
 
 										<div class="row panel panel-default">

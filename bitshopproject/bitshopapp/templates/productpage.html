@@ -139,7 +139,7 @@
 																	</div>
 																	<div class="sold-item">
 																		{% if product.seller %}
-																		<h5> SOLD BY 
+																		<h5> SOLD BY -
 																			<span class="seller-name">{{product.seller}}</span>&nbsp; &nbsp;
 																			{% if product.seller_rating != "Sol" %}
 																			<span class="badge"><b>{{product.seller_rating}}</b>/5</span>
@@ -344,102 +344,24 @@
 								<div class="similar-content">
 									<div class="similar-content" style="margin-top: 40px;">
 										<div class="panel panel-default">
-											<div class="panel-body">Men</div>
-											{% for data in data1|slice:":3" %}
-											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
+											<div class="panel-body">Similar Products</div>
+											{% for similar in similars|slice:":10" %}
+											{% if similar.offer_price or sale_price %}
+											<a href="{% url 'productdetail' similar.id %}" style="text-decoration: none;">
 												<div class="thumbnail">
-														<img src={{data.mainimage}} alt="item-imgs"/>
+														<img src={{similar.mainimage}} alt="item-imgs"/>
 													
 													<div class="caption announce">
-														<span class="badge pull-right"> &#8377; {{data.price}} </span>
-														<a href="{% url 'productdetail' data.id %}"><h5>{{data.title}}</h5></a>	
+														<a href="{% url 'productdetail' similar.id %}"><h5>{{similar.title}}</h5></a>
+														{% if similar.offer_price %}
+														<h5> &#8377; {{similar.offer_price}} </h5>
+														{% else %}
+														<h5> &#8377; {{similar.sale_price}} </h5>
+														{% endif %}
 													</div>
 												</div>
 											</a>
-											{% endfor %}
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="similar-content">
-									<div class="similar-content">
-										<div class="panel panel-default">
-											<div class="panel-body">Women</div>
-											{% for data in data2|slice:":3" %}
-											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
-												<div class="thumbnail">
-														<img src={{data.mainimage}} alt="item-imgs"/>
-													
-													<div class="caption announce">
-														<span class="badge pull-right"> &#8377; {{data.price}} </span>
-														<a href="{% url 'productdetail' data.id %}"><h5>{{data.title}}</h5></a>	
-													</div>
-												</div>
-											</a>
-											{% endfor %}
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="similar-content">
-									<div class="similar-content">
-										<div class="panel panel-default">
-											<div class="panel-body">Appliances</div>
-											{% for data in data3|slice:":7" %}
-											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
-												<div class="thumbnail">
-														<img src={{data.mainimage}} alt="item-imgs"/>
-													
-													<div class="caption announce">
-														<span class="badge pull-right"> &#8377; {{data.price}} </span>
-														<a href="{% url 'productdetail' data.id %}"><h5>{{data.title}}</h5></a>	
-													</div>
-												</div>
-											</a>
-											{% endfor %}
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="similar-content">
-									<div class="similar-content">
-										<div class="panel panel-default">
-											<div class="panel-body">Home</div>
-											{% for data in data4|slice:":7" %}
-											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
-												<div class="thumbnail">
-														<img src={{data.mainimage}} alt="item-imgs"/>
-													
-													<div class="caption announce">
-														<span class="badge pull-right"> &#8377; {{data.price}} </span>
-														<a href="{% url 'productdetail' data.id %}"><h5>{{data.title}}</h5></a>	
-													</div>
-												</div>
-											</a>
-											{% endfor %}
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="similar-content">
-									<div class="similar-content">
-										<div class="panel panel-default">
-											<div class="panel-body">Electronics</div>
-											{% for data in data5|slice:":7" %}
-											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
-												<div class="thumbnail">
-														<img src={{data.mainimage}} alt="item-imgs"/>
-													
-													<div class="caption announce">
-														<span class="badge pull-right"> &#8377; {{data.price}} </span>
-														<a href="{% url 'productdetail' data.id %}"><h5>{{data.title}}</h5></a>	
-													</div>
-												</div>
-											</a>
+											{% endif %}
 											{% endfor %}
 										</div>
 									</div>

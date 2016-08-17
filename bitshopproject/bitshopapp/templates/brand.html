@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+{% load static from staticfiles %}
+	<html lang="en">
+		<head>
+			<title>BitShopping</title>
+			<!-- meta name -->
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<meta name="keywords" content="">
+			<meta name="author" content="">
+			<!-- Favicon -->
+			<link rel="shortcut icon" type="images/icon" href="{% static "images/favicon.ico" %}"/>
+			<!-- Bootstrap -->
+			<link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet"> 
+			<!--<link href="css/bootstrap.css" rel="stylesheet"> -->
+			<!-- Font Awesome -->
+			<link href="{% static "css/font-awesome.css" %}" rel="stylesheet">
+			<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+			<!-- Main Style -->
+			<link href="{% static "css/owl.carousel.css" %}" rel="stylesheet">
+			<link href="{% static "css/owl.theme.css" %}" rel="stylesheet">
+			<link href="{% static "css/style.css" %}" rel="stylesheet">
+		</head>
+		
+		<body>
+			<div class="wrapper" id="wrapper">
+				<header>
+					<div class="header-main">
+						<nav class="navbar navbar-default">
+							<div class="container-fluid">
+								<!-- Brand and toggle get grouped for better mobile display -->
+								<div class="navbar-header">
+								  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								  </button>
+								  <a class="navbar-brand" href="{% url 'home' %}"><b>BitShopping</b></a>
+								</div>
+
+								<!-- Collect the nav links, forms, and other content for toggling -->
+								<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+								  <!--<ul class="nav navbar-nav">
+									<li>
+										<a href="#"></a>
+									</li>
+									<li>
+										<a href="#"></a>
+									</li>
+								  </ul>-->
+								  <ul class="nav navbar-nav navbar-right">
+									{% for cat in navbar_category|slice:":5" %}
+									<li><a href="{% url 'categorydetail' cat.id %}">{{cat.category_name}}</a></li>
+									{% endfor %}
+								  </ul>
+								</div>
+							</div>
+						</nav>
+					</div>
+				</header>
+				<section class="Bishopping-main">
+					<div class="container">
+						<div class="search-top">
+								<form class="navbar-form" action="{% url 'results'  %}" method="get" role="search">
+								<div class="input-group">
+									<input class="form-control" type="search" value="Search" name="q" placeholder="Search..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}" required="">
+									<span class="input-group-btn" style="text-align: left;">
+										<button type="search" value="Search" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></button>
+								  	</span>
+								</div>
+							</form>
+						</div>
+						
+						<div class="row">
+							<div class="col-md-12">
+								<div class="news-details-wrap result-wraps">
+									<div class="news-details-content">
+										<div class="row panel panel-default">
+											<div class="panel-default">
+												<div class="panel-body">Brands</div>
+												<div class="main-products-details news-page result-details">
+													<div class="col-md-3">
+														<div class="brand-menu">
+															<ul class="list-unstyled">
+																{% for brand in brands|slice:":4000" %}
+																<a href="{% url 'brandetail' brand.id %}"><li>{{brand.brand_name}}</li></a>
+																{% endfor %}
+															<ul>
+														</div>
+													</div>
+													<div class="col-md-3">
+														<div class="brand-menu">
+															<ul class="list-unstyled">
+																{% for brand in brands|slice:"4000:8000" %}
+																<a href="{% url 'brandetail' brand.id %}"><li>{{brand.brand_name}}</li></a>
+																{% endfor %}
+															<ul>
+														</div>
+													</div>
+													<div class="col-md-3">
+														<div class="brand-menu">
+															<ul class="list-unstyled">
+																{% for brand in brands|slice:"8000:12000" %}
+																<a href="{% url 'brandetail' brand.id %}"><li>{{brand.brand_name}}</li></a>
+																{% endfor %}
+															<ul>
+														</div>
+													</div>
+													<div class="col-md-3">
+														<div class="brand-menu">
+															<ul class="list-unstyled">
+																{% for brand in brands|slice:"12000:" %}
+																<a href="{% url 'brandetail' brand.id %}"><li>{{brand.brand_name}}</li></a>
+																{% endfor %}
+															<ul>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div clas="clearfix"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</section>
+				<!-- Start Footer -->    
+				<!--	<footer id="footer">
+					<div class="footer-main">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="footer-top-area">                        
+										
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="footer-top-area rights">                        
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</footer>-->
+				<!-- End Footer -->
+			</div>
+			<!-- initialize jQuery Library --> 
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+			<!-- jquery -->
+			<script src="{% static "js/jquery.min.js" %}"></script>
+			<!-- Bootstrap -->
+			<script src="{% static "js/bootstrap.min.js" %}"></script>
+			<script src="{% static "js/owl.carousel.min.js" %}"></script>
+		</body>
+	</html>

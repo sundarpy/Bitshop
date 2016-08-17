@@ -208,7 +208,6 @@ class SerfoProduct(models.Model):
 class New(models.Model):
 	"""News related to Products"""
 	title = models.CharField(max_length=255, null=True)
-	subtitle = models.TextField(null=True, blank=True)
 	main_content = models.TextField(null=True, blank=True)
 	timestamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 	product_link1 = models.CharField(max_length=255, null=True, blank=True)

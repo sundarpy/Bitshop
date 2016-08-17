@@ -265,7 +265,7 @@ def CategoryPage(request, c_id):
 	brands = Brand.objects.all().order_by('?')
 	category = Category.objects.get(pk=c_id)
 	subcategory = SubCategory.objects.filter(category=category).order_by('id')
-	products_list = Product.objects.filter(category=category).order_by('id')
+	products_list = Product.objects.filter(category=category).exclude(offer_price="", sale_price="").order_by('id')
 	paginator = Paginator(products_list, 18)
 	page = request.GET.get('page')
 	try:
@@ -279,6 +279,30 @@ def CategoryPage(request, c_id):
 	template = 'categorydetail.html'
 	return render(request, template, context)
 
+"""=================================="""
+"""======BRANDS INDIVIDUAL PAGE======"""
+"""=================================="""
+
+def BrandsPage(request, b_id):
+	"""Brands Detail Page"""
+	navbar_category = Category.objects.all().order_by('?')
+	brands = Brand.objects.all().order_by('?')
+	prime_brand = Brand.objects.get(pk=b_id)
+	category = Category.objects.all()
+	products_list = Product.objects.filter(brand=prime_brand).exclude(offer_price="", sale_price="").order_by('id')
+	paginator = Paginator(products_list, 18)
+	page = request.GET.get('page')
+	try:
+		products = paginator.page(page)
+	except PageNotAnInteger:
+		products = paginator.page(1)
+	except EmptyPage:
+		products = paginator.page(paginator.num_pages)
+	total_pages = products.paginator.num_pages+1
+	context = {"category":category, "products":products, "navbar_category":navbar_category, "brands":brands, "prime_brand":prime_brand}
+	template = 'brandetail.html'
+	return render(request, template, context)
+
 """====================================="""
 """=====SUBCATEGORY INDIVIDUAL PAGE====="""
 """====================================="""
@@ -290,7 +314,7 @@ def SubCategoryPage(request, c_id, s_id):
 	category = Category.objects.get(pk=c_id)
 	subcategory = SubCategory.objects.filter(category=category).order_by('id')
 	subcat = SubCategory.objects.get(pk=s_id, category=category)
-	products_list = Product.objects.filter(subcategory=subcat).order_by('id')
+	products_list = Product.objects.filter(subcategory=subcat).exclude(offer_price="", sale_price="").order_by('id')
 	paginator = Paginator(products_list, 18)
 	page = request.GET.get('page')
 	try:
@@ -527,6 +551,17 @@ def News(request):
 
 # def EmbedNews(request, n_id):
 
+"""==========================="""
+"""=====ALL BRANDS METHOD====="""
+"""==========================="""
+
+def AllBrands(request):
+	"""All brands page"""
+	brands = Brand.objects.all().order_by('brand_name')
+	navbar_category = Category.objects.all().order_by('?')
+	context = {"navbar_category":navbar_category, "brands":brands}
+	template = 'brand.html'
+	return render(request, template, context)
 
 """============================="""
 """=====PRODUCT DETAIL PAGE====="""
@@ -541,109 +576,17 @@ def ProductPage(request, p_id):
 	image = ProductImage.objects.filter(product_name=product)
 	comments = Comment.objects.filter(product=product)
 	subcomments = SubComment.objects.filter(comment=comments)
-	item1 = []
-	item2 = []
-	item3 = []
-	item4 = []
-	item5 = []
-
-	men_prod = SerfoProduct.objects.filter(super_category='M')
-	women_prod = SerfoProduct.objects.filter(super_category='W')
-	appliances_prod = SerfoProduct.objects.filter(super_category='A')
-	home_prod = SerfoProduct.objects.filter(super_category='H')
-	electronics_prod = SerfoProduct.objects.filter(super_category='E')
-
-	"""Men"""
-	for i in men_prod:
-		response1 = {}
-		response1['super_category'] = i.super_category
-		response1['id'] = i.product.id
-		response1['title'] = i.product.title
-		if i.product.offer_price != "":
-			response1['price'] = i.product.offer_price
-		else:
-			response1['price'] = i.product.sale_price
-		response1['link'] = i.product.link
-		temp_image = i.product.mainimage
-		response1['mainimage'] = temp_image
-		item1.append(response1)
-
-	"""Women"""
-	for j in women_prod:
-		response2 = {}
-		response2['super_category'] = j.super_category
-		response2['id'] = j.product.id
-		response2['title'] = j.product.title
-		if j.product.offer_price != "":
-			response2['price'] = j.product.offer_price
-		else:
-			response2['price'] = j.product.sale_price
-		response2['link'] = j.product.link
-		temp_image = j.product.mainimage
-		response2['mainimage'] = temp_image
-		item2.append(response2)
-
-	"""Appliances"""
-	for x in appliances_prod:
-		response3 = {}
-		response3['super_category'] = x.super_category
-		response3['id'] = x.product.id
-		response3['title'] = x.product.title
-		if x.product.offer_price != "":
-			response3['price'] = x.product.offer_price
-		else:
-			response3['price'] = x.product.sale_price
-		response3['link'] = x.product.link
-		response3['mainimage'] = x.product.mainimage
-		item3.append(response3)
-
-	"""Home"""
-	for y in home_prod:
-		response4 = {}
-		response4['super_category'] = y.super_category
-		response4['id'] = y.product.id
-		response4['title'] = y.product.title
-		if y.product.offer_price != "":
-			response4['price'] = y.product.offer_price
-		else:
-			response4['price'] = y.product.sale_price
-		response4['link'] = y.product.link
-		response4['mainimage'] = y.product.mainimage
-		item4.append(response4)
-
-	"""Electronics"""
-	for z in electronics_prod:
-		response5 = {}
-		response5['super_category'] = z.super_category
-		response5['id'] = z.product.id
-		response5['title'] = z.product.title
-		if z.product.offer_price != "":
-			response5['price'] = z.product.offer_price
-		else:
-			response5['price'] = z.product.sale_price
-		response5['link'] = z.product.link
-		response5['mainimage'] = z.product.mainimage
-		item5.append(response5)
-
-	data1 = item1
-	data2 = item2
-	data3 = item3
-	data4 = item4
-	data5 = item5
+	similar_products = Product.objects.filter(subcategory=product.subcategory).order_by('?')
 
 	context = {
 				"category":category,
 				"subcategory":subcategory, 
 				"product":product, 
 				"navbar_category":navbar_category,
-				"data1" : data1,
-				"data2" : data2,
-				"data3" : data3,
-				"data4" : data4,
-				"data5" : data5, 
 				"image" : image,
 				"comments" : comments,
 				"subcomments" : subcomments,
+				"similars" : similar_products,
 				}
 	template = 'productpage.html'
 	return render(request, template, context)

@@ -330,7 +330,7 @@ section css start
     text-decoration: none !important;
     position: relative;
     white-space: nowrap;
-    width: 215px;
+    width: 300px;
     text-overflow: ellipsis;
 }
 
@@ -404,6 +404,9 @@ Details css start
 }
 .main-products-details {
     padding-left: 8px;
+}
+.result-details {
+    padding: 0 10px !important;
 }
 .news-body {
     padding: 15px;
@@ -517,6 +520,12 @@ News Details css Start
     max-width: 100%;
     margin: 0 auto;
 	margin-top: 40px;
+}
+.result-wraps {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto;
+    margin-top: 40px;
 }
 .details-page  {
 	padding: 20px;
