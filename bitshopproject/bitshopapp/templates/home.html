@@ -98,17 +98,17 @@
 											<div class="news-details">
 												{% for new in news|slice:":6" %}
 												<div class="col-md-4">
-													<a href="{% url 'newsdetail' new.id %}" style="text-decoration: none;">
-														<div class="thumbnail">
-																<img src={{new.image_url}} alt="item-imgs"/>
-															
-															<div class="caption">
-																<h5>{{new.title}}</h5>
-																<p class="item-name-desc"></p>
+														<a href="{% url 'newsdetail' new.id %}" style="text-decoration: none;">
+															<div class="thumbnail">
+																	<img src={{new.image_url}} alt="item-imgs"/>
+																
+																<div class="caption">
+																	<h5>{{new.title}}</h5>
+																	<p class="item-name-desc"></p>
+																</div>
 															</div>
-														</div>
-													</a>
-												</div>
+														</a>
+													</div>
 												{% endfor %}
 											</div>
 										</div>

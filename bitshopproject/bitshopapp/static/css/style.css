@@ -559,6 +559,21 @@ News Details css Start
     display: block;
     width: 100%;
     height: auto;
+    overflow: hidden;
+    height: 192px;
+    width: 206px;
+    max-width: 100%;
+    max-height: 100%;
+}
+.item .thumbnail .caption h5 {
+    white-space: nowrap;
+    overflow: hidden;
+    width: 124px;
+    text-overflow: ellipsis;
+}
+.Slider-images {
+    border: 1px solid #ddd;
+    padding: 8px;
 }
 .breadcrumb {
     padding: 8px 15px;
