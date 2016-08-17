@@ -95,7 +95,7 @@
 										</div>
 										<div class="row panel panel-default">
 											<div class="panel-body">News <a href="{% url 'news' %}"><span class="badge pull-right">Show More</span></a></div>
-											<div class="news-details">
+											<div class="main-products-details news-page">
 												{% for new in news|slice:":6" %}
 												<div class="col-md-4">
 														<a href="{% url 'newsdetail' new.id %}" style="text-decoration: none;">
