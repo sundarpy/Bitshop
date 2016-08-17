@@ -97,7 +97,7 @@
 										<div class="row">
 											<div class="Slider-images">
 												<div id="owl-demo" class="owl-carousel owl-theme">
-
+												{% if product1 %}
 												  <div class="col-md-4">
 													<a href="{% url 'productdetail' product1.id %}" style="text-decoration: none;">
 														<div class="thumbnail">
@@ -113,6 +113,8 @@
 														</div>
 													</a>
 												</div>
+												{% endif %}
+												{% if product2 %}
 												<div class="col-md-4">
 													<a href="{% url 'productdetail' product2.id %}" style="text-decoration: none;">
 														<div class="thumbnail">
@@ -128,6 +130,8 @@
 														</div>
 													</a>
 												</div>
+												{% endif %}
+												{% if product3 %}
 												<div class="col-md-4">
 													<a href="{% url 'productdetail' product3.id %}" style="text-decoration: none;">
 														<div class="thumbnail">
@@ -143,6 +147,8 @@
 														</div>
 													</a>
 												</div>
+												{% endif %}
+												{% if product4 %}
 												<div class="col-md-4">
 													<a href="{% url 'productdetail' product4.id %}" style="text-decoration: none;">
 														<div class="thumbnail">
@@ -158,6 +164,8 @@
 														</div>
 													</a>
 												</div>
+												{% endif %}
+												{% if product5 %}
 												<div class="col-md-4">
 													<a href="{% url 'productdetail' product5.id %}" style="text-decoration: none;">
 														<div class="thumbnail">
@@ -173,6 +181,8 @@
 														</div>
 													</a>
 												</div>
+												{% endif %}
+												{% if product6 %}
 												<div class="col-md-4">
 													<a href="{% url 'productdetail' product6.id %}" style="text-decoration: none;">
 														<div class="thumbnail">
@@ -188,6 +198,8 @@
 														</div>
 													</a>
 												</div>
+												{% endif %}
+												{% if product7 %}
 												<div class="col-md-4">
 													<a href="{% url 'productdetail' product7.id %}" style="text-decoration: none;">
 														<div class="thumbnail">
@@ -203,6 +215,8 @@
 														</div>
 													</a>
 												</div>
+												{% endif %}
+												{% if product8 %}
 												<div class="col-md-4">
 													<a href="{% url 'productdetail' product8.id %}" style="text-decoration: none;">
 														<div class="thumbnail">
@@ -218,6 +232,8 @@
 														</div>
 													</a>
 												</div>
+												{% endif %}
+												{% if product9 %}
 												<div class="col-md-4">
 													<a href="{% url 'productdetail' product9.id %}" style="text-decoration: none;">
 														<div class="thumbnail">
@@ -233,6 +249,8 @@
 														</div>
 													</a>
 												</div>
+												{% endif %}
+												{% if product10 %}
 												<div class="col-md-4">
 													<a href="{% url 'productdetail' product10.id %}" style="text-decoration: none;">
 														<div class="thumbnail">
@@ -248,7 +266,7 @@
 														</div>
 													</a>
 												</div>
-
+												{% endif %}
 												</div>	
 											</div>
 										</div>

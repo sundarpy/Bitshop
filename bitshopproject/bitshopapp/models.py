@@ -60,6 +60,16 @@ class UserProfile(models.Model):
 """==========PRODUCT MODELS=========="""
 """=================================="""
 
+class Price(models.Model):
+	"""Product Price Filter Class"""
+	title = models.CharField(max_length=100, null=True)
+	upper_limit = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+	lower_limit = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+
+	def __unicode__(self):
+		"""Unicode class."""
+		return str(self.title)
+
 class Brand(models.Model):
 	"""Product Categories Class"""
 	brand_name = models.CharField(max_length=100, null=True)

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Brand, SerfoProduct, Product, ProductImage, Category, SubCategory, UserProfile, Review, Comment, SubComment, New
+from .models import Price, Brand, SerfoProduct, Product, ProductImage, Category, SubCategory, UserProfile, Review, Comment, SubComment, New
 
 # Register your models here.
 class ProductAdmin(admin.ModelAdmin):
@@ -29,10 +29,15 @@ class NewAdmin(admin.ModelAdmin):
 	list_display = ('title',)
 	search_fields = ('title',)
 
+class PriceAdmin(admin.ModelAdmin):
+	list_display = ('title', 'lower_limit', 'upper_limit',)
+	search_fields = ('title',)
+
 admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductImage, ProductImageAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Brand, BrandAdmin)
+admin.site.register(Price, PriceAdmin)
 admin.site.register(SubCategory, SubCategoryAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(Review)

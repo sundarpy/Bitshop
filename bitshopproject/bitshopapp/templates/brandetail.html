@@ -88,32 +88,31 @@
 											<div class="filter-content">
 												<div class="panel-body">Price</div>
 												<form class="check-brand">
+													{% for price in prices %}
+													{% if price.title == 'Very Low' %}
 													<label class="checkbox">
 														<input type="checkbox" value="">
-														Below Rs. 2000 (1698)
+														Below Rs. {{price.upper_limit}}
 													</label>
-
+													{% elif price.title == 'Very High' %}
 													<label class="checkbox">
 														<input type="checkbox" value="">
-														Rs. 2000 - Rs. 4999 (1299)
+														Above Rs. {{price.lower_limit}}
 													</label>
-
+													{% else %}
 													<label class="checkbox">
 														<input type="checkbox" value="">
-														Rs. 5000 - Rs. 9999 (1007)
+														Rs. {{price.lower_limit}} - Rs. {{price.upper_limit}}
 													</label>
-
-													<label class="checkbox">
-														<input type="checkbox" value="">
-														Rs. 10000 - Rs. 19999 (373)
-													</label>
+													{% endif %}
+													{% endfor %}
 												</form>
 											</div>
 										</div>
 										
 										<div class="panel panel-default">
 											<div class="filter-content">
-												<div class="panel-body">Brand</div>
+												<div class="panel-body">Brands</div>
 												{% for brand in brands|slice:":10" %}
 												<a href="{% url 'brandetail' brand.id %}"><div class="panel-body">{{brand.brand_name}}</div></a>
 												{% endfor %}

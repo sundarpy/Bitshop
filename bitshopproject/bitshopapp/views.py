@@ -262,6 +262,7 @@ def HomePage(request):
 
 def CategoryPage(request, c_id):
 	"""Category Detail Page"""
+	prices = Price.objects.all().order_by('-id')
 	navbar_category = Category.objects.all().order_by('?')
 	brands = Brand.objects.all().order_by('?')
 	category = Category.objects.get(pk=c_id)
@@ -278,7 +279,7 @@ def CategoryPage(request, c_id):
 	total_pages = products.paginator.num_pages+1
 
 	news = New.objects.all().order_by('-id')
-	context = {"category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category, "brands":brands,  "news" : news,}
+	context = {"category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category, "brands":brands,  "news" : news, "prices":prices}
 	template = 'categorydetail.html'
 	return render(request, template, context)
 
@@ -288,6 +289,7 @@ def CategoryPage(request, c_id):
 
 def BrandsPage(request, b_id):
 	"""Brands Detail Page"""
+	prices = Price.objects.all().order_by('-id')
 	navbar_category = Category.objects.all().order_by('?')
 	brands = Brand.objects.all().order_by('?')
 	prime_brand = Brand.objects.get(pk=b_id)
@@ -304,7 +306,7 @@ def BrandsPage(request, b_id):
 	total_pages = products.paginator.num_pages+1
 
 	news = New.objects.all().order_by('-id')
-	context = {"category":category, "products":products, "navbar_category":navbar_category, "brands":brands, "prime_brand":prime_brand, "news" : news,}
+	context = {"category":category, "products":products, "navbar_category":navbar_category, "brands":brands, "prime_brand":prime_brand, "news" : news, "prices":prices}
 	template = 'brandetail.html'
 	return render(request, template, context)
 
@@ -314,6 +316,7 @@ def BrandsPage(request, b_id):
 
 def SubCategoryPage(request, c_id, s_id):
 	"""SubCategory Detail Page"""
+	prices = Price.objects.all().order_by('-id')
 	navbar_category = Category.objects.all().order_by('?')
 	brands = Brand.objects.all().order_by('?')
 	category = Category.objects.get(pk=c_id)
@@ -331,7 +334,7 @@ def SubCategoryPage(request, c_id, s_id):
 	total_pages = products.paginator.num_pages+1
 
 	news = New.objects.all().order_by('-id')
-	context = {"category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category,"subcat":subcat, "brands":brands,  "news" : news,}
+	context = {"category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category,"subcat":subcat, "brands":brands,  "news" : news, "prices":prices}
 	template = 'subcategorydetail.html'
 	return render(request, template, context)
 
@@ -344,47 +347,57 @@ def NewsPage(request, n_id):
 	navbar_category = Category.objects.all().order_by('?')
 	news = New.objects.get(pk=n_id)
 	multi_news = New.objects.all().order_by('-id')
+	product1 = []
+	product2 = []
+	product3 = []
+	product4 = []
+	product5 = []
+	product6 = []
+	product7 = []
+	product8 = []
+	product9 = []
+	product10 = []
 
 	if news.product_link1:
-		link1 = news.product_link1
-		id1 = link1.rsplit('/', 1)[-1]
+		link1 = str(news.product_link1)
+		id1 = int(link1.replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		product1 = Product.objects.get(pk=id1)
 	if news.product_link2:
 		link2 = news.product_link2
-		id2 = link2.rsplit('/', 1)[-1]
+		id2 = int(link2.replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		product2 = Product.objects.get(pk=id2)
 	if news.product_link3:
 		link3 = news.product_link3
-		id3 = link3.rsplit('/', 1)[-1]
+		id3 = int(link3.replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		product3 = Product.objects.get(pk=id3)
 	if news.product_link4:
 		link4 = news.product_link4
-		id4 = link4.rsplit('/', 1)[-1]
+		id4 = int(link4.replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		product4 = Product.objects.get(pk=id4)
 	if news.product_link5:
 		link5 = news.product_link5
-		id5 = link5.rsplit('/', 1)[-1]
+		id5 = int(link5.replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		product5 = Product.objects.get(pk=id5)
 	if news.product_link6:
 		link6 = news.product_link6
-		id6 = link6.rsplit('/', 1)[-1]
+		id6 = int(link6.replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		product6 = Product.objects.get(pk=id6)
 	if news.product_link7:
 		link7 = news.product_link7
-		id7 = link7.rsplit('/', 1)[-1]
+		id7 = int(link7.replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		product7 = Product.objects.get(pk=id7)
 	if news.product_link8:
 		link8 = news.product_link8
-		id8 = link8.rsplit('/', 1)[-1]
+		id8 = int(link8.replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		product8 = Product.objects.get(pk=id8)
 	if news.product_link9:
 		link9 = news.product_link9
-		id9 = link9.rsplit('/', 1)[-1]
+		id9 = int(link9.replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		product9 = Product.objects.get(pk=id9)
 	if news.product_link10:
 		link10 = news.product_link10
-		id10 = link10.rsplit('/', 1)[-1]
-	product1 = Product.objects.get(pk=id1)
-	product2 = Product.objects.get(pk=id2)
-	product3 = Product.objects.get(pk=id3)
-	product4 = Product.objects.get(pk=id4)
-	product5 = Product.objects.get(pk=id5)
-	product6 = Product.objects.get(pk=id6)
-	product7 = Product.objects.get(pk=id7)
-	product8 = Product.objects.get(pk=id8)
-	product9 = Product.objects.get(pk=id9)
-	product10 = Product.objects.get(pk=id10)
+		id10 = int(link10.replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		product10 = Product.objects.get(pk=id10)
 
 	item1 = []
 	item2 = []
