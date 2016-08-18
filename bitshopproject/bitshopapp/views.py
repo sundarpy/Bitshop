@@ -368,7 +368,7 @@ def NewsPage(request, n_id):
 	"""Product News Detail Page"""
 	navbar_category = Category.objects.all()
 	news = New.objects.get(pk=n_id)
-	multi_news = New.objects.all().order_by('-id')
+	multi_news = New.objects.all().order_by('?')
 	product1 = []
 	product2 = []
 	product3 = []
