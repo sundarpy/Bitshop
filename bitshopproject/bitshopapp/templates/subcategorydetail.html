@@ -54,7 +54,7 @@
 						<div class="container-fluid">
 								<div class="collapse navbar navbar-collapse" id="bs-example-navbar-collapse-1" style="    border-top: 1px solid transparent;">
 								  <ul class="nav navbar-nav" style="display: block;padding-left: 72px;">
-								  	{% for cat in navbar_category|slice:":7" %}
+								  	{% for cat in navbar_category|slice:"5:12" %}
 									<li class="item-lis first"><a href="{% url 'categorydetail' cat.id %}">{{cat.category_name}}</a></li>
 									{% endfor %}
 								  </ul>
@@ -180,7 +180,7 @@
 										  	</ul>
 										</nav>
 										</div>
-
+										{% if news %}
 										<div class="row panel panel-default">
 											<div class="panel-default">
 												<div class="panel-body">News <a href="{% url 'news' %}"><span class="badge pull-right">Show More</span></a></div>
@@ -202,6 +202,7 @@
 												</div>
 											</div>
 										</div>
+										{% endif %}
 										<div clas="clearfix"></div>
 									</div>
 								</div>
