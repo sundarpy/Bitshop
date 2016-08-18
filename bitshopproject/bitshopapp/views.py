@@ -40,7 +40,7 @@ def Search(request):
 		response1['super_category'] = i.super_category
 		response1['id'] = i.product.id
 		response1['title'] = i.product.title
-		if i.product.offer_price != "":
+		if i.product.offer_price != None:
 			response1['price'] = i.product.offer_price
 		else:
 			response1['price'] = i.product.sale_price
@@ -55,7 +55,7 @@ def Search(request):
 		response2['super_category'] = j.super_category
 		response2['id'] = j.product.id
 		response2['title'] = j.product.title
-		if j.product.offer_price != "":
+		if j.product.offer_price != None:
 			response2['price'] = j.product.offer_price
 		else:
 			response2['price'] = j.product.sale_price
@@ -70,7 +70,7 @@ def Search(request):
 		response3['super_category'] = x.super_category
 		response3['id'] = x.product.id
 		response3['title'] = x.product.title
-		if x.product.offer_price != "":
+		if x.product.offer_price != None:
 			response3['price'] = x.product.offer_price
 		else:
 			response3['price'] = x.product.sale_price
@@ -84,7 +84,7 @@ def Search(request):
 		response4['super_category'] = y.super_category
 		response4['id'] = y.product.id
 		response4['title'] = y.product.title
-		if y.product.offer_price != "":
+		if y.product.offer_price != None:
 			response4['price'] = y.product.offer_price
 		else:
 			response4['price'] = y.product.sale_price
@@ -98,7 +98,7 @@ def Search(request):
 		response5['super_category'] = z.super_category
 		response5['id'] = z.product.id
 		response5['title'] = z.product.title
-		if z.product.offer_price != "":
+		if z.product.offer_price != None:
 			response5['price'] = z.product.offer_price
 		else:
 			response5['price'] = z.product.sale_price
@@ -169,7 +169,7 @@ def HomePage(request):
 		response1['super_category'] = i.super_category
 		response1['id'] = i.product.id
 		response1['title'] = i.product.title
-		if i.product.offer_price != "":
+		if i.product.offer_price != None:
 			response1['price'] = i.product.offer_price
 		else:
 			response1['price'] = i.product.sale_price
@@ -184,7 +184,7 @@ def HomePage(request):
 		response2['super_category'] = j.super_category
 		response2['id'] = j.product.id
 		response2['title'] = j.product.title
-		if j.product.offer_price != "":
+		if j.product.offer_price != None:
 			response2['price'] = j.product.offer_price
 		else:
 			response2['price'] = j.product.sale_price
@@ -199,7 +199,7 @@ def HomePage(request):
 		response3['super_category'] = x.super_category
 		response3['id'] = x.product.id
 		response3['title'] = x.product.title
-		if x.product.offer_price != "":
+		if x.product.offer_price != None:
 			response3['price'] = x.product.offer_price
 		else:
 			response3['price'] = x.product.sale_price
@@ -213,7 +213,7 @@ def HomePage(request):
 		response4['super_category'] = y.super_category
 		response4['id'] = y.product.id
 		response4['title'] = y.product.title
-		if y.product.offer_price != "":
+		if y.product.offer_price != None:
 			response4['price'] = y.product.offer_price
 		else:
 			response4['price'] = y.product.sale_price
@@ -227,7 +227,7 @@ def HomePage(request):
 		response5['super_category'] = z.super_category
 		response5['id'] = z.product.id
 		response5['title'] = z.product.title
-		if z.product.offer_price != "":
+		if z.product.offer_price != None:
 			response5['price'] = z.product.offer_price
 		else:
 			response5['price'] = z.product.sale_price
@@ -417,7 +417,7 @@ def NewsPage(request, n_id):
 		response1['super_category'] = i.super_category
 		response1['id'] = i.product.id
 		response1['title'] = i.product.title
-		if i.product.offer_price != "":
+		if i.product.offer_price != None:
 			response1['price'] = i.product.offer_price
 		else:
 			response1['price'] = i.product.sale_price
@@ -432,7 +432,7 @@ def NewsPage(request, n_id):
 		response2['super_category'] = j.super_category
 		response2['id'] = j.product.id
 		response2['title'] = j.product.title
-		if j.product.offer_price != "":
+		if j.product.offer_price != None:
 			response2['price'] = j.product.offer_price
 		else:
 			response2['price'] = j.product.sale_price
@@ -447,7 +447,7 @@ def NewsPage(request, n_id):
 		response3['super_category'] = x.super_category
 		response3['id'] = x.product.id
 		response3['title'] = x.product.title
-		if x.product.offer_price != "":
+		if x.product.offer_price != None:
 			response3['price'] = x.product.offer_price
 		else:
 			response3['price'] = x.product.sale_price
@@ -461,7 +461,7 @@ def NewsPage(request, n_id):
 		response4['super_category'] = y.super_category
 		response4['id'] = y.product.id
 		response4['title'] = y.product.title
-		if y.product.offer_price != "":
+		if y.product.offer_price != None:
 			response4['price'] = y.product.offer_price
 		else:
 			response4['price'] = y.product.sale_price
@@ -475,7 +475,7 @@ def NewsPage(request, n_id):
 		response5['super_category'] = z.super_category
 		response5['id'] = z.product.id
 		response5['title'] = z.product.title
-		if z.product.offer_price != "":
+		if z.product.offer_price != None:
 			response5['price'] = z.product.offer_price
 		else:
 			response5['price'] = z.product.sale_price
@@ -537,7 +537,7 @@ def News(request):
 		response1['super_category'] = i.super_category
 		response1['id'] = i.product.id
 		response1['title'] = i.product.title
-		if i.product.offer_price != "":
+		if i.product.offer_price != None:
 			response1['price'] = i.product.offer_price
 		else:
 			response1['price'] = i.product.sale_price
@@ -552,7 +552,7 @@ def News(request):
 		response2['super_category'] = j.super_category
 		response2['id'] = j.product.id
 		response2['title'] = j.product.title
-		if j.product.offer_price != "":
+		if j.product.offer_price != None:
 			response2['price'] = j.product.offer_price
 		else:
 			response2['price'] = j.product.sale_price
@@ -567,7 +567,7 @@ def News(request):
 		response3['super_category'] = x.super_category
 		response3['id'] = x.product.id
 		response3['title'] = x.product.title
-		if x.product.offer_price != "":
+		if x.product.offer_price != None:
 			response3['price'] = x.product.offer_price
 		else:
 			response3['price'] = x.product.sale_price
@@ -581,7 +581,7 @@ def News(request):
 		response4['super_category'] = y.super_category
 		response4['id'] = y.product.id
 		response4['title'] = y.product.title
-		if y.product.offer_price != "":
+		if y.product.offer_price != None:
 			response4['price'] = y.product.offer_price
 		else:
 			response4['price'] = y.product.sale_price
@@ -595,7 +595,7 @@ def News(request):
 		response5['super_category'] = z.super_category
 		response5['id'] = z.product.id
 		response5['title'] = z.product.title
-		if z.product.offer_price != "":
+		if z.product.offer_price != None:
 			response5['price'] = z.product.offer_price
 		else:
 			response5['price'] = z.product.sale_price
@@ -733,7 +733,7 @@ def getproducts(request):
 		response1['super_category'] = i.super_category
 		response1['id'] = i.product.id
 		response1['title'] = i.product.title
-		if i.product.offer_price != "":
+		if i.product.offer_price != None:
 			response1['price'] = i.product.offer_price
 		else:
 			response1['price'] = i.product.sale_price
@@ -748,7 +748,7 @@ def getproducts(request):
 		response2['super_category'] = j.super_category
 		response2['id'] = j.product.id
 		response2['title'] = j.product.title
-		if j.product.offer_price != "":
+		if j.product.offer_price != None:
 			response2['price'] = j.product.offer_price
 		else:
 			response2['price'] = j.product.sale_price
@@ -763,7 +763,7 @@ def getproducts(request):
 		response3['super_category'] = x.super_category
 		response3['id'] = x.product.id
 		response3['title'] = x.product.title
-		if x.product.offer_price != "":
+		if x.product.offer_price != None:
 			response3['price'] = x.product.offer_price
 		else:
 			response3['price'] = x.product.sale_price
@@ -777,7 +777,7 @@ def getproducts(request):
 		response4['super_category'] = y.super_category
 		response4['id'] = y.product.id
 		response4['title'] = y.product.title
-		if y.product.offer_price != "":
+		if y.product.offer_price != None:
 			response4['price'] = y.product.offer_price
 		else:
 			response4['price'] = y.product.sale_price
@@ -791,7 +791,7 @@ def getproducts(request):
 		response5['super_category'] = z.super_category
 		response5['id'] = z.product.id
 		response5['title'] = z.product.title
-		if z.product.offer_price != "":
+		if z.product.offer_price != None:
 			response5['price'] = z.product.offer_price
 		else:
 			response5['price'] = z.product.sale_price
