@@ -291,7 +291,7 @@ def CategoryPage(request, c_id):
 """======BRANDS INDIVIDUAL PAGE======"""
 """=================================="""
 
-def BrandsPage(request, b_id)):
+def BrandsPage(request, b_id):
 	"""Brands Detail Page"""
 	# selected_price = Price.objects.get(pk=pr_id)
 	# upper = selected_price.upper_limit
@@ -321,7 +321,7 @@ def BrandsPage(request, b_id)):
 """=====SUBCATEGORY INDIVIDUAL PAGE====="""
 """====================================="""
 
-def SubCategoryPage(request, c_id, s_id, pr_id)):
+def SubCategoryPage(request, c_id, s_id):
 	"""SubCategory Detail Page"""
 	# selected_price = Price.objects.get(pk=pr_id)
 	# upper = selected_price.upper_limit
