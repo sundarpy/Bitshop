@@ -55,10 +55,36 @@ navbar start
 .navbar-default .navbar-nav>li>a {
     color: #000;
     background-color: transparent;
-	font-size: 14px;
+	font-size: 13px    ;
     line-height: 20px;
-    font-weight: 400;
+    font-weight: 600;
 }
+.listing .navbar-nav>li>a {
+    color: #000;
+    background-color: transparent;
+    font-size: 13px    ;
+    line-height: 20px;
+    font-weight: 600;
+}
+/*.navbar-nav>li::before{
+    position: absolute;
+    top: 17px;
+    right: -3px;
+    float: left;
+    border: 0;
+    color: #dfe1e8;
+    content: '|';
+}*/
+.navbar-nav>li:not(:last-child):after {
+    position: absolute;
+    top: 17px;
+    right: -3px;
+    float: left;
+    border: 0;
+    color: #dfe1e8;     
+    content:'|';
+}
+
 .navbar-default .navbar-nav>li>a:hover {
     color: #000;
     background-color: transparent;
@@ -186,9 +212,10 @@ section css start
     margin: 0 auto;
 }
 .search-top {
-	display: block;
+	display: table-cell;
     margin-top: 40px;
 	text-align: center;
+    padding-left: 95px;
 }
 .main-products {
 	margin-top: 40px;

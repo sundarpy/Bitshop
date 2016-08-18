@@ -105,7 +105,7 @@ def Search(request):
 		response5['link'] = z.product.link
 		response5['mainimage'] = z.product.mainimage
 		item5.append(response5)
-	navbar_category = Category.objects.all().order_by('?')
+	navbar_category = Category.objects.all()
 	data1 = item1
 	data2 = item2
 	data3 = item3
@@ -144,7 +144,7 @@ def Search(request):
 
 def HomePage(request):
 	"""Home Page"""
-	navbar_category = Category.objects.all().order_by('?')
+	navbar_category = Category.objects.all()
 	category = Category.objects.all()
 	sub_category = SubCategory.objects.all()
 	subcategory = SubCategory.objects.filter(category=category)
@@ -267,7 +267,7 @@ def CategoryPage(request, c_id):
 	# upper = selected_price.upper_limit
 	# lower = selected_price.lower_limit
 	prices = Price.objects.all().order_by('-id')
-	navbar_category = Category.objects.all().order_by('?')
+	navbar_category = Category.objects.all()
 	brands = Brand.objects.all().order_by('?')
 	category = Category.objects.get(pk=c_id)
 	subcategory = SubCategory.objects.filter(category=category).order_by('id')
@@ -297,7 +297,7 @@ def BrandsPage(request, b_id):
 	# upper = selected_price.upper_limit
 	# lower = selected_price.lower_limit
 	prices = Price.objects.all().order_by('-id')
-	navbar_category = Category.objects.all().order_by('?')
+	navbar_category = Category.objects.all()
 	brands = Brand.objects.all().order_by('?')
 	prime_brand = Brand.objects.get(pk=b_id)
 	category = Category.objects.all()
@@ -327,7 +327,7 @@ def SubCategoryPage(request, c_id, s_id):
 	# upper = selected_price.upper_limit
 	# lower = selected_price.lower_limit
 	prices = Price.objects.all().order_by('-id')
-	navbar_category = Category.objects.all().order_by('?')
+	navbar_category = Category.objects.all()
 	brands = Brand.objects.all().order_by('?')
 	category = Category.objects.get(pk=c_id)
 	subcategory = SubCategory.objects.filter(category=category).order_by('id')
@@ -354,7 +354,7 @@ def SubCategoryPage(request, c_id, s_id):
 
 def NewsPage(request, n_id):
 	"""Product News Detail Page"""
-	navbar_category = Category.objects.all().order_by('?')
+	navbar_category = Category.objects.all()
 	news = New.objects.get(pk=n_id)
 	multi_news = New.objects.all().order_by('-id')
 	product1 = []
@@ -526,7 +526,7 @@ def NewsPage(request, n_id):
 
 def News(request):
 	"""Product News Detail Page"""
-	navbar_category = Category.objects.all().order_by('?')
+	navbar_category = Category.objects.all()
 	news = New.objects.all().order_by('-id')
 
 	item1 = []
@@ -638,7 +638,7 @@ def News(request):
 def AllBrands(request):
 	"""All brands page"""
 	brands = Brand.objects.all().order_by('brand_name')
-	navbar_category = Category.objects.all().order_by('?')
+	navbar_category = Category.objects.all()
 	context = {"navbar_category":navbar_category, "brands":brands}
 	template = 'brand.html'
 	return render(request, template, context)
@@ -649,7 +649,7 @@ def AllBrands(request):
 
 def ProductPage(request, p_id):
 	"""Product detail page"""
-	navbar_category = Category.objects.all().order_by('?')
+	navbar_category = Category.objects.all()
 	category = Category.objects.all()
 	subcategory = SubCategory.objects.all()
 	product = Product.objects.get(pk=p_id)
