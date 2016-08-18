@@ -332,7 +332,7 @@ section css start
     max-height: 68px;
     max-width: 50px;
     float: left;
-    margin-right: 10px;
+    margin: 3px;
     display: inline;
     width: 16%;
 }
@@ -597,20 +597,34 @@ News Details css Start
     font-weight: normal;
 	text-align: justify;
 }
-#owl-demo .item img{
-    display: block;
+.item .thumbnail {
+    display: inline-block;
+    padding: 4px;
+    margin-bottom: 0px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 0px;
+    -webkit-transition: border .2s ease-in-out;
+    -o-transition: border .2s ease-in-out;
+    transition: border .2s ease-in-out;
+    /* float: left; */
     width: 100%;
-    height: auto;
+}
+#owl-demo .item img{
+    display: inline-block;
+    width: 100%;
     overflow: hidden;
     height: 192px;
     width: 206px;
     max-width: 100%;
-    max-height: 100%;
+    float: left;
+    margin-right: 20px;
 }
 .item .thumbnail .caption h5 {
     white-space: nowrap;
     overflow: hidden;
-    width: 124px;
+    /*width: 124px;*/
     text-overflow: ellipsis;
 }
 .Slider-images {

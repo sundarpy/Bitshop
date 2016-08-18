@@ -19,6 +19,9 @@
 			<link href="{% static "css/owl.carousel.css" %}" rel="stylesheet">
 			<link href="{% static "css/owl.theme.css" %}" rel="stylesheet">
 			<link href="{% static "css/style.css" %}" rel="stylesheet">
+			<script type="text/javascript">var switchTo5x=true;</script>
+			<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+			<script type="text/javascript">stLight.options({publisher: "0d8788c3-362d-4766-bfd6-b4fb0f354c84", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
 		</head>
 		
 		<body>
@@ -83,6 +86,13 @@
 														<div class="news-desc">
 															<p>{{news.main_content}}</p>
 														</div>
+														<div class="share-social">
+															<h5>share it</h5>
+																<span class='st_facebook_large' displayText='Facebook'></span>
+																<span class='st_twitter_large' displayText='Tweet'></span>
+																<span class='st_linkedin_large' displayText='LinkedIn'></span>
+																<span class='st_pinterest_large' displayText='Pinterest'></span>
+														</div>
 													</div>
 													<div class="clearfix"></div>
 												</div>
@@ -98,9 +108,19 @@
 														<div class="caption">
 															<a href="{% url 'productdetail' product1.id %}" style="text-decoration: none;"><h5>{{product1.title}}</h5></a>
 															{% if product1.offer_price != None %}
-															<p class="item-name-desc"> &#x20B9; {{product1.offer_price}}</p>
+															<p class="item-name-desc"> Price : &#x20B9; {{product1.offer_price}}</p>
 															{% else %}
-															<p class="item-name-desc"> &#x20B9; {{product1.sale_price}}</p>
+															<p class="item-name-desc"> Price : &#x20B9; {{product1.sale_price}}</p>
+															{% endif %}
+															<p> Cash on Delivery : {{product1.COD}}</p>
+															{% if product1.seller %}
+															<p> Seller : {{product1.seller}}</p>
+															{% endif %}
+															{% if product1.star_rating != "Fac" %}
+															<p> Rating : {{product1.star_rating}}</p>
+															{% endif %}
+															{% if product1.brand %}
+															<p> Brand : {{product1.brand}}</p>
 															{% endif %}
 														</div>
 													</div>
@@ -113,9 +133,19 @@
 														<div class="caption">
 															<a href="{% url 'productdetail' product2.id %}" style="text-decoration: none;"><h5>{{product2.title}}</h5></a>
 															{% if product2.offer_price != None %}
-															<p class="item-name-desc"> &#x20B9; {{product2.offer_price}}</p>
+															<p class="item-name-desc"> Price : &#x20B9; {{product2.offer_price}}</p>
 															{% else %}
-															<p class="item-name-desc"> &#x20B9; {{product2.sale_price}}</p>
+															<p class="item-name-desc"> Price : &#x20B9; {{product2.sale_price}}</p>
+															{% endif %}
+															<p> Cash on Delivery : {{product2.COD}}</p>
+															{% if product2.seller %}
+															<p> Seller : {{product2.seller}}</p>
+															{% endif %}
+															{% if product2.star_rating != "Fac" %}
+															<p> Rating : {{product2.star_rating}}</p>
+															{% endif %}
+															{% if product2.brand %}
+															<p> Brand : {{product2.brand}}</p>
 															{% endif %}
 														</div>
 													</div>
@@ -128,9 +158,19 @@
 														<div class="caption">
 															<a href="{% url 'productdetail' product3.id %}" style="text-decoration: none;"><h5>{{product3.title}}</h5></a>
 															{% if product3.offer_price != None %}
-															<p class="item-name-desc"> &#x20B9; {{product3.offer_price}}</p>
+															<p class="item-name-desc"> Price : &#x20B9; {{product3.offer_price}}</p>
 															{% else %}
-															<p class="item-name-desc"> &#x20B9; {{product3.sale_price}}</p>
+															<p class="item-name-desc"> Price : &#x20B9; {{product3.sale_price}}</p>
+															{% endif %}
+															<p> Cash on Delivery : {{product3.COD}}</p>
+															{% if product3.seller %}
+															<p> Seller : {{product3.seller}}</p>
+															{% endif %}
+															{% if product3.star_rating != "Fac" %}
+															<p> Rating : {{product3.star_rating}}</p>
+															{% endif %}
+															{% if product3.brand %}
+															<p> Brand : {{product3.brand}}</p>
 															{% endif %}
 														</div>
 													</div>
@@ -143,9 +183,19 @@
 														<div class="caption">
 															<a href="{% url 'productdetail' product4.id %}" style="text-decoration: none;"><h5>{{product4.title}}</h5></a>
 															{% if product4.offer_price != None %}
-															<p class="item-name-desc"> &#x20B9; {{product4.offer_price}}</p>
+															<p class="item-name-desc"> Price : &#x20B9; {{product4.offer_price}}</p>
 															{% else %}
-															<p class="item-name-desc"> &#x20B9; {{product4.sale_price}}</p>
+															<p class="item-name-desc"> Price : &#x20B9; {{product4.sale_price}}</p>
+															{% endif %}
+															<p> Cash on Delivery : {{product4.COD}}</p>
+															{% if product4.seller %}
+															<p> Seller : {{product4.seller}}</p>
+															{% endif %}
+															{% if product4.star_rating != "Fac" %}
+															<p> Rating : {{product4.star_rating}}</p>
+															{% endif %}
+															{% if product4.brand %}
+															<p> Brand : {{product4.brand}}</p>
 															{% endif %}
 														</div>
 													</div>
@@ -158,9 +208,19 @@
 														<div class="caption">
 															<a href="{% url 'productdetail' product5.id %}" style="text-decoration: none;"><h5>{{product5.title}}</h5></a>
 															{% if product5.offer_price != None %}
-															<p class="item-name-desc"> &#x20B9; {{product5.offer_price}}</p>
+															<p class="item-name-desc"> Price : &#x20B9; {{product5.offer_price}}</p>
 															{% else %}
-															<p class="item-name-desc"> &#x20B9; {{product5.sale_price}}</p>
+															<p class="item-name-desc"> Price : &#x20B9; {{product5.sale_price}}</p>
+															{% endif %}
+															<p> Cash on Delivery : {{product5.COD}}</p>
+															{% if product5.seller %}
+															<p> Seller : {{product5.seller}}</p>
+															{% endif %}
+															{% if product5.star_rating != "Fac" %}
+															<p> Rating : {{product5.star_rating}}</p>
+															{% endif %}
+															{% if product5.brand %}
+															<p> Brand : {{product5.brand}}</p>
 															{% endif %}
 														</div>
 													</div>
@@ -173,9 +233,19 @@
 														<div class="caption">
 															<a href="{% url 'productdetail' product6.id %}" style="text-decoration: none;"><h5>{{product6.title}}</h5></a>
 															{% if product6.offer_price != None %}
-															<p class="item-name-desc"> &#x20B9; {{product6.offer_price}}</p>
+															<p class="item-name-desc"> Price : &#x20B9; {{product6.offer_price}}</p>
 															{% else %}
-															<p class="item-name-desc"> &#x20B9; {{product6.sale_price}}</p>
+															<p class="item-name-desc"> Price : &#x20B9; {{product6.sale_price}}</p>
+															{% endif %}
+															<p> Cash on Delivery : {{product6.COD}}</p>
+															{% if product6.seller %}
+															<p> Seller : {{product6.seller}}</p>
+															{% endif %}
+															{% if product6.star_rating != "Fac" %}
+															<p> Rating : {{product6.star_rating}}</p>
+															{% endif %}
+															{% if product6.brand %}
+															<p> Brand : {{product6.brand}}</p>
 															{% endif %}
 														</div>
 													</div>
@@ -188,9 +258,19 @@
 														<div class="caption">
 															<a href="{% url 'productdetail' product7.id %}" style="text-decoration: none;"><h5>{{product7.title}}</h5></a>
 															{% if product7imgTagWrapperId %}
-															<p class="item-name-desc"> &#x20B9; {{product7.offer_price}}</p>
+															<p class="item-name-desc"> Price : &#x20B9; {{product7.offer_price}}</p>
 															{% else %}
-															<p class="item-name-desc"> &#x20B9; {{product7.sale_price}}</p>
+															<p class="item-name-desc"> Price : &#x20B9; {{product7.sale_price}}</p>
+															{% endif %}
+															<p> Cash on Delivery : {{product7.COD}}</p>
+															{% if product7.seller %}
+															<p> Seller : {{product7.seller}}</p>
+															{% endif %}
+															{% if product7.star_rating != "Fac" %}
+															<p> Rating : {{product7.star_rating}}</p>
+															{% endif %}
+															{% if product7.brand %}
+															<p> Brand : {{product7.brand}}</p>
 															{% endif %}
 														</div>
 													</div>
@@ -203,9 +283,19 @@
 														<div class="caption">
 															<a href="{% url 'productdetail' product8.id %}" style="text-decoration: none;"><h5>{{product8.title}}</h5></a>
 															{% if product8.offer_price != None %}
-															<p class="item-name-desc"> &#x20B9; {{product8.offer_price}}</p>
+															<p class="item-name-desc"> Price : &#x20B9; {{product8.offer_price}}</p>
 															{% else %}
-															<p class="item-name-desc"> &#x20B9; {{product8.sale_price}}</p>
+															<p class="item-name-desc"> Price : &#x20B9; {{product8.sale_price}}</p>
+															{% endif %}
+															<p> Cash on Delivery : {{product8.COD}}</p>
+															{% if product8.seller %}
+															<p> Seller : {{product38.seller}}</p>
+															{% endif %}
+															{% if product8.star_rating != "Fac" %}
+															<p> Rating : {{product8.star_rating}}</p>
+															{% endif %}
+															{% if product8.brand %}
+															<p> Brand : {{product8.brand}}</p>
 															{% endif %}
 														</div>
 													</div>
@@ -218,9 +308,19 @@
 														<div class="caption">
 															<a href="{% url 'productdetail' product9.id %}" style="text-decoration: none;"><h5>{{product9.title}}</h5></a>
 															{% if product9.offer_price != None %}
-															<p class="item-name-desc"> &#x20B9; {{product9.offer_price}}</p>
+															<p class="item-name-desc"> Price : &#x20B9; {{product9.offer_price}}</p>
 															{% else %}
-															<p class="item-name-desc"> &#x20B9; {{product9.sale_price}}</p>
+															<p class="item-name-desc"> Price : &#x20B9; {{product9.sale_price}}</p>
+															{% endif %}
+															<p> Cash on Delivery : {{product9.COD}}</p>
+															{% if product9.seller %}
+															<p> Seller : {{product9.seller}}</p>
+															{% endif %}
+															{% if product9.star_rating != "Fac" %}
+															<p> Rating : {{product9.star_rating}}</p>
+															{% endif %}
+															{% if product9.brand %}
+															<p> Brand : {{product9.brand}}</p>
 															{% endif %}
 														</div>
 													</div>
@@ -233,9 +333,19 @@
 														<div class="caption">
 															<a href="{% url 'productdetail' product10.id %}" style="text-decoration: none;"><h5>{{product10.title}}</h5></a>
 															{% if product10.offer_price != None %}
-															<p class="item-name-desc"> &#x20B9; {{product10.offer_price}}</p>
+															<p class="item-name-desc"> Price : &#x20B9; {{product10.offer_price}}</p>
 															{% else %}
-															<p class="item-name-desc"> &#x20B9; {{product10.sale_price}}</p>
+															<p class="item-name-desc"> Price : &#x20B9; {{product10.sale_price}}</p>
+															{% endif %}
+															<p> Cash on Delivery : {{product10.COD}}</p>
+															{% if product10.seller %}
+															<p> Seller : {{product10.seller}}</p>
+															{% endif %}
+															{% if product10.star_rating != "Fac" %}
+															<p> Rating : {{product10.star_rating}}</p>
+															{% endif %}
+															{% if product10.brand %}
+															<p> Brand : {{product10.brand}}</p>
 															{% endif %}
 														</div>
 													</div>
@@ -247,7 +357,7 @@
 										
 										<div class="row panel panel-default">
 											<div class="panel-default">
-												<div class="panel-body">News <a href="{% url 'news' %}"><span class="badge pull-right">Show More</span></a></div>
+												<div class="panel-body">People also Read <a href="{% url 'news' %}"><span class="badge pull-right">Show More</span></a></div>
 												<div class="main-products-details news-page">
 													{% for new in multi_news|slice:":6" %}
 													<div class="col-md-4">
@@ -413,15 +523,16 @@
  
 				  $("#owl-demo").owlCarousel({
 				 
-					  navigation : false, // Show next and prev buttons
-				 	  pagination: true,
+					  navigation : true, // Show next and prev buttons
+				 	  pagination: false,
 					  slideSpeed : 300,
 					  paginationSpeed : 400,
 				 
-					  items : 4, 
+					  items : 1, 
 					  itemsDesktop : false,
 					  itemsDesktopSmall : false,
 					  itemsTablet: false,
+					  navigationText: ['<i class="fa fa-chevron-left" aria-hidden="true"></i>',' <i class="fa fa-chevron-right" aria-hidden="true"></i>'],
 					  itemsMobile : false
 				 
 				  });

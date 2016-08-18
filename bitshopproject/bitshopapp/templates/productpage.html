@@ -153,7 +153,7 @@
 																		</h5>
 																	</div>
 																	{% endif %}
-																	{% if product.brand %}
+																	{% if product.brand and product.brand != "[]" %}
 																	<div class="cash-item">
 																		<h5> Brand <b>:</b> &nbsp; &nbsp; 
 																			<a href="{% url 'brandetail' product.brand.id %}"><span class="avail-name">{{product.brand}}</span></a>
