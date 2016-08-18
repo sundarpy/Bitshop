@@ -64,7 +64,7 @@ navbar start
     background-color: transparent;
     font-size: 13px    ;
     line-height: 20px;
-    font-weight: 600;
+    font-weight: 500;
 }
 /*.navbar-nav>li::before{
     position: absolute;
@@ -166,7 +166,7 @@ navbar END
 SIGNIN/ SIGNUP PART(CSS)
 ===========*/
  body {
-    padding-top: 15px;
+    /*padding-top: 15px;*/
     font-size: 12px
   }
   .main {
@@ -327,6 +327,8 @@ section css start
     max-width: 50px;
     float: left;
     margin-right: 10px;
+    display: inline;
+    width: 16%;
 }
 .similar-content .thumbnail .badge {
 	margin-right: 20px;
@@ -346,6 +348,11 @@ section css start
 .thumbnail .announce {
     padding: 0px;
     color: #333;
+    display: inline;
+    float: right;
+    width: 82%;
+    max-width: 100%;
+    overflow: hidden;
 }
 .announce  h5 {
     color: #000 !important;
@@ -357,8 +364,10 @@ section css start
     text-decoration: none !important;
     position: relative;
     white-space: nowrap;
-    width: 300px;
+    width: 268px;
     text-overflow: ellipsis;
+    margin: 4px 0;
+
 }
 
 /*========

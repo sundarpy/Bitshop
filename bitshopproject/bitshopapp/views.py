@@ -830,4 +830,28 @@ def page_not_found(request):
 # HTTP Error 500
 def server_error(request):
 	return render_to_response('500.html')	
+
+"""============================="""
+"""=====PRICE FILTER METHOD====="""
+"""============================="""
+
+# def PriceFilter(self, request, c_id, pr_id):
+# 	price = Price.objects.get(pk=pr_id)
+# 	upper = request.GET.get(price.upper_limit, None)
+# 	lower = request.GET.get(price.lower_limit, None)
+# 	cat = Category.objects.get(pk=c_id)
+# 	category = request.GET.get(cat, None)
+
+# 	if lower and upper and cat:
+# 		products = Product.objects.filter(Q(category=category, offer_price__lte=upper, offer_price__gte=lower) | Q(category=category, sale_price__lte=upper, sale_price__gte=lower))
+# 		price_products = json.dumps(products)
+
+# 	return Response({"price_products":price_products, 'status':200})
+
+
+
+
+
+
+
 	
