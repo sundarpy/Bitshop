@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^news/$', views.News, name='news'),
     url(r'^brands/$', views.AllBrands, name='brands'),
 
+
     url(r'^signin/$', views.login_view, name='login'),
     url(r'^logout/$', views.logout_view, name='logout'),
     url(r'^register/$', views.register_view, name='signup'),

@@ -77,7 +77,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bitshopproject.wsgi.application'
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
-SITE_ID = 4
+SITE_ID = 6
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 

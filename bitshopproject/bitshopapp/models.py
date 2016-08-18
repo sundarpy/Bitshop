@@ -109,8 +109,8 @@ class Product(models.Model):
 	"""Product Class"""
 	title = models.CharField(max_length=255, null=True)
 	brand = models.ForeignKey(Brand, default="")
-	offer_price = models.CharField(max_length=255, null=True)
-	sale_price = models.CharField(max_length=255, null=True)								
+	offer_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+	sale_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)								
 	description = models.TextField(null=True)
 	feature = models.TextField(null=True)			
 	link = models.TextField(null=True)    									
@@ -218,6 +218,8 @@ class SerfoProduct(models.Model):
 class New(models.Model):
 	"""News related to Products"""
 	title = models.CharField(max_length=255, null=True)
+	category = models.ForeignKey(Category, default="")
+	subcategory = models.ForeignKey(SubCategory, default="")
 	main_content = models.TextField(null=True, blank=True)
 	timestamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 	image_url = models.CharField(max_length=255, null=True, blank=True)
