@@ -152,7 +152,7 @@
 											      	</a>
 											      	{% endif %}
 											    </li>
-											    {% for page in range %}
+											    {% for page in range|slice:sl %}
 											    <li><a href="?page={{ page }}">{{page}}</a></li>
 											    {% endfor %}
 											    <li>
@@ -224,7 +224,7 @@
 			<script src="{% static "js/bootstrap.min.js" %}"></script>
 			<script src="{% static "js/owl.carousel.min.js" %}"></script>
 			<script type="text/javascript">
-			
+
 			</script>
 			
 		</body>

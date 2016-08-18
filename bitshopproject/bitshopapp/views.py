@@ -282,8 +282,12 @@ def CategoryPage(request, c_id):
 		products = paginator.page(paginator.num_pages)
 	total_pages = products.paginator.num_pages+1
 
+	x = products.number - 1
+	y = products.number + 4
+	sl = "%d:%d" % (x,y)
+
 	news = New.objects.filter(category=category).order_by('-id')
-	context = {"category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category, "brands":brands,  "news" : news, "prices":prices}
+	context = {"category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
 	template = 'categorydetail.html'
 	return render(request, template, context)
 
@@ -312,8 +316,12 @@ def BrandsPage(request, b_id):
 		products = paginator.page(paginator.num_pages)
 	total_pages = products.paginator.num_pages+1
 
+	x = products.number - 1
+	y = products.number + 4
+	sl = "%d:%d" % (x,y)
+
 	news = New.objects.all().order_by('-id')
-	context = {"category":category, "products":products, "navbar_category":navbar_category, "brands":brands, "prime_brand":prime_brand, "news" : news, "prices":prices}
+	context = {"category":category, "products":products, "navbar_category":navbar_category, "brands":brands, "prime_brand":prime_brand, "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
 	template = 'brandetail.html'
 	return render(request, template, context)
 
@@ -343,8 +351,12 @@ def SubCategoryPage(request, c_id, s_id):
 		products = paginator.page(paginator.num_pages)
 	total_pages = products.paginator.num_pages+1
 
+	x = products.number - 1
+	y = products.number + 4
+	sl = "%d:%d" % (x,y)
+
 	news = New.objects.filter(category=category).order_by('-id')
-	context = {"category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category,"subcat":subcat, "brands":brands,  "news" : news, "prices":prices}
+	context = {"category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category,"subcat":subcat, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
 	template = 'subcategorydetail.html'
 	return render(request, template, context)
 

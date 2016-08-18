@@ -167,7 +167,7 @@
 											      	</a>
 											      	{% endif %}
 											    </li>
-											    {% for page in range %}
+											    {% for page in range|slice:sl %}
 											    <li><a href="?page={{ page }}">{{page}}</a></li>
 											    {% endfor %}
 											    <li>
