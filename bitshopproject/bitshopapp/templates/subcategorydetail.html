@@ -144,7 +144,7 @@
 											<div class="panel-body">Products > {{category.category_name}} > {{subcat.subcategory_name}}</div>
 											<div class="row">
 												{% for product in products|slice:":18" %}
-												{% if product.offer_price or product.sale_price %}
+												{% if product.offer_price != None or product.sale_price != None %}
 												<div class="col-md-4">
 													<a href="{% url 'productdetail' product.id %}" style="text-decoration: none;">
 														<div class="thumbnail">
@@ -152,7 +152,7 @@
 															
 															<div class="caption">
 																<a href="{% url 'productdetail' product.id %}" style="text-decoration: none;"><h5>{{product.title}}</h5></a>
-																{% if product.offer_price != "" %}
+																{% if product.offer_price != None %}
 																<p class="item-name-desc"> &#x20B9; {{product.offer_price}}</p>
 																{% else %}
 																<p class="item-name-desc"> &#x20B9; {{product.sale_price}}</p>

@@ -279,7 +279,7 @@ def CategoryPage(request, c_id):
 		products = paginator.page(paginator.num_pages)
 	total_pages = products.paginator.num_pages+1
 
-	news = New.objects.all().order_by('-id')
+	news = New.objects.filter(category=category).order_by('-id')
 	context = {"category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category, "brands":brands,  "news" : news, "prices":prices}
 	template = 'categorydetail.html'
 	return render(request, template, context)
@@ -334,7 +334,7 @@ def SubCategoryPage(request, c_id, s_id):
 		products = paginator.page(paginator.num_pages)
 	total_pages = products.paginator.num_pages+1
 
-	news = New.objects.all().order_by('-id')
+	news = New.objects.filter(category=category).order_by('-id')
 	context = {"category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category,"subcat":subcat, "brands":brands,  "news" : news, "prices":prices}
 	template = 'subcategorydetail.html'
 	return render(request, template, context)
