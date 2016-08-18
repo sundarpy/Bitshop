@@ -263,6 +263,9 @@ def HomePage(request):
 
 def CategoryPage(request, c_id):
 	"""Category Detail Page"""
+	# selected_price = Price.objects.get(pk=pr_id)
+	# upper = selected_price.upper_limit
+	# lower = selected_price.lower_limit
 	prices = Price.objects.all().order_by('-id')
 	navbar_category = Category.objects.all().order_by('?')
 	brands = Brand.objects.all().order_by('?')
@@ -288,8 +291,11 @@ def CategoryPage(request, c_id):
 """======BRANDS INDIVIDUAL PAGE======"""
 """=================================="""
 
-def BrandsPage(request, b_id):
+def BrandsPage(request, b_id)):
 	"""Brands Detail Page"""
+	# selected_price = Price.objects.get(pk=pr_id)
+	# upper = selected_price.upper_limit
+	# lower = selected_price.lower_limit
 	prices = Price.objects.all().order_by('-id')
 	navbar_category = Category.objects.all().order_by('?')
 	brands = Brand.objects.all().order_by('?')
@@ -315,8 +321,11 @@ def BrandsPage(request, b_id):
 """=====SUBCATEGORY INDIVIDUAL PAGE====="""
 """====================================="""
 
-def SubCategoryPage(request, c_id, s_id):
+def SubCategoryPage(request, c_id, s_id, pr_id)):
 	"""SubCategory Detail Page"""
+	# selected_price = Price.objects.get(pk=pr_id)
+	# upper = selected_price.upper_limit
+	# lower = selected_price.lower_limit
 	prices = Price.objects.all().order_by('-id')
 	navbar_category = Category.objects.all().order_by('?')
 	brands = Brand.objects.all().order_by('?')

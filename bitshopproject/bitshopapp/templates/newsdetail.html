@@ -103,7 +103,7 @@
 															<a href="{% url 'productdetail' product1.id %}"><img src={{product1.mainimage}} alt="item-imgs"/></a>
 														<div class="caption">
 															<a href="{% url 'productdetail' product1.id %}" style="text-decoration: none;"><h5>{{product1.title}}</h5></a>
-															{% if product1.offer_price != "" %}
+															{% if product1.offer_price != None %}
 															<p class="item-name-desc"> &#x20B9; {{product1.offer_price}}</p>
 															{% else %}
 															<p class="item-name-desc"> &#x20B9; {{product1.sale_price}}</p>
@@ -118,7 +118,7 @@
 															<a href="{% url 'productdetail' product2.id %}"><img src={{product2.mainimage}} alt="item-imgs"/></a>
 														<div class="caption">
 															<a href="{% url 'productdetail' product2.id %}" style="text-decoration: none;"><h5>{{product2.title}}</h5></a>
-															{% if product2.offer_price != "" %}
+															{% if product2.offer_price != None %}
 															<p class="item-name-desc"> &#x20B9; {{product2.offer_price}}</p>
 															{% else %}
 															<p class="item-name-desc"> &#x20B9; {{product2.sale_price}}</p>
@@ -133,7 +133,7 @@
 															<a href="{% url 'productdetail' product3.id %}"><img src={{product3.mainimage}} alt="item-imgs"/></a>
 														<div class="caption">
 															<a href="{% url 'productdetail' product3.id %}" style="text-decoration: none;"><h5>{{product3.title}}</h5></a>
-															{% if product3.offer_price != "" %}
+															{% if product3.offer_price != None %}
 															<p class="item-name-desc"> &#x20B9; {{product3.offer_price}}</p>
 															{% else %}
 															<p class="item-name-desc"> &#x20B9; {{product3.sale_price}}</p>
@@ -148,7 +148,7 @@
 															<a href="{% url 'productdetail' product4.id %}"><img src={{product4.mainimage}} alt="item-imgs"/></a>
 														<div class="caption">
 															<a href="{% url 'productdetail' product4.id %}" style="text-decoration: none;"><h5>{{product4.title}}</h5></a>
-															{% if product4.offer_price != "" %}
+															{% if product4.offer_price != None %}
 															<p class="item-name-desc"> &#x20B9; {{product4.offer_price}}</p>
 															{% else %}
 															<p class="item-name-desc"> &#x20B9; {{product4.sale_price}}</p>
@@ -163,7 +163,7 @@
 															<a href="{% url 'productdetail' product5.id %}"><img src={{product5.mainimage}} alt="item-imgs"/></a>
 														<div class="caption">
 															<a href="{% url 'productdetail' product5.id %}" style="text-decoration: none;"><h5>{{product5.title}}</h5></a>
-															{% if product5.offer_price != "" %}
+															{% if product5.offer_price != None %}
 															<p class="item-name-desc"> &#x20B9; {{product5.offer_price}}</p>
 															{% else %}
 															<p class="item-name-desc"> &#x20B9; {{product5.sale_price}}</p>
@@ -178,7 +178,7 @@
 															<a href="{% url 'productdetail' product6.id %}"><img src={{product6.mainimage}} alt="item-imgs"/></a>
 														<div class="caption">
 															<a href="{% url 'productdetail' product6.id %}" style="text-decoration: none;"><h5>{{product6.title}}</h5></a>
-															{% if product6.offer_price != "" %}
+															{% if product6.offer_price != None %}
 															<p class="item-name-desc"> &#x20B9; {{product6.offer_price}}</p>
 															{% else %}
 															<p class="item-name-desc"> &#x20B9; {{product6.sale_price}}</p>
@@ -193,7 +193,7 @@
 															<a href="{% url 'productdetail' product7.id %}"><img src={{product7.mainimage}} alt="item-imgs"/></a>
 														<div class="caption">
 															<a href="{% url 'productdetail' product7.id %}" style="text-decoration: none;"><h5>{{product7.title}}</h5></a>
-															{% if product7.offer_price != "" %}
+															{% if product7imgTagWrapperId %}
 															<p class="item-name-desc"> &#x20B9; {{product7.offer_price}}</p>
 															{% else %}
 															<p class="item-name-desc"> &#x20B9; {{product7.sale_price}}</p>
@@ -208,7 +208,7 @@
 															<a href="{% url 'productdetail' product8.id %}"><img src={{product8.mainimage}} alt="item-imgs"/></a>
 														<div class="caption">
 															<a href="{% url 'productdetail' product8.id %}" style="text-decoration: none;"><h5>{{product8.title}}</h5></a>
-															{% if product8.offer_price != "" %}
+															{% if product8.offer_price != None %}
 															<p class="item-name-desc"> &#x20B9; {{product8.offer_price}}</p>
 															{% else %}
 															<p class="item-name-desc"> &#x20B9; {{product8.sale_price}}</p>
@@ -223,7 +223,7 @@
 															<a href="{% url 'productdetail' product9.id %}"><img src={{product9.mainimage}} alt="item-imgs"/></a>
 														<div class="caption">
 															<a href="{% url 'productdetail' product9.id %}" style="text-decoration: none;"><h5>{{product9.title}}</h5></a>
-															{% if product9.offer_price != "" %}
+															{% if product9.offer_price != None %}
 															<p class="item-name-desc"> &#x20B9; {{product9.offer_price}}</p>
 															{% else %}
 															<p class="item-name-desc"> &#x20B9; {{product9.sale_price}}</p>
@@ -238,7 +238,7 @@
 															<a href="{% url 'productdetail' product10.id %}"><img src={{product10.mainimage}} alt="item-imgs"/></a>
 														<div class="caption">
 															<a href="{% url 'productdetail' product10.id %}" style="text-decoration: none;"><h5>{{product10.title}}</h5></a>
-															{% if product10.offer_price != "" %}
+															{% if product10.offer_price != None %}
 															<p class="item-name-desc"> &#x20B9; {{product10.offer_price}}</p>
 															{% else %}
 															<p class="item-name-desc"> &#x20B9; {{product10.sale_price}}</p>
