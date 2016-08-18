@@ -263,9 +263,6 @@ def HomePage(request):
 
 def CategoryPage(request, c_id):
 	"""Category Detail Page"""
-	# selected_price = Price.objects.get(pk=pr_id)
-	# upper = selected_price.upper_limit
-	# lower = selected_price.lower_limit
 	prices = Price.objects.all().order_by('-id')
 	navbar_category = Category.objects.all()
 	brands = Brand.objects.all().order_by('?')
@@ -291,15 +288,47 @@ def CategoryPage(request, c_id):
 	template = 'categorydetail.html'
 	return render(request, template, context)
 
+"""============================="""
+"""=====CATEGORY PRICE PAGE====="""
+"""============================="""
+
+def PriceFilterCategory(request, c_id, pr_id):
+	"""Price Filter Category Page"""
+	selected_price = Price.objects.get(pk=pr_id)
+	title = selected_price.title
+	upper = selected_price.upper_limit
+	lower = selected_price.lower_limit
+	prices = Price.objects.all().order_by('-id')
+	navbar_category = Category.objects.all()
+	brands = Brand.objects.all().order_by('?')
+	category = Category.objects.get(pk=c_id)
+	subcategory = SubCategory.objects.filter(category=category).order_by('id')
+	products_list = Product.objects.filter(Q(category=category, offer_price__lte=upper, offer_price__gte=lower) | Q(category=category, sale_price__lte=upper, sale_price__gte=lower))
+	paginator = Paginator(products_list, 18)
+	page = request.GET.get('page')
+	try:
+		products = paginator.page(page)
+	except PageNotAnInteger:
+		products = paginator.page(1)
+	except EmptyPage:
+		products = paginator.page(paginator.num_pages)
+	total_pages = products.paginator.num_pages+1
+
+	x = products.number - 1
+	y = products.number + 4
+	sl = "%d:%d" % (x,y)
+
+	news = New.objects.filter(category=category).order_by('-id')
+	context = {"category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title}
+	template = 'pricecatdetail.html'
+	return render(request, template, context)
+
 """=================================="""
 """======BRANDS INDIVIDUAL PAGE======"""
 """=================================="""
 
 def BrandsPage(request, b_id):
 	"""Brands Detail Page"""
-	# selected_price = Price.objects.get(pk=pr_id)
-	# upper = selected_price.upper_limit
-	# lower = selected_price.lower_limit
 	prices = Price.objects.all().order_by('-id')
 	navbar_category = Category.objects.all()
 	brands = Brand.objects.all().order_by('?')
@@ -325,15 +354,47 @@ def BrandsPage(request, b_id):
 	template = 'brandetail.html'
 	return render(request, template, context)
 
+"""============================="""
+"""======BRANDS PRICE PAGE======"""
+"""============================="""
+
+def PriceFilterBrands(request, b_id, pr_id):
+	"""Brands Price Filter Page"""
+	selected_price = Price.objects.get(pk=pr_id)
+	title = selected_price.title
+	upper = selected_price.upper_limit
+	lower = selected_price.lower_limit
+	prices = Price.objects.all().order_by('-id')
+	navbar_category = Category.objects.all()
+	brands = Brand.objects.all().order_by('?')
+	prime_brand = Brand.objects.get(pk=b_id)
+	category = Category.objects.all()
+	products_list = Product.objects.filter(Q(brand=prime_brand, offer_price__lte=upper, offer_price__gte=lower) | Q(brand=prime_brand, sale_price__lte=upper, sale_price__gte=lower))
+	paginator = Paginator(products_list, 18)
+	page = request.GET.get('page')
+	try:
+		products = paginator.page(page)
+	except PageNotAnInteger:
+		products = paginator.page(1)
+	except EmptyPage:
+		products = paginator.page(paginator.num_pages)
+	total_pages = products.paginator.num_pages+1
+
+	x = products.number - 1
+	y = products.number + 4
+	sl = "%d:%d" % (x,y)
+
+	news = New.objects.all().order_by('-id')
+	context = {"category":category, "products":products, "navbar_category":navbar_category, "brands":brands, "prime_brand":prime_brand, "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title}
+	template = 'pricebranddetail.html'
+	return render(request, template, context)
+
 """====================================="""
 """=====SUBCATEGORY INDIVIDUAL PAGE====="""
 """====================================="""
 
 def SubCategoryPage(request, c_id, s_id):
 	"""SubCategory Detail Page"""
-	# selected_price = Price.objects.get(pk=pr_id)
-	# upper = selected_price.upper_limit
-	# lower = selected_price.lower_limit
 	prices = Price.objects.all().order_by('-id')
 	navbar_category = Category.objects.all()
 	brands = Brand.objects.all().order_by('?')
@@ -358,6 +419,42 @@ def SubCategoryPage(request, c_id, s_id):
 	news = New.objects.filter(category=category).order_by('-id')
 	context = {"category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category,"subcat":subcat, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
 	template = 'subcategorydetail.html'
+	return render(request, template, context)
+
+"""====================================="""
+"""=====SUBCATEGORY INDIVIDUAL PAGE====="""
+"""====================================="""
+
+def PriceFilterSubCategory(request, c_id, s_id, pr_id):
+	"""SubCategory Filter Page"""
+	prices = Price.objects.all().order_by('-id')
+	selected_price = Price.objects.get(pk=pr_id)
+	title = selected_price.title
+	upper = selected_price.upper_limit
+	lower = selected_price.lower_limit
+	navbar_category = Category.objects.all()
+	brands = Brand.objects.all().order_by('?')
+	category = Category.objects.get(pk=c_id)
+	subcategory = SubCategory.objects.filter(category=category).order_by('id')
+	subcat = SubCategory.objects.get(pk=s_id, category=category)
+	products_list = Product.objects.filter(Q(subcategory=subcat, offer_price__lte=upper, offer_price__gte=lower) | Q(subcategory=subcat, sale_price__lte=upper, sale_price__gte=lower))
+	paginator = Paginator(products_list, 18)
+	page = request.GET.get('page')
+	try:
+		products = paginator.page(page)
+	except PageNotAnInteger:
+		products = paginator.page(1)
+	except EmptyPage:
+		products = paginator.page(paginator.num_pages)
+	total_pages = products.paginator.num_pages+1
+
+	x = products.number - 1
+	y = products.number + 4
+	sl = "%d:%d" % (x,y)
+
+	news = New.objects.filter(category=category).order_by('-id')
+	context = {"category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category,"subcat":subcat, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title}
+	template = 'pricesubcatdetail.html'
 	return render(request, template, context)
 
 """=============================="""

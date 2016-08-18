@@ -29,6 +29,9 @@ urlpatterns = [
     url(r'^news/$', views.News, name='news'),
     url(r'^brands/$', views.AllBrands, name='brands'),
 
+    url(r'^categoryprice/(?P<c_id>\d+)/(?P<pr_id>\d+)/$', views.PriceFilterCategory, name='pricecatdetail'),
+    url(r'^brandprice/(?P<b_id>\d+)/(?P<pr_id>\d+)/$', views.PriceFilterBrands, name='pricebranddetail'),
+    url(r'^subcategoryprice/(?P<c_id>\d+)/(?P<s_id>\d+)/(?P<pr_id>\d+)/$', views.PriceFilterSubCategory, name='pricesubcatdetail'),
 
     url(r'^signin/$', views.login_view, name='login'),
     url(r'^logout/$', views.logout_view, name='logout'),

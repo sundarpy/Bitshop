@@ -81,13 +81,13 @@
 										<div class="panel panel-default">
 											<div class="filter-content">
 												<div class="panel-body">Price</div>
-												{% for price in prices %}
+													{% for price in prices %}
 												{% if price.title == 'Very Low' %}
-												<a href="{% url 'pricecatdetail' category.id price.id %}"><div class="panel-body">Below &#x20B9;{{price.upper_limit}}</div></a>
+												<a href="{% url 'pricesubcatdetail' category.id subcat.id price.id %}"><div class="panel-body">Below &#x20B9;{{price.upper_limit}}</div></a>
 												{% elif price.title == 'Very High' %}
-													<a href="{% url 'pricecatdetail' category.id price.id %}"><div class="panel-body">Above &#x20B9;{{price.lower_limit}}</div></a>
+													<a href="{% url 'pricesubcatdetail' category.id subcat.id price.id %}"><div class="panel-body">Above &#x20B9;{{price.lower_limit}}</div></a>
 												{% else %}
-													<a href="{% url 'pricecatdetail' category.id price.id %}"><div class="panel-body">&#x20B9;{{price.lower_limit}} - &#x20B9;{{price.upper_limit}}</div></a>
+													<a href="{% url 'pricesubcatdetail' category.id subcat.id price.id %}"><div class="panel-body">&#x20B9;{{price.lower_limit}} - &#x20B9;{{price.upper_limit}}</div></a>
 												{% endif %}
 												{% endfor %}
 											</div>
@@ -102,6 +102,21 @@
 												<a href="{% url 'brands' %}"><div class="panel-body">All Brands...</div></a>
 											</div>
 										</div>
+										
+										<!--<div class="panel panel-default">
+											<div class="filter-content">
+												<div class="panel-body">category</div>
+												<form class="sub-category">
+													<select id="size" name="size">
+														<option>choose size</option>
+														<option>S</option>
+														<option>M</option>
+														<option>L</option>
+														<option>XL</option>
+													</select>
+												</form>
+											</div>
+										</div>-->
 									</div>
 								</div>
 							</div>
@@ -109,7 +124,7 @@
 								<div class="main-wrap-details">
 									<div class="main-content-details">
 										<div class="main-products-details panel panel-default">
-											<div class="panel-body">Products > {{category.category_name}}</div>
+											<div class="panel-body">Products > {{category.category_name}} > {{subcat.subcategory_name}} > {{title}}</div>
 											<div class="row">
 												{% for product in products %}
 												{% if product.offer_price != None or product.sale_price != None %}
@@ -213,9 +228,6 @@
 			<!-- Bootstrap -->
 			<script src="{% static "js/bootstrap.min.js" %}"></script>
 			<script src="{% static "js/owl.carousel.min.js" %}"></script>
-			<script type="text/javascript">
-
-			</script>
 			
 		</body>
 	</html>

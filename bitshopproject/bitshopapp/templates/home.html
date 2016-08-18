@@ -87,6 +87,7 @@
 												{% endfor %}
 											</div>
 										</div>
+										{% if news %}
 										<div class="row panel panel-default">
 											<div class="panel-body">News <a href="{% url 'news' %}"><span class="badge pull-right">Show More</span></a></div>
 											<div class="main-products-details news-page">
@@ -106,6 +107,7 @@
 												{% endfor %}
 											</div>
 										</div>
+										{% endif %}
 										<div clas="clearfix"></div>
 									</div>
 								</div>

@@ -81,26 +81,15 @@
 										<div class="panel panel-default">
 											<div class="filter-content">
 												<div class="panel-body">Price</div>
-												<form class="check-brand">
 													{% for price in prices %}
-													{% if price.title == 'Very Low' %}
-													<label class="checkbox">
-														<input type="checkbox" value="">
-														Below Rs. {{price.upper_limit}}
-													</label>
-													{% elif price.title == 'Very High' %}
-													<label class="checkbox">
-														<input type="checkbox" value="">
-														Above Rs. {{price.lower_limit}}
-													</label>
-													{% else %}
-													<label class="checkbox">
-														<input type="checkbox" value="">
-														Rs. {{price.lower_limit}} - Rs. {{price.upper_limit}}
-													</label>
-													{% endif %}
-													{% endfor %}
-												</form>
+												{% if price.title == 'Very Low' %}
+												<a href="{% url 'pricesubcatdetail' category.id subcat.id price.id %}"><div class="panel-body">Below &#x20B9;{{price.upper_limit}}</div></a>
+												{% elif price.title == 'Very High' %}
+													<a href="{% url 'pricesubcatdetail' category.id subcat.id price.id %}"><div class="panel-body">Above &#x20B9;{{price.lower_limit}}</div></a>
+												{% else %}
+													<a href="{% url 'pricesubcatdetail' category.id subcat.id price.id %}"><div class="panel-body">&#x20B9;{{price.lower_limit}} - &#x20B9;{{price.upper_limit}}</div></a>
+												{% endif %}
+												{% endfor %}
 											</div>
 										</div>
 										
@@ -137,7 +126,7 @@
 										<div class="main-products-details panel panel-default">
 											<div class="panel-body">Products > {{category.category_name}} > {{subcat.subcategory_name}}</div>
 											<div class="row">
-												{% for product in products|slice:":18" %}
+												{% for product in products %}
 												{% if product.offer_price != None or product.sale_price != None %}
 												<div class="col-md-4">
 													<a href="{% url 'productdetail' product.id %}" style="text-decoration: none;">
