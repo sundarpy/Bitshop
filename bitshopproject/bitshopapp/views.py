@@ -119,18 +119,35 @@ def Search(request):
 		q = None
 
 	if q:
-		products = Product.objects.filter(title__icontains=q)
+		products_list = Product.objects.filter(title__icontains=q)
+		paginator = Paginator(products_list, 18)
+		page = request.GET.get('page')
+		try:
+			products = paginator.page(page)
+		except PageNotAnInteger:
+			products = paginator.page(1)
+		except EmptyPage:
+			products = paginator.page(paginator.num_pages)
+		total_pages = products.paginator.num_pages+1
+
+		x = products.number - 1
+		y = products.number + 4
+		sl = "%d:%d" % (x,y)
+
 		context = {
 					"query": q, 
 					"products": products,
 					"subcats":subcat, 
 					"cats":cat,
+					"user" : request.user,
 					"data1" : data1,
 					"data2" : data2,
 					"data3" : data3,
 					"data4" : data4,
 					"data5" : data5, 
 					"navbar_category" : navbar_category,
+					"sl":sl,
+					'range': range(1,total_pages),
 					}
 		template = 'results.html'
 	else:
@@ -770,6 +787,11 @@ def ProductPage(request, p_id):
 	subcomments = SubComment.objects.filter(comment=comments)
 	similar_products = Product.objects.filter(subcategory=product.subcategory).order_by('?')
 
+	if product.offer_price != None:
+		cheapers = Product.objects.filter(subcategory=product.subcategory, offer_price__lt=product.offer_price)
+	else:
+		cheapers = Product.objects.filter(subcategory=product.subcategory, sale_price__lt=product.sale_price)
+
 	context = {
 				"category":category,
 				"subcategory":subcategory, 
@@ -780,6 +802,7 @@ def ProductPage(request, p_id):
 				"subcomments" : subcomments,
 				"similars" : similar_products,
 				"user" : request.user,
+				"cheapers" : cheapers,
 				}
 	template = 'productpage.html'
 	return render(request, template, context)

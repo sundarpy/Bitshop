@@ -211,13 +211,7 @@
 														
 														{% if product.description %}
 														<div class="descrip">
-															<!--<ul class="list-unstyled"> 
-																<li><b>-</b> &nbsp;Trendiest collection.Lowest prices. COD. Easy returns. Quality material</li>
-																<li><b>-</b> &nbsp;Trendiest collection.Lowest prices. COD. Easy returns. Quality material</li>
-																<li><b>-</b> &nbsp;Trendiest collection.Lowest prices. COD. Easy returns. Quality material</li>
-																<li><b>-</b> &nbsp;Trendiest collection.Lowest prices. COD. Easy returns. Quality material</li>
-																<li><b>-</b> &nbsp;Trendiest collection.Lowest prices. COD. Easy returns. Quality material</li>
-															</ul>-->
+															<h4>Product Description :</h4>
 															{{product.description|safe}}
 														</div>
 														{% endif %}
@@ -372,8 +366,8 @@
 									<div class="similar-content" style="margin-top: 40px;">
 										<div class="panel panel-default">
 											<div class="panel-body">Similar Products</div>
-											{% for similar in similars|slice:":10" %}
-											{% if similar.offer_price or sale_price %}
+											{% for similar in similars|slice:":5" %}
+											{% if similar.offer_price or similar.sale_price %}
 											<a href="{% url 'productdetail' similar.id %}" style="text-decoration: none;">
 												<div class="thumbnail">
 														<img src={{similar.mainimage}} alt="item-imgs"/>
@@ -384,6 +378,33 @@
 														<h5> &#8377; {{similar.offer_price}} </h5>
 														{% else %}
 														<h5> &#8377; {{similar.sale_price}} </h5>
+														{% endif %}
+													</div>
+												</div>
+											</a>
+											{% endif %}
+											{% endfor %}
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="similar-content">
+									<div class="similar-content" style="margin-top: 40px;">
+										<div class="panel panel-default">
+											<div class="panel-body">Cheaper Alternatives</div>
+											{% for cheaper in cheapers|slice:":5" %}
+											{% if cheaper.offer_price or cheaper.sale_price %}
+											<a href="{% url 'productdetail' cheaper.id %}" style="text-decoration: none;">
+												<div class="thumbnail">
+														<img src={{cheaper.mainimage}} alt="item-imgs"/>
+													
+													<div class="caption announce">
+														<a href="{% url 'productdetail' cheaper.id %}"><h5>{{cheaper.title}}</h5></a>
+														{% if cheaper.offer_price %}
+														<h5> &#8377; {{cheaper.offer_price}} </h5>
+														{% else %}
+														<h5> &#8377; {{cheaper.sale_price}} </h5>
 														{% endif %}
 													</div>
 												</div>

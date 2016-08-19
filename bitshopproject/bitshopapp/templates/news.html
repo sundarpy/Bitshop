@@ -126,7 +126,7 @@
 									<div class="similar-content" style="margin-top: 40px;">
 										<div class="panel panel-default">
 											<div class="panel-body">Men</div>
-											{% for data in data1|slice:":2" %}
+											{% for data in data1|slice:":3" %}
 											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
 												<div class="thumbnail">
 														<img src={{data.mainimage}} alt="item-imgs"/>
@@ -147,7 +147,7 @@
 									<div class="similar-content">
 										<div class="panel panel-default">
 											<div class="panel-body">Women</div>
-											{% for data in data2|slice:":2" %}
+											{% for data in data2|slice:":3" %}
 											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
 												<div class="thumbnail">
 														<img src={{data.mainimage}} alt="item-imgs"/>
@@ -168,7 +168,7 @@
 									<div class="similar-content">
 										<div class="panel panel-default">
 											<div class="panel-body">Appliances</div>
-											{% for data in data3|slice:":2" %}
+											{% for data in data3|slice:":3" %}
 											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
 												<div class="thumbnail">
 														<img src={{data.mainimage}} alt="item-imgs"/>
@@ -189,7 +189,7 @@
 									<div class="similar-content">
 										<div class="panel panel-default">
 											<div class="panel-body">Home</div>
-											{% for data in data4|slice:":2" %}
+											{% for data in data4|slice:":3" %}
 											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
 												<div class="thumbnail">
 														<img src={{data.mainimage}} alt="item-imgs"/>
@@ -210,7 +210,7 @@
 									<div class="similar-content">
 										<div class="panel panel-default">
 											<div class="panel-body">Electronics</div>
-											{% for data in data5|slice:":2" %}
+											{% for data in data5|slice:":3" %}
 											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
 												<div class="thumbnail">
 														<img src={{data.mainimage}} alt="item-imgs"/>
