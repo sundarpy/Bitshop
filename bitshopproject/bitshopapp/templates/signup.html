@@ -44,7 +44,7 @@
 												<hr class="hr-or">
 												<span class="span-or">or</span>
 											</div>
-											<form role="form" method="POST" action="." enctype='mutipart/form-data'>{% csrf_token %}
+											<form id="user_form" class="inside-fm" method="POST" action="." enctype='mutipart/form-data'>{% csrf_token %}
 												<div class="form-group">
 													<div>{{form.username|as_crispy_field:"bootstrap"}}</div>
 												</div>
@@ -54,11 +54,11 @@
 												<div class="form-group">
 													<div>{{form.password|as_crispy_field:"bootstrap"}}</div>
 												</div>
-												
-											</form>
-											<div class="form-group">
+												<div class="form-group">
 												<input type="submit" class="btn btn-primary btn-sm pull-right btn-submit" style="display: block;margin: 0 auto;" value='{{title}}' />
 											</div>
+											</form>
+											
 											<div class="clearfix"></div>
 									</div>
 								</div>
