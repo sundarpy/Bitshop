@@ -17,6 +17,27 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 
 """==============================="""
+"""=========FORUMS METHOD========="""
+"""==============================="""
+
+def Forums(request):
+	"""All Forums Page"""
+	navbar_category = Category.objects.all()
+	forumquestion = ForumQuestion.objects.all()
+	template = 'forums.html'
+	context = {"navbar_category" : navbar_category, "user" : request.user, "forumquestion":forumquestion}
+	return render(request, template, context)
+
+def ForumsDetail(request, f_id):
+	"""Forums Detail Page"""
+	navbar_category = Category.objects.all()
+	forumquestion = ForumQuestion.objects.get(pk=f_id)
+	forumanswers = ForumAnswer.objects.filter(question=forumquestion)
+	template = 'forumsdetail.html'
+	context = {"navbar_category" : navbar_category,"user" : request.user, "forumquestion":forumquestion, "forumanswers":forumanswers}
+	return render(request, template, context)
+
+"""==============================="""
 """=========SEARCH METHOD========="""
 """==============================="""
 
@@ -135,7 +156,7 @@ def Search(request):
 		template = 'results.html'
 	else:
 		template = 'home.html'
-		context = {"subcats":subcat, "cat":cat, "navbar_category" : navbar_category,}
+		context = {"subcats":subcat, "cat":cat, "navbar_category" : navbar_category,"user" : request.user,}
 	return render(request, template, context)
 
 """==============================="""
@@ -253,6 +274,7 @@ def HomePage(request):
 				"data5" : data5, 
 				"navbar_category" : navbar_category,
 				"news" : news,
+				"user" : request.user,
 				}
 	template = 'home.html'
 	return render(request, template, context)
@@ -284,7 +306,7 @@ def CategoryPage(request, c_id):
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.filter(category=category).order_by('-id')
-	context = {"category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
+	context = {"category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category,"user" : request.user, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
 	template = 'categorydetail.html'
 	return render(request, template, context)
 
@@ -319,7 +341,7 @@ def PriceFilterCategory(request, c_id, pr_id):
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.filter(category=category).order_by('-id')
-	context = {"category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title}
+	context = {"category":category, "subcategory":subcategory, "products":products,"user" : request.user, "navbar_category":navbar_category, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title}
 	template = 'pricecatdetail.html'
 	return render(request, template, context)
 
@@ -350,7 +372,7 @@ def BrandsPage(request, b_id):
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.all().order_by('-id')
-	context = {"category":category, "products":products, "navbar_category":navbar_category, "brands":brands, "prime_brand":prime_brand, "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
+	context = {"category":category, "products":products, "navbar_category":navbar_category,"user" : request.user, "brands":brands, "prime_brand":prime_brand, "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
 	template = 'brandetail.html'
 	return render(request, template, context)
 
@@ -385,7 +407,7 @@ def PriceFilterBrands(request, b_id, pr_id):
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.all().order_by('-id')
-	context = {"category":category, "products":products, "navbar_category":navbar_category, "brands":brands, "prime_brand":prime_brand, "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title}
+	context = {"category":category, "products":products,"user" : request.user, "navbar_category":navbar_category, "brands":brands, "prime_brand":prime_brand, "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title}
 	template = 'pricebranddetail.html'
 	return render(request, template, context)
 
@@ -417,7 +439,7 @@ def SubCategoryPage(request, c_id, s_id):
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.filter(category=category).order_by('-id')
-	context = {"category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category,"subcat":subcat, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
+	context = {"category":category, "subcategory":subcategory, "products":products,"user" : request.user, "navbar_category":navbar_category,"subcat":subcat, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
 	template = 'subcategorydetail.html'
 	return render(request, template, context)
 
@@ -453,7 +475,7 @@ def PriceFilterSubCategory(request, c_id, s_id, pr_id):
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.filter(category=category).order_by('-id')
-	context = {"category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category,"subcat":subcat, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title}
+	context = {"category":category, "subcategory":subcategory, "products":products,"user" : request.user, "navbar_category":navbar_category,"subcat":subcat, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title}
 	template = 'pricesubcatdetail.html'
 	return render(request, template, context)
 
@@ -625,6 +647,7 @@ def NewsPage(request, n_id):
 				"product9" : product9,
 				"product10" : product10,
 				"multi_news" : multi_news,
+				"user" : request.user,
 				}
 	template = 'newsdetail.html'
 	return render(request, template, context)
@@ -736,6 +759,7 @@ def News(request):
 				"data4" : data4,
 				"data5" : data5,
 				"news" : news,
+				"user" : request.user,
 				}
 	template = 'news.html'
 	return render(request, template, context)
@@ -748,7 +772,7 @@ def AllBrands(request):
 	"""All brands page"""
 	brands = Brand.objects.all().order_by('brand_name')
 	navbar_category = Category.objects.all()
-	context = {"navbar_category":navbar_category, "brands":brands}
+	context = {"navbar_category":navbar_category,"user" : request.user, "brands":brands}
 	template = 'brand.html'
 	return render(request, template, context)
 
@@ -776,6 +800,7 @@ def ProductPage(request, p_id):
 				"comments" : comments,
 				"subcomments" : subcomments,
 				"similars" : similar_products,
+				"user" : request.user,
 				}
 	template = 'productpage.html'
 	return render(request, template, context)

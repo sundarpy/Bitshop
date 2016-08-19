@@ -16,6 +16,7 @@ handler500 = 'bitshopapp.views.server_error'
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^accounts/', include('allauth.urls')),
     url(r'^$', views.HomePage, name='home'),
     url(r'^category/(?P<c_id>\d+)/$', views.CategoryPage, name='categorydetail'),
     url(r'^subcategory/(?P<c_id>\d+)/(?P<s_id>\d+)/$', views.SubCategoryPage, name='subcategorydetail'),

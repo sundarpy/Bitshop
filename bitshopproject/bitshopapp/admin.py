@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Price, Brand, SerfoProduct, Product, ProductImage, Category, SubCategory, UserProfile, Review, Comment, SubComment, New
+from .models import *
 
 # Register your models here.
 class ProductAdmin(admin.ModelAdmin):
@@ -45,3 +45,5 @@ admin.site.register(New, NewAdmin)
 admin.site.register(SerfoProduct, SerfoProductAdmin)
 admin.site.register(Comment)
 admin.site.register(SubComment)
+admin.site.register(ForumQuestion)
+admin.site.register(ForumAnswer)
