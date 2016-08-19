@@ -53,15 +53,15 @@ class CommentForm(forms.ModelForm):
 	def clean(self):
 		return self.cleaned_data
 
-class SubCommentForm(forms.ModelForm):
-	content = forms.CharField(widget=forms.TextInput(attrs=dict(required=True, max_length=1000, render_value=False)), label=_(""))
+# class SubCommentForm(forms.ModelForm):
+# 	content = forms.CharField(widget=forms.TextInput(attrs=dict(required=True, max_length=1000, render_value=False)), label=_(""))
 
-	class Meta:
-		model = SubComment
-		fields = ['content']
+# 	class Meta:
+# 		model = SubComment
+# 		fields = ['content']
 
-	def clean(self):
-		return self.cleaned_data
+# 	def clean(self):
+# 		return self.cleaned_data
 
 
 

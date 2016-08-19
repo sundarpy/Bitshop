@@ -785,7 +785,7 @@ def ProductPage(request, p_id):
 	image = ProductImage.objects.filter(product_name=product)
 	comments = Comment.objects.filter(product=product)
 	subcomments = SubComment.objects.filter(comment=comments)
-
+	form = CommentForm()
 	if request.user.is_authenticated():
 		if request.method == 'POST':
 			form = CommentForm(data=request.POST)
@@ -796,17 +796,6 @@ def ProductPage(request, p_id):
 				return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 		else :
 			form = CommentForm()
-
-	if request.user.is_authenticated():
-		if request.method == 'POST':
-			form2 = SubCommentForm(data=request.POST)
-			if form2.is_valid():
-				content=form2.cleaned_data.get('content')
-				subcomment = SubComment(user=request.user, content=content, comment=comments)
-				subcomment.save()
-				return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-		else :
-			form2 = SubCommentForm()
 
 	similar_products = Product.objects.filter(subcategory=product.subcategory).order_by('?')
 	if product.offer_price != None:
@@ -826,7 +815,6 @@ def ProductPage(request, p_id):
 				"user" : request.user,
 				"cheapers" : cheapers,
 				"form" : form,
-				"form2" : form2,
 				}
 	template = 'productpage.html'
 	return render(request, template, context)
