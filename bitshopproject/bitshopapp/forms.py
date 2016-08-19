@@ -43,3 +43,5 @@ class UserRegisterForm(forms.ModelForm):
 			raise forms.ValidationError("Email already exists. Please try another one.")
 		return email
 
+
+

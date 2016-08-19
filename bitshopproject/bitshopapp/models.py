@@ -148,32 +148,6 @@ class Review(models.Model):
 	def __str__(self):
 		return self.title
 
-"""================================"""
-"""==========FORUM MODELS=========="""
-"""================================"""
-
-class ForumQuestion(models.Model):
-	"""Forum Questions Class"""
-	user = models.ForeignKey(User)
-	title = models.CharField(max_length=255, null=True, blank=True)
-	question = models.TextField(null=True, blank=True)
-	timestamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
-
-	def __unicode__(self):
-		"""Unicode class."""
-		return str(self.title)	
-
-class ForumAnswer(models.Model):
-	"""Forum Answers Class"""
-	user = models.ForeignKey(User)
-	question = models.ForeignKey(ForumQuestion, blank=True, null=True)
-	answer = models.TextField(null=True, blank=True)
-	timestamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
-
-	def __unicode__(self):
-		"""Unicode class."""
-		return str(self.question)
-
 """=========================================="""
 """===========PRODUCT PAGE COMMENTS=========="""
 """=========================================="""

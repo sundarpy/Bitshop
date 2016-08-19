@@ -33,8 +33,6 @@ urlpatterns = [
     url(r'^categoryprice/(?P<c_id>\d+)/(?P<pr_id>\d+)/$', views.PriceFilterCategory, name='pricecatdetail'),
     url(r'^brandprice/(?P<b_id>\d+)/(?P<pr_id>\d+)/$', views.PriceFilterBrands, name='pricebranddetail'),
     url(r'^subcategoryprice/(?P<c_id>\d+)/(?P<s_id>\d+)/(?P<pr_id>\d+)/$', views.PriceFilterSubCategory, name='pricesubcatdetail'),
-    url(r'^forums/(?P<f_id>\d+)/$', views.ForumsDetail, name='forumsdetail'),
-    url(r'^forums/$', views.Forums, name='forum'),
 
     url(r'^signin/$', views.login_view, name='login'),
     url(r'^logout/$', views.logout_view, name='logout'),

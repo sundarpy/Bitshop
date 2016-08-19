@@ -17,27 +17,6 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 
 """==============================="""
-"""=========FORUMS METHOD========="""
-"""==============================="""
-
-def Forums(request):
-	"""All Forums Page"""
-	navbar_category = Category.objects.all()
-	forumquestion = ForumQuestion.objects.all()
-	template = 'forums.html'
-	context = {"navbar_category" : navbar_category, "user" : request.user, "forumquestion":forumquestion}
-	return render(request, template, context)
-
-def ForumsDetail(request, f_id):
-	"""Forums Detail Page"""
-	navbar_category = Category.objects.all()
-	forumquestion = ForumQuestion.objects.get(pk=f_id)
-	forumanswers = ForumAnswer.objects.filter(question=forumquestion)
-	template = 'forumsdetail.html'
-	context = {"navbar_category" : navbar_category,"user" : request.user, "forumquestion":forumquestion, "forumanswers":forumanswers}
-	return render(request, template, context)
-
-"""==============================="""
 """=========SEARCH METHOD========="""
 """==============================="""
 
