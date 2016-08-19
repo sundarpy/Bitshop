@@ -7,6 +7,7 @@ class AmazonItem(scrapy.Item):
 	title = scrapy.Field()
 	brand = scrapy.Field()
 	feature = scrapy.Field()
+	specs = scrapy.Field()
 	offerprice = scrapy.Field()
 	saleprice = scrapy.Field()
 	description = scrapy.Field()

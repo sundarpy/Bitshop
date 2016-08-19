@@ -39,7 +39,7 @@ class LiteratureFiction(scrapy.Spider):
 		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
 		item['offerprice'] = hxs.select('//span[@class="a-size-medium a-color-price inlineBlock-display offer-price a-text-normal price3P"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
-		item['description'] = hxs.select('//div[@id="productDescription"]/p[1]/text()').extract()
+		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
 		item['feature'] = hxs.select('//ul[@class="a-vertical a-spacing-none"]/li/span/text()').extract()
 		item['image'] = hxs.select('//div[@id="img-canvas"]/img/@src').extract()
 		item['link'] = response.meta["url"]
@@ -85,7 +85,7 @@ class ChildrensYoungAdult(scrapy.Spider):
 		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
 		item['offerprice'] = hxs.select('//span[@class="a-size-medium a-color-price inlineBlock-display offer-price a-text-normal price3P"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
-		item['description'] = hxs.select('//div[@id="productDescription"]/p[1]/text()').extract()
+		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
 		item['feature'] = hxs.select('//ul[@class="a-vertical a-spacing-none"]/li/span/text()').extract()
 		item['image'] = hxs.select('//div[@id="img-canvas"]/img/@src').extract()
 		item['link'] = response.meta["url"]
@@ -131,7 +131,7 @@ class Textbooks(scrapy.Spider):
 		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
 		item['offerprice'] = hxs.select('//span[@class="a-size-medium a-color-price inlineBlock-display offer-price a-text-normal price3P"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
-		item['description'] = hxs.select('//div[@id="productDescription"]/p[1]/text()').extract()
+		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
 		item['feature'] = hxs.select('//ul[@class="a-vertical a-spacing-none"]/li/span/text()').extract()
 		item['image'] = hxs.select('//div[@id="img-canvas"]/img/@src').extract()
 		item['link'] = response.meta["url"]
@@ -177,7 +177,7 @@ class ExamCentral(scrapy.Spider):
 		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
 		item['offerprice'] = hxs.select('//span[@class="a-size-medium a-color-price inlineBlock-display offer-price a-text-normal price3P"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
-		item['description'] = hxs.select('//div[@id="productDescription"]/p[1]/text()').extract()
+		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
 		item['feature'] = hxs.select('//ul[@class="a-vertical a-spacing-none"]/li/span/text()').extract()
 		item['image'] = hxs.select('//div[@id="img-canvas"]/img/@src').extract()
 		item['link'] = response.meta["url"]
@@ -223,7 +223,7 @@ class EducationalSoftware(scrapy.Spider):
 		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
 		item['offerprice'] = hxs.select('//span[@class="a-size-medium a-color-price inlineBlock-display offer-price a-text-normal price3P"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
-		item['description'] = hxs.select('//div[@id="productDescription"]/p[1]/text()').extract()
+		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
 		item['feature'] = hxs.select('//ul[@class="a-vertical a-spacing-none"]/li/span/text()').extract()
 		item['image'] = hxs.select('//span[@class="a-button-text"]/img/@src').extract()
 		item['link'] = response.meta["url"]
@@ -269,7 +269,7 @@ class IndianLanguages(scrapy.Spider):
 		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
 		item['offerprice'] = hxs.select('//span[@class="a-size-medium a-color-price inlineBlock-display offer-price a-text-normal price3P"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
-		item['description'] = hxs.select('//div[@id="productDescription"]/p[1]/text()').extract()
+		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
 		item['feature'] = hxs.select('//ul[@class="a-vertical a-spacing-none"]/li/span/text()').extract()
 		item['image'] = hxs.select('//div[@id="img-canvas"]/img/@src').extract()
 		item['link'] = response.meta["url"]
@@ -315,7 +315,7 @@ class Hindi(scrapy.Spider):
 		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
 		item['offerprice'] = hxs.select('//span[@class="a-size-medium a-color-price inlineBlock-display offer-price a-text-normal price3P"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
-		item['description'] = hxs.select('//div[@id="productDescription"]/p[1]/text()').extract()
+		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
 		item['feature'] = hxs.select('//ul[@class="a-vertical a-spacing-none"]/li/span/text()').extract()
 		item['image'] = hxs.select('//div[@id="img-canvas"]/img/@src').extract()
 		item['link'] = response.meta["url"]
@@ -361,7 +361,7 @@ class Marathi(scrapy.Spider):
 		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
 		item['offerprice'] = hxs.select('//span[@class="a-size-medium a-color-price inlineBlock-display offer-price a-text-normal price3P"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
-		item['description'] = hxs.select('//div[@id="productDescription"]/p[1]/text()').extract()
+		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
 		item['feature'] = hxs.select('//ul[@class="a-vertical a-spacing-none"]/li/span/text()').extract()
 		item['image'] = hxs.select('//div[@id="img-canvas"]/img/@src').extract()
 		item['link'] = response.meta["url"]
@@ -407,7 +407,7 @@ class Tamil(scrapy.Spider):
 		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
 		item['offerprice'] = hxs.select('//span[@class="a-size-medium a-color-price inlineBlock-display offer-price a-text-normal price3P"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
-		item['description'] = hxs.select('//div[@id="productDescription"]/p[1]/text()').extract()
+		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
 		item['feature'] = hxs.select('//ul[@class="a-vertical a-spacing-none"]/li/span/text()').extract()
 		item['image'] = hxs.select('//div[@id="img-canvas"]/img/@src').extract()
 		item['link'] = response.meta["url"]
