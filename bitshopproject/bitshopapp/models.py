@@ -133,21 +133,6 @@ class ProductImage(models.Model):
 	def __str__(self):
 		return self.product_name.title
 
-"""=================================="""
-"""==========REVIEWS MODELS=========="""
-"""=================================="""
-
-class Review(models.Model):
-	"""Reviews Class"""
-	user = models.ForeignKey(User)
-	title = models.CharField(max_length=255, null=True)
-	content = models.TextField(null=True)
-	timestamp = models.DateTimeField(auto_now_add=True, blank=True)
-	product = models.ForeignKey(Product)
-
-	def __str__(self):
-		return self.title
-
 """=========================================="""
 """===========PRODUCT PAGE COMMENTS=========="""
 """=========================================="""
