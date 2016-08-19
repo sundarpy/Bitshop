@@ -44,13 +44,12 @@
 											<span class="input-group-btn" style="text-align: left;">
 												<button type="search" value="Search" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></button>
 										  	</span>
-										</div>
 										{% if user.is_authenticated %}
-										<span class="user-log pull-right">
+										<span class="user-log pull-right btn">
 											{% if user.socialaccount_set.all.0.get_avatar_url %}
 											<img src="{{ user.socialaccount_set.all.0.get_avatar_url }}"> &nbsp;
 											{% else %}
-											<img src="http://minorschool.net/user-avatar/avatar-placeholder.jpg"> &nbsp;
+											<img src="http://minorschool.net/user-avatar/avatar-placeholder.jpg"> &nbsp; 
 											{% endif %}
 											<span class="dropdown">
 												<span class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -63,8 +62,8 @@
 											</span>
 										</span>
 										{% else %}
-										<a href="{% url 'login' %}"><span class="user-log pull-right"><img src="http://minorschool.net/user-avatar/avatar-placeholder.jpg"> &nbsp;
-											<span class="dropdown">
+										<a href="{% url 'login' %}"><span class="user-log pull-right btn"><img src="http://minorschool.net/user-avatar/avatar-placeholder.jpg"> &nbsp;  &nbsp;  &nbsp;
+											<span class="dropdown user-nme">
 												<span class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 													Login
 												</span>
