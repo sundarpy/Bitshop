@@ -43,5 +43,25 @@ class UserRegisterForm(forms.ModelForm):
 			raise forms.ValidationError("Email already exists. Please try another one.")
 		return email
 
+class CommentForm(forms.ModelForm):
+	content = forms.CharField(widget=forms.Textarea, label=_(""))
+
+	class Meta:
+		model = Comment
+		fields = ['content']
+
+	def clean(self):
+		return self.cleaned_data
+
+class SubCommentForm(forms.ModelForm):
+	content = forms.CharField(widget=forms.TextInput(attrs=dict(required=True, max_length=1000, render_value=False)), label=_(""))
+
+	class Meta:
+		model = SubComment
+		fields = ['content']
+
+	def clean(self):
+		return self.cleaned_data
+
 
 

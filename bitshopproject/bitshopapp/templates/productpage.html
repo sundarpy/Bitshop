@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static from staticfiles %}
+{% load crispy_forms_tags %}
 	<html lang="en">
 		<head>
 			<title>BitShopping</title>
@@ -179,7 +180,7 @@
 																		</h5>
 																	</div>
 																	{% endif %}
-																	{% if product.brand and product.brand != "[]" %}
+																	{% if product.brand and product.brand != '[]' %}
 																	<div class="cash-item">
 																		<h5> Brand <b>:</b> &nbsp; &nbsp; 
 																			<a href="{% url 'brandetail' product.brand.id %}"><span class="avail-name">{{product.brand}}</span></a>
@@ -219,136 +220,64 @@
 														<div class="row">
 															<div class="col-md-12">
 																<!-- UI 40 Starts -->
-																<!--<div class="comment-box">
+																<div class="comment-box">
 																	<h2 class="comment-section-header">{{comments.count}} Comments</h2>
 																	<div class="comment-space">
 																		<div class="row">
+																			{% if user.is_authenticated %}
+																			{% if user.socialaccount_set.all.0.get_avatar_url %}
+																			<div class="col-md-2">
+																				<div class="comment-img">
+																					<img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" class="" alt=""/>
+																				</div>
+																			</div>
+																			{% else %}
 																			<div class="col-md-2">
 																				<div class="comment-img">
 																					<img src="http://mcq.incevio.com/user-avatar/avatar-placeholder.jpg" class="" alt=""/>
 																				</div>
 																			</div>
+																			{% endif %}
 																			<div class="col-md-10">
 																				<div class="comment-post">
-																					<textarea class="form-control" rows="3"></textarea>
-																				</div>
-																				<div class="comment-post comment-submit">
-																					<button class="btn btn-danger" type="submit">Post</button>
+																					<form id="form" enctype='mutipart/form-data' action="." method="POST">
+																						{% csrf_token %}
+																						<div class="form-group" id="name">
+																							<div>{{form.content|as_crispy_field:"bootstrap"}}</div>
+																						</div>
+																						<input type="submit" class="btn btn-primary btn-md center btn-submit" style="border-radius: 4px;margin-right: 15px;padding: 4px 14px;" value='Post'/>
+																					</form>
 																				</div>
 																			</div>
+																			{% endif %}
 																		</div>
 																	</div>
-																	
+																	{% for comment in comments %}
 																	<div class="comment-space">
 																		<div class="row">
+																			{% if comment.user.socialaccount_set.all.0.get_avatar_url %}
+																			<div class="col-md-2">
+																				<div class="comment-img">
+																					<img src="{{comment.user.socialaccount_set.all.0.get_avatar_url}}" class="" alt=""/>
+																				</div>
+																			</div>
+																			{% else %}
 																			<div class="col-md-2">
 																				<div class="comment-img">
 																					<img src="http://mcq.incevio.com/user-avatar/avatar-placeholder.jpg" class="" alt=""/>
 																				</div>
 																			</div>
+																			{% endif %}
 																			<div class="col-md-10">
 																				<div class="comment-post">
-																					<h4 class="commenter"><a href="#">Selena</a>
-																						<span class="points">
-																							<a href="#">2 Points</span></a>
-																						<span class="comment-hr pull-right">
-																							<a href="#">2h</span></a>
-																					</h4>
-																					<p>This is Awesome..!!!</p>
-																					
-																					<div class="comment-reply">
-																						<ul class="list-unstyled">
-																							<li>
-																								<a href="#">Reply</a>
-																							</li>
-																							
-																							<li>
-																								<a href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
-																							</li>
-																							<li>
-																								<a href="#"><i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
-																							</li>
-																						</ul>
-																					</div>
-																				</div>
-																			</div>
-																		</div>
-																		
-																		<div class="reply-comment">
-																			<div class="row">
-																				<div class="col-md-2">
-																					<div class="comment-img">
-																						<img src="http://mcq.incevio.com/user-avatar/avatar-placeholder.jpg" class="" alt=""/>
-																					</div>
-																				</div>
-																				<div class="col-md-10">
-																					<div class="comment-post">
-																						<h4 class="commenter"><a href="#">Selena</a>
-																							<span class="points">
-																								<a href="#">2 Points</span></a>
-																							<span class="comment-hr">
-																								<a href="#">2d</span></a>
-																						</h4>
-																						<p><a href="#">@zelfsilverwolf</a> So...you read like Sean Connery speaks. Interesting.</p>
-																						
-																						<div class="comment-reply">
-																							<ul class="list-unstyled">
-																								<li>
-																									<a href="#">Reply</a>
-																								</li>
-																								
-																								<li>
-																									<a href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
-																								</li>
-																								<li>
-																									<a href="#"><i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
-																								</li>
-																							</ul>
-																						</div>
-																					</div>
-																				</div>
-																			</div>
-																		</div>
-																		
-																	</div>
-																	
-																	<div class="comment-space" style="border-bottom: transparent;">
-																		<div class="row">
-																			<div class="col-md-2">
-																				<div class="comment-img">
-																					<img src="http://mcq.incevio.com/user-avatar/avatar-placeholder.jpg" class="" alt=""/>
-																				</div>
-																			</div>
-																			<div class="col-md-10">
-																				<div class="comment-post">
-																					<h4 class="commenter"><a href="#">Selena</a>
-																						<span class="points">
-																							<a href="#">2 Points</span></a>
-																						<span class="comment-hr pull-right">
-																							<a href="#">2h</span></a>
-																					</h4>
-																					<p>This is Awesome..!!!</p>
-																					
-																					<div class="comment-reply">
-																						<ul class="list-unstyled">
-																							<li>
-																								<a href="#">Reply</a>
-																							</li>
-																							
-																							<li>
-																								<a href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
-																							</li>
-																							<li>
-																								<a href="#"><i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
-																							</li>
-
-																						</ul>
-																					</div>
+																					<h4 class="commenter">{{comment.user.username}}<span class="comment-hr pull-right">{{comment.timestamp}}</span></h4>
+																					<p>{{comment.content}}</p>
 																				</div>
 																			</div>
 																		</div>
 																	</div>
-																</div>-->
+																	{% endfor %}
+																</div>
 																<!-- UI 40 Ends -->
 															</div>	
 														</div>	
@@ -385,12 +314,6 @@
 											{% endif %}
 											{% endfor %}
 										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="similar-content">
-									<div class="similar-content" style="margin-top: 40px;">
 										<div class="panel panel-default">
 											<div class="panel-body">Cheaper Alternatives</div>
 											{% for cheaper in cheapers|slice:":5" %}
