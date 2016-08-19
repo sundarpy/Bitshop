@@ -24,38 +24,44 @@
 		</head>
 		
 		<body>
-			<div class="wrapper" id="wrapper">
+			<div class="wrapper loged-wrap" id="wrapper">
 					<!-- Signin part Start -->
 					<div class="container">
 						<div class="row">
-							<div class="main">
-							  <h3>Please Sign Up, or <a href="{% url 'login' %}" style="text-decoration: none;">Sign in</a></h3>
-								<div class="row">
-									<div class="col-xs-6 col-sm-6 col-md-12">
-										<div class="social">
-										  <a href="{% provider_login_url "facebook" method="oauth2" %}" class="btn btn-lg btn-primary btn-block facebk">Facebook</a>
-										  <a href="{% provider_login_url "google" method="oauth2" %}" class="btn btn-lg btn-info btn-block google">Google</a>
-										</div>
+							<div class="abc">
+								<div class="bca">
+									<div class="main">
+										  <h3>Please Sign Up, or <a href="{% url 'login' %}" style="text-decoration: none;">Sign in</a></h3>
+											<div class="row">
+												<div class="col-xs-6 col-sm-6 col-md-12">
+													<div class="social">
+													  <a href="{% provider_login_url "facebook" method="oauth2" %}" class="btn btn-lg btn-primary btn-block facebk">Facebook</a>
+													  <a href="{% provider_login_url "google" method="oauth2" %}" class="btn btn-lg btn-info btn-block google">Google</a>
+													</div>
+												</div>
+											</div>
+											<div class="login-or" style="position: relative;">
+												<hr class="hr-or">
+												<span class="span-or">or</span>
+											</div>
+											<form role="form" method="POST" action="." enctype='mutipart/form-data'>{% csrf_token %}
+												<div class="form-group">
+													<div>{{form.username|as_crispy_field:"bootstrap"}}</div>
+												</div>
+												<div class="form-group">
+													<div>{{form.email|as_crispy_field:"bootstrap"}}</div>
+												</div>
+												<div class="form-group">
+													<div>{{form.password|as_crispy_field:"bootstrap"}}</div>
+												</div>
+												
+											</form>
+											<div class="form-group">
+												<input type="submit" class="btn btn-primary btn-sm pull-right btn-submit" style="display: block;margin: 0 auto;" value='{{title}}' />
+											</div>
+											<div class="clearfix"></div>
 									</div>
 								</div>
-								<div class="login-or">
-									<hr class="hr-or">
-									<span class="span-or">or</span>
-								</div>
-								<form role="form" method="POST" action="." enctype='mutipart/form-data'>{% csrf_token %}
-									<div class="form-group">
-										<div>{{form.username|as_crispy_field:"bootstrap"}}</div>
-									</div>
-									<div class="form-group">
-										<div>{{form.email|as_crispy_field:"bootstrap"}}</div>
-									</div>
-									<div class="form-group">
-										<div>{{form.password|as_crispy_field:"bootstrap"}}</div>
-									</div>
-									<div class="form-group">
-										<input type="submit" class="btn btn-primary btn-sm pull-right btn-submit" style="display: block;margin: 0 auto;" value='{{title}}' />
-									</div>
-								</form>
 							</div>
 						</div>
 					</div>

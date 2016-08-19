@@ -24,7 +24,7 @@
 		</head>
 		
 		<body>
-			<div class="wrapper" id="wrapper">
+			<div class="wrapper loged-wrap" id="wrapper">
 					<!-- Signin part Start -->
 					<div class="container">
 						<div class="row">
@@ -38,7 +38,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="login-or">
+								<div class="login-or" style="position: relative;">
 									<hr class="hr-or">
 									<span class="span-or">or</span>
 								</div>
@@ -50,10 +50,12 @@
 										<div>{{form.password|as_crispy_field:"bootstrap"}}</div>
 									</div>
 									<p class="forgot-pswrd block-center"><a href="{% url 'account_reset_password' %}">Forgot Password?</a></p>
-									<div class="form-group">
-										<input type="submit" class="btn btn-primary btn-sm pull-right btn-submit" style="display: block;margin: 0 auto;" value='{{title}}' />
-									</div>
+									
 								</form>
+								<div class="form-group submit-groups">
+										<input type="submit" class="btn btn-primary btn-sm pull-right btn-submit" style="" value='{{title}}' />
+								</div>
+								<div class="clearfix"></div>
 							</div>
 						</div>
 					</div>

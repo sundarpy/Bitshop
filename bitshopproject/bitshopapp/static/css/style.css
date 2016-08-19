@@ -159,11 +159,22 @@ navbar start
 	max-width: 100%;
     height: 110px;
 }
+/*
+.user-log  {
+    border: 1px solid #4D87EF;
+    padding: 4px 10px;
+    border-radius: 2px;
+}*/
 .user-log img {
     width: 32px;
     max-width: 100%;
     height: 32px;
-    border-radius: 18px;
+    border-radius: 18px;178
+}
+.user-nme {
+    font-size: 14px;
+    font-weight: 600;
+    color: #272727;
 }
 /*=======
 navbar END
@@ -175,16 +186,29 @@ SIGNIN/ SIGNUP PART(CSS)
     /*padding-top: 15px;*/
     font-size: 12px
   }
+  .loged-wrap {
+    background: url(../images/bgs.jpg) 50% fixed;
+    height: 100vh;
+    background-size: cover;
+  }
   .main {
     max-width: 382px;
-    margin: 0 auto;
+   border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 4px;
+    margin: 40px auto;
+    background: #fff;
+}
+
+
+
   }
   .login-or {
     position: relative;
     font-size: 18px;
     color: #aaa;
     margin-top: 10px;
-            margin-bottom: 10px;
+    margin-bottom: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
   }
@@ -192,22 +216,27 @@ SIGNIN/ SIGNUP PART(CSS)
     display: block;
     position: absolute;
     left: 50%;
-    top: -2px;
+    top: -10px;
     margin-left: -25px;
     background-color: #fff;
     width: 50px;
     text-align: center;
+    font-size: 14px;
   }
   .hr-or {
     background-color: #cdcdcd;
     height: 1px;
-    margin-top: 0px !important;
-    margin-bottom: 0px !important;
+    /*margin-top: 0px !important;
+    margin-bottom: 0px !important;*/
   }
-  h3 {
+
+  .main h3 {
     text-align: center;
-    line-height: 300%;
+    line-height: 30px;
+    font-size: 24px;
+    margin-top: 0px;
   }
+
 /*=======
 section css start
 ==========*/
