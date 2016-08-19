@@ -48,6 +48,32 @@
 												<button type="search" value="Search" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></button>
 										  	</span>
 										</div>
+										{% if user.is_authenticated %}
+										<span class="user-log pull-right">
+											{% if user.socialaccount_set.all.0.get_avatar_url %}
+											<img src="{{ user.socialaccount_set.all.0.get_avatar_url }}"> &nbsp;
+											{% else %}
+											<img src="http://minorschool.net/user-avatar/avatar-placeholder.jpg"> &nbsp;
+											{% endif %}
+											<span class="dropdown">
+												<span class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+													{{ user.username }}
+													<span class="caret"></span>
+												</span>
+												<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+													<li><a href="{% url 'logout' %}">Logout</a></li>
+												</ul>
+											</span>
+										</span>
+										{% else %}
+										<a href="{% url 'login' %}"><span class="user-log pull-right"><img src="http://minorschool.net/user-avatar/avatar-placeholder.jpg"> &nbsp;
+											<span class="dropdown">
+												<span class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+													Login
+												</span>
+											</span>
+										</span></a>
+										{% endif %}
 									</form>
 								</div>
 							</div>

@@ -159,6 +159,12 @@ navbar start
 	max-width: 100%;
     height: 110px;
 }
+.user-log img {
+    width: 32px;
+    max-width: 100%;
+    height: 32px;
+    border-radius: 18px;
+}
 /*=======
 navbar END
 ==========*/
