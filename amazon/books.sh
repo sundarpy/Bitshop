@@ -6,3 +6,4 @@ scrapy crawl books6 -o books6.json
 scrapy crawl books7 -o books7.json
 scrapy crawl books8 -o books8.json
 scrapy crawl books9 -o books9.json
+scrapy crawl books5 -o books5.json

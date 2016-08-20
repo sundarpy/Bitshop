@@ -120,7 +120,8 @@ def Search(request):
 
 	if q:
 		products_list = Product.objects.filter(title__icontains=q)
-		paginator = Paginator(products_list, 18)
+		productcount = products_list.count
+		paginator = Paginator(products_list, 24)
 		page = request.GET.get('page')
 		try:
 			products = paginator.page(page)
@@ -133,9 +134,10 @@ def Search(request):
 		x = products.number - 1
 		y = products.number + 4
 		sl = "%d:%d" % (x,y)
-
+		current_path = request.get_full_path()
 		context = {
 					"query": q, 
+					"count": productcount,
 					"products": products,
 					"subcats":subcat, 
 					"cats":cat,
@@ -148,6 +150,7 @@ def Search(request):
 					"navbar_category" : navbar_category,
 					"sl":sl,
 					'range': range(1,total_pages),
+					'current_path': current_path,
 					}
 		template = 'results.html'
 	else:
@@ -288,6 +291,7 @@ def CategoryPage(request, c_id):
 	subcategory = SubCategory.objects.filter(category=category).order_by('id')
 	products_list = Product.objects.filter(category=category).order_by('id')
 	paginator = Paginator(products_list, 18)
+	productcount = products_list.count
 	page = request.GET.get('page')
 	try:
 		products = paginator.page(page)
@@ -302,7 +306,7 @@ def CategoryPage(request, c_id):
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.filter(category=category).order_by('-id')
-	context = {"category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category,"user" : request.user, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
+	context = {"count":productcount, "category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category,"user" : request.user, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
 	template = 'categorydetail.html'
 	return render(request, template, context)
 
@@ -323,6 +327,7 @@ def PriceFilterCategory(request, c_id, pr_id):
 	subcategory = SubCategory.objects.filter(category=category).order_by('id')
 	products_list = Product.objects.filter(Q(category=category, offer_price__lte=upper, offer_price__gte=lower) | Q(category=category, sale_price__lte=upper, sale_price__gte=lower))
 	paginator = Paginator(products_list, 18)
+	productcount = products_list.count
 	page = request.GET.get('page')
 	try:
 		products = paginator.page(page)
@@ -337,7 +342,7 @@ def PriceFilterCategory(request, c_id, pr_id):
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.filter(category=category).order_by('-id')
-	context = {"category":category, "subcategory":subcategory, "products":products,"user" : request.user, "navbar_category":navbar_category, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title}
+	context = {"count":productcount, "category":category, "subcategory":subcategory, "products":products,"user" : request.user, "navbar_category":navbar_category, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title}
 	template = 'pricecatdetail.html'
 	return render(request, template, context)
 
@@ -354,6 +359,7 @@ def BrandsPage(request, b_id):
 	category = Category.objects.all()
 	products_list = Product.objects.filter(brand=prime_brand).order_by('id')
 	paginator = Paginator(products_list, 18)
+	productcount = products_list.count
 	page = request.GET.get('page')
 	try:
 		products = paginator.page(page)
@@ -368,7 +374,7 @@ def BrandsPage(request, b_id):
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.all().order_by('-id')
-	context = {"category":category, "products":products, "navbar_category":navbar_category,"user" : request.user, "brands":brands, "prime_brand":prime_brand, "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
+	context = {"count":productcount, "category":category, "products":products, "navbar_category":navbar_category,"user" : request.user, "brands":brands, "prime_brand":prime_brand, "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
 	template = 'brandetail.html'
 	return render(request, template, context)
 
@@ -389,6 +395,7 @@ def PriceFilterBrands(request, b_id, pr_id):
 	category = Category.objects.all()
 	products_list = Product.objects.filter(Q(brand=prime_brand, offer_price__lte=upper, offer_price__gte=lower) | Q(brand=prime_brand, sale_price__lte=upper, sale_price__gte=lower))
 	paginator = Paginator(products_list, 18)
+	productcount = products_list.count
 	page = request.GET.get('page')
 	try:
 		products = paginator.page(page)
@@ -403,7 +410,7 @@ def PriceFilterBrands(request, b_id, pr_id):
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.all().order_by('-id')
-	context = {"category":category, "products":products,"user" : request.user, "navbar_category":navbar_category, "brands":brands, "prime_brand":prime_brand, "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title}
+	context = {"count":productcount, "category":category, "products":products,"user" : request.user, "navbar_category":navbar_category, "brands":brands, "prime_brand":prime_brand, "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title}
 	template = 'pricebranddetail.html'
 	return render(request, template, context)
 
@@ -421,6 +428,7 @@ def SubCategoryPage(request, c_id, s_id):
 	subcat = SubCategory.objects.get(pk=s_id, category=category)
 	products_list = Product.objects.filter(subcategory=subcat).order_by('id')
 	paginator = Paginator(products_list, 18)
+	productcount = products_list.count
 	page = request.GET.get('page')
 	try:
 		products = paginator.page(page)
@@ -435,7 +443,7 @@ def SubCategoryPage(request, c_id, s_id):
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.filter(category=category).order_by('-id')
-	context = {"category":category, "subcategory":subcategory, "products":products,"user" : request.user, "navbar_category":navbar_category,"subcat":subcat, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
+	context = {"count":productcount, "category":category, "subcategory":subcategory, "products":products,"user" : request.user, "navbar_category":navbar_category,"subcat":subcat, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
 	template = 'subcategorydetail.html'
 	return render(request, template, context)
 
@@ -457,6 +465,7 @@ def PriceFilterSubCategory(request, c_id, s_id, pr_id):
 	subcat = SubCategory.objects.get(pk=s_id, category=category)
 	products_list = Product.objects.filter(Q(subcategory=subcat, offer_price__lte=upper, offer_price__gte=lower) | Q(subcategory=subcat, sale_price__lte=upper, sale_price__gte=lower))
 	paginator = Paginator(products_list, 18)
+	productcount = products_list.count
 	page = request.GET.get('page')
 	try:
 		products = paginator.page(page)
@@ -471,7 +480,7 @@ def PriceFilterSubCategory(request, c_id, s_id, pr_id):
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.filter(category=category).order_by('-id')
-	context = {"category":category, "subcategory":subcategory, "products":products,"user" : request.user, "navbar_category":navbar_category,"subcat":subcat, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title}
+	context = {"category":category, "subcategory":subcategory, "products":products,"user" : request.user, "navbar_category":navbar_category,"subcat":subcat, "count":productcount, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title}
 	template = 'pricesubcatdetail.html'
 	return render(request, template, context)
 

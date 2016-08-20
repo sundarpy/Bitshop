@@ -38,6 +38,7 @@ class CarMotorbikeCare(scrapy.Spider):
 		item = AmazonItem()
 		item['title'] = hxs.select('//div[@class="a-section a-spacing-none"]/h1/span[@id="productTitle"]/text()').extract()
 		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
+		item['specs'] = hxs.select('//div[@class="pdTab"][1]//node()').extract()
 		item['offerprice'] = hxs.select('//span[@id="priceblock_ourprice"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
 		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
@@ -85,6 +86,7 @@ class OilsFluids(scrapy.Spider):
 		item = AmazonItem()
 		item['title'] = hxs.select('//div[@class="a-section a-spacing-none"]/h1/span[@id="productTitle"]/text()').extract()
 		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
+		item['specs'] = hxs.select('//div[@class="pdTab"][1]//node()').extract()
 		item['offerprice'] = hxs.select('//span[@id="priceblock_ourprice"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
 		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
@@ -132,6 +134,7 @@ class Helmets(scrapy.Spider):
 		item = AmazonItem()
 		item['title'] = hxs.select('//div[@class="a-section a-spacing-none"]/h1/span[@id="productTitle"]/text()').extract()
 		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
+		item['specs'] = hxs.select('//div[@class="pdTab"][1]//node()').extract()
 		item['offerprice'] = hxs.select('//span[@id="priceblock_ourprice"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
 		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
@@ -179,6 +182,7 @@ class Gloves(scrapy.Spider):
 		item = AmazonItem()
 		item['title'] = hxs.select('//div[@class="a-section a-spacing-none"]/h1/span[@id="productTitle"]/text()').extract()
 		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
+		item['specs'] = hxs.select('//div[@class="pdTab"][1]//node()').extract()
 		item['offerprice'] = hxs.select('//span[@id="priceblock_ourprice"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
 		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
@@ -226,6 +230,7 @@ class MotorbikeAccessories(scrapy.Spider):
 		item = AmazonItem()
 		item['title'] = hxs.select('//div[@class="a-section a-spacing-none"]/h1/span[@id="productTitle"]/text()').extract()
 		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
+		item['specs'] = hxs.select('//div[@class="pdTab"][1]//node()').extract()
 		item['offerprice'] = hxs.select('//span[@id="priceblock_ourprice"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
 		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
@@ -273,6 +278,7 @@ class FramesFittings(scrapy.Spider):
 		item = AmazonItem()
 		item['title'] = hxs.select('//div[@class="a-section a-spacing-none"]/h1/span[@id="productTitle"]/text()').extract()
 		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
+		item['specs'] = hxs.select('//div[@class="pdTab"][1]//node()').extract()
 		item['offerprice'] = hxs.select('//span[@id="priceblock_ourprice"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
 		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
@@ -320,6 +326,7 @@ class AirFresheners(scrapy.Spider):
 		item = AmazonItem()
 		item['title'] = hxs.select('//div[@class="a-section a-spacing-none"]/h1/span[@id="productTitle"]/text()').extract()
 		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
+		item['specs'] = hxs.select('//div[@class="pdTab"][1]//node()').extract()
 		item['offerprice'] = hxs.select('//span[@id="priceblock_ourprice"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
 		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
@@ -366,15 +373,18 @@ class CarAccessories(scrapy.Spider):
 		items = []
 		item = AmazonItem()
 		item['title'] = hxs.select('//div[@class="a-section a-spacing-none"]/h1/span[@id="productTitle"]/text()').extract()
-		item['sellingprice'] = hxs.select('//span[@class="a-text-strike"]/text()').extract()
+		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
+		item['specs'] = hxs.select('//div[@class="pdTab"][1]//node()').extract()
 		item['offerprice'] = hxs.select('//span[@id="priceblock_ourprice"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
-		item['description'] = hxs.select('//div[@class="content pdClearfix"]//node()').extract()
-		item['image'] = hxs.select('//div[@class="imgTagWrapper"]/img/@src').extract()
+		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
+		item['feature'] = hxs.select('//ul[@class="a-vertical a-spacing-none"]/li/span/text()').extract()
+		item['image'] = hxs.select('//span[@class="a-button-text"]/img/@src').extract()
 		item['link'] = response.meta["url"]
 		item['seller'] = hxs.select('//div[@id="merchant-info"]/a[1]/text()').extract()
 		item['sellrating'] = hxs.select('//div[@id="merchant-info"]/text()').extract()
-		item['COD'] = hxs.select('//span[@id="cod_eligible_message"]//text()').extract()
+		item['starating'] = hxs.select('//a[@class="a-link-normal"]/i/span/text()').extract()[0]
+		item['COD'] = "Available"
 		item['category'] = "Car, Motorbike & Industrial"
 		item['subcategory'] = "Car Accessories"
 		items.append(item)
@@ -411,15 +421,18 @@ class CarParts(scrapy.Spider):
 		items = []
 		item = AmazonItem()
 		item['title'] = hxs.select('//div[@class="a-section a-spacing-none"]/h1/span[@id="productTitle"]/text()').extract()
-		item['sellingprice'] = hxs.select('//span[@class="a-text-strike"]/text()').extract()
+		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
+		item['specs'] = hxs.select('//div[@class="pdTab"][1]//node()').extract()
 		item['offerprice'] = hxs.select('//span[@id="priceblock_ourprice"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
-		item['description'] = hxs.select('//div[@class="content pdClearfix"]//node()').extract()
-		item['image'] = hxs.select('//div[@class="imgTagWrapper"]/img/@src').extract()
+		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
+		item['feature'] = hxs.select('//ul[@class="a-vertical a-spacing-none"]/li/span/text()').extract()
+		item['image'] = hxs.select('//span[@class="a-button-text"]/img/@src').extract()
 		item['link'] = response.meta["url"]
 		item['seller'] = hxs.select('//div[@id="merchant-info"]/a[1]/text()').extract()
 		item['sellrating'] = hxs.select('//div[@id="merchant-info"]/text()').extract()
-		item['COD'] = hxs.select('//span[@id="cod_eligible_message"]//text()').extract()
+		item['starating'] = hxs.select('//a[@class="a-link-normal"]/i/span/text()').extract()[0]
+		item['COD'] = "Available"
 		item['category'] = "Car, Motorbike & Industrial"
 		item['subcategory'] = "Car Parts"
 		items.append(item)
@@ -456,15 +469,18 @@ class CarTyresRims(scrapy.Spider):
 		items = []
 		item = AmazonItem()
 		item['title'] = hxs.select('//div[@class="a-section a-spacing-none"]/h1/span[@id="productTitle"]/text()').extract()
-		item['sellingprice'] = hxs.select('//span[@class="a-text-strike"]/text()').extract()
+		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
+		item['specs'] = hxs.select('//div[@class="pdTab"][1]//node()').extract()
 		item['offerprice'] = hxs.select('//span[@id="priceblock_ourprice"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
-		item['description'] = hxs.select('//div[@class="content pdClearfix"]//node()').extract()
-		item['image'] = hxs.select('//div[@class="imgTagWrapper"]/img/@src').extract()
+		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
+		item['feature'] = hxs.select('//ul[@class="a-vertical a-spacing-none"]/li/span/text()').extract()
+		item['image'] = hxs.select('//span[@class="a-button-text"]/img/@src').extract()
 		item['link'] = response.meta["url"]
 		item['seller'] = hxs.select('//div[@id="merchant-info"]/a[1]/text()').extract()
 		item['sellrating'] = hxs.select('//div[@id="merchant-info"]/text()').extract()
-		item['COD'] = hxs.select('//span[@id="cod_eligible_message"]//text()').extract()
+		item['starating'] = hxs.select('//a[@class="a-link-normal"]/i/span/text()').extract()[0]
+		item['COD'] = "Available"
 		item['category'] = "Car, Motorbike & Industrial"
 		item['subcategory'] = "Car Tyres & Rims"
 		items.append(item)
@@ -501,15 +517,18 @@ class LabScientific(scrapy.Spider):
 		items = []
 		item = AmazonItem()
 		item['title'] = hxs.select('//div[@class="a-section a-spacing-none"]/h1/span[@id="productTitle"]/text()').extract()
-		item['sellingprice'] = hxs.select('//span[@class="a-text-strike"]/text()').extract()
+		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
+		item['specs'] = hxs.select('//div[@class="pdTab"][1]//node()').extract()
 		item['offerprice'] = hxs.select('//span[@id="priceblock_ourprice"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
-		item['description'] = hxs.select('//div[@class="content pdClearfix"]//node()').extract()
-		item['image'] = hxs.select('//div[@class="imgTagWrapper"]/img/@src').extract()
+		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
+		item['feature'] = hxs.select('//ul[@class="a-vertical a-spacing-none"]/li/span/text()').extract()
+		item['image'] = hxs.select('//span[@class="a-button-text"]/img/@src').extract()
 		item['link'] = response.meta["url"]
 		item['seller'] = hxs.select('//div[@id="merchant-info"]/a[1]/text()').extract()
 		item['sellrating'] = hxs.select('//div[@id="merchant-info"]/text()').extract()
-		item['COD'] = hxs.select('//span[@id="cod_eligible_message"]//text()').extract()
+		item['starating'] = hxs.select('//a[@class="a-link-normal"]/i/span/text()').extract()[0]
+		item['COD'] = "Available"
 		item['category'] = "Car, Motorbike & Industrial"
 		item['subcategory'] = "Lab & Scientific Products"
 		items.append(item)
@@ -546,15 +565,18 @@ class JanitorialSanitation(scrapy.Spider):
 		items = []
 		item = AmazonItem()
 		item['title'] = hxs.select('//div[@class="a-section a-spacing-none"]/h1/span[@id="productTitle"]/text()').extract()
-		item['sellingprice'] = hxs.select('//span[@class="a-text-strike"]/text()').extract()
+		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
+		item['specs'] = hxs.select('//div[@class="pdTab"][1]//node()').extract()
 		item['offerprice'] = hxs.select('//span[@id="priceblock_ourprice"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
-		item['description'] = hxs.select('//div[@class="content pdClearfix"]//node()').extract()
-		item['image'] = hxs.select('//div[@class="imgTagWrapper"]/img/@src').extract()
+		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
+		item['feature'] = hxs.select('//ul[@class="a-vertical a-spacing-none"]/li/span/text()').extract()
+		item['image'] = hxs.select('//span[@class="a-button-text"]/img/@src').extract()
 		item['link'] = response.meta["url"]
 		item['seller'] = hxs.select('//div[@id="merchant-info"]/a[1]/text()').extract()
 		item['sellrating'] = hxs.select('//div[@id="merchant-info"]/text()').extract()
-		item['COD'] = hxs.select('//span[@id="cod_eligible_message"]//text()').extract()
+		item['starating'] = hxs.select('//a[@class="a-link-normal"]/i/span/text()').extract()[0]
+		item['COD'] = "Available"
 		item['category'] = "Car, Motorbike & Industrial"
 		item['subcategory'] = "Janitorial & Sanitation Supplies"
 		items.append(item)
@@ -591,15 +613,18 @@ class TestMeasureInspect(scrapy.Spider):
 		items = []
 		item = AmazonItem()
 		item['title'] = hxs.select('//div[@class="a-section a-spacing-none"]/h1/span[@id="productTitle"]/text()').extract()
-		item['sellingprice'] = hxs.select('//span[@class="a-text-strike"]/text()').extract()
+		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
+		item['specs'] = hxs.select('//div[@class="pdTab"][1]//node()').extract()
 		item['offerprice'] = hxs.select('//span[@id="priceblock_ourprice"]/text()').extract()
 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
-		item['description'] = hxs.select('//div[@class="content pdClearfix"]//node()').extract()
-		item['image'] = hxs.select('//div[@class="imgTagWrapper"]/img/@src').extract()
+		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
+		item['feature'] = hxs.select('//ul[@class="a-vertical a-spacing-none"]/li/span/text()').extract()
+		item['image'] = hxs.select('//span[@class="a-button-text"]/img/@src').extract()
 		item['link'] = response.meta["url"]
 		item['seller'] = hxs.select('//div[@id="merchant-info"]/a[1]/text()').extract()
 		item['sellrating'] = hxs.select('//div[@id="merchant-info"]/text()').extract()
-		item['COD'] = hxs.select('//span[@id="cod_eligible_message"]//text()').extract()
+		item['starating'] = hxs.select('//a[@class="a-link-normal"]/i/span/text()').extract()[0]
+		item['COD'] = "Available"
 		item['category'] = "Car, Motorbike & Industrial"
 		item['subcategory'] = "Test, Measure & Inspect"
 		items.append(item)

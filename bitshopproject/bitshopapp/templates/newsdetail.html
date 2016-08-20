@@ -385,7 +385,7 @@
 											<div class="panel-default">
 												<div class="panel-body">People also Read <a href="{% url 'news' %}"><span class="badge pull-right">Show More</span></a></div>
 												<div class="main-products-details news-page">
-													{% for new in multi_news|slice:":6" %}
+													{% for new in multi_news|slice:":12" %}
 													<div class="col-md-4">
 														<a href="{% url 'newsdetail' new.id %}" style="text-decoration: none;">
 															<div class="thumbnail">
@@ -411,8 +411,8 @@
 								<div class="similar-content">
 									<div class="similar-content" style="margin-top: 40px;">
 										<div class="panel panel-default">
-											<div class="panel-body">Men</div>
-											{% for data in data1|slice:":2" %}
+											<div class="panel-body">Top 3 popular Products in Men</div>
+											{% for data in data1|slice:":3" %}
 											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
 												<div class="thumbnail">
 														<img src={{data.mainimage}} alt="item-imgs"/>
@@ -432,8 +432,8 @@
 								<div class="similar-content">
 									<div class="similar-content">
 										<div class="panel panel-default">
-											<div class="panel-body">Women</div>
-											{% for data in data2|slice:":2" %}
+											<div class="panel-body">Top 3 popular Products in Women</div>
+											{% for data in data2|slice:":3" %}
 											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
 												<div class="thumbnail">
 														<img src={{data.mainimage}} alt="item-imgs"/>
@@ -453,8 +453,8 @@
 								<div class="similar-content">
 									<div class="similar-content">
 										<div class="panel panel-default">
-											<div class="panel-body">Appliances</div>
-											{% for data in data3|slice:":2" %}
+											<div class="panel-body">Top 3 popular Products in Appliances</div>
+											{% for data in data3|slice:":3" %}
 											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
 												<div class="thumbnail">
 														<img src={{data.mainimage}} alt="item-imgs"/>
@@ -474,8 +474,8 @@
 								<div class="similar-content">
 									<div class="similar-content">
 										<div class="panel panel-default">
-											<div class="panel-body">Home</div>
-											{% for data in data4|slice:":2" %}
+											<div class="panel-body">Top 3 popular Products in Home</div>
+											{% for data in data4|slice:":3" %}
 											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
 												<div class="thumbnail">
 														<img src={{data.mainimage}} alt="item-imgs"/>
@@ -495,8 +495,8 @@
 								<div class="similar-content">
 									<div class="similar-content">
 										<div class="panel panel-default">
-											<div class="panel-body">Electronics</div>
-											{% for data in data5|slice:":2" %}
+											<div class="panel-body">Top 3 popular Products in Electronics</div>
+											{% for data in data5|slice:":3" %}
 											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
 												<div class="thumbnail">
 														<img src={{data.mainimage}} alt="item-imgs"/>

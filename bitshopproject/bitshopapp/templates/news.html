@@ -97,9 +97,9 @@
 									<div class="news-details-content">
 										<div class="row panel panel-default">
 											<div class="panel-default">
-												<div class="panel-body">News</div>
+												<div class="panel-body">Articles</div>
 												<div class="main-products-details news-page">
-													{% for new in news|slice:":20" %}
+													{% for new in news %}
 													<div class="col-md-4">
 														<a href="{% url 'newsdetail' new.id %}" style="text-decoration: none;">
 															<div class="thumbnail">
@@ -125,7 +125,7 @@
 								<div class="similar-content">
 									<div class="similar-content" style="margin-top: 40px;">
 										<div class="panel panel-default">
-											<div class="panel-body">Men</div>
+											<div class="panel-body">Top 3 popular Products in Men</div>
 											{% for data in data1|slice:":3" %}
 											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
 												<div class="thumbnail">
@@ -146,7 +146,7 @@
 								<div class="similar-content">
 									<div class="similar-content">
 										<div class="panel panel-default">
-											<div class="panel-body">Women</div>
+											<div class="panel-body">Top 3 popular Products in Women</div>
 											{% for data in data2|slice:":3" %}
 											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
 												<div class="thumbnail">
@@ -167,7 +167,7 @@
 								<div class="similar-content">
 									<div class="similar-content">
 										<div class="panel panel-default">
-											<div class="panel-body">Appliances</div>
+											<div class="panel-body">Top 3 popular Products in Appliances</div>
 											{% for data in data3|slice:":3" %}
 											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
 												<div class="thumbnail">
@@ -188,7 +188,7 @@
 								<div class="similar-content">
 									<div class="similar-content">
 										<div class="panel panel-default">
-											<div class="panel-body">Home</div>
+											<div class="panel-body">Top 3 popular Products in Home</div>
 											{% for data in data4|slice:":3" %}
 											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
 												<div class="thumbnail">
@@ -209,7 +209,7 @@
 								<div class="similar-content">
 									<div class="similar-content">
 										<div class="panel panel-default">
-											<div class="panel-body">Electronics</div>
+											<div class="panel-body">Top 3 popular Products in Electronics</div>
 											{% for data in data5|slice:":3" %}
 											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
 												<div class="thumbnail">

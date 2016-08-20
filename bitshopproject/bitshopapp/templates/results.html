@@ -97,7 +97,7 @@
 									<div class="news-details-content">
 										<div class="row panel panel-default">
 											<div class="panel-default">
-												<div class="panel-body">{{products.count}} Results</div>
+												<div class="panel-body">{{count}} Results</div>
 												<div class="main-products-details news-page result-details">
 													{% for product in products %}
 													{% if product.offer_price or product.sale_price %}
@@ -120,8 +120,52 @@
 												{% endif %}
 												{% endfor %}
 												</div>
+
 											</div>
+
 										</div>
+										<!-- <nav style="text-align: center;margin: 0 auto;">
+										  	<ul class="pagination">
+											    <li>
+											    	{% if products.has_previous %}
+											      	<a href="{{current_path}}&page={{ products.previous_page_number }}" aria-label="Previous">
+											       	 <span aria-hidden="true">&laquo;</span>
+											      	</a>
+											      	{% endif %}
+											    </li>
+											    {% for page in range|slice:sl %}
+											    <li><a href="{{current_path}}&page={{ page }}">{{page}}</a></li>
+											    {% endfor %}
+											    <li>
+											    	{% if products.has_next %}
+											      	<a href="{{current_path}}&page={{ products.next_page_number }}" aria-label="Next">
+											       	 <span aria-hidden="true">&raquo;</span>
+											      	</a>
+											      	{% endif %}
+											    </li>
+										  	</ul>
+										</nav> -->
+										<nav style="text-align: center;margin: 0 auto;">
+										  	<ul class="pagination">
+											    <li>
+											    	{% if products.has_previous %}
+											      	<a href="{{current_path}}&page={{ products.previous_page_number }}" aria-label="Previous">
+											       	 <span aria-hidden="true">&laquo;</span>
+											      	</a>
+											      	{% endif %}
+											    </li>
+											    {% for page in range|slice:sl %}
+											    <li><a href="{{current_path}}&page={{ page }}">{{page}}</a></li>
+											    {% endfor %}
+											    <li>
+											    	{% if products.has_next %}
+											      	<a href="{{current_path}}&page={{ products.next_page_number }}" aria-label="Next">
+											       	 <span aria-hidden="true">&raquo;</span>
+											      	</a>
+											      	{% endif %}
+											    </li>
+										  	</ul>
+										</nav>
 										<div clas="clearfix"></div>
 									</div>
 								</div>

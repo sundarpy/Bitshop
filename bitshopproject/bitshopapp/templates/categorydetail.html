@@ -135,7 +135,7 @@
 								<div class="main-wrap-details">
 									<div class="main-content-details">
 										<div class="main-products-details panel panel-default">
-											<div class="panel-body">Products > {{category.category_name}}</div>
+											<div class="panel-body">Home > {{category.category_name}} ({{count}})</div>
 											<div class="row">
 												{% for product in products %}
 												{% if product.offer_price != None or product.sale_price != None %}
@@ -183,7 +183,7 @@
 										{% if news %}
 										<div class="row panel panel-default">
 											<div class="panel-default">
-												<div class="panel-body">News <a href="{% url 'news' %}"><span class="badge pull-right">Show More</span></a></div>
+												<div class="panel-body">Articles to help you shop<a href="{% url 'news' %}"><span class="badge pull-right">Show More</span></a></div>
 												<div class="main-products-details news-page">
 													{% for new in news|slice:":6" %}
 													<div class="col-md-4">

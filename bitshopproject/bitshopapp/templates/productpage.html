@@ -220,64 +220,7 @@
 														<div class="row">
 															<div class="col-md-12">
 																<!-- UI 40 Starts -->
-																<div class="comment-box">
-																	<h2 class="comment-section-header">{{comments.count}} Comments</h2>
-																	<div class="comment-space">
-																		<div class="row">
-																			{% if user.is_authenticated %}
-																			{% if user.socialaccount_set.all.0.get_avatar_url %}
-																			<div class="col-md-2">
-																				<div class="comment-img">
-																					<img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" class="" alt=""/>
-																				</div>
-																			</div>
-																			{% else %}
-																			<div class="col-md-2">
-																				<div class="comment-img">
-																					<img src="http://mcq.incevio.com/user-avatar/avatar-placeholder.jpg" class="" alt=""/>
-																				</div>
-																			</div>
-																			{% endif %}
-																			<div class="col-md-10">
-																				<div class="comment-post">
-																					<form id="form" enctype='mutipart/form-data' action="." method="POST">
-																						{% csrf_token %}
-																						<div class="form-group" id="name">
-																							<div>{{form.content|as_crispy_field:"bootstrap"}}</div>
-																						</div>
-																						<input type="submit" class="btn btn-primary btn-md center btn-submit" style="border-radius: 4px;margin-right: 15px;padding: 4px 14px;" value='Post'/>
-																					</form>
-																				</div>
-																			</div>
-																			{% endif %}
-																		</div>
-																	</div>
-																	{% for comment in comments %}
-																	<div class="comment-space">
-																		<div class="row">
-																			{% if comment.user.socialaccount_set.all.0.get_avatar_url %}
-																			<div class="col-md-2">
-																				<div class="comment-img">
-																					<img src="{{comment.user.socialaccount_set.all.0.get_avatar_url}}" class="" alt=""/>
-																				</div>
-																			</div>
-																			{% else %}
-																			<div class="col-md-2">
-																				<div class="comment-img">
-																					<img src="http://mcq.incevio.com/user-avatar/avatar-placeholder.jpg" class="" alt=""/>
-																				</div>
-																			</div>
-																			{% endif %}
-																			<div class="col-md-10">
-																				<div class="comment-post">
-																					<h4 class="commenter">{{comment.user.username}}<span class="comment-hr pull-right">{{comment.timestamp}}</span></h4>
-																					<p>{{comment.content}}</p>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																	{% endfor %}
-																</div>
+																
 																<!-- UI 40 Ends -->
 															</div>	
 														</div>	
