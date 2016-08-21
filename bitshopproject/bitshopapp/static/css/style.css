@@ -779,6 +779,10 @@ News Details css Start
     transition: border .2s ease-in-out;
     overflow: hidden;
 }
+.news-content .thumbnail{
+    height: 266px;
+    max-height: 100%;
+}
 .news-content .thumbnail .caption .news-ttle {
     font-size: 14px;
     line-height: 17px;
@@ -789,8 +793,6 @@ News Details css Start
     display: block;
     text-decoration: none !important;
     position: relative;
-    height: 266px;
-    max-height: 100%;
     /* white-space: nowrap; */
     /* width: 165px; */
     text-overflow: ellipsis;
