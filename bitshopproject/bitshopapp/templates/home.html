@@ -136,9 +136,9 @@
 											</div>
 										</div>
 										{% if news %}
-										<div class="main-wrap-details">
-											<div class="main-content-details">Articles to help you shop<a href="{% url 'news' %}"><span class="badge pull-right">Show More</span></a></div>
-											<div class="main-products-details panel panel-default">
+										<div class="panel panel-default">
+											<div class="panel-body">Articles to help you shop<a href="{% url 'news' %}"><span class="badge pull-right">Show More</span></a></div>
+											<div class="news-wraping">
 												
 												<div class="row">
 													{% for new in news|slice:":12" %}
