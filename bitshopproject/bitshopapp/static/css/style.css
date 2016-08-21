@@ -779,7 +779,7 @@ News Details css Start
     transition: border .2s ease-in-out;
     overflow: hidden;
 }
-.news-content .thumbnail{
+.news-content .thumbnail img{
     height: 266px;
     max-height: 100%;
 }
