@@ -143,15 +143,17 @@
 												<div class="row">
 													{% for new in news|slice:":12" %}
 													<div class="col-md-4">
-														<a href="{% url 'newsdetail' new.id %}" style="text-decoration: none;">
-															<div class="thumbnail">
-																	<img src={{new.image_url}} alt="item-imgs"/>
-																
-																<div class="caption">
-																	<h5>{{new.title}}</h5>
+														<div class="news-content">
+															<a href="{% url 'newsdetail' new.id %}" style="text-decoration: none;">
+																<div class="thumbnail">
+																		<img src={{new.image_url}} alt="item-imgs"/>
+																	
+																	<div class="caption">
+																		<h5 class="news-ttle">{{new.title}}</h5>
+																	</div>
 																</div>
-															</div>
-														</a>
+															</a>
+														</div>
 													</div>
 													{% endfor %}
 												</div>

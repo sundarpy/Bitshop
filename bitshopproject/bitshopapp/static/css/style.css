@@ -779,10 +779,6 @@ News Details css Start
     transition: border .2s ease-in-out;
     overflow: hidden;
 }
-.news-content .thumbnail img{
-    height: 266px;
-    max-height: 100%;
-}
 .news-content .thumbnail .caption .news-ttle {
     font-size: 14px;
     line-height: 17px;
