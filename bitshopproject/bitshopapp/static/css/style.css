@@ -789,6 +789,8 @@ News Details css Start
     display: block;
     text-decoration: none !important;
     position: relative;
+    height: 266px;
+    max-height: 100%;
     /* white-space: nowrap; */
     /* width: 165px; */
     text-overflow: ellipsis;
