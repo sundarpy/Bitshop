@@ -562,8 +562,8 @@ Details css start
     display: block;
     text-decoration: none !important;
     position: relative;
-    white-space: nowrap;
-    width: 165px;
+    /*white-space: nowrap;
+    width: 165px;*/
     text-overflow: ellipsis;
 }
 .main-products-details .thumbnail .caption p {
