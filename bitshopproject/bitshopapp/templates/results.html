@@ -2,7 +2,7 @@
 {% load static from staticfiles %}
 	<html lang="en">
 		<head>
-			<title>BitShopping</title>
+			<title>Serfo Shopping</title>
 			<!-- meta name -->
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 			<meta name="keywords" content="">
@@ -35,12 +35,12 @@
 									<span class="icon-bar"></span>
 									<span class="icon-bar"></span>
 								  </button>
-								  <a class="navbar-brand" href="{% url 'home' %}"><b>BitShopping</b></a>
+								  <a class="navbar-brand" href="{% url 'home' %}"><b>Serfo Shopping</b></a>
 								</div>
 								<div class="search-top">
 									<form class="navbar-form" action="{% url 'results'  %}" method="get" role="search">
 										<div class="input-group">
-											<input class="form-control" type="search" value="Search" name="q" placeholder="Search..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}" required="">
+											<input class="form-control" type="search" value="Search millions of products from leading online stores." name="q" placeholder="Search millions of products from leading online stores." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search millions of products from leading online stores.';}" required="">
 											<span class="input-group-btn" style="text-align: left;">
 												<button type="search" value="Search" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></button>
 										  	</span>
@@ -175,24 +175,96 @@
 					</div>
 				</section>
 				<!-- Start Footer -->    
-				<!--	<footer id="footer">
-					<div class="footer-main">
-						<div class="container">
-							<div class="row">
-								<div class="col-md-6">
-									<div class="footer-top-area">                        
-										
+				<section class="genuine-products">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="artical artical-base">
+									<div class="added-content">
+										<img src="https://doypaxk1e2349.cloudfront.net/elements/genuine-products.png" alt="product-img"/>
 									</div>
+									<div class="added-contents">
+										<h4>100% Genuine Products</h4>
+										<p>We only list genuine products. Who likes to die copying?
+										</p>
+									</div>
+									<div class="clearfix"></div>	
 								</div>
-								<div class="col-md-6">
-									<div class="footer-top-area rights">                        
-										
+							</div>
+							<div class="col-md-4">
+								<div class="artical artical-base">
+									<div class="added-content">
+										<img src="https://doypaxk1e2349.cloudfront.net/elements/hidden-charges.png" alt="product-img"/>
 									</div>
+									<div class="added-contents">
+										<h4>Zero Hidden Charges</h4>
+										<p>We offer our services for free. Okay, a little love would suffice.
+										</p>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="artical artical-base">
+									<div class="added-content">
+										<img src="https://doypaxk1e2349.cloudfront.net/elements/shield.png" alt="product-img"/>
+									</div>
+									<div class="added-contents">
+										<h4>100% Safe and Secure</h4>
+										<p>We only sell products, never your information.
+										</p>
+									</div>
+									<div class="clearfix"></div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</footer>-->
+				</section>	
+
+				<!-- Start Footer -->    
+				<footer>
+					<div claSS="container">
+						<div class="row">
+							<div class="col-md-8">
+								<div class="shopping-footer">
+									<h4>Categories</h4>
+									<div class="row">
+										<div class="col-md-4">
+											<ol class="list-unstyled">
+												{% for cat in navbar_category|slice:":5" %}
+												<li><a href="{% url 'categorydetail' cat.id %}">{{cat.category_name}}</a></li>
+												{% endfor %}
+											</ol>
+										</div>
+										<div class="col-md-4">
+											<ol class="list-unstyled">
+												{% for cat in navbar_category|slice:"5:10" %}
+												<li><a href="{% url 'categorydetail' cat.id %}">{{cat.category_name}}</a></li>
+												{% endfor %}
+											</ol>
+										</div>
+										<div class="col-md-4">
+											<ol class="list-unstyled">
+												{% for cat in navbar_category|slice:"10:" %}
+												<li><a href="{% url 'categorydetail' cat.id %}">{{cat.category_name}}</a></li>
+												{% endfor %}
+											</ol>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="about-shopping">
+									<h4 class="about-shp"><a href="{% url 'home' %}">Serfo Shopping</a></h4>
+									<p class="contents">
+										Serfo Shopping is your best guide to shop for online products. It aggregates products from all leading stores such as Flipkart, Amazon , Snapdeal and many more exclusive online stores in India to give you largest collection of products to choose from. We guarantee cheapest prices on all of our products. In Addition go through our growing collection of articles, reviews written by category experts to guide you in your shopping journey. Ask questions about what to buy from our active community who are there to help you out. Serfo Shopping is your starting point for online shopping journey.
+									</p>
+									<p>Copy &copy; 2016 Serfo Shopping, All rights reserved &reg; .</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</footer>
 				<!-- End Footer -->
 			</div>
 			<!-- initialize jQuery Library --> 

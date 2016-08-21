@@ -289,7 +289,7 @@ def CategoryPage(request, c_id):
 	brands = Brand.objects.all().order_by('?')
 	category = Category.objects.get(pk=c_id)
 	subcategory = SubCategory.objects.filter(category=category).order_by('id')
-	products_list = Product.objects.filter(category=category).order_by('id')
+	products_list = Product.objects.filter(category=category).order_by('?')
 	paginator = Paginator(products_list, 18)
 	productcount = products_list.count
 	page = request.GET.get('page')
