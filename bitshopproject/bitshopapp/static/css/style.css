@@ -779,7 +779,7 @@ News Details css Start
     transition: border .2s ease-in-out;
     overflow: hidden;
 }
-.thumbnail .caption .news-ttle {
+.news-content .thumbnail .caption .news-ttle {
     font-size: 14px;
     line-height: 17px;
     margin-bottom: 2px;

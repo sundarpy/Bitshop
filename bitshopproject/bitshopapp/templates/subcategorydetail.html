@@ -219,6 +219,7 @@
 												<div class="row">
 													{% for new in news|slice:":6" %}
 													<div class="col-md-4">
+														<div class="news-content">
 															<a href="{% url 'newsdetail' new.id %}" style="text-decoration: none;">
 																<div class="thumbnail">
 																		<img src={{new.image_url}} alt="item-imgs"/>
@@ -228,6 +229,7 @@
 																	</div>
 																</div>
 															</a>
+														</div>
 													</div>
 													{% endfor %}
 												</div>
