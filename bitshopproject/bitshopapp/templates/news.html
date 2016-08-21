@@ -119,8 +119,9 @@
 										<div class="panel panel-default">
 											<div class="panel-body">Articles<a href="{% url 'news' %}"></a></div>
 											<div class="news-wraping">
-												{% for new in news %}
+												
 												<div class="row">
+													{% for new in news %}
 													<div class="col-md-4">
 														<div class="news-content">
 															<a href="{% url 'newsdetail' new.id %}" style="text-decoration: none;">
@@ -134,8 +135,9 @@
 															</a>
 														</div>
 													</div>
+													{% endfor %}
 												</div>
-												{% endfor %}
+												
 											</div>
 										</div>
 										<div clas="clearfix"></div>

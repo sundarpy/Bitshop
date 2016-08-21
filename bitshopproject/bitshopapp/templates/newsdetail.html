@@ -405,8 +405,9 @@
 										<div class="panel panel-default">
 											<div class="panel-body">People also read<a href="{% url 'news' %}"><span class="badge pull-right">Show More</span></a></div>
 											<div class="news-wraping">
-												{% for new in multi_news|slice:":12" %}
+												
 												<div class="row">
+													{% for new in multi_news|slice:":12" %}
 													<div class="col-md-4">
 														<div class="news-content">
 															<a href="{% url 'newsdetail' new.id %}" style="text-decoration: none;">
@@ -420,8 +421,9 @@
 															</a>
 														</div>
 													</div>
+													{% endfor %}
 												</div>
-												{% endfor %}
+												
 											</div>
 										</div>
 										<div clas="clearfix"></div>
