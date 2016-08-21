@@ -84,7 +84,7 @@ class Category(models.Model):
 	category_slug = AutoSlugField(populate_from='category_name', null=True)
 	icon = models.ImageField(upload_to='icons/', null=True, blank=True, default="http://images.all-free-download.com/images/graphicthumb/abstract_led_tv_blank_screen_realistic_reflection_blue_wave_stylish_colorful_vector_6818232.jpg")
 
-	def __unicode__(self):
+	def __str__(self):
 		"""Unicode class."""
 		return str(self.category_name)
 
@@ -98,7 +98,7 @@ class SubCategory(models.Model):
 	category = models.ForeignKey(Category, blank=True, null=True)
 	subcategory_slug = AutoSlugField(populate_from='subcategory_name', null=True)
 
-	def __unicode__(self):
+	def __str__(self):
 		"""Unicode class."""
 		return str(self.subcategory_name)
 

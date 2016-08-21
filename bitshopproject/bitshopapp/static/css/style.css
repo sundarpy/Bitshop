@@ -66,9 +66,11 @@ navbar start
 .listing .navbar-nav>li>a {
     color: #000;
     background-color: transparent;
-    font-size: 13px    ;
+    font-size: 12px    ;
     line-height: 20px;
-    font-weight: 500;
+    font-weight: 400;
+    cursor: pointer;
+    text-decoration: none !important;
 }
 /*.navbar-nav>li::before{
     position: absolute;
@@ -96,7 +98,7 @@ navbar start
 .navbar-default .navbar-nav>li:hover {
     color: #fff !important;
 	/*background-color: hsla(0,0%,100%,.2);*/
-	background-color: hsla(170, 50%, 45%, 1);
+	background-color: hsla(205, 100%, 93%);
 }
 .search-top .navbar-form .input-group {
 	width: 678px;
@@ -180,6 +182,124 @@ navbar start
     font-weight: 600;
     color: #272727;
 }
+/*roall hover categories css part start*/
+
+.dropdown-submenu  {
+    position:relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    position:absolute;
+    top:0;
+    left:100%;
+    margin-top:-6px;
+ }
+ /*
+ .cat-detail {
+    position:relative;
+ }
+ .dropdown-submenu>.dropdown-menu{
+    position:absolute;
+    top:0;
+    left:100%;
+    margin-top:-6px;
+    margin-left:-1px;
+   -webkit-border-radius:0 6px 6px 0px;
+   -moz-border-radius:0 6px 6px 0px;
+   sborder-radius:0 6px 6px 0px;
+ }*/
+ .dropdown-submenu>.dropdown-menu  a {
+    text-decoration: none;
+ }
+ .main-drp .cat-wrp .cat-detail a {
+    text-decoration: none;
+ }
+ .dropdown-submenu>.dropdown-menu .dropdown a {
+    text-decoration: none;
+ }
+  .cat-wrp li a {
+    text-decoration: none;
+  }
+.dropdown-submenu > a:after {
+  border-color: transparent transparent transparent #333;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  content: " ";
+  display: block;
+  float: right;  
+  height: 0;     
+  margin-right: -10px;
+  margin-top: 5px;
+  width: 0;
+}
+ 
+.dropdown-submenu:hover>a:after {
+    border-left-color:#555;
+ }
+
+.dropdown-menu > li > a:hover, .dropdown-menu > .active > a:hover {
+  text-decoration: underline;
+}  
+  
+@media (max-width: 767px) {
+
+  .navbar-nav  {
+     display: inline;
+  }
+  .navbar-default .navbar-brand {
+    display: inline;
+  }
+  .navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+  }
+  .navbar-default .navbar-nav .dropdown-menu > li > a {
+    color: red;
+    background-color: #ccc;
+    border-radius: 0px;
+    margin-top: 2px;   
+    text-decoration: none !important;
+  }
+  .cat-wrp .cat-detail .cat1-wrp .cat1-detail a {
+        text-decoration: none !important;
+        color: blue !important;
+  }
+   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+     color: #333;
+     text-decoration: none !important;
+   }
+   .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+   .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+     background-color: #ccc;
+   }
+
+   .navbar-nav .open .dropdown-menu {
+     border-bottom: 1px solid white; 
+     border-radius: 0;
+   }
+  .dropdown-menu {
+      padding-left: 10px;
+  }
+  .dropdown-menu .dropdown-menu {
+      padding-left: 20px;
+   }
+   .dropdown-menu .dropdown-menu .dropdown-menu {
+      padding-left: 30px;
+   }
+   li.dropdown.open {
+    border: 0px solid #ddd;
+   }
+
+}
+ 
+@media (min-width: 768px) {
+  ul.nav li:hover > ul.dropdown-menu {
+    display: block;
+  }
+  #navbar {
+    text-align: center;
+  }
+}  
+/*roall hover categories css part end*/
 /*=======
 navbar END
 ==========*/
@@ -265,7 +385,7 @@ section css start
 }
 .panel-body {
     font-weight: 700;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 18px;
     padding: 12px;
 }
@@ -423,10 +543,10 @@ Details css start
 =========*/
 .product-content .panel-body {
     padding: 4px 12px;
-    border: 1px solid #bbb;
+    /*border: 1px solid #bbb;*/
 }
 .product-content-list {
-    margin-top: 40px;
+   /* margin-top: 40px;*/
 }
 .product-content .product-list {
     margin:4px 0 5px;
@@ -452,7 +572,7 @@ Details css start
     font-weight: 400;
 }
 .product-content ul li {
-    border-bottom: 1px solid #bbb;
+    border-top: 1px solid #bbb;
     padding: 6px 0 6px 12px;
 }
 .product-content ul .last {
@@ -484,7 +604,7 @@ Details css start
 .main-wrap-details {
     width: 650px;
     margin: 0 auto;
-    margin-top: 40px;
+    /*margin-top: 40px;*/
 }
 .main-products-details {
     padding-left: 8px;
@@ -562,8 +682,8 @@ Details css start
     display: block;
     text-decoration: none !important;
     position: relative;
-    /*white-space: nowrap;
-    width: 165px;*/
+    white-space: nowrap;
+    width: 165px;
     text-overflow: ellipsis;
 }
 .main-products-details .thumbnail .caption p {
@@ -640,6 +760,39 @@ News Details css Start
     font-weight: normal;
 	text-align: justify;
 }
+.news-content .thumbnail {
+    position: relative;
+    width: 206px;
+    max-width: 100%;
+    height: 266px;
+    max-height: 100%;
+    display: block;
+    padding: 0px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    line-height: 1.42857143;
+    background-color: transparent !important;
+    border: 1px solid transparent !important;
+    border-radius: 0;
+    -webkit-transition: border .2s ease-in-out;
+    -o-transition: border .2s ease-in-out;
+    transition: border .2s ease-in-out;
+    overflow: hidden;
+}
+.news-content .thumbnail .caption .news-ttle {
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 2px;
+    margin-top: 2px;
+    min-height: 17px;
+    overflow: hidden;
+    display: block;
+    text-decoration: none !important;
+    position: relative;
+    /* white-space: nowrap; */
+    /* width: 165px; */
+    text-overflow: ellipsis;
+}
 .item .thumbnail {
     display: inline-block;
     padding: 4px;
@@ -678,7 +831,7 @@ News Details css Start
     padding: 8px 15px;
     margin-bottom: 20px;
     list-style: none;
-    background-color: #fff;
+    background-color: transparent;
     border-radius: 4px;
 }
 .breadcrumb li a {

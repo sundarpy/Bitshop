@@ -52,7 +52,7 @@
 											{% else %}
 											<img src="http://minorschool.net/user-avatar/avatar-placeholder.jpg"> &nbsp; 
 											{% endif %}
-											<span class="dropdown">
+											<span class="dropdown-submenu">
 												<span class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 													{{ user.username }}
 													<span class="caret"></span>
@@ -78,18 +78,47 @@
 					</div>
 					<div class="listing">
 						<div class="container-fluid">
-								<div class="collapse navbar navbar-collapse" id="bs-example-navbar-collapse-1" style="    border-top: 1px solid transparent;">
-								  <ul class="nav navbar-nav" style="display: block;padding-left: 72px;">
-								  	{% for cat in navbar_category|slice:"5:12" %}
-									<li class="item-lis first"><a href="{% url 'categorydetail' cat.id %}">{{cat.category_name}}</a></li>
-									{% endfor %}
-								  </ul>
-								</div>
+							<nav class="navbar navbar-default navbar-static-top" role="navigation">
+					            <div class="collapse navbar-collapse" id="navbar-collapse-1">
+					                <ul class="nav navbar-nav">
+					                    
+					                    <li class="dropdown main-drp">
+					                      <a  class="dropdown-toggle" data-toggle="dropdown">All Categories <b class="caret"></b></a>
+					                      
+					                        <ul class="dropdown-menu cat-wrp">
+					                        	{% for cat in navbar_category %}
+					                            <li class="dropdown dropdown-submenu cat-detail">
+					                   				<a href="{% url 'categorydetail' cat.id %}" class="dropdown-toggle">{{cat.category_name}}</a>
+													<ul class="dropdown-menu cat1-wrp">
+														{% for sub in cat.get_subs %}
+														<li class="dropdown cat1-detail">
+															<a href="{% url 'subcategorydetail' cat.id sub.id %}">{{sub.subcategory_name}}</a>
+														</li>
+					                                    {% endfor %}                                  
+													</ul>
+												</li>
+												{% endfor %}                                
+					                        </ul>
+					                    </li>
+					                    {% for cat in navbar_category|slice:"5:12" %}
+										<li class="item-lis first"><a href="{% url 'categorydetail' cat.id %}">{{cat.category_name}}</a></li>
+										{% endfor %}
+					                </ul>
+					            </div><!-- /.navbar-collapse -->
+					        </nav>
 						</div>
 					</div>
 				</header>
 				<section class="Bishopping-main">
 					<div class="container">
+						<div class="current-cate">
+							<ol class="breadcrumb">
+							  <li><a href="{% url 'home' %}">Home</a></li>
+							  <li><a href="{% url 'categorydetail' category.id %}">{{category.category_name}}</a></li>
+							  <li><a href="{% url 'subcategorydetail' category.id subcat.id %}">{{subcat.subcategory_name}}</a></li>
+							  <li class="active">Price:{{title}} ({{count}})</li>
+							</ol>
+						</div>
 						
 						<div class="row">
 							<div class="col-md-2">
@@ -107,42 +136,31 @@
 										<div class="panel panel-default">
 											<div class="filter-content">
 												<div class="panel-body">Price</div>
-													{% for price in prices %}
+												<ul class="list-unstyled product-list">
+												{% for price in prices %}
 												{% if price.title == 'Very Low' %}
-												<a href="{% url 'pricesubcatdetail' category.id subcat.id price.id %}"><div class="panel-body">Below &#x20B9;{{price.upper_limit}}</div></a>
+												<li><a href="{% url 'pricesubcatdetail' category.id subcat.id price.id %}">Below &#x20B9;{{price.upper_limit}}</a></li>
 												{% elif price.title == 'Very High' %}
-													<a href="{% url 'pricesubcatdetail' category.id subcat.id price.id %}"><div class="panel-body">Above &#x20B9;{{price.lower_limit}}</div></a>
+													<li><a href="{% url 'pricesubcatdetail' category.id subcat.id price.id %}">Above &#x20B9;{{price.lower_limit}}</a></li>
 												{% else %}
-													<a href="{% url 'pricesubcatdetail' category.id subcat.id price.id %}"><div class="panel-body">&#x20B9;{{price.lower_limit}} - &#x20B9;{{price.upper_limit}}</div></a>
+													<li><a href="{% url 'pricesubcatdetail' category.id subcat.id price.id %}">&#x20B9;{{price.lower_limit}} - &#x20B9;{{price.upper_limit}}</a></li>
 												{% endif %}
 												{% endfor %}
+												</ul>
 											</div>
 										</div>
 										
 										<div class="panel panel-default">
 											<div class="filter-content">
 												<div class="panel-body">Brands</div>
+												<ul class="list-unstyled product-list">
 												{% for brand in brands|slice:":10" %}
-												<a href="{% url 'brandetail' brand.id %}"><div class="panel-body">{{brand.brand_name}}</div></a>
+												<li><a href="{% url 'brandetail' brand.id %}">{{brand.brand_name}}</a></li>
 												{% endfor %}
-												<a href="{% url 'brands' %}"><div class="panel-body">All Brands...</div></a>
+												<li><a href="{% url 'brands' %}">All Brands...</a></li>
+											</ul>
 											</div>
 										</div>
-										
-										<!--<div class="panel panel-default">
-											<div class="filter-content">
-												<div class="panel-body">category</div>
-												<form class="sub-category">
-													<select id="size" name="size">
-														<option>choose size</option>
-														<option>S</option>
-														<option>M</option>
-														<option>L</option>
-														<option>XL</option>
-													</select>
-												</form>
-											</div>
-										</div>-->
 									</div>
 								</div>
 							</div>
@@ -150,7 +168,6 @@
 								<div class="main-wrap-details">
 									<div class="main-content-details">
 										<div class="main-products-details panel panel-default">
-											<div class="panel-body">Home > {{category.category_name}} > {{subcat.subcategory_name}} > Price:{{title}} ({{count}})</div>
 											<div class="row">
 												{% for product in products %}
 												{% if product.offer_price != None or product.sale_price != None %}
@@ -196,24 +213,26 @@
 										</nav>
 										</div>
 										{% if news %}
-										<div class="row panel panel-default">
-											<div class="panel-default">
-												<div class="panel-body">Articles to help you shop<a href="{% url 'news' %}"><span class="badge pull-right">Show More</span></a></div>
-												<div class="main-products-details news-page">
-													{% for new in news|slice:":6" %}
+										<div class="panel panel-default">
+											<div class="panel-body">Articles to help you shop<a href="{% url 'news' %}"><span class="badge pull-right">Show More</span></a></div>
+											<div class="news-wraping">
+												{% for new in news|slice:":6" %}
+												<div class="row">
 													<div class="col-md-4">
-														<a href="{% url 'newsdetail' new.id %}" style="text-decoration: none;">
-															<div class="thumbnail">
-																	<img src={{new.image_url}} alt="item-imgs"/>
-																
-																<div class="caption">
-																	<h5>{{new.title}}</h5>
+														<div class="news-content">
+															<a href="{% url 'newsdetail' new.id %}" style="text-decoration: none;">
+																<div class="thumbnail">
+																		<img src={{new.image_url}} alt="item-imgs"/>
+																	
+																	<div class="caption">
+																		<h5 class="news-ttle">{{new.title}}</h5>
+																	</div>
 																</div>
-															</div>
-														</a>
+															</a>
+														</div>
 													</div>
-													{% endfor %}
 												</div>
+												{% endfor %}
 											</div>
 										</div>
 										{% endif %}
@@ -232,12 +251,10 @@
 							<div class="col-md-4">
 								<div class="artical artical-base">
 									<div class="added-content">
-										<img src="https://doypaxk1e2349.cloudfront.net/elements/genuine-products.png" alt="product-img"/>
+										<img src="{% static "images/product.png" %}" alt="product-img"/>
 									</div>
 									<div class="added-contents">
-										<h4>100% Genuine Products</h4>
-										<p>We only list genuine products. Who likes to die copying?
-										</p>
+										<h4>Search millions of products from leading online stores.</h4>
 									</div>
 									<div class="clearfix"></div>	
 								</div>
@@ -245,12 +262,10 @@
 							<div class="col-md-4">
 								<div class="artical artical-base">
 									<div class="added-content">
-										<img src="https://doypaxk1e2349.cloudfront.net/elements/hidden-charges.png" alt="product-img"/>
+										<img src="{% static "images/articles.png" %}" alt="product-img"/>
 									</div>
 									<div class="added-contents">
-										<h4>Zero Hidden Charges</h4>
-										<p>We offer our services for free. Okay, a little love would suffice.
-										</p>
+										<h4>Read articles and reviews to help you shop.</h4>
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -258,12 +273,10 @@
 							<div class="col-md-4">
 								<div class="artical artical-base">
 									<div class="added-content">
-										<img src="https://doypaxk1e2349.cloudfront.net/elements/shield.png" alt="product-img"/>
+										<img src="{% static "images/community.png" %}" alt="product-img"/>
 									</div>
 									<div class="added-contents">
-										<h4>100% Safe and Secure</h4>
-										<p>We only sell products, never your information.
-										</p>
+										<h4>Get buying advice from active community.</h4>
 									</div>
 									<div class="clearfix"></div>
 								</div>

@@ -51,7 +51,7 @@
 											{% else %}
 											<img src="http://minorschool.net/user-avatar/avatar-placeholder.jpg"> &nbsp; 
 											{% endif %}
-											<span class="dropdown">
+											<span class="dropdown-submenu">
 												<span class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 													{{ user.username }}
 													<span class="caret"></span>
@@ -77,13 +77,34 @@
 					</div>
 					<div class="listing">
 						<div class="container-fluid">
-								<div class="collapse navbar navbar-collapse" id="bs-example-navbar-collapse-1" style="    border-top: 1px solid transparent;">
-								  <ul class="nav navbar-nav" style="display: block;padding-left: 72px;">
-								  	{% for cat in navbar_category|slice:"5:12" %}
-									<li class="item-lis first"><a href="{% url 'categorydetail' cat.id %}">{{cat.category_name}}</a></li>
-									{% endfor %}
-								  </ul>
-								</div>
+							<nav class="navbar navbar-default navbar-static-top" role="navigation">
+					            <div class="collapse navbar-collapse" id="navbar-collapse-1">
+					                <ul class="nav navbar-nav">
+					                    
+					                    <li class="dropdown main-drp">
+					                      <a  class="dropdown-toggle" data-toggle="dropdown">All Categories <b class="caret"></b></a>
+					                      
+					                        <ul class="dropdown-menu cat-wrp">
+					                        	{% for cat in navbar_category %}
+					                            <li class="dropdown dropdown-submenu cat-detail">
+					                   				<a href="{% url 'categorydetail' cat.id %}" class="dropdown-toggle">{{cat.category_name}}</a>
+													<ul class="dropdown-menu cat1-wrp">
+														{% for sub in cat.get_subs %}
+														<li class="dropdown cat1-detail">
+															<a href="{% url 'subcategorydetail' cat.id sub.id %}">{{sub.subcategory_name}}</a>
+														</li>
+					                                    {% endfor %}                                  
+													</ul>
+												</li>
+												{% endfor %}                                
+					                        </ul>
+					                    </li>
+					                    {% for cat in navbar_category|slice:"5:12" %}
+										<li class="item-lis first"><a href="{% url 'categorydetail' cat.id %}">{{cat.category_name}}</a></li>
+										{% endfor %}
+					                </ul>
+					            </div><!-- /.navbar-collapse -->
+					        </nav>
 						</div>
 					</div>
 				</header>
@@ -152,12 +173,10 @@
 							<div class="col-md-4">
 								<div class="artical artical-base">
 									<div class="added-content">
-										<img src="https://doypaxk1e2349.cloudfront.net/elements/genuine-products.png" alt="product-img"/>
+										<img src="{% static "images/product.png" %}" alt="product-img"/>
 									</div>
 									<div class="added-contents">
-										<h4>100% Genuine Products</h4>
-										<p>We only list genuine products. Who likes to die copying?
-										</p>
+										<h4>Search millions of products from leading online stores.</h4>
 									</div>
 									<div class="clearfix"></div>	
 								</div>
@@ -165,12 +184,10 @@
 							<div class="col-md-4">
 								<div class="artical artical-base">
 									<div class="added-content">
-										<img src="https://doypaxk1e2349.cloudfront.net/elements/hidden-charges.png" alt="product-img"/>
+										<img src="{% static "images/articles.png" %}" alt="product-img"/>
 									</div>
 									<div class="added-contents">
-										<h4>Zero Hidden Charges</h4>
-										<p>We offer our services for free. Okay, a little love would suffice.
-										</p>
+										<h4>Read articles and reviews to help you shop.</h4>
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -178,12 +195,10 @@
 							<div class="col-md-4">
 								<div class="artical artical-base">
 									<div class="added-content">
-										<img src="https://doypaxk1e2349.cloudfront.net/elements/shield.png" alt="product-img"/>
+										<img src="{% static "images/community.png" %}" alt="product-img"/>
 									</div>
 									<div class="added-contents">
-										<h4>100% Safe and Secure</h4>
-										<p>We only sell products, never your information.
-										</p>
+										<h4>Get buying advice from active community.</h4>
 									</div>
 									<div class="clearfix"></div>
 								</div>
