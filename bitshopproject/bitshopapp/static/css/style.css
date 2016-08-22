@@ -17,11 +17,11 @@
 /* BASIC TYPOGRAPHY */
 /*--------------------*/
 
-@import url(https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic);
+@import 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,600i,700';
 body,html {
 	margin:0px;
 	padding: 0px;
-	font-family: 'Lato', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 100%;
 	overflow-x: hidden;
 	color: #272727;
@@ -66,11 +66,12 @@ navbar start
 .listing .navbar-nav>li>a {
     color: #000;
     background-color: transparent;
-    font-size: 12px    ;
+    font-size: 10px    ;
     line-height: 20px;
-    font-weight: 400;
+    font-weight: 600;
     cursor: pointer;
     text-decoration: none !important;
+    text-transform: uppercase;
 }
 /*.navbar-nav>li::before{
     position: absolute;
@@ -143,7 +144,7 @@ navbar start
     user-select: none;
     background-image: none;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 0px 4px 4px 0;
 }
 .btn-default {
    color: #fff;
@@ -380,11 +381,29 @@ section css start
 	margin-top: 40px;
 	margin-bottom: 40px;
 }
+.badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #4D87EF;
+    border-radius: 0px;
+}
+.news-wraping {
+     padding: 8px;
+
+}
 .main-products  .panel-default {
     border: 1px solid transparent;
 }
 .panel-body {
-    font-weight: 700;
+    font-weight: 600;
     font-size: 15px;
     line-height: 18px;
     padding: 12px;
@@ -491,12 +510,12 @@ section css start
     box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
 }
 .similar-content .thumbnail img {
-    max-height: 68px;
+    max-height: 66px;
     max-width: 50px;
     float: left;
     margin: 3px;
     display: inline;
-    width: 16%;
+    width:68px;
 }
 .similar-content .thumbnail .badge {
 	margin-right: 20px;
@@ -779,9 +798,15 @@ News Details css Start
     transition: border .2s ease-in-out;
     overflow: hidden;
 }
+.news-content .thumbnail img {
+    height: 192px;
+    width: 206px;
+    max-width: 100%;
+    max-height: 100%;
+}
 .news-content .thumbnail .caption .news-ttle {
     font-size: 14px;
-    line-height: 17px;
+    /* line-height: 17px;
     margin-bottom: 2px;
     margin-top: 2px;
     min-height: 17px;
@@ -789,9 +814,17 @@ News Details css Start
     display: block;
     text-decoration: none !important;
     position: relative;
-    /* white-space: nowrap; */
-    /* width: 165px; */
-    text-overflow: ellipsis;
+    white-space: nowrap; */
+    /* width: 165px; 
+    text-overflow: ellipsis;*/
+
+    overflow: hidden;
+    position: relative;
+    line-height: 14px;
+    max-height: 30px;
+    margin-right: -14px;
+    padding-right: 3px;
+    text-align: left;
 }
 .item .thumbnail {
     display: inline-block;
@@ -1192,6 +1225,10 @@ footer {
     border: 1px solid #ddd;
     margin-right: 20px;
     /*background: #fff;*/
+}
+.artical  .added-contents h4 {
+    font-weight: 300;
+    font-size: 17px;
 }
 .genuine-products {
    /* margin: 40px 0;*/
