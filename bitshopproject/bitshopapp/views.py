@@ -968,6 +968,123 @@ def getproducts(request):
 	data=item
 	return Response({"data":data, 'status':200})
 
+@api_view(['GET','POST'])
+def getmenproducts(request):
+	"""Products to be sent to Serfo"""
+	item = []
+	men_prod = SerfoProduct.objects.filter(super_category='M')
+
+	"""Men"""
+	for i in men_prod:
+		response1 = {}
+		response1['super_category'] = i.super_category
+		response1['id'] = i.product.id
+		response1['title'] = i.product.title
+		if i.product.offer_price != None:
+			response1['price'] = i.product.offer_price
+		else:
+			response1['price'] = i.product.sale_price
+		response1['link'] = i.product.link
+		temp_image = i.product.mainimage
+		response1['mainimage'] = temp_image
+		item.append(response1)
+
+	data=item
+	return Response({"data":data, 'status':200})
+
+@api_view(['GET','POST'])
+def getwomenproducts(request):
+	"""Products to be sent to Serfo"""
+	item = []
+	women_prod = SerfoProduct.objects.filter(super_category='W')
+
+	"""Women"""
+	for j in women_prod:
+		response2 = {}
+		response2['super_category'] = j.super_category
+		response2['id'] = j.product.id
+		response2['title'] = j.product.title
+		if j.product.offer_price != None:
+			response2['price'] = j.product.offer_price
+		else:
+			response2['price'] = j.product.sale_price
+		response2['link'] = j.product.link
+		temp_image = j.product.mainimage
+		response2['mainimage'] = temp_image
+		item.append(response2)
+
+	data=item
+	return Response({"data":data, 'status':200})
+
+@api_view(['GET','POST'])
+def getappliancesproducts(request):
+	"""Products to be sent to Serfo"""
+	item = []
+	appliances_prod = SerfoProduct.objects.filter(super_category='A')
+
+	"""Appliances"""
+	for x in appliances_prod:
+		response3 = {}
+		response3['super_category'] = x.super_category
+		response3['id'] = x.product.id
+		response3['title'] = x.product.title
+		if x.product.offer_price != None:
+			response3['price'] = x.product.offer_price
+		else:
+			response3['price'] = x.product.sale_price
+		response3['link'] = x.product.link
+		response3['mainimage'] = x.product.mainimage
+		item.append(response3)
+
+	data=item
+	return Response({"data":data, 'status':200})
+
+@api_view(['GET','POST'])
+def gethomeproducts(request):
+	"""Products to be sent to Serfo"""
+	item = []
+	home_prod = SerfoProduct.objects.filter(super_category='H')
+
+	"""Home"""
+	for y in home_prod:
+		response4 = {}
+		response4['super_category'] = y.super_category
+		response4['id'] = y.product.id
+		response4['title'] = y.product.title
+		if y.product.offer_price != None:
+			response4['price'] = y.product.offer_price
+		else:
+			response4['price'] = y.product.sale_price
+		response4['link'] = y.product.link
+		response4['mainimage'] = y.product.mainimage
+		item.append(response4)
+
+	data=item
+	return Response({"data":data, 'status':200})
+
+@api_view(['GET','POST'])
+def getelectronicproducts(request):
+	"""Products to be sent to Serfo"""
+	item = []
+	electronics_prod = SerfoProduct.objects.filter(super_category='E')
+
+	"""Electronics"""
+	for z in electronics_prod:
+		response5 = {}
+		response5['super_category'] = z.super_category
+		response5['id'] = z.product.id
+		response5['title'] = z.product.title
+		if z.product.offer_price != None:
+			response5['price'] = z.product.offer_price
+		else:
+			response5['price'] = z.product.sale_price
+		response5['link'] = z.product.link
+		response5['mainimage'] = z.product.mainimage
+		item.append(response5)
+
+	data=item
+	return Response({"data":data, 'status':200})
+
 """============================"""
 """=====EXCEPTION HANDLING====="""
 """============================"""

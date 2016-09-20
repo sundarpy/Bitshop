@@ -41,5 +41,11 @@ urlpatterns = [
     url(r'^getproducts/', views.getproducts, name='getproducts'),
     url(r'^accounts/profile/$', views.redirection, name='redirection'),
 
+    url(r'^getmenproducts/', views.getmenproducts, name='getmenproducts'),
+    url(r'^getwomenproducts/', views.getwomenproducts, name='getwomenproducts'),
+    url(r'^getappliancesproducts/', views.getappliancesproducts, name='getappliancesproducts'),
+    url(r'^gethomeproducts/', views.gethomeproducts, name='gethomeproducts'),
+    url(r'^getelectronicproducts/', views.getelectronicproducts, name='getelectronicproducts'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += staticfiles_urlpatterns()
