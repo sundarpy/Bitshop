@@ -22,97 +22,10 @@ from django.db.models import Q
 
 def Search(request):
 	"""Search."""
-	item1 = []
-	item2 = []
-	item3 = []
-	item4 = []
-	item5 = []
-
-	men_prod = SerfoProduct.objects.filter(super_category='M')
-	women_prod = SerfoProduct.objects.filter(super_category='W')
-	appliances_prod = SerfoProduct.objects.filter(super_category='A')
-	home_prod = SerfoProduct.objects.filter(super_category='H')
-	electronics_prod = SerfoProduct.objects.filter(super_category='E')
-
-	"""Men"""
-	for i in men_prod:
-		response1 = {}
-		response1['super_category'] = i.super_category
-		response1['id'] = i.product.id
-		response1['title'] = i.product.title
-		if i.product.offer_price != None:
-			response1['price'] = i.product.offer_price
-		else:
-			response1['price'] = i.product.sale_price
-		response1['link'] = i.product.link
-		temp_image = i.product.mainimage
-		response1['mainimage'] = temp_image
-		item1.append(response1)
-
-	"""Women"""
-	for j in women_prod:
-		response2 = {}
-		response2['super_category'] = j.super_category
-		response2['id'] = j.product.id
-		response2['title'] = j.product.title
-		if j.product.offer_price != None:
-			response2['price'] = j.product.offer_price
-		else:
-			response2['price'] = j.product.sale_price
-		response2['link'] = j.product.link
-		temp_image = j.product.mainimage
-		response2['mainimage'] = temp_image
-		item2.append(response2)
-
-	"""Appliances"""
-	for x in appliances_prod:
-		response3 = {}
-		response3['super_category'] = x.super_category
-		response3['id'] = x.product.id
-		response3['title'] = x.product.title
-		if x.product.offer_price != None:
-			response3['price'] = x.product.offer_price
-		else:
-			response3['price'] = x.product.sale_price
-		response3['link'] = x.product.link
-		response3['mainimage'] = x.product.mainimage
-		item3.append(response3)
-
-	"""Home"""
-	for y in home_prod:
-		response4 = {}
-		response4['super_category'] = y.super_category
-		response4['id'] = y.product.id
-		response4['title'] = y.product.title
-		if y.product.offer_price != None:
-			response4['price'] = y.product.offer_price
-		else:
-			response4['price'] = y.product.sale_price
-		response4['link'] = y.product.link
-		response4['mainimage'] = y.product.mainimage
-		item4.append(response4)
-
-	"""Electronics"""
-	for z in electronics_prod:
-		response5 = {}
-		response5['super_category'] = z.super_category
-		response5['id'] = z.product.id
-		response5['title'] = z.product.title
-		if z.product.offer_price != None:
-			response5['price'] = z.product.offer_price
-		else:
-			response5['price'] = z.product.sale_price
-		response5['link'] = z.product.link
-		response5['mainimage'] = z.product.mainimage
-		item5.append(response5)
 	navbar_category = Category.objects.all()
-	data1 = item1
-	data2 = item2
-	data3 = item3
-	data4 = item4
-	data5 = item5
 	cat = Category.objects.all()
 	subcat = SubCategory.objects.all()
+
 	try:
 		q = request.GET.get('q')
 	except:
@@ -142,11 +55,6 @@ def Search(request):
 					"subcats":subcat, 
 					"cats":cat,
 					"user" : request.user,
-					"data1" : data1,
-					"data2" : data2,
-					"data3" : data3,
-					"data4" : data4,
-					"data5" : data5, 
 					"navbar_category" : navbar_category,
 					"sl":sl,
 					'range': range(1,total_pages),
@@ -171,106 +79,22 @@ def HomePage(request):
 	products = Product.objects.filter(subcategory=subcategory)
 	news = New.objects.all().order_by('-id')
 
-	item1 = []
-	item2 = []
-	item3 = []
-	item4 = []
-	item5 = []
-
 	men_prod = SerfoProduct.objects.filter(super_category='M')
 	women_prod = SerfoProduct.objects.filter(super_category='W')
 	appliances_prod = SerfoProduct.objects.filter(super_category='A')
 	home_prod = SerfoProduct.objects.filter(super_category='H')
 	electronics_prod = SerfoProduct.objects.filter(super_category='E')
 
-	"""Men"""
-	for i in men_prod:
-		response1 = {}
-		response1['super_category'] = i.super_category
-		response1['id'] = i.product.id
-		response1['title'] = i.product.title
-		if i.product.offer_price != None:
-			response1['price'] = i.product.offer_price
-		else:
-			response1['price'] = i.product.sale_price
-		response1['link'] = i.product.link
-		temp_image = i.product.mainimage
-		response1['mainimage'] = temp_image
-		item1.append(response1)
-
-	"""Women"""
-	for j in women_prod:
-		response2 = {}
-		response2['super_category'] = j.super_category
-		response2['id'] = j.product.id
-		response2['title'] = j.product.title
-		if j.product.offer_price != None:
-			response2['price'] = j.product.offer_price
-		else:
-			response2['price'] = j.product.sale_price
-		response2['link'] = j.product.link
-		temp_image = j.product.mainimage
-		response2['mainimage'] = temp_image
-		item2.append(response2)
-
-	"""Appliances"""
-	for x in appliances_prod:
-		response3 = {}
-		response3['super_category'] = x.super_category
-		response3['id'] = x.product.id
-		response3['title'] = x.product.title
-		if x.product.offer_price != None:
-			response3['price'] = x.product.offer_price
-		else:
-			response3['price'] = x.product.sale_price
-		response3['link'] = x.product.link
-		response3['mainimage'] = x.product.mainimage
-		item3.append(response3)
-
-	"""Home"""
-	for y in home_prod:
-		response4 = {}
-		response4['super_category'] = y.super_category
-		response4['id'] = y.product.id
-		response4['title'] = y.product.title
-		if y.product.offer_price != None:
-			response4['price'] = y.product.offer_price
-		else:
-			response4['price'] = y.product.sale_price
-		response4['link'] = y.product.link
-		response4['mainimage'] = y.product.mainimage
-		item4.append(response4)
-
-	"""Electronics"""
-	for z in electronics_prod:
-		response5 = {}
-		response5['super_category'] = z.super_category
-		response5['id'] = z.product.id
-		response5['title'] = z.product.title
-		if z.product.offer_price != None:
-			response5['price'] = z.product.offer_price
-		else:
-			response5['price'] = z.product.sale_price
-		response5['link'] = z.product.link
-		response5['mainimage'] = z.product.mainimage
-		item5.append(response5)
-
-	data1 = item1
-	data2 = item2
-	data3 = item3
-	data4 = item4
-	data5 = item5
-
 	context = {
 				"category":category, 
 				"subcategory":subcategory, 
 				"products":products, 
 				"sub_category":sub_category, 
-				"data1" : data1,
-				"data2" : data2,
-				"data3" : data3,
-				"data4" : data4,
-				"data5" : data5, 
+				"data1" : men_prod,
+				"data2" : women_prod,
+				"data3" : appliances_prod,
+				"data4" : home_prod,
+				"data5" : electronics_prod, 
 				"navbar_category" : navbar_category,
 				"news" : news,
 				"user" : request.user,
@@ -545,102 +369,20 @@ def NewsPage(request, n_id):
 		id10 = int(link10.replace("http://54.191.242.230:8000/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product10 = Product.objects.get(pk=id10)
 
-	item1 = []
-	item2 = []
-	item3 = []
-	item4 = []
-	item5 = []
-
 	men_prod = SerfoProduct.objects.filter(super_category='M')
 	women_prod = SerfoProduct.objects.filter(super_category='W')
 	appliances_prod = SerfoProduct.objects.filter(super_category='A')
 	home_prod = SerfoProduct.objects.filter(super_category='H')
 	electronics_prod = SerfoProduct.objects.filter(super_category='E')
-	"""Men"""
-	for i in men_prod:
-		response1 = {}
-		response1['super_category'] = i.super_category
-		response1['id'] = i.product.id
-		response1['title'] = i.product.title
-		if i.product.offer_price != None:
-			response1['price'] = i.product.offer_price
-		else:
-			response1['price'] = i.product.sale_price
-		response1['link'] = i.product.link
-		temp_image = i.product.mainimage
-		response1['mainimage'] = temp_image
-		item1.append(response1)
-
-	"""Women"""
-	for j in women_prod:
-		response2 = {}
-		response2['super_category'] = j.super_category
-		response2['id'] = j.product.id
-		response2['title'] = j.product.title
-		if j.product.offer_price != None:
-			response2['price'] = j.product.offer_price
-		else:
-			response2['price'] = j.product.sale_price
-		response2['link'] = j.product.link
-		temp_image = j.product.mainimage
-		response2['mainimage'] = temp_image
-		item2.append(response2)
-
-	"""Appliances"""
-	for x in appliances_prod:
-		response3 = {}
-		response3['super_category'] = x.super_category
-		response3['id'] = x.product.id
-		response3['title'] = x.product.title
-		if x.product.offer_price != None:
-			response3['price'] = x.product.offer_price
-		else:
-			response3['price'] = x.product.sale_price
-		response3['link'] = x.product.link
-		response3['mainimage'] = x.product.mainimage
-		item3.append(response3)
-
-	"""Home"""
-	for y in home_prod:
-		response4 = {}
-		response4['super_category'] = y.super_category
-		response4['id'] = y.product.id
-		response4['title'] = y.product.title
-		if y.product.offer_price != None:
-			response4['price'] = y.product.offer_price
-		else:
-			response4['price'] = y.product.sale_price
-		response4['link'] = y.product.link
-		response4['mainimage'] = y.product.mainimage
-		item4.append(response4)
-
-	"""Electronics"""
-	for z in electronics_prod:
-		response5 = {}
-		response5['super_category'] = z.super_category
-		response5['id'] = z.product.id
-		response5['title'] = z.product.title
-		if z.product.offer_price != None:
-			response5['price'] = z.product.offer_price
-		else:
-			response5['price'] = z.product.sale_price
-		response5['link'] = z.product.link
-		response5['mainimage'] = z.product.mainimage
-		item5.append(response5)
-
-	data1 = item1
-	data2 = item2
-	data3 = item3
-	data4 = item4
-	data5 = item5
+	
 	context = {
 				"news":news, 
 				"navbar_category":navbar_category,
-				"data1" : data1,
-				"data2" : data2,
-				"data3" : data3,
-				"data4" : data4,
-				"data5" : data5,
+				"data1" : men_prod,
+				"data2" : women_prod,
+				"data3" : appliances_prod,
+				"data4" : home_prod,
+				"data5" : electronics_prod,
 				"product1" : product1,
 				"product2" : product2,
 				"product3" : product3,
@@ -666,103 +408,20 @@ def News(request):
 	navbar_category = Category.objects.all()
 	news = New.objects.all().order_by('-id')
 
-	item1 = []
-	item2 = []
-	item3 = []
-	item4 = []
-	item5 = []
-
 	men_prod = SerfoProduct.objects.filter(super_category='M')
 	women_prod = SerfoProduct.objects.filter(super_category='W')
 	appliances_prod = SerfoProduct.objects.filter(super_category='A')
 	home_prod = SerfoProduct.objects.filter(super_category='H')
 	electronics_prod = SerfoProduct.objects.filter(super_category='E')
-	"""Men"""
-	for i in men_prod:
-		response1 = {}
-		response1['super_category'] = i.super_category
-		response1['id'] = i.product.id
-		response1['title'] = i.product.title
-		if i.product.offer_price != None:
-			response1['price'] = i.product.offer_price
-		else:
-			response1['price'] = i.product.sale_price
-		response1['link'] = i.product.link
-		temp_image = i.product.mainimage
-		response1['mainimage'] = temp_image
-		item1.append(response1)
-
-	"""Women"""
-	for j in women_prod:
-		response2 = {}
-		response2['super_category'] = j.super_category
-		response2['id'] = j.product.id
-		response2['title'] = j.product.title
-		if j.product.offer_price != None:
-			response2['price'] = j.product.offer_price
-		else:
-			response2['price'] = j.product.sale_price
-		response2['link'] = j.product.link
-		temp_image = j.product.mainimage
-		response2['mainimage'] = temp_image
-		item2.append(response2)
-
-	"""Appliances"""
-	for x in appliances_prod:
-		response3 = {}
-		response3['super_category'] = x.super_category
-		response3['id'] = x.product.id
-		response3['title'] = x.product.title
-		if x.product.offer_price != None:
-			response3['price'] = x.product.offer_price
-		else:
-			response3['price'] = x.product.sale_price
-		response3['link'] = x.product.link
-		response3['mainimage'] = x.product.mainimage
-		item3.append(response3)
-
-	"""Home"""
-	for y in home_prod:
-		response4 = {}
-		response4['super_category'] = y.super_category
-		response4['id'] = y.product.id
-		response4['title'] = y.product.title
-		if y.product.offer_price != None:
-			response4['price'] = y.product.offer_price
-		else:
-			response4['price'] = y.product.sale_price
-		response4['link'] = y.product.link
-		response4['mainimage'] = y.product.mainimage
-		item4.append(response4)
-
-	"""Electronics"""
-	for z in electronics_prod:
-		response5 = {}
-		response5['super_category'] = z.super_category
-		response5['id'] = z.product.id
-		response5['title'] = z.product.title
-		if z.product.offer_price != None:
-			response5['price'] = z.product.offer_price
-		else:
-			response5['price'] = z.product.sale_price
-		response5['link'] = z.product.link
-		response5['mainimage'] = z.product.mainimage
-		item5.append(response5)
-
-	data1 = item1
-	data2 = item2
-	data3 = item3
-	data4 = item4
-	data5 = item5
 
 	context = {
 				"news":news, 
 				"navbar_category":navbar_category,
-				"data1" : data1,
-				"data2" : data2,
-				"data3" : data3,
-				"data4" : data4,
-				"data5" : data5,
+				"data1" : men_prod,
+				"data2" : women_prod,
+				"data3" : appliances_prod,
+				"data4" : home_prod,
+				"data5" : electronics_prod,
 				"news" : news,
 				"user" : request.user,
 				}
@@ -882,91 +541,6 @@ def logout_view(request):
 """========================"""
 """=====SERFO PRODUCTS====="""
 """========================"""
-
-@api_view(['GET','POST'])
-def getproducts(request):
-	"""Products to be sent to Serfo"""
-	item = []
-	men_prod = SerfoProduct.objects.filter(super_category='M')
-	women_prod = SerfoProduct.objects.filter(super_category='W')
-	appliances_prod = SerfoProduct.objects.filter(super_category='A')
-	home_prod = SerfoProduct.objects.filter(super_category='H')
-	electronics_prod = SerfoProduct.objects.filter(super_category='E')
-
-	"""Men"""
-	for i in men_prod:
-		response1 = {}
-		response1['super_category'] = i.super_category
-		response1['id'] = i.product.id
-		response1['title'] = i.product.title
-		if i.product.offer_price != None:
-			response1['price'] = i.product.offer_price
-		else:
-			response1['price'] = i.product.sale_price
-		response1['link'] = i.product.link
-		temp_image = i.product.mainimage
-		response1['mainimage'] = temp_image
-		item.append(response1)
-
-	"""Women"""
-	for j in women_prod:
-		response2 = {}
-		response2['super_category'] = j.super_category
-		response2['id'] = j.product.id
-		response2['title'] = j.product.title
-		if j.product.offer_price != None:
-			response2['price'] = j.product.offer_price
-		else:
-			response2['price'] = j.product.sale_price
-		response2['link'] = j.product.link
-		temp_image = j.product.mainimage
-		response2['mainimage'] = temp_image
-		item.append(response2)
-
-	"""Appliances"""
-	for x in appliances_prod:
-		response3 = {}
-		response3['super_category'] = x.super_category
-		response3['id'] = x.product.id
-		response3['title'] = x.product.title
-		if x.product.offer_price != None:
-			response3['price'] = x.product.offer_price
-		else:
-			response3['price'] = x.product.sale_price
-		response3['link'] = x.product.link
-		response3['mainimage'] = x.product.mainimage
-		item.append(response3)
-
-	"""Home"""
-	for y in home_prod:
-		response4 = {}
-		response4['super_category'] = y.super_category
-		response4['id'] = y.product.id
-		response4['title'] = y.product.title
-		if y.product.offer_price != None:
-			response4['price'] = y.product.offer_price
-		else:
-			response4['price'] = y.product.sale_price
-		response4['link'] = y.product.link
-		response4['mainimage'] = y.product.mainimage
-		item.append(response4)
-
-	"""Electronics"""
-	for z in electronics_prod:
-		response5 = {}
-		response5['super_category'] = z.super_category
-		response5['id'] = z.product.id
-		response5['title'] = z.product.title
-		if z.product.offer_price != None:
-			response5['price'] = z.product.offer_price
-		else:
-			response5['price'] = z.product.sale_price
-		response5['link'] = z.product.link
-		response5['mainimage'] = z.product.mainimage
-		item.append(response5)
-
-	data=item
-	return Response({"data":data, 'status':200})
 
 @api_view(['GET','POST'])
 def getmenproducts(request):

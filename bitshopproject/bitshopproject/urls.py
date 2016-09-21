@@ -38,7 +38,6 @@ urlpatterns = [
     url(r'^logout/$', views.logout_view, name='logout'),
     url(r'^register/$', views.register_view, name='signup'),
     url(r'^read/', api.read_file, name='read_file'),
-    url(r'^getproducts/', views.getproducts, name='getproducts'),
     url(r'^accounts/profile/$', views.redirection, name='redirection'),
 
     url(r'^getmenproducts/', views.getmenproducts, name='getmenproducts'),

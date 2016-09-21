@@ -22,15 +22,13 @@
 		</head>
 		
 		<body>
-			<!-- Google Tag Manager -->
- +<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TMWGDS"
- +height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
- +<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
- +new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
- +j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
- +'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
- +})(window,document,'script','dataLayer','GTM-TMWGDS');</script>
- +<!-- End Google Tag Manager -->
+			<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TMWGDS"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TMWGDS');</script>
 			<div class="wrapper" id="wrapper">
 				<header>
 					<div class="header-main">
@@ -160,13 +158,17 @@
 										<div class="panel panel-default">
 											<div class="panel-body">Top 3 popular Products in Men</div>
 											{% for data in data1|slice:":3" %}
-											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
+											<a href="{% url 'productdetail' data.product.id %}" style="text-decoration: none;">
 												<div class="thumbnail">
-														<img src={{data.mainimage}} alt="item-imgs"/>
+														<img src={{data.product.mainimage}} alt="item-imgs"/>
 													
 													<div class="caption announce">
-														<a href="{% url 'productdetail' data.id %}"><h5>{{data.title}}</h5></a>	
-														<h5> &#8377; {{data.price}} </h5>
+														<a href="{% url 'productdetail' data.product.id %}"><h5>{{data.product.title}}</h5></a>	
+														{% if data.product.offer_price %}
+															<h5> &#8377; {{data.product.offer_price}} </h5>
+														{% else %}
+															<h5> &#8377; {{data.product.sale_price}} </h5>
+														{% endif %}
 													</div>
 												</div>
 											</a>
@@ -179,13 +181,17 @@
 										<div class="panel panel-default">
 											<div class="panel-body">Top 3 popular Products in Women</div>
 											{% for data in data2|slice:":3" %}
-											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
+											<a href="{% url 'productdetail' data.product.id %}" style="text-decoration: none;">
 												<div class="thumbnail">
-														<img src={{data.mainimage}} alt="item-imgs"/>
+														<img src={{data.product.mainimage}} alt="item-imgs"/>
 													
 													<div class="caption announce">
-														<a href="{% url 'productdetail' data.id %}"><h5>{{data.title}}</h5></a>	
-														<h5> &#8377; {{data.price}} </h5>
+														<a href="{% url 'productdetail' data.product.id %}"><h5>{{data.product.title}}</h5></a>	
+														{% if data.product.offer_price %}
+															<h5> &#8377; {{data.product.offer_price}} </h5>
+														{% else %}
+															<h5> &#8377; {{data.product.sale_price}} </h5>
+														{% endif %}
 													</div>
 												</div>
 											</a>
@@ -198,13 +204,17 @@
 										<div class="panel panel-default">
 											<div class="panel-body">Top 3 popular Products in Appliances</div>
 											{% for data in data3|slice:":3" %}
-											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
+											<a href="{% url 'productdetail' data.product.id %}" style="text-decoration: none;">
 												<div class="thumbnail">
-														<img src={{data.mainimage}} alt="item-imgs"/>
+														<img src={{data.product.mainimage}} alt="item-imgs"/>
 													
 													<div class="caption announce">
-														<a href="{% url 'productdetail' data.id %}"><h5>{{data.title}}</h5></a>	
-														<h5> &#8377; {{data.price}} </h5>
+														<a href="{% url 'productdetail' data.product.id %}"><h5>{{data.product.title}}</h5></a>	
+														{% if data.product.offer_price %}
+															<h5> &#8377; {{data.product.offer_price}} </h5>
+														{% else %}
+															<h5> &#8377; {{data.product.sale_price}} </h5>
+														{% endif %}
 													</div>
 												</div>
 											</a>
@@ -217,13 +227,17 @@
 										<div class="panel panel-default">
 											<div class="panel-body">Top 3 popular Products in Home</div>
 											{% for data in data4|slice:":3" %}
-											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
+											<a href="{% url 'productdetail' data.product.id %}" style="text-decoration: none;">
 												<div class="thumbnail">
-														<img src={{data.mainimage}} alt="item-imgs"/>
+														<img src={{data.product.mainimage}} alt="item-imgs"/>
 													
 													<div class="caption announce">
-														<a href="{% url 'productdetail' data.id %}"><h5>{{data.title}}</h5></a>	
-														<h5> &#8377; {{data.price}} </h5>
+														<a href="{% url 'productdetail' data.product.id %}"><h5>{{data.product.title}}</h5></a>	
+														{% if data.product.offer_price %}
+															<h5> &#8377; {{data.product.offer_price}} </h5>
+														{% else %}
+															<h5> &#8377; {{data.product.sale_price}} </h5>
+														{% endif %}
 													</div>
 												</div>
 											</a>
@@ -236,13 +250,17 @@
 										<div class="panel panel-default">
 											<div class="panel-body">Top 3 popular Products in Electronics</div>
 											{% for data in data5|slice:":3" %}
-											<a href="{% url 'productdetail' data.id %}" style="text-decoration: none;">
+											<a href="{% url 'productdetail' data.product.id %}" style="text-decoration: none;">
 												<div class="thumbnail">
-														<img src={{data.mainimage}} alt="item-imgs"/>
+														<img src={{data.product.mainimage}} alt="item-imgs"/>
 													
 													<div class="caption announce">
-														<a href="{% url 'productdetail' data.id %}"><h5>{{data.title}}</h5></a>	
-														<h5> &#8377; {{data.price}} </h5>
+														<a href="{% url 'productdetail' data.product.id %}"><h5>{{data.product.title}}</h5></a>	
+														{% if data.product.offer_price %}
+															<h5> &#8377; {{data.product.offer_price}} </h5>
+														{% else %}
+															<h5> &#8377; {{data.product.sale_price}} </h5>
+														{% endif %}
 													</div>
 												</div>
 											</a>
