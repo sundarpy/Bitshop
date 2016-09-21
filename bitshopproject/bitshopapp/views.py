@@ -330,43 +330,43 @@ def NewsPage(request, n_id):
 
 	if news.product_link1:
 		link1 = str(news.product_link1)
-		id1 = int(link1.replace("http://54.191.242.230:8000/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		id1 = int(link1.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product1 = Product.objects.get(pk=id1)
 	if news.product_link2:
 		link2 = news.product_link2
-		id2 = int(link2.replace("http://54.191.242.230:8000/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		id2 = int(link2.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product2 = Product.objects.get(pk=id2)
 	if news.product_link3:
 		link3 = news.product_link3
-		id3 = int(link3.replace("http://54.191.242.230:8000/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		id3 = int(link3.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product3 = Product.objects.get(pk=id3)
 	if news.product_link4:
 		link4 = news.product_link4
-		id4 = int(link4.replace("http://54.191.242.230:8000/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		id4 = int(link4.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product4 = Product.objects.get(pk=id4)
 	if news.product_link5:
 		link5 = news.product_link5
-		id5 = int(link5.replace("http://54.191.242.230:8000/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		id5 = int(link5.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product5 = Product.objects.get(pk=id5)
 	if news.product_link6:
 		link6 = news.product_link6
-		id6 = int(link6.replace("http://54.191.242.230:8000/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		id6 = int(link6.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product6 = Product.objects.get(pk=id6)
 	if news.product_link7:
 		link7 = news.product_link7
-		id7 = int(link7.replace("http://54.191.242.230:8000/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		id7 = int(link7.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product7 = Product.objects.get(pk=id7)
 	if news.product_link8:
 		link8 = news.product_link8
-		id8 = int(link8.replace("http://54.191.242.230:8000/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		id8 = int(link8.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product8 = Product.objects.get(pk=id8)
 	if news.product_link9:
 		link9 = news.product_link9
-		id9 = int(link9.replace("http://54.191.242.230:8000/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		id9 = int(link9.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product9 = Product.objects.get(pk=id9)
 	if news.product_link10:
 		link10 = news.product_link10
-		id10 = int(link10.replace("http://54.191.242.230:8000/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		id10 = int(link10.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product10 = Product.objects.get(pk=id10)
 
 	men_prod = SerfoProduct.objects.filter(super_category='M')
