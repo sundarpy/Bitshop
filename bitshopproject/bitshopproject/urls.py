@@ -46,5 +46,7 @@ urlpatterns = [
     url(r'^gethomeproducts/', views.gethomeproducts, name='gethomeproducts'),
     url(r'^getelectronicproducts/', views.getelectronicproducts, name='getelectronicproducts'),
 
+    url(r'^getproducts/', views.getproducts, name='getproducts'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += staticfiles_urlpatterns()
