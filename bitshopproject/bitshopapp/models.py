@@ -192,6 +192,7 @@ class SerfoProduct(models.Model):
 		('E', 'Electronics'),
 	)
 	super_category = models.CharField(max_length=2, choices=PRODUCT_CATEGORY, blank=True, null=True)
+	date_modified = models.DateTimeField(default=datetime.datetime.now)
 
 	def __str__(self):
 		return str(self.product.title)

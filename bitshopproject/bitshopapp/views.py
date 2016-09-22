@@ -15,6 +15,12 @@ from rest_framework.response import Response
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
+from django.db.models.aggregates import Count
+from random import randint
+import datetime
+from datetime import date, timedelta
+from itertools import chain
+import json
 
 """==============================="""
 """=========SEARCH METHOD========="""
@@ -545,6 +551,25 @@ def logout_view(request):
 @api_view(['GET','POST'])
 def getmenproducts(request):
 	"""Products to be sent to Serfo"""
+	now = datetime.datetime.now().replace(tzinfo=None)
+	current = SerfoProduct.objects.filter(super_category='M')
+
+	for i in current:
+		n = i.date_modified.replace(tzinfo=None)
+		diff = now-n
+
+		if diff > datetime.timedelta(hours=24):
+			SerfoProduct.objects.filter(super_category='M').delete()
+			list1 = Product.objects.filter(subcategory__subcategory_name="Men").order_by('?')[:3]
+			list2 = Product.objects.filter(subcategory__subcategory_name="Men's Watches").order_by('?')[:2]
+			list3 = Product.objects.filter(subcategory__subcategory_name="Formals & Lace-ups").order_by('?')[:1]
+			list4 = Product.objects.filter(subcategory__subcategory_name="Men's Grooming").order_by('?')[:1]
+			result_list = list(chain(list1, list2, list3, list4))
+
+			for x in result_list:
+				serfoproducts = SerfoProduct(super_category='M', product=x)
+				serfoproducts.save()
+
 	item = []
 	men_prod = SerfoProduct.objects.filter(super_category='M')
 
@@ -569,6 +594,25 @@ def getmenproducts(request):
 @api_view(['GET','POST'])
 def getwomenproducts(request):
 	"""Products to be sent to Serfo"""
+	now = datetime.datetime.now().replace(tzinfo=None)
+	current = SerfoProduct.objects.filter(super_category='W')
+
+	for i in current:
+		n = i.date_modified.replace(tzinfo=None)
+		diff = now-n
+
+		if diff > datetime.timedelta(hours=24):
+			SerfoProduct.objects.filter(super_category='W').delete()
+			list1 = Product.objects.filter(subcategory__subcategory_name="Women").order_by('?')[:3]
+			list2 = Product.objects.filter(subcategory__subcategory_name="Women's Watches").order_by('?')[:2]
+			list3 = Product.objects.filter(subcategory__subcategory_name="Women's Jewellery").order_by('?')[:1]
+			list4 = Product.objects.filter(subcategory__subcategory_name="Ballerinas").order_by('?')[:1]
+			result_list = list(chain(list1, list2, list3, list4))
+
+			for x in result_list:
+				serfoproducts = SerfoProduct(super_category='W', product=x)
+				serfoproducts.save()
+
 	item = []
 	women_prod = SerfoProduct.objects.filter(super_category='W')
 
@@ -593,6 +637,23 @@ def getwomenproducts(request):
 @api_view(['GET','POST'])
 def getappliancesproducts(request):
 	"""Products to be sent to Serfo"""
+	now = datetime.datetime.now().replace(tzinfo=None)
+	current = SerfoProduct.objects.filter(super_category='A')
+
+	for i in current:
+		n = i.date_modified.replace(tzinfo=None)
+		diff = now-n
+
+		if diff > datetime.timedelta(hours=24):
+			SerfoProduct.objects.filter(super_category='A').delete()
+			list1 = Product.objects.filter(subcategory__subcategory_name="Kitchen & Home Appliances").order_by('?')[:3]
+			list2 = Product.objects.filter(subcategory__subcategory_name="Large Appliances").order_by('?')[:4]
+			result_list = list(chain(list1, list2))
+
+			for x in result_list:
+				serfoproducts = SerfoProduct(super_category='A', product=x)
+				serfoproducts.save()
+
 	item = []
 	appliances_prod = SerfoProduct.objects.filter(super_category='A')
 
@@ -616,6 +677,24 @@ def getappliancesproducts(request):
 @api_view(['GET','POST'])
 def gethomeproducts(request):
 	"""Products to be sent to Serfo"""
+	now = datetime.datetime.now().replace(tzinfo=None)
+	current = SerfoProduct.objects.filter(super_category='H')
+
+	for i in current:
+		n = i.date_modified.replace(tzinfo=None)
+		diff = now-n
+
+		if diff > datetime.timedelta(hours=24):
+			SerfoProduct.objects.filter(super_category='H').delete()
+			list1 = Product.objects.filter(subcategory__subcategory_name="Decor & Lighting").order_by('?')[:3]
+			list2 = Product.objects.filter(subcategory__subcategory_name="Kitchen & Dining").order_by('?')[:2]
+			list3 = Product.objects.filter(subcategory__subcategory_name="Home Improvement").order_by('?')[:2]
+			result_list = list(chain(list1, list2, list3))
+
+			for x in result_list:
+				serfoproducts = SerfoProduct(super_category='H', product=x)
+				serfoproducts.save()
+
 	item = []
 	home_prod = SerfoProduct.objects.filter(super_category='H')
 
@@ -639,6 +718,24 @@ def gethomeproducts(request):
 @api_view(['GET','POST'])
 def getelectronicproducts(request):
 	"""Products to be sent to Serfo"""
+	now = datetime.datetime.now().replace(tzinfo=None)
+	current = SerfoProduct.objects.filter(super_category='E')
+
+	for i in current:
+		n = i.date_modified.replace(tzinfo=None)
+		diff = now-n
+
+		if diff > datetime.timedelta(hours=24):
+			SerfoProduct.objects.filter(super_category='E').delete()
+			list1 = Product.objects.filter(subcategory__subcategory_name="Android Mobiles").order_by('?')[:3]
+			list2 = Product.objects.filter(subcategory__subcategory_name="Tablets").order_by('?')[:2]
+			list3 = Product.objects.filter(subcategory__subcategory_name="Laptops").order_by('?')[:1]
+			list4 = Product.objects.filter(subcategory__subcategory_name="Digital SLRs").order_by('?')[:1]
+			result_list = list(chain(list1, list2, list3, list4))
+
+			for x in result_list:
+				serfoproducts = SerfoProduct(super_category='E', product=x)
+				serfoproducts.save()
 	item = []
 	electronics_prod = SerfoProduct.objects.filter(super_category='E')
 
