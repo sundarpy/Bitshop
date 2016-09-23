@@ -17,11 +17,12 @@
 /* BASIC TYPOGRAPHY */
 /*--------------------*/
 
-@import 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,600i,700';
+@import 'https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700';
+
 body,html {
 	margin:0px;
 	padding: 0px;
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'PT Sans', sans-serif;
 	font-size: 100%;
 	overflow-x: hidden;
 	color: #272727;
@@ -154,10 +155,10 @@ navbar start
     border-radius: 0px 4px 4px 0;
 }
 .btn-default {
-   color: #fff;
+  /* color: #fff;
     background-color: #4D87EF;
     border-color: #ccc;
-    padding: 0 2px;
+    padding: 0 2px;*/
 }
 .btn-default:hover {
     color: #333;
@@ -250,10 +251,14 @@ navbar start
   text-decoration: underline;
 }  
   
-@media (max-width: 767px) {
+/*@media (max-width: 767px) {
+    .navbar-right .nav>li {
+        position: relative !important;
+        display: inline-block !important;
+    }*/
 
   .navbar-nav  {
-     display: inline;
+    /* display: inline;*/
   }
   .navbar-default .navbar-brand {
     display: inline;
@@ -278,7 +283,7 @@ navbar start
    }
    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-     background-color: #ccc;
+     /*background-color: #ccc;*/
    }
 
    .navbar-nav .open .dropdown-menu {
@@ -1018,6 +1023,7 @@ News Details css Start
     font-size: 14px;
     line-height: 20px;
     font-weight: 400;
+    text-align: justify;
 }
 /*comment css*/
 
@@ -1291,7 +1297,7 @@ Footer css End
 /* Custom, iPhone Retina */ 
 @media only screen and (min-width : 320px) {
     .navbar-header .navbar-brand {
-        margin: 0 28px;
+        /*margin: 0 28px;*/
     }
     .search-top {
         display: table-cell;
@@ -1327,15 +1333,16 @@ Footer css End
         margin-top: 6px;
     }
     .shopping-footer {
-        padding: 0 80px;
+        padding: 0 20px;
         border-bottom: 1px solid #ddd;
 
     }
     .shopping-footer  h4 {
-        text-align: center;
+        text-align: left;
     }
     .about-shopping .contents {
         padding: 0 20px;
+        color: #000;
     }
     
    /* .main-wrap-details {
@@ -1377,7 +1384,7 @@ Footer css End
         display: block;
         text-decoration: none !important;
         position: relative;
-        white-space: normal;
+        white-space: nowrap;
         width: 100%;
         text-overflow: ellipsis;
     }
@@ -1395,8 +1402,109 @@ Footer css End
     .nav>li::after {
         visibility: hidden;
     }
+    .navbar-default {
+        background-color: #fff;
+        border-color: transparent;
+        border-radius: 0;
+        margin-bottom: 0px;
+        padding: 0px 20px;
+    }
+     .navbar-default .navbar-form {
+        border-color: transparent;
+    }
+    .nav>li {
+        position: relative !important;
+        display: inline-block !important;
+    }
+    .navbar-right li {
+        padding-left: 12px !important;
+    }
+    .navbar-default .navbar-toggle {
+        border-color: #ddd;
+        background: #bbb !important;
+    }
+     .nav-listings .navbar-nav>li {
+        display: block!important;
+        position: relative;
+        x-overflow:scroll;
+     }
+    .nav-listings .navbar-nav>li>a {
+        color: #000;
+        background-color: #ddd;
+        font-size: 12px;
+        line-height: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none !important;
+        text-transform: uppercase;
+    }
+    .navbar-default .navbar-brand {
+        display: inline;
+        padding-left: 22px !important;
+    }
+    /*.navbar-right li {
+        display: block!important;
+    }*/
+     .main-wrap-details {
+        width: 320px;
+        margin: 0 auto;
+        /* margin-top: 40px; */
+    }
+    .genuine-products .artical-base {
+        padding: 12px;
+        border: 1px solid #ddd;
+        margin-right: 0px;
+        /* background: #fff; */
+    }
+    .col-xs-6 {
+        width: 46%;
+        float: left;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
 
 }
+
+/*nav slider*/
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #ddd;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s
+}
+
+.sidenav a:hover, .offcanvas a:focus{
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 28px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 12px;}
+}
+/*nav slide end*/
 
 /* Extra Small Devices, Phones */ 
 @media only screen and (min-width : 480px) {
@@ -1422,6 +1530,13 @@ Footer css End
         white-space: normal;
         width: 100%;
         text-overflow: ellipsis;
+    }
+    .navbar-default {
+        background-color: #fff;
+        border-color: #000;
+        border-radius: 0;
+        margin-bottom: 0px;
+        padding: 0px 20px;
     }
   }
 
@@ -1449,6 +1564,13 @@ Footer css End
         white-space: nowrap;
         width: 100%;
         text-overflow: ellipsis;
+    }
+    .navbar-default {
+        background-color: #fff;
+        border-color: #000;
+        border-radius: 0;
+        margin-bottom: 0px;
+        padding: 0px 20px;
     }
     
 }
@@ -1524,5 +1646,58 @@ Footer css End
     }
     .nav>li::after {
         visibility: visible;
+    }
+    .navbar-form .input-group {
+        width: 750px !important;
+         max-width: 100% !important;
+    }
+    .navbar-default {
+        background-color: #fff;
+        border-color: #ddd;
+        border-radius: 0;
+        margin-bottom: 0px;
+        padding: 0 62px;
+    }
+    .listing .navbar-nav>li>a {
+        color: #000;
+        background-color: transparent;
+        font-size: 9px;
+        line-height: 20px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none !important;
+        text-transform: uppercase;
+    }
+    .navbar-default .navbar-brand {
+        display: inline;
+        padding-left: 0px !important;
+    }
+    .navbar-right {
+        float: none!important;
+        margin-right: 0;
+        vertical-align: bottom;
+        padding-top: 12px;
+    }
+    .navbar-right li {
+        padding-left: 0px !important;
+    }
+    .main-wrap-details {
+        width: 650px;
+        margin: 0 auto;
+        /* margin-top: 40px; */
+    }
+    .genuine-products .artical-base {
+        padding: 12px;
+        border: 1px solid #ddd;
+        margin-right: 20px;
+        /* background: #fff; */
+    }
+    .col-md-4 {
+        width: 33.33333333%;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+    .about-shopping p {
+        color: #5FBBF8;
     }
 }
