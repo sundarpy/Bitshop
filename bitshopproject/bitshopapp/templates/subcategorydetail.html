@@ -42,60 +42,87 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 				<header>
 					<div class="header-main">
 						<nav class="navbar navbar-default">
-							<div class="container-fluid">
-								<!-- Brand and toggle get grouped for better mobile display -->
-								<div class="navbar-header">
-								  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-									<span class="sr-only">Toggle navigation</span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-								  </button>
-								  <a class="navbar-brand" href="{% url 'home' %}"><b>Serfo Shopping</b></a>
-								</div>
-								<div class="search-top">
-									<form class="navbar-form" action="{% url 'results'  %}" method="get" role="search">
-										<div class="input-group">
+						  	<div class="container-fluid">
+							    <!-- Brand and toggle get grouped for better mobile display -->
+							    <div class="navbar-header">
+							      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+							        <span class="sr-only">Toggle navigation</span>
+							        <span class="icon-bar"></span>
+							        <span class="icon-bar"></span>
+							        <span class="icon-bar"></span>
+							      </button>
+							      	<span id="mySidenav" class="sidenav" style="">
+									  	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="color: #000;">&times;</a>
+									  	<div class="listing nav-listings">
+											<div class="container-fluid">
+												<nav class="navbar navbar-default navbar-static-top" role="navigation" style="background-color: #ddd;">
+										            <div class="collapse navbar-collapse" id="navbar-collapse-1" style="display: block;">
+										                <ul class="nav navbar-nav">
+										                    
+										                   
+										                    {% for cat in navbar_category %}
+															<li class="item-lis first"><a href="{% url 'categorydetail' cat.id %}">{{cat.category_name}}</a></li>
+															{% endfor %}
+										                </ul>
+										            </div>
+										        </nav>
+											</div>
+										</div>
+									</span>
+							       <a class="" href="#" style="text-decoration: none;"><span class="hidden-lg hidden-md pull-left" style="padding-left: 18px;font-size:18px;line-height:50px;color: #000;cursor:pointer" onclick="openNav()">&#9776;</span></a>
+							       &nbsp; 
+							       <a class="navbar-brand" href="{% url 'home' %}"><b>Serfo Shopping</b></a>
+							    </div>
+
+							    <!-- Collect the nav links, forms, and other content for toggling -->
+							    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							      <!-- <ul class="nav navbar-nav">
+							        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+							        <li><a href="#">Link</a></li>
+							      </ul> -->
+							      	<form class="navbar-form navbar-left" action="{% url 'results' %}" method="get" role="search">
+							         	<div class="input-group">
 											<input class="form-control" type="search" value="Search millions of products from leading online stores." name="q" placeholder="Search millions of products from leading online stores." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search millions of products from leading online stores.';}" required="">
 											<span class="input-group-btn" style="text-align: left;">
 												<button type="search" value="Search" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></button>
 										  	</span>
 										</div>
-										{% if user.is_authenticated %}
-										<span class="user-log pull-right btn">
-											{% if user.socialaccount_set.all.0.get_avatar_url %}
-											<img src="{{ user.socialaccount_set.all.0.get_avatar_url }}"> &nbsp;
+							      	</form>
+
+							      <ul class="nav navbar-nav navbar-right">
+							      	{% if user.is_authenticated %}
+									<li>
+										<span class="pu">
+								        	{% if user.socialaccount_set.all.0.get_avatar_url %}
+											<a href="{% url 'logout' %}"><img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" style="width:28px;max-width: 100%;border-radius: 100%;"></a> &nbsp;
 											{% else %}
-											<img src="http://minorschool.net/user-avatar/avatar-placeholder.jpg"> &nbsp; 
+											<a href="{% url 'logout' %}"><img src="http://minorschool.net/user-avatar/avatar-placeholder.jpg" style="width:28px;max-width: 100%;border-radius: 100%;"></a> &nbsp; 
 											{% endif %}
-											<span class="dropdown-submenu">
-												<span class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-													{{ user.username }}
-													<span class="caret"></span>
-												</span>
-												<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-													<li><a href="{% url 'logout' %}">Logout</a></li>
-												</ul>
-											</span>
 										</span>
-										{% else %}
-										<a href="{% url 'login' %}"><span class="user-log pull-right btn"><img src="http://minorschool.net/user-avatar/avatar-placeholder.jpg"> &nbsp;  &nbsp;  &nbsp;
-											<span class="dropdown user-nme">
-												<span class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-													Login
-												</span>
-											</span>
-										</span></a>
-										{% endif %}
-									</form>
-								</div>
-							</div>
+										<span class="su">
+							       			<a href="{% url 'logout' %}" style="text-decoration: none;color: #000;">{{ user.username }} &nbsp; ( <b>Logout</b> )</a>
+							       		</span>
+							       	</li>
+							        {% else %}
+							        <li>
+							        	<span class="pu">
+							        		<a href="{% url 'login' %}"><img src="http://minorschool.net/user-avatar/avatar-placeholder.jpg" style="width:28px;max-width: 100%;border-radius: 100%;"></a>
+							       		</span>
+							       		&nbsp; &nbsp; 
+							       		<span class="su">
+							       			<a href="{% url 'login' %}" style="text-decoration: none;color: #000;">Login</a>
+							       		</span>
+							       	</li>
+							        {% endif %}
+							      </ul>
+							    </div><!-- /.navbar-collapse -->
+						  	</div><!-- /.container-fluid -->
 						</nav>
 					</div>
-					<div class="listing">
+					<div class="listing hidden-sm hidden-xs">
 						<div class="container-fluid">
 							<nav class="navbar navbar-default navbar-static-top" role="navigation">
-					            <div class="collapse navbar-collapse" id="navbar-collapse-1">
+					            <div class="collapse navbar-collapse" id="navbar-collapse-1" style="display: block;">
 					                <ul class="nav navbar-nav">
 					                    
 					                    <li class="dropdown main-drp">
@@ -120,7 +147,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 										<li class="item-lis first"><a href="{% url 'categorydetail' cat.id %}">{{cat.category_name}}</a></li>
 										{% endfor %}
 					                </ul>
-					            </div><!-- /.navbar-collapse -->
+					            </div>
 					        </nav>
 						</div>
 					</div>
