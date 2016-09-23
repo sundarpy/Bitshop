@@ -17,11 +17,12 @@
 /* BASIC TYPOGRAPHY */
 /*--------------------*/
 
-@import 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,600i,700';
+@import 'https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700';
+
 body,html {
 	margin:0px;
 	padding: 0px;
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'PT Sans', sans-serif;
 	font-size: 100%;
 	overflow-x: hidden;
 	color: #272727;
@@ -1022,6 +1023,7 @@ News Details css Start
     font-size: 14px;
     line-height: 20px;
     font-weight: 400;
+    text-align: justify;
 }
 /*comment css*/
 
@@ -1331,15 +1333,16 @@ Footer css End
         margin-top: 6px;
     }
     .shopping-footer {
-        padding: 0 80px;
+        padding: 0 20px;
         border-bottom: 1px solid #ddd;
 
     }
     .shopping-footer  h4 {
-        text-align: center;
+        text-align: left;
     }
     .about-shopping .contents {
         padding: 0 20px;
+        color: #000;
     }
     
    /* .main-wrap-details {
@@ -1381,7 +1384,7 @@ Footer css End
         display: block;
         text-decoration: none !important;
         position: relative;
-        white-space: normal;
+        white-space: nowrap;
         width: 100%;
         text-overflow: ellipsis;
     }
@@ -1442,6 +1445,23 @@ Footer css End
     /*.navbar-right li {
         display: block!important;
     }*/
+     .main-wrap-details {
+        width: 320px;
+        margin: 0 auto;
+        /* margin-top: 40px; */
+    }
+    .genuine-products .artical-base {
+        padding: 12px;
+        border: 1px solid #ddd;
+        margin-right: 0px;
+        /* background: #fff; */
+    }
+    .col-xs-6 {
+        width: 46%;
+        float: left;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
 
 }
 
@@ -1660,5 +1680,24 @@ Footer css End
     }
     .navbar-right li {
         padding-left: 0px !important;
+    }
+    .main-wrap-details {
+        width: 650px;
+        margin: 0 auto;
+        /* margin-top: 40px; */
+    }
+    .genuine-products .artical-base {
+        padding: 12px;
+        border: 1px solid #ddd;
+        margin-right: 20px;
+        /* background: #fff; */
+    }
+    .col-md-4 {
+        width: 33.33333333%;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+    .about-shopping p {
+        color: #5FBBF8;
     }
 }
