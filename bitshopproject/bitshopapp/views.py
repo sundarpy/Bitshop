@@ -799,10 +799,10 @@ def getproducts(request):
 
 		if diff > datetime.timedelta(hours=24):
 			SerfoProduct.objects.filter(super_category='M').delete()
-			list1 = Product.objects.filter(subcategory__subcategory_name="Men").order_by('?')[:3]
-			list2 = Product.objects.filter(subcategory__subcategory_name="Men's Watches").order_by('?')[:2]
-			list3 = Product.objects.filter(subcategory__subcategory_name="Formals & Lace-ups").order_by('?')[:1]
-			list4 = Product.objects.filter(subcategory__subcategory_name="Men's Grooming").order_by('?')[:1]
+			list1 = Product.objects.filter(subcategory__subcategory_name="Men").exclude(offer_price=None, sale_price=None).order_by('?')[:3]
+			list2 = Product.objects.filter(subcategory__subcategory_name="Men's Watches").exclude(offer_price=None, sale_price=None).order_by('?')[:2]
+			list3 = Product.objects.filter(subcategory__subcategory_name="Formals & Lace-ups").exclude(offer_price=None, sale_price=None).order_by('?')[:1]
+			list4 = Product.objects.filter(subcategory__subcategory_name="Men's Grooming").exclude(offer_price=None, sale_price=None).order_by('?')[:1]
 			result_list = list(chain(list1, list2, list3, list4))
 
 			for p in result_list:
@@ -815,10 +815,10 @@ def getproducts(request):
 
 		if diff > datetime.timedelta(hours=24):
 			SerfoProduct.objects.filter(super_category='W').delete()
-			list1 = Product.objects.filter(subcategory__subcategory_name="Women").order_by('?')[:3]
-			list2 = Product.objects.filter(subcategory__subcategory_name="Women's Watches").order_by('?')[:2]
-			list3 = Product.objects.filter(subcategory__subcategory_name="Women's Jewellery").order_by('?')[:1]
-			list4 = Product.objects.filter(subcategory__subcategory_name="Ballerinas").order_by('?')[:1]
+			list1 = Product.objects.filter(subcategory__subcategory_name="Women").exclude(offer_price=None, sale_price=None).order_by('?')[:3]
+			list2 = Product.objects.filter(subcategory__subcategory_name="Women's Watches").exclude(offer_price=None, sale_price=None).order_by('?')[:2]
+			list3 = Product.objects.filter(subcategory__subcategory_name="Women's Jewellery").exclude(offer_price=None, sale_price=None).order_by('?')[:1]
+			list4 = Product.objects.filter(subcategory__subcategory_name="Ballerinas").exclude(offer_price=None, sale_price=None).order_by('?')[:1]
 			result_list = list(chain(list1, list2, list3, list4))
 
 			for p in result_list:
@@ -831,8 +831,8 @@ def getproducts(request):
 
 		if diff > datetime.timedelta(hours=24):
 			SerfoProduct.objects.filter(super_category='A').delete()
-			list1 = Product.objects.filter(subcategory__subcategory_name="Kitchen & Home Appliances").order_by('?')[:3]
-			list2 = Product.objects.filter(subcategory__subcategory_name="Large Appliances").order_by('?')[:4]
+			list1 = Product.objects.filter(subcategory__subcategory_name="Kitchen & Home Appliances").exclude(offer_price=None, sale_price=None).order_by('?')[:3]
+			list2 = Product.objects.filter(subcategory__subcategory_name="Large Appliances").exclude(offer_price=None, sale_price=None).order_by('?')[:4]
 			result_list = list(chain(list1, list2))
 
 			for p in result_list:
@@ -845,9 +845,9 @@ def getproducts(request):
 
 		if diff > datetime.timedelta(hours=24):
 			SerfoProduct.objects.filter(super_category='H').delete()
-			list1 = Product.objects.filter(subcategory__subcategory_name="Decor & Lighting").order_by('?')[:3]
-			list2 = Product.objects.filter(subcategory__subcategory_name="Kitchen & Dining").order_by('?')[:2]
-			list3 = Product.objects.filter(subcategory__subcategory_name="Home Improvement").order_by('?')[:2]
+			list1 = Product.objects.filter(subcategory__subcategory_name="Decor & Lighting").exclude(offer_price=None, sale_price=None).order_by('?')[:3]
+			list2 = Product.objects.filter(subcategory__subcategory_name="Kitchen & Dining").exclude(offer_price=None, sale_price=None).order_by('?')[:2]
+			list3 = Product.objects.filter(subcategory__subcategory_name="Home Improvement").exclude(offer_price=None, sale_price=None).order_by('?')[:2]
 			result_list = list(chain(list1, list2, list3))
 
 			for p in result_list:
@@ -860,10 +860,10 @@ def getproducts(request):
 
 		if diff > datetime.timedelta(hours=24):
 			SerfoProduct.objects.filter(super_category='E').delete()
-			list1 = Product.objects.filter(subcategory__subcategory_name="Android Mobiles").order_by('?')[:3]
-			list2 = Product.objects.filter(subcategory__subcategory_name="Tablets").order_by('?')[:2]
-			list3 = Product.objects.filter(subcategory__subcategory_name="Laptops").order_by('?')[:1]
-			list4 = Product.objects.filter(subcategory__subcategory_name="Digital SLRs").order_by('?')[:1]
+			list1 = Product.objects.filter(subcategory__subcategory_name="Android Mobiles").exclude(offer_price=None, sale_price=None).order_by('?')[:3]
+			list2 = Product.objects.filter(subcategory__subcategory_name="Tablets").exclude(offer_price=None, sale_price=None).order_by('?')[:2]
+			list3 = Product.objects.filter(subcategory__subcategory_name="Laptops").exclude(offer_price=None, sale_price=None).order_by('?')[:1]
+			list4 = Product.objects.filter(subcategory__subcategory_name="Digital SLRs").exclude(offer_price=None, sale_price=None).order_by('?')[:1]
 			result_list = list(chain(list1, list2, list3, list4))
 
 			for p in result_list:
