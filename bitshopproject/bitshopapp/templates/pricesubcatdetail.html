@@ -19,6 +19,15 @@
 			<link href="{% static "css/owl.carousel.css" %}" rel="stylesheet">
 			<link href="{% static "css/owl.theme.css" %}" rel="stylesheet">
 			<link href="{% static "css/style.css" %}" rel="stylesheet">
+			<script>
+				function openNav() {
+				    document.getElementById("mySidenav").style.width = "250px";
+				}
+
+				function closeNav() {
+				    document.getElementById("mySidenav").style.width = "0";
+				}
+			</script>
 		</head>
 		
 		<body>
@@ -228,7 +237,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 											<div class="row">
 												{% for product in products %}
 												{% if product.offer_price != None or product.sale_price != None %}
-												<div class="col-md-4">
+												<div class="col-sm-6 col-xs-6 col-md-4">
 													<a href="{% url 'productdetail' product.id %}" style="text-decoration: none;">
 														<div class="thumbnail">
 																<img src={{product.mainimage}} alt="item-imgs"/>
