@@ -415,6 +415,13 @@ section css start
 }
 .main-products  .panel-default {
     border: 1px solid transparent;
+    -webkit-box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.panel-default {
+    border: 1px solid transparent;
+    -webkit-box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 .panel-body {
     font-weight: 600;
@@ -498,6 +505,8 @@ section css start
     padding-left: 10px;
 }
 .similar-content {
+    -webkit-box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 	margin-top: 40px;
 }
 .similar-content .panel {
@@ -899,12 +908,16 @@ News Details css Start
   left: auto;
   background-image: none !important;
   background-repeat: repeat-x;
+  background: #EAEAE9;
+  color: #4D87EF;
 }
  .carousel-control.left {
   left: 0;
   right: auto;
   background-image: none !important;
   background-repeat: repeat-x;
+  background: #EAEAE9;
+  color: #4D87EF;
 }
 #carousel-example-generic {
     margin: 20px auto;
@@ -1300,6 +1313,13 @@ Footer css End
     .navbar-header .navbar-brand {
         /*margin: 0 28px;*/
     }
+    .listing {
+        background: #fff;
+        padding: 0 0;
+       /* height: 52px;*/
+       /* margin: 0px;
+        padding: 20px 20px;*/
+    }
     .search-top {
         display: table-cell;
         margin-top: 0;
@@ -1362,7 +1382,7 @@ Footer css End
         margin-right: 10px;
         line-height: 1.42857143;
         background-color: transparent !important;
-        border: 1px solid #ddd !important;
+        border: 1px solid transparent !important;
         border-radius: 3px;
         -webkit-transition: border .2s ease-in-out;
         -o-transition: border .2s ease-in-out;
@@ -1405,7 +1425,7 @@ Footer css End
     }
     .navbar-default {
         background-color: #fff;
-        border-color: transparent;
+        border-color: transparent !important;
         border-radius: 0;
         margin-bottom: 0px;
         padding: 0px 20px;
@@ -1500,6 +1520,26 @@ Footer css End
     font-size: 28px;
     margin-left: 50px;
 }
+.news-content .thumbnail {
+    position: relative;
+    width: 206px;
+    max-width: 100%;
+    height: 266px;
+    max-height: 100%;
+    display: block;
+    padding: 0px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    line-height: 1.42857143;
+    background-color: transparent !important;
+    border: 1px solid transparent !important;
+    border-radius: 0;
+    -webkit-transition: border .2s ease-in-out;
+    -o-transition: border .2s ease-in-out;
+    transition: border .2s ease-in-out;
+    overflow: hidden;
+    margin: 0 auto;
+}
 
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
@@ -1509,6 +1549,26 @@ Footer css End
 
 /* Extra Small Devices, Phones */ 
 @media only screen and (min-width : 480px) {
+    .news-content .thumbnail {
+        position: relative;
+        width: 206px;
+        max-width: 100%;
+        height: 266px;
+        max-height: 100%;
+        display: block;
+        padding: 0px;
+        margin-bottom: 10px;
+        margin-right: 10px;
+        line-height: 1.42857143;
+        background-color: transparent !important;
+        border: 1px solid transparent !important;
+        border-radius: 0;
+        -webkit-transition: border .2s ease-in-out;
+        -o-transition: border .2s ease-in-out;
+        transition: border .2s ease-in-out;
+        overflow: hidden;
+        margin: 0 auto;
+    }
      .navbar-header .navbar-brand {
         margin: 0 42px;
     }
@@ -1539,10 +1599,37 @@ Footer css End
         margin-bottom: 0px;
         padding: 0px 20px;
     }
+    .listing {
+        background: #fff;
+        padding: 0 0;
+       /* height: 52px;*/
+       /* margin: 0px;
+        padding: 20px 20px;*/
+    }
   }
 
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
+    .news-content .thumbnail {
+        position: relative;
+        width: 206px;
+        max-width: 100%;
+        height: 266px;
+        max-height: 100%;
+        display: block;
+        padding: 0px;
+        margin-bottom: 10px;
+        margin-right: 10px;
+        line-height: 1.42857143;
+        background-color: transparent !important;
+        border: 1px solid transparent !important;
+        border-radius: 0;
+        -webkit-transition: border .2s ease-in-out;
+        -o-transition: border .2s ease-in-out;
+        transition: border .2s ease-in-out;
+        overflow: hidden;
+        margin: 0 auto;
+    }
     .listing .collapse {
         display: block;
     }
@@ -1573,6 +1660,13 @@ Footer css End
         margin-bottom: 0px;
         padding: 0px 20px;
     }
+    .listing {
+        background: #fff;
+        padding: 0 0;
+       /* height: 52px;*/
+       /* margin: 0px;
+        padding: 20px 20px;*/
+    }
     
 }
 
@@ -1587,6 +1681,13 @@ Footer css End
             max-width: 678px;
             min-width: 678px;
             width: 100%;
+    }
+    .listing {
+        background: #fff;
+        padding: 0 58px;
+       /* height: 52px;*/
+       /* margin: 0px;
+        padding: 20px 20px;*/
     }
     .search-top .form-control {
         display: block;
@@ -1640,7 +1741,7 @@ Footer css End
     }
     #carousel-custom {
         width: 228px;
-        border: 1px solid #ddd;
+        border: 1px solid transparent;
     }
      .nav>li::before {
         visibility: visible;
@@ -1717,6 +1818,25 @@ Footer css End
     .listing ul li a {
         text-decoration: none;
         color: #000;    
+    }
+    .news-content .thumbnail {
+        position: relative;
+        width: 206px;
+        max-width: 100%;
+        height: 266px;
+        max-height: 100%;
+        display: block;
+        padding: 0px;
+        margin-bottom: 10px;
+        margin-right: 10px;
+        line-height: 1.42857143;
+        background-color: transparent !important;
+        border: 1px solid transparent !important;
+        border-radius: 0;
+        -webkit-transition: border .2s ease-in-out;
+        -o-transition: border .2s ease-in-out;
+        transition: border .2s ease-in-out;
+        overflow: hidden;
     }
 
 }

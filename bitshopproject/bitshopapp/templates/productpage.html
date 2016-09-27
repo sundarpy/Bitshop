@@ -73,7 +73,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 											</div>
 										</div>
 									</span>
-							       <a class="" href="#" style="text-decoration: none;"><span class="hidden-lg hidden-md pull-left" style="padding-left: 18px;font-size:18px;line-height:50px;color: #000;cursor:pointer" onclick="openNav()">&#9776;</span></a>
+							       <a class="" href="#" style="text-decoration: none;"><span class="hidden-lg hidden-md pull-left" style="padding-left: 18px;font-size:18px;line-height:50px;color: #000;cursor:pointer" onclick="openNav()"><i class="fa fa-bars" aria-hidden="true"></i></span></a>
 							       &nbsp; 
 							       <a class="navbar-brand" href="{% url 'home' %}"><b>Serfo Shopping</b></a>
 							    </div>
@@ -207,9 +207,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 																	</div>
 																	<div class="price-item">
 																		{% if product.offer_price %}
-																		<h4> &#x20B9; {{product.offer_price}}</h4>
+																		<h4> <i class="fa fa-inr" aria-hidden="true"></i> {{product.offer_price}}</h4>
 																		{% else %}
-																		<h4> &#x20B9; {{product.sale_price}}</h4>
+																		<h4> <i class="fa fa-inr" aria-hidden="true"></i> {{product.sale_price}}</h4>
 																		{% endif %}
 																	</div>
 																	<div class="sold-item">
@@ -250,7 +250,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 																	{% endif %}
 																	<div class="select-item">
 																		<h5> 
-																			<a href={{product.link}}><button class="btn btn-default">Buy</button></a>
+																			<a href={{product.link}}><button class="btn btn-primary btn-sm" style="padding: 5px 60px;font-weight: 600;font-size: 18px;">Buy</button></a>
 																		</h5>
 																	</div>
 																	<div class="share-social">
@@ -301,9 +301,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 													<div class="caption announce">
 														<a href="{% url 'productdetail' similar.id %}"><h5>{{similar.title}}</h5></a>
 														{% if similar.offer_price %}
-														<h5> &#8377; {{similar.offer_price}} </h5>
+														<h5> <i class="fa fa-inr" aria-hidden="true"></i> {{similar.offer_price}} </h5>
 														{% else %}
-														<h5> &#8377; {{similar.sale_price}} </h5>
+														<h5> <i class="fa fa-inr" aria-hidden="true"></i> {{similar.sale_price}} </h5>
 														{% endif %}
 													</div>
 												</div>
@@ -322,9 +322,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 													<div class="caption announce">
 														<a href="{% url 'productdetail' cheaper.id %}"><h5>{{cheaper.title}}</h5></a>
 														{% if cheaper.offer_price %}
-														<h5> &#8377; {{cheaper.offer_price}} </h5>
+														<h5> <i class="fa fa-inr" aria-hidden="true"></i> {{cheaper.offer_price}} </h5>
 														{% else %}
-														<h5> &#8377; {{cheaper.sale_price}} </h5>
+														<h5> <i class="fa fa-inr" aria-hidden="true"></i> {{cheaper.sale_price}} </h5>
 														{% endif %}
 													</div>
 												</div>

@@ -67,7 +67,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 											</div>
 										</div>
 									</span>
-							       <a class="" href="#" style="text-decoration: none;"><span class="hidden-lg hidden-md pull-left" style="padding-left: 18px;font-size:18px;line-height:50px;color: #000;cursor:pointer" onclick="openNav()">&#9776;</span></a>
+							       <a class="" href="#" style="text-decoration: none;"><span class="hidden-lg hidden-md pull-left" style="padding-left: 18px;font-size:18px;line-height:50px;color: #000;cursor:pointer" onclick="openNav()"><i class="fa fa-bars" aria-hidden="true"></i></span></a>
 							       &nbsp; 
 							       <a class="navbar-brand" href="{% url 'home' %}"><b>Serfo Shopping</b></a>
 							    </div>
@@ -167,11 +167,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 												<ul class="list-unstyled product-list">
 												{% for price in prices %}
 												{% if price.title == 'Very Low' %}
-												<li><a href="{% url 'pricecatdetail' category.id price.id %}">Below &#x20B9;{{price.upper_limit}}</a></li>
+												<li><a href="{% url 'pricecatdetail' category.id price.id %}">Below &nbsp;<i class="fa fa-inr" aria-hidden="true"></i> &nbsp;{{price.upper_limit}}</a></li>
 												{% elif price.title == 'Very High' %}
-													<li><a href="{% url 'pricecatdetail' category.id price.id %}">Above &#x20B9;{{price.lower_limit}}</a></li>
+													<li><a href="{% url 'pricecatdetail' category.id price.id %}">Above &nbsp;<i class="fa fa-inr" aria-hidden="true"></i> &nbsp;{{price.lower_limit}}</a></li>
 												{% else %}
-													<li><a href="{% url 'pricecatdetail' category.id price.id %}">&#x20B9;{{price.lower_limit}} - &#x20B9;{{price.upper_limit}}</a></li>
+													<li><a href="{% url 'pricecatdetail' category.id price.id %}"> &nbsp;<i class="fa fa-inr" aria-hidden="true"></i> &nbsp;{{price.lower_limit}} - &nbsp;<i class="fa fa-inr" aria-hidden="true"></i> &nbsp;{{price.upper_limit}}</a></li>
 												{% endif %}
 												{% endfor %}
 												</ul>
@@ -207,9 +207,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 															<div class="caption">
 																<a href="{% url 'productdetail' product.id %}" style="text-decoration: none;"><h5>{{product.title}}</h5></a>
 																{% if product.offer_price != None %}
-																<p class="item-name-desc"> &#x20B9; {{product.offer_price}}</p>
+																<p class="item-name-desc"> <i class="fa fa-inr" aria-hidden="true"></i> {{product.offer_price}}</p>
 																{% else %}
-																<p class="item-name-desc"> &#x20B9; {{product.sale_price}}</p>
+																<p class="item-name-desc"> <i class="fa fa-inr" aria-hidden="true"></i> {{product.sale_price}}</p>
 																{% endif %}
 															</div>
 														</div>
