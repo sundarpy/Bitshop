@@ -1677,6 +1677,11 @@ Footer css End
 
 /* Large Devices, Wide Screens */
 @media only screen and (min-width : 1200px) {
+    #owl-demo .item img{
+        display: block;
+        width: 100%;
+        height: auto;
+    }
     .search-top .navbar-form .input-group {
             max-width: 678px;
             min-width: 678px;

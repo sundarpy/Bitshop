@@ -170,7 +170,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 											</div>
 										</div>
 										{% if news %}
-										<div class="panel panel-default">
+										<div class="panel panel-default hidden-xs hidden-sm">
 											<div class="panel-body">Articles to help you shop<a href="{% url 'news' %}"><span class="badge pull-right">Show More</span></a></div>
 											<div class="news-wraping">
 												
@@ -196,6 +196,29 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 										</div>
 										{% endif %}
 										<div clas="clearfix"></div>
+
+
+										<div class="panel panel-default hidden-lg hidden-md">
+											<div class="panel-body">Articles to help you shop
+												<a href="{% url 'news' %}">
+													<span class="badge pull-right">Show More</span>
+												</a>
+											</div>
+											<div id="owl-demo" class="owl-carousel owl-theme news-wraping">
+												{% for new in news|slice:":12" %}
+												<div class="news-content">
+													<a href="{% url 'newsdetail' new.id %}" style="text-decoration: none;">
+													  	<div class="item thumbnail">
+													  		<img src={{new.image_url}} alt="item-imgs"/>
+												  			<div class="caption">
+												  				<h5 class="news-ttle">{{new.title}}</h5>
+												  			</div>
+												  		</div>
+											  		</a>
+										  		</div>
+										  		{% endfor %}
+											</div>
+										</div>										
 									</div>
 								</div>
 							</div>
@@ -415,5 +438,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 			<!-- Bootstrap -->
 			<script src="{% static "js/bootstrap.min.js" %}"></script>
 			<script src="{% static "js/owl.carousel.min.js" %}"></script>
+
+			<script>
+				$(document).ready(function() {
+ 
+				  $("#owl-demo").owlCarousel({
+				 
+			      	navigation : false, // Show next and prev buttons
+			 		autoPlay:false,
+			 		pagination:false,
+			      	slideSpeed : 300,
+			      	paginationSpeed : 400,
+			      	items : 2
+				 
+				  });
+				 
+				});
+			</script>
 		</body>
 	</html>
