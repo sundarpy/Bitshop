@@ -1,13 +1,13 @@
-scrapy crawl shoes1 -o shoes1.json
-scrapy crawl shoes2 -o shoes2.json
-scrapy crawl shoes3 -o shoes3.json
-scrapy crawl shoes4 -o shoes4.json
-scrapy crawl shoes5 -o shoes5.json
-scrapy crawl shoes6 -o shoes6.json
-scrapy crawl shoes7 -o shoes7.json
-scrapy crawl shoes8 -o shoes8.json
-scrapy crawl shoes9 -o shoes9.json
-scrapy crawl shoes10 -o shoes10.json
-scrapy crawl shoes11 -o shoes11.json
-scrapy crawl shoes12 -o shoes12.json
-scrapy crawl shoes13 -o shoes13.json
+scrapy crawl shoes1
+scrapy crawl shoes2
+scrapy crawl shoes3
+scrapy crawl shoes4
+scrapy crawl shoes5
+scrapy crawl shoes6
+scrapy crawl shoes7
+scrapy crawl shoes8
+scrapy crawl shoes9
+scrapy crawl shoes10
+scrapy crawl shoes11
+scrapy crawl shoes12
+scrapy crawl shoes13

@@ -1,9 +1,9 @@
-scrapy crawl movies1 -o movies1.json
-scrapy crawl movies2 -o movies2.json
-scrapy crawl movies3 -o movies3.json
-scrapy crawl movies4 -o movies4.json
-scrapy crawl movies5 -o movies5.json
-scrapy crawl movies6 -o movies6.json
-scrapy crawl movies7 -o movies7.json
-scrapy crawl movies8 -o movies8.json
-scrapy crawl movies9 -o movies9.json
+scrapy crawl movies1
+scrapy crawl movies2
+scrapy crawl movies3
+scrapy crawl movies4
+scrapy crawl movies5
+scrapy crawl movies6
+scrapy crawl movies7
+scrapy crawl movies8
+scrapy crawl movies9

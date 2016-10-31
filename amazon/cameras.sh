@@ -1,12 +1,12 @@
-scrapy crawl cameras1 -o cameras1.json
-scrapy crawl cameras2 -o cameras2.json
-scrapy crawl cameras3 -o cameras3.json
-scrapy crawl cameras4 -o cameras4.json
-scrapy crawl cameras5 -o cameras5.json
-scrapy crawl cameras6 -o cameras6.json
-scrapy crawl cameras7 -o cameras7.json
-scrapy crawl cameras8 -o cameras8.json
-scrapy crawl cameras9 -o cameras9.json
-scrapy crawl cameras10 -o cameras10.json
-scrapy crawl cameras11 -o cameras11.json
-scrapy crawl cameras12 -o cameras12.json
+scrapy crawl cameras1
+scrapy crawl cameras2
+scrapy crawl cameras3
+scrapy crawl cameras4
+scrapy crawl cameras5
+scrapy crawl cameras6
+scrapy crawl cameras7
+scrapy crawl cameras8
+scrapy crawl cameras9
+scrapy crawl cameras10
+scrapy crawl cameras11
+scrapy crawl cameras12

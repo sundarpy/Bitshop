@@ -1,11 +1,11 @@
-scrapy crawl sports1 -o sports1.json
-scrapy crawl sports2 -o sports2.json
-scrapy crawl sports3 -o sports3.json
-scrapy crawl sports4 -o sports4.json
-scrapy crawl sports5 -o sports5.json
-scrapy crawl sports6 -o sports6.json
-scrapy crawl sports7 -o sports7.json
-scrapy crawl sports8 -o sports8.json
-scrapy crawl sports9 -o sports9.json
-scrapy crawl sports10 -o sports10.json
-scrapy crawl sports11 -o sports11.json
+scrapy crawl sports1
+scrapy crawl sports2
+scrapy crawl sports3
+scrapy crawl sports4
+scrapy crawl sports5
+scrapy crawl sports6
+scrapy crawl sports7
+scrapy crawl sports8
+scrapy crawl sports9
+scrapy crawl sports10
+scrapy crawl sports11

@@ -1,13 +1,13 @@
-scrapy crawl cars1 -o cars1.json
-scrapy crawl cars2 -o cars2.json
-scrapy crawl cars3 -o cars3.json
-scrapy crawl cars4 -o cars4.json
-scrapy crawl cars5 -o cars5.json
-scrapy crawl cars6 -o cars6.json
-scrapy crawl cars7 -o cars7.json
-scrapy crawl cars8 -o cars8.json
-scrapy crawl cars9 -o cars9.json
-scrapy crawl cars10 -o cars10.json
-scrapy crawl cars11 -o cars11.json
-scrapy crawl cars12 -o cars12.json
-scrapy crawl cars13 -o cars13.json
+scrapy crawl cars1
+scrapy crawl cars2
+scrapy crawl cars3
+scrapy crawl cars4
+scrapy crawl cars5
+scrapy crawl cars6
+scrapy crawl cars7
+scrapy crawl cars8
+scrapy crawl cars9
+scrapy crawl cars10
+scrapy crawl cars11
+scrapy crawl cars12
+scrapy crawl cars13

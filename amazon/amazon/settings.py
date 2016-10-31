@@ -20,9 +20,10 @@ ITEM_PIPELINES = {
 
 DOWNLOAD_DELAY = 0.25
 FEED_FORMAT = 'json'
-FILES_EXPIRES = 2
-FEED_URI= 's3://AKIAJ4HPSETQVSPZMVPQ:ctkY2rzrYdh9C+xBo39g9THq0SqOv76wfBhw47Td@bitshopping/newjson/%(name)s.json'
-
+FILES_EXPIRES = 6
+FEED_URI= 's3://AKIAJ4HPSETQVSPZMVPQ:ctkY2rzrYdh9C+xBo39g9THq0SqOv76wfBhw47Td@serfoshopping/newjson/%(name)s.json'
+AWS_S3_ACCESS_KEY_ID = 'AKIAJ4HPSETQVSPZMVPQ'
+AWS_S3_SECRET_ACCESS_KEY = 'ctkY2rzrYdh9C+xBo39g9THq0SqOv76wfBhw47Td'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'amazon (+http://www.yourdomain.com)'
 
@@ -35,13 +36,13 @@ ROBOTSTXT_OBEY = False
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-#DOWNLOAD_DELAY = 3
+
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-COOKIES_ENABLED = False
+# COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
