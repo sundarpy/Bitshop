@@ -12,3 +12,4 @@
 ./bags.sh
 ./shoes.sh
 ./cars.sh
+./offers.sh

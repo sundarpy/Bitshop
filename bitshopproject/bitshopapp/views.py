@@ -28,6 +28,7 @@ import json
 
 def Search(request):
 	"""Search."""
+	limitedoffer = LimitedOffer.objects.all()
 	navbar_category = Category.objects.all()
 	cat = Category.objects.all()
 	subcat = SubCategory.objects.all()
@@ -40,7 +41,7 @@ def Search(request):
 	if q:
 		products_list = Product.objects.filter(title__icontains=q)
 		productcount = products_list.count
-		paginator = Paginator(products_list, 24)
+		paginator = Paginator(products_list, 25)
 		page = request.GET.get('page')
 		try:
 			products = paginator.page(page)
@@ -50,26 +51,29 @@ def Search(request):
 			products = paginator.page(paginator.num_pages)
 		total_pages = products.paginator.num_pages+1
 
+		prodnum = products.number
 		x = products.number - 1
-		y = products.number + 4
+		y = products.number + 7
 		sl = "%d:%d" % (x,y)
 		current_path = request.get_full_path()
 		context = {
 					"query": q, 
 					"count": productcount,
 					"products": products,
+					"limitedoffer":limitedoffer,
 					"subcats":subcat, 
 					"cats":cat,
 					"user" : request.user,
 					"navbar_category" : navbar_category,
 					"sl":sl,
+					"prodnum":prodnum,
 					'range': range(1,total_pages),
 					'current_path': current_path,
 					}
 		template = 'results.html'
 	else:
 		template = 'home.html'
-		context = {"subcats":subcat, "cat":cat, "navbar_category" : navbar_category,"user" : request.user,}
+		context = {"prodnum":prodnum, "subcats":subcat, "cat":cat, "navbar_category" : navbar_category,"user" : request.user,}
 	return render(request, template, context)
 
 """==============================="""
@@ -79,6 +83,8 @@ def Search(request):
 def HomePage(request):
 	"""Home Page"""
 	navbar_category = Category.objects.all()
+	saleoffer = SaleOffer.objects.all()
+	limitedoffer = LimitedOffer.objects.all()
 	category = Category.objects.all()
 	sub_category = SubCategory.objects.all()
 	subcategory = SubCategory.objects.filter(category=category)
@@ -104,6 +110,8 @@ def HomePage(request):
 				"navbar_category" : navbar_category,
 				"news" : news,
 				"user" : request.user,
+				"saleoffer" : saleoffer,
+				"limitedoffer" : limitedoffer
 				}
 	template = 'home.html'
 	return render(request, template, context)
@@ -112,15 +120,17 @@ def HomePage(request):
 """=====CATEGORY INDIVIDUAL PAGE====="""
 """=================================="""
 
-def CategoryPage(request, c_id):
+def CategoryPage(request, slug):
 	"""Category Detail Page"""
+	limitedoffer = LimitedOffer.objects.all()
 	prices = Price.objects.all().order_by('-id')
 	navbar_category = Category.objects.all()
 	brands = Brand.objects.all().order_by('?')
-	category = Category.objects.get(pk=c_id)
+	category = Category.objects.get(category_slug=slug)
 	subcategory = SubCategory.objects.filter(category=category).order_by('id')
 	products_list = Product.objects.filter(category=category).order_by('?')
-	paginator = Paginator(products_list, 18)
+
+	paginator = Paginator(products_list, 25)
 	productcount = products_list.count
 	page = request.GET.get('page')
 	try:
@@ -131,12 +141,13 @@ def CategoryPage(request, c_id):
 		products = paginator.page(paginator.num_pages)
 	total_pages = products.paginator.num_pages+1
 
+	prodnum = products.number
 	x = products.number - 1
-	y = products.number + 4
+	y = products.number + 7
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.filter(category=category).order_by('-id')
-	context = {"count":productcount, "category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category,"user" : request.user, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
+	context = {"prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category,"user" : request.user, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
 	template = 'categorydetail.html'
 	return render(request, template, context)
 
@@ -144,8 +155,9 @@ def CategoryPage(request, c_id):
 """=====CATEGORY PRICE PAGE====="""
 """============================="""
 
-def PriceFilterCategory(request, c_id, pr_id):
+def PriceFilterCategory(request, slug, pr_id):
 	"""Price Filter Category Page"""
+	limitedoffer = LimitedOffer.objects.all()
 	selected_price = Price.objects.get(pk=pr_id)
 	title = selected_price.title
 	upper = selected_price.upper_limit
@@ -153,10 +165,10 @@ def PriceFilterCategory(request, c_id, pr_id):
 	prices = Price.objects.all().order_by('-id')
 	navbar_category = Category.objects.all()
 	brands = Brand.objects.all().order_by('?')
-	category = Category.objects.get(pk=c_id)
+	category = Category.objects.get(category_slug=slug)
 	subcategory = SubCategory.objects.filter(category=category).order_by('id')
 	products_list = Product.objects.filter(Q(category=category, offer_price__lte=upper, offer_price__gte=lower) | Q(category=category, sale_price__lte=upper, sale_price__gte=lower))
-	paginator = Paginator(products_list, 18)
+	paginator = Paginator(products_list, 25)
 	productcount = products_list.count
 	page = request.GET.get('page')
 	try:
@@ -167,12 +179,13 @@ def PriceFilterCategory(request, c_id, pr_id):
 		products = paginator.page(paginator.num_pages)
 	total_pages = products.paginator.num_pages+1
 
+	prodnum = products.number
 	x = products.number - 1
-	y = products.number + 4
+	y = products.number + 7
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.filter(category=category).order_by('-id')
-	context = {"count":productcount, "category":category, "subcategory":subcategory, "products":products,"user" : request.user, "navbar_category":navbar_category, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title}
+	context = {"prodnum":prodnum, "selected_price":selected_price, "limitedoffer":limitedoffer, "count":productcount, "category":category, "subcategory":subcategory, "products":products,"user" : request.user, "navbar_category":navbar_category, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title, "upper":upper, "lower":lower}
 	template = 'pricecatdetail.html'
 	return render(request, template, context)
 
@@ -182,13 +195,14 @@ def PriceFilterCategory(request, c_id, pr_id):
 
 def BrandsPage(request, b_id):
 	"""Brands Detail Page"""
+	limitedoffer = LimitedOffer.objects.all()
 	prices = Price.objects.all().order_by('-id')
 	navbar_category = Category.objects.all()
 	brands = Brand.objects.all().order_by('?')
 	prime_brand = Brand.objects.get(pk=b_id)
 	category = Category.objects.all()
 	products_list = Product.objects.filter(brand=prime_brand).order_by('id')
-	paginator = Paginator(products_list, 18)
+	paginator = Paginator(products_list, 25)
 	productcount = products_list.count
 	page = request.GET.get('page')
 	try:
@@ -199,12 +213,13 @@ def BrandsPage(request, b_id):
 		products = paginator.page(paginator.num_pages)
 	total_pages = products.paginator.num_pages+1
 
+	prodnum = products.number
 	x = products.number - 1
-	y = products.number + 4
+	y = products.number + 7
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.all().order_by('-id')
-	context = {"count":productcount, "category":category, "products":products, "navbar_category":navbar_category,"user" : request.user, "brands":brands, "prime_brand":prime_brand, "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
+	context = {"prodnum":prodnum, "limitedoffer":limitedoffer, "count":productcount, "category":category, "products":products, "navbar_category":navbar_category,"user" : request.user, "brands":brands, "prime_brand":prime_brand, "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
 	template = 'brandetail.html'
 	return render(request, template, context)
 
@@ -214,6 +229,7 @@ def BrandsPage(request, b_id):
 
 def PriceFilterBrands(request, b_id, pr_id):
 	"""Brands Price Filter Page"""
+	limitedoffer = LimitedOffer.objects.all()
 	selected_price = Price.objects.get(pk=pr_id)
 	title = selected_price.title
 	upper = selected_price.upper_limit
@@ -224,7 +240,7 @@ def PriceFilterBrands(request, b_id, pr_id):
 	prime_brand = Brand.objects.get(pk=b_id)
 	category = Category.objects.all()
 	products_list = Product.objects.filter(Q(brand=prime_brand, offer_price__lte=upper, offer_price__gte=lower) | Q(brand=prime_brand, sale_price__lte=upper, sale_price__gte=lower))
-	paginator = Paginator(products_list, 18)
+	paginator = Paginator(products_list, 25)
 	productcount = products_list.count
 	page = request.GET.get('page')
 	try:
@@ -235,12 +251,13 @@ def PriceFilterBrands(request, b_id, pr_id):
 		products = paginator.page(paginator.num_pages)
 	total_pages = products.paginator.num_pages+1
 
+	prodnum = products.number
 	x = products.number - 1
-	y = products.number + 4
+	y = products.number + 7
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.all().order_by('-id')
-	context = {"count":productcount, "category":category, "products":products,"user" : request.user, "navbar_category":navbar_category, "brands":brands, "prime_brand":prime_brand, "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title}
+	context = {"prodnum":prodnum, "selected_price":selected_price, "limitedoffer":limitedoffer, "count":productcount, "upper":upper, "lower":lower, "category":category, "products":products,"user" : request.user, "navbar_category":navbar_category, "brands":brands, "prime_brand":prime_brand, "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title}
 	template = 'pricebranddetail.html'
 	return render(request, template, context)
 
@@ -248,16 +265,17 @@ def PriceFilterBrands(request, b_id, pr_id):
 """=====SUBCATEGORY INDIVIDUAL PAGE====="""
 """====================================="""
 
-def SubCategoryPage(request, c_id, s_id):
+def SubCategoryPage(request, slug1, slug2):
 	"""SubCategory Detail Page"""
+	limitedoffer = LimitedOffer.objects.all()
 	prices = Price.objects.all().order_by('-id')
 	navbar_category = Category.objects.all()
 	brands = Brand.objects.all().order_by('?')
-	category = Category.objects.get(pk=c_id)
+	category = Category.objects.get(category_slug=slug1)
 	subcategory = SubCategory.objects.filter(category=category).order_by('id')
-	subcat = SubCategory.objects.get(pk=s_id, category=category)
+	subcat = SubCategory.objects.get(subcategory_slug=slug2, category=category)
 	products_list = Product.objects.filter(subcategory=subcat).order_by('id')
-	paginator = Paginator(products_list, 18)
+	paginator = Paginator(products_list, 25)
 	productcount = products_list.count
 	page = request.GET.get('page')
 	try:
@@ -268,12 +286,13 @@ def SubCategoryPage(request, c_id, s_id):
 		products = paginator.page(paginator.num_pages)
 	total_pages = products.paginator.num_pages+1
 
+	prodnum = products.number
 	x = products.number - 1
-	y = products.number + 4
+	y = products.number + 7
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.filter(category=category).order_by('-id')
-	context = {"count":productcount, "category":category, "subcategory":subcategory, "products":products,"user" : request.user, "navbar_category":navbar_category,"subcat":subcat, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
+	context = {"prodnum":prodnum, "limitedoffer":limitedoffer, "count":productcount, "category":category, "subcategory":subcategory, "products":products,"user" : request.user, "navbar_category":navbar_category,"subcat":subcat, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
 	template = 'subcategorydetail.html'
 	return render(request, template, context)
 
@@ -281,8 +300,9 @@ def SubCategoryPage(request, c_id, s_id):
 """=====SUBCATEGORY INDIVIDUAL PAGE====="""
 """====================================="""
 
-def PriceFilterSubCategory(request, c_id, s_id, pr_id):
+def PriceFilterSubCategory(request, slug1, slug2, pr_id):
 	"""SubCategory Filter Page"""
+	limitedoffer = LimitedOffer.objects.all()
 	prices = Price.objects.all().order_by('-id')
 	selected_price = Price.objects.get(pk=pr_id)
 	title = selected_price.title
@@ -290,11 +310,11 @@ def PriceFilterSubCategory(request, c_id, s_id, pr_id):
 	lower = selected_price.lower_limit
 	navbar_category = Category.objects.all()
 	brands = Brand.objects.all().order_by('?')
-	category = Category.objects.get(pk=c_id)
+	category = Category.objects.get(category_slug=slug1)
 	subcategory = SubCategory.objects.filter(category=category).order_by('id')
-	subcat = SubCategory.objects.get(pk=s_id, category=category)
+	subcat = SubCategory.objects.get(subcategory_slug=slug2, category=category)
 	products_list = Product.objects.filter(Q(subcategory=subcat, offer_price__lte=upper, offer_price__gte=lower) | Q(subcategory=subcat, sale_price__lte=upper, sale_price__gte=lower))
-	paginator = Paginator(products_list, 18)
+	paginator = Paginator(products_list, 25)
 	productcount = products_list.count
 	page = request.GET.get('page')
 	try:
@@ -305,12 +325,13 @@ def PriceFilterSubCategory(request, c_id, s_id, pr_id):
 		products = paginator.page(paginator.num_pages)
 	total_pages = products.paginator.num_pages+1
 
+	prodnum = products.number
 	x = products.number - 1
-	y = products.number + 4
+	y = products.number + 7
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.filter(category=category).order_by('-id')
-	context = {"category":category, "subcategory":subcategory, "products":products,"user" : request.user, "navbar_category":navbar_category,"subcat":subcat, "count":productcount, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title}
+	context = {"prodnum":prodnum, "selected_price":selected_price, "limitedoffer":limitedoffer, "category":category, "subcategory":subcategory, "products":products,"user" : request.user, "navbar_category":navbar_category,"subcat":subcat, "count":productcount, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title, "upper":upper, "lower":lower}
 	template = 'pricesubcatdetail.html'
 	return render(request, template, context)
 
@@ -320,9 +341,11 @@ def PriceFilterSubCategory(request, c_id, s_id, pr_id):
 
 def NewsPage(request, n_id):
 	"""Product News Detail Page"""
+	limitedoffer = LimitedOffer.objects.all()
 	navbar_category = Category.objects.all()
 	news = New.objects.get(pk=n_id)
 	multi_news = New.objects.all().order_by('?')
+	saleoffer = SaleOffer.objects.all()
 	product1 = []
 	product2 = []
 	product3 = []
@@ -401,49 +424,10 @@ def NewsPage(request, n_id):
 				"product10" : product10,
 				"multi_news" : multi_news,
 				"user" : request.user,
+				"limitedoffer":limitedoffer,
+				"saleoffer":saleoffer,
 				}
 	template = 'newsdetail.html'
-	return render(request, template, context)
-
-"""========================="""
-"""=====NEWS TOTAL PAGE====="""
-"""========================="""
-
-def News(request):
-	"""Product News Detail Page"""
-	navbar_category = Category.objects.all()
-	news = New.objects.all().order_by('-id')
-
-	men_prod = SerfoProduct.objects.filter(super_category='M')
-	women_prod = SerfoProduct.objects.filter(super_category='W')
-	appliances_prod = SerfoProduct.objects.filter(super_category='A')
-	home_prod = SerfoProduct.objects.filter(super_category='H')
-	electronics_prod = SerfoProduct.objects.filter(super_category='E')
-
-	context = {
-				"news":news, 
-				"navbar_category":navbar_category,
-				"data1" : men_prod,
-				"data2" : women_prod,
-				"data3" : appliances_prod,
-				"data4" : home_prod,
-				"data5" : electronics_prod,
-				"news" : news,
-				"user" : request.user,
-				}
-	template = 'news.html'
-	return render(request, template, context)
-
-"""==========================="""
-"""=====ALL BRANDS METHOD====="""
-"""==========================="""
-
-def AllBrands(request):
-	"""All brands page"""
-	brands = Brand.objects.all().order_by('brand_name')
-	navbar_category = Category.objects.all()
-	context = {"navbar_category":navbar_category,"user" : request.user, "brands":brands}
-	template = 'brand.html'
 	return render(request, template, context)
 
 """============================="""
@@ -452,6 +436,7 @@ def AllBrands(request):
 
 def ProductPage(request, p_id):
 	"""Product detail page"""
+	limitedoffer = LimitedOffer.objects.all()
 	navbar_category = Category.objects.all()
 	category = Category.objects.all()
 	subcategory = SubCategory.objects.all()
@@ -483,6 +468,7 @@ def ProductPage(request, p_id):
 				"product":product, 
 				"navbar_category":navbar_category,
 				"image" : image,
+				"limitedoffer":limitedoffer,
 				"comments" : comments,
 				"subcomments" : subcomments,
 				"similars" : similar_products,
@@ -492,57 +478,6 @@ def ProductPage(request, p_id):
 				}
 	template = 'productpage.html'
 	return render(request, template, context)
-
-"""============================="""
-"""=====USER AUTHENTICATION====="""
-"""============================="""
-
-@csrf_protect
-def login_view(request):
-	"""Sign In Method"""
-	next = request.GET.get('next')
-	title = "LOG IN"
-	form = UserLoginForm(request.POST or None)
-	if form.is_valid():
-		username = form.cleaned_data.get("username")
-		password = form.cleaned_data.get("password")
-		user = authenticate(username=username, password=password)
-		login(request, user)
-		messages.info(request, 'Logged in as '+request.user.username+'.',fail_silently=True)
-		if next:
-			return HttpResponseRedirect(next)
-		return HttpResponseRedirect('/')
-	context = {"form":form, "title":title}
-	template = 'login.html'
-	return render(request, template, context)
-
-@csrf_protect
-def register_view(request):
-	"""Sign Up Method"""
-	next = request.GET.get('next')
-	title = "SIGN UP"
-	form = UserRegisterForm(request.POST or None)
-	if form.is_valid():
-		user = form.save(commit=False)
-		password = form.cleaned_data.get('password')
-		user.set_password(password)
-		user.save()
-		user_details = UserProfile(user_id=user.id)
-		user_details.save()
-		new_user = authenticate(username=user.username, password=password)
-		login(request, new_user)
-		messages.info(request, 'Logged in as '+request.user.username+'.',fail_silently=True)
-		if next:
-			return HttpResponseRedirect(next)
-		return HttpResponseRedirect('/')
-	context = {"form":form, "title":title}
-	template = 'signup.html'
-	return render(request, template, context)
-
-def logout_view(request):
-	logout(request)
-	messages.info(request, 'Successfully logged out.',fail_silently=True)
-	return HttpResponseRedirect('/')
 
 """========================"""
 """=====SERFO PRODUCTS====="""
@@ -779,9 +714,6 @@ def server_error(request):
 """================================="""
 """=====SOCIAL ACCOUNT REDIRECT====="""
 """================================="""
-
-def redirection(request):
-	return HttpResponseRedirect('/')
 
 @api_view(['GET','POST'])
 def getproducts(request):

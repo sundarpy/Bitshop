@@ -223,10 +223,25 @@ class New(models.Model):
 	def __str__(self):
 		return str(self.title)
 
+"""======================================="""
+"""===========OFFER FOR PRODUCTS=========="""
+"""======================================="""
 
+class SaleOffer(models.Model):
+	"""Home Page Offers"""
+	image = models.CharField(max_length=255, null=True, blank=True)
+	link = models.CharField(max_length=255, null=True, blank=True)
 
+	def __str__(self):
+		return str(self.image)
 
+class LimitedOffer(models.Model):
+	"""Limited Offers on Products"""
+	image = models.CharField(max_length=255, null=True, blank=True)
+	link = models.CharField(max_length=255, null=True, blank=True)
 
+	def __str__(self):
+		return str(self.image)
 
 
 

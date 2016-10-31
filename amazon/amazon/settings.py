@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import boto
 # Scrapy settings for amazon project
 #
 # For simplicity, this file contains only settings considered important or
@@ -17,6 +17,11 @@ NEWSPIDER_MODULE = 'amazon.spiders'
 ITEM_PIPELINES = {
     'amazon.pipelines.AmazonPipeline': 1,
 }
+
+DOWNLOAD_DELAY = 0.25
+FEED_FORMAT = 'json'
+FILES_EXPIRES = 2
+FEED_URI= 's3://AKIAJ4HPSETQVSPZMVPQ:ctkY2rzrYdh9C+xBo39g9THq0SqOv76wfBhw47Td@bitshopping/newjson/%(name)s.json'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'amazon (+http://www.yourdomain.com)'

@@ -19,3 +19,7 @@ class AmazonItem(scrapy.Item):
 	COD = scrapy.Field()
 	category = scrapy.Field()
 	subcategory = scrapy.Field()
+
+class OfferItem(scrapy.Item):
+	image =  scrapy.Field()
+	link = scrapy.Field()

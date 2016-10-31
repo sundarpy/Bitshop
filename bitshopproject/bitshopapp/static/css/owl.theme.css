@@ -15,10 +15,10 @@
 	display: inline-block;
 	zoom: 1;
 	*display: inline;/*IE7 life-saver */
-	margin: -18px -54px;
+	margin: 5px;
 	padding: 0px;
 	font-size: 12px;
-	-webkit-border-radius: 30px;
+	-webkit-border-radius: 3px;
 	-moz-border-radius: 30px;
 	border-radius: 30px;
 	background: #869791;
@@ -80,26 +80,33 @@
 .owl-prev{
 	background: transparent !important;
 	position: absolute;
-	top: 41%;
-	left: 56px;
+	top: 34%;
+	left: 0px;
 }
 .owl-prev{
-	font-size: 48px !important;
+	font-size: 18px !important;
 }
 .owl-prev i{
 	color: #000;
-	font-size:36px;
+	padding: 24px 16px;
+    background: #ddd;
 }
+/*.owl-prev i:hover {
+	color: #fff;
+	padding: 24px 16px;
+    background: #000;
+}*/
 .owl-next{
 	background: transparent !important;
 	position: absolute;
-	top: 41%;
-	right: 56px;
+	top: 34%;
+	right: 0px;
 }
 .owl-next{
-	font-size: 48px !important;
+	font-size: 18px !important;
 }
 .owl-next i{
 	color: #000;
-	font-size:36px;
+	padding: 24px 16px;
+    background: #ddd;
 }

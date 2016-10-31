@@ -12,6 +12,7 @@ class ProductImageAdmin(admin.ModelAdmin):
 
 class BrandAdmin(admin.ModelAdmin):
 	list_display = ('brand_name',)
+	search_fields = ('brand_name',)
 
 class CategoryAdmin(admin.ModelAdmin):
 	list_display = ('category_name',)
@@ -44,3 +45,5 @@ admin.site.register(New, NewAdmin)
 admin.site.register(SerfoProduct, SerfoProductAdmin)
 admin.site.register(Comment)
 admin.site.register(SubComment)
+admin.site.register(SaleOffer)
+admin.site.register(LimitedOffer)

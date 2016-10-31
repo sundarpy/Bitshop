@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 {% load static from staticfiles %}
 	<html lang="en">
@@ -12,7 +11,7 @@
 			<link rel="shortcut icon" type="images/icon" href="{% static "images/favicon.ico" %}"/>
 			<!-- Bootstrap -->
 			<link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet"> 
-			<!--<link href="css/bootstrap.css" rel="stylesheet"> -->
+			<!--<link href="{% static "css/bootstrap.css" %}" rel="stylesheet"> -->
 			<!-- Font Awesome -->
 			<link href="{% static "css/font-awesome.css" %}" rel="stylesheet">
 			<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
@@ -20,15 +19,6 @@
 			<link href="{% static "css/owl.carousel.css" %}" rel="stylesheet">
 			<link href="{% static "css/owl.theme.css" %}" rel="stylesheet">
 			<link href="{% static "css/style.css" %}" rel="stylesheet">
-			<script>
-				function openNav() {
-				    document.getElementById("mySidenav").style.width = "250px";
-				}
-
-				function closeNav() {
-				    document.getElementById("mySidenav").style.width = "0";
-				}
-			</script>
 		</head>
 		
 		<body>
@@ -43,744 +33,389 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 				<header>
 					<div class="header-main">
 						<nav class="navbar navbar-default">
-						  	<div class="container-fluid">
-							    <!-- Brand and toggle get grouped for better mobile display -->
-							    <div class="navbar-header">
-							      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-							        <span class="sr-only">Toggle navigation</span>
-							        <span class="icon-bar"></span>
-							        <span class="icon-bar"></span>
-							        <span class="icon-bar"></span>
-							      </button>
-							      	<span id="mySidenav" class="sidenav" style="">
-									  	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="color: #000;">&times;</a>
-									  	<div class="listing nav-listings">
-											<div class="container-fluid">
-												<nav class="navbar navbar-default navbar-static-top" role="navigation" style="background-color: #ddd;">
-										            <div class="collapse navbar-collapse" id="navbar-collapse-1" style="display: block;">
-										                <ul class="nav navbar-nav">
-										                    {% for cat in navbar_category %}
-															<li class="item-lis first"><a href="{% url 'categorydetail' cat.id %}">{{cat.category_name}}</a></li>
-															{% endfor %}
-										                </ul>
-										            </div>
-										        </nav>
-											</div>
-										</div>
-									</span>
-							       <a class="" href="#" style="text-decoration: none;"><span class="hidden-lg hidden-md pull-left" style="padding-left: 18px;font-size:18px;line-height:50px;color: #000;cursor:pointer" onclick="openNav()">&#9776;</span></a>
-							       &nbsp; 
-							       <a class="navbar-brand" href="{% url 'home' %}"><b>Serfo Shopping</b></a>
-							    </div>
+							<div class="container-fluid">
+								<!-- Brand and toggle get grouped for better mobile display -->
+								<div class="navbar-header">
+								  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								  </button>
+								  <a class="navbar-brand" href="{% url 'home' %}"><b>SerfoShopping</b></a>
+								</div>
 
-							    <!-- Collect the nav links, forms, and other content for toggling -->
-							    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-							      <!-- <ul class="nav navbar-nav">
-							        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-							        <li><a href="#">Link</a></li>
-							      </ul> -->
-							      	<form class="navbar-form navbar-left" action="{% url 'results' %}" method="get" role="search">
-							         	<div class="input-group">
-											<input class="form-control" type="search" value="Search millions of products from leading online stores." name="q" placeholder="Search millions of products from leading online stores." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search millions of products from leading online stores.';}" required="" style="outline: none;box-shadow: none;">
-											<span class="input-group-btn" style="text-align: left;">
-												<button type="search" value="Search" class="btn btn-default" style="outline: none;box-shadow: none;"><i class="fa fa-search" aria-hidden="true"></i></button>
-										  	</span>
-										</div>
-							      	</form>
-
-							      <ul class="nav navbar-nav navbar-right">
-							      	{% if user.is_authenticated %}
-									<li>
-										<span class="pu">
-								        	{% if user.socialaccount_set.all.0.get_avatar_url %}
-											<a href="{% url 'logout' %}"><img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" style="width:28px;max-width: 100%;border-radius: 100%;"></a> &nbsp;
-											{% else %}
-											<a href="{% url 'logout' %}"><img src="http://minorschool.net/user-avatar/avatar-placeholder.jpg" style="width:28px;max-width: 100%;border-radius: 100%;"></a> &nbsp; 
-											{% endif %}
-										</span>
-										<span class="su">
-							       			<a href="{% url 'logout' %}" style="text-decoration: none;color: #000;">{{ user.username }} &nbsp; ( <b>Logout</b> )</a>
-							       		</span>
-							       	</li>
-							        {% else %}
-							        <li>
-							        	<span class="pu">
-							        		<a href="{% url 'login' %}"><img src="http://minorschool.net/user-avatar/avatar-placeholder.jpg" style="width:28px;max-width: 100%;border-radius: 100%;"></a>
-							       		</span>
-							       		&nbsp; &nbsp; 
-							       		<span class="su">
-							       			<a href="{% url 'login' %}" style="text-decoration: none;color: #000;">Login</a>
-							       		</span>
-							       	</li>
-							        {% endif %}
-							      </ul>
-							    </div><!-- /.navbar-collapse -->
-						  	</div><!-- /.container-fluid -->
-						</nav>
-					</div>
-					<div class="listing hidden-sm hidden-xs">
-						<div class="container-fluid">
-							<nav class="navbar navbar-default navbar-static-top" role="navigation">
-					            <div class="collapse navbar-collapse" id="navbar-collapse-1" style="display: block;">
-					                <ul class="nav navbar-nav">
-					                    
-					                    <li class="dropdown main-drp">
-					                      <a  class="dropdown-toggle" data-toggle="dropdown">All Categories <b class="caret"></b></a>
-					                      
-					                        <ul class="dropdown-menu cat-wrp">
-					                        	{% for cat in navbar_category %}
-					                            <li class="dropdown dropdown-submenu cat-detail">
-					                   				<a href="{% url 'categorydetail' cat.id %}" class="dropdown-toggle">{{cat.category_name}}</a>
-													<ul class="dropdown-menu cat1-wrp">
-														{% for sub in cat.get_subs %}
-														<li class="dropdown cat1-detail">
-															<a href="{% url 'subcategorydetail' cat.id sub.id %}">{{sub.subcategory_name}}</a>
-														</li>
-					                                    {% endfor %}                                  
-													</ul>
-												</li>
-												{% endfor %}                                
-					                        </ul>
-					                    </li>
-					                    {% for cat in navbar_category|slice:"5:12" %}
-										<li class="item-lis first"><a href="{% url 'categorydetail' cat.id %}">{{cat.category_name}}</a></li>
-										{% endfor %}
-					                </ul>
-					            </div>
-					        </nav>
-						</div>
-					</div>
-				</header>
-
-				<section class="Bishopping-main">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-8">
-
-								<div class="main-wrap">
-									<div class="main-content">
-										<div class="main-products">
-											<div class="row  panel panel-default">
-												<div class="panel-body">Categories</div>
-												{% for cat in category %}
-												<div class="col-md-4">
-													<a href="{% url 'categorydetail' cat.id %}" style="text-decoration: none;">
-														<div class="thumbnail">
-																<img src={{cat.icon.url}} alt="item-imgs"/>
-															
-															<div class="caption">
-																<h5>{{cat.category_name}}</h5>
-															</div>
-														</div>
-													</a>
-												</div>
-												{% endfor %}
-											</div>
-										</div>
-										{% if news %}
-										<div class="panel panel-default">
-											<div class="panel-body">Articles to help you shop<a href="{% url 'news' %}"><span class="badge pull-right">Show More</span></a></div>
-											<div class="news-wraping">
-												
-												<div class="row">
-													{% for new in news|slice:":12" %}
-													<div class="col-md-4">
-														<div class="news-content">
-															<a href="{% url 'newsdetail' new.id %}" style="text-decoration: none;">
-																<div class="thumbnail">
-																		<img src={{new.image_url}} alt="item-imgs"/>
-																	
-																	<div class="caption">
-																		<h5 class="news-ttle">{{new.title}}</h5>
-																	</div>
-																</div>
-															</a>
-														</div>
-													</div>
-													{% endfor %}
-												</div>
-												
-											</div>
-										</div>
-										{% endif %}
-										<div clas="clearfix"></div>
-									</div>
-								</div>
-							</div>
-							
-							<div class="col-md-4">
-								<div class="similar-content">
-									<div class="similar-content" style="margin-top: 40px;">
-										<div class="panel panel-default">
-											<div class="panel-body">Top 3 popular Products in Men</div>
-											{% for data in data1|slice:":3" %}
-											<a href="{% url 'productdetail' data.product.id %}" style="text-decoration: none;">
-												<div class="thumbnail">
-														<img src={{data.product.mainimage}} alt="item-imgs"/>
-													
-													<div class="caption announce">
-														<a href="{% url 'productdetail' data.product.id %}"><h5>{{data.product.title}}</h5></a>	
-														{% if data.product.offer_price %}
-															<h5> &#8377; {{data.product.offer_price}} </h5>
-														{% else %}
-															<h5> &#8377; {{data.product.sale_price}} </h5>
-														{% endif %}
-													</div>
-												</div>
-											</a>
-											{% endfor %}
-										</div>
-									</div>
-								</div>
-								<div class="similar-content">
-									<div class="similar-content">
-										<div class="panel panel-default">
-											<div class="panel-body">Top 3 popular Products in Women</div>
-											{% for data in data2|slice:":3" %}
-											<a href="{% url 'productdetail' data.product.id %}" style="text-decoration: none;">
-												<div class="thumbnail">
-														<img src={{data.product.mainimage}} alt="item-imgs"/>
-													
-													<div class="caption announce">
-														<a href="{% url 'productdetail' data.product.id %}"><h5>{{data.product.title}}</h5></a>	
-														{% if data.product.offer_price %}
-															<h5> &#8377; {{data.product.offer_price}} </h5>
-														{% else %}
-															<h5> &#8377; {{data.product.sale_price}} </h5>
-														{% endif %}
-													</div>
-												</div>
-											</a>
-											{% endfor %}
-										</div>
-									</div>
-								</div>
-								<div class="similar-content">
-									<div class="similar-content">
-										<div class="panel panel-default">
-											<div class="panel-body">Top 3 popular Products in Appliances</div>
-											{% for data in data3|slice:":3" %}
-											<a href="{% url 'productdetail' data.product.id %}" style="text-decoration: none;">
-												<div class="thumbnail">
-														<img src={{data.product.mainimage}} alt="item-imgs"/>
-													
-													<div class="caption announce">
-														<a href="{% url 'productdetail' data.product.id %}"><h5>{{data.product.title}}</h5></a>	
-														{% if data.product.offer_price %}
-															<h5> &#8377; {{data.product.offer_price}} </h5>
-														{% else %}
-															<h5> &#8377; {{data.product.sale_price}} </h5>
-														{% endif %}
-													</div>
-												</div>
-											</a>
-											{% endfor %}
-										</div>
-									</div>
-								</div>
-								<div class="similar-content">
-									<div class="similar-content">
-										<div class="panel panel-default">
-											<div class="panel-body">Top 3 popular Products in Home</div>
-											{% for data in data4|slice:":3" %}
-											<a href="{% url 'productdetail' data.product.id %}" style="text-decoration: none;">
-												<div class="thumbnail">
-														<img src={{data.product.mainimage}} alt="item-imgs"/>
-													
-													<div class="caption announce">
-														<a href="{% url 'productdetail' data.product.id %}"><h5>{{data.product.title}}</h5></a>	
-														{% if data.product.offer_price %}
-															<h5> &#8377; {{data.product.offer_price}} </h5>
-														{% else %}
-															<h5> &#8377; {{data.product.sale_price}} </h5>
-														{% endif %}
-													</div>
-												</div>
-											</a>
-											{% endfor %}
-										</div>
-									</div>
-								</div>
-								<div class="similar-content">
-									<div class="similar-content">
-										<div class="panel panel-default">
-											<div class="panel-body">Top 3 popular Products in Electronics</div>
-											{% for data in data5|slice:":3" %}
-											<a href="{% url 'productdetail' data.product.id %}" style="text-decoration: none;">
-												<div class="thumbnail">
-														<img src={{data.product.mainimage}} alt="item-imgs"/>
-													
-													<div class="caption announce">
-														<a href="{% url 'productdetail' data.product.id %}"><h5>{{data.product.title}}</h5></a>	
-														{% if data.product.offer_price %}
-															<h5> &#8377; {{data.product.offer_price}} </h5>
-														{% else %}
-															<h5> &#8377; {{data.product.sale_price}} </h5>
-														{% endif %}
-													</div>
-												</div>
-											</a>
-											{% endfor %}
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-					</div>
-				</section>
-
-				<section class="genuine-products">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-4">
-								<div class="artical artical-base">
-									<div class="added-content">
-										<img src="{% static "images/product.png" %}" alt="product-img"/>
-									</div>
-									<div class="added-contents">
-										<h4>Search millions of products from leading online stores.</h4>
-									</div>
-									<div class="clearfix"></div>	
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="artical artical-base">
-									<div class="added-content">
-										<img src="{% static "images/articles.png" %}" alt="product-img"/>
-									</div>
-									<div class="added-contents">
-										<h4>Read articles and reviews to help you shop.</h4>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="artical artical-base">
-									<div class="added-content">
-										<img src="{% static "images/community.png" %}" alt="product-img"/>
-									</div>
-									<div class="added-contents">
-										<h4>Get buying advice from active community.</h4>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>	
-
-				<!-- Start Footer -->    
-				<footer>
-					<div claSS="container">
-						<div class="row">
-							<div class="col-md-8">
-								<div class="shopping-footer">
-									<h4>Categories</h4>
-									<div class="row">
-										<div class="col-md-4">
-											<ol class="list-unstyled">
-												{% for cat in navbar_category|slice:":5" %}
-												<li><a href="{% url 'categorydetail' cat.id %}">{{cat.category_name}}</a></li>
-												{% endfor %}
-											</ol>
-										</div>
-										<div class="col-md-4">
-											<ol class="list-unstyled">
-												{% for cat in navbar_category|slice:"5:10" %}
-												<li><a href="{% url 'categorydetail' cat.id %}">{{cat.category_name}}</a></li>
-												{% endfor %}
-											</ol>
-										</div>
-										<div class="col-md-4">
-											<ol class="list-unstyled">
-												{% for cat in navbar_category|slice:"10:" %}
-												<li><a href="{% url 'categorydetail' cat.id %}">{{cat.category_name}}</a></li>
-												{% endfor %}
-											</ol>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="about-shopping">
-									<h4 class="about-shp"><a href="{% url 'home' %}">Serfo Shopping</a></h4>
-									<p class="contents">
-										Serfo Shopping is your best guide to shop for online products. It aggregates products from all leading stores such as Flipkart, Amazon , Snapdeal and many more exclusive online stores in India to give you largest collection of products to choose from. We guarantee cheapest prices on all of our products. In Addition go through our growing collection of articles, reviews written by category experts to guide you in your shopping journey. Ask questions about what to buy from our active community who are there to help you out. Serfo Shopping is your starting point for online shopping journey.
-									</p>
-									<p class="copie">Copy &copy; 2016 Serfo Shopping, All rights reserved &reg; .</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</footer>
-				<!-- End Footer -->
-			</div>
-			<!-- initialize jQuery Library --> 
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-			<!-- jquery -->
-			<script src="{% static "js/jquery.min.js" %}"></script>
-			<!-- Bootstrap -->
-			<script src="{% static "js/bootstrap.min.js" %}"></script>
-			<script src="{% static "js/owl.carousel.min.js" %}"></script>
-			
-		</body>
-	</html>
-=======
-<!DOCTYPE html>
-{% load static from staticfiles %}
-	<html lang="en">
-		<head>
-			<title>Serfo Shopping - Latest Handbags & Luggage, Beauty, Health & Gourmet, Books, Cameras, Audio & Video, Car, Motorbike & Industrial, Clothing & Accessories, Computers & Accessories, Home, Kitchen & Pets, Jewellery, Watches & Eyewear, Mobiles & Tablets, Shoes, Sports, Fitness & Outdoors, Toys & Baby Products, Movies, Music & Video Games 2016</title>
-			<!-- meta name -->
-			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<meta name="keywords" content="">
-			<meta name="author" content="">
-			<!-- Favicon -->
-			<link rel="shortcut icon" type="images/icon" href="{% static "images/favicon.ico" %}"/>
-			<!-- Bootstrap -->
-			<link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet"> 
-			<!--<link href="css/bootstrap.css" rel="stylesheet"> -->
-			<!-- Font Awesome -->
-			<link href="{% static "css/font-awesome.css" %}" rel="stylesheet">
-			<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-			<!-- Main Style -->
-			<link href="{% static "css/owl.carousel.css" %}" rel="stylesheet">
-			<link href="{% static "css/owl.theme.css" %}" rel="stylesheet">
-			<link href="{% static "css/style.css" %}" rel="stylesheet">
-			<script>
-				function openNav() {
-				    document.getElementById("mySidenav").style.width = "250px";
-				}
-
-				function closeNav() {
-				    document.getElementById("mySidenav").style.width = "0";
-				}
-			</script>
-			
-		</head>
-		
-		<body>
-			<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TMWGDS"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-TMWGDS');</script>
-			<div class="wrapper" id="wrapper">
-				<header>
-					<div class="header-main">
-						<nav class="navbar navbar-default">
-						  	<div class="container-fluid">
-							    <!-- Brand and toggle get grouped for better mobile display -->
-							    <div class="navbar-header">
-							      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-							        <span class="sr-only">Toggle navigation</span>
-							        <span class="icon-bar"></span>
-							        <span class="icon-bar"></span>
-							        <span class="icon-bar"></span>
-							      </button>
-							      	<span id="mySidenav" class="sidenav" style="">
-									  	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="color: #000;">&times;</a>
-									  	<div class="listing nav-listings">
-											<div class="container-fluid">
-												<nav class="navbar navbar-default navbar-static-top" role="navigation" style="background-color: #ddd;">
-										            <div class="collapse navbar-collapse" id="navbar-collapse-1" style="display: block;">
-										                <ul class="nav navbar-nav">
-										                    {% for cat in navbar_category %}
-															<li class="item-lis first"><a href="{% url 'categorydetail' cat.id %}">{{cat.category_name}}</a></li>
-															{% endfor %}
-										                </ul>
-										            </div>
-										        </nav>
-											</div>
-										</div>
-									</span>
-							       <a class="" href="#" style="text-decoration: none;"><span class="hidden-lg hidden-md pull-left" style="padding-left: 18px;font-size:18px;line-height:50px;color: #000;cursor:pointer" onclick="openNav()"><i class="fa fa-bars" aria-hidden="true"></i></span></a>
-							       &nbsp; 
-							       <a class="navbar-brand" href="{% url 'home' %}"><b>Serfo Shopping</b></a>
-							    </div>
-
-							    <!-- Collect the nav links, forms, and other content for toggling -->
-							    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-							      <!-- <ul class="nav navbar-nav">
-							        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-							        <li><a href="#">Link</a></li>
-							      </ul> -->
-							      	<form class="navbar-form navbar-left" action="{% url 'results' %}" method="get" role="search">
+								<!-- Collect the nav links, forms, and other content for toggling -->
+								<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+									<form class="navbar-form navbar-left" action="{% url 'results' %}" method="get" role="search">
 							         	<div class="input-group" style="z-index: 0;">
 											<input class="form-control" type="search" value="Search millions of products from leading online stores." name="q" placeholder="Search millions of products from leading online stores." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search millions of products from leading online stores.';}" required="" style="outline: none;box-shadow: none;">
-											<span class="input-group-btn" style="text-align: left;">
-												<button type="search" value="Search" class="btn btn-default" style="outline: none;box-shadow: none;"><i class="fa fa-search" aria-hidden="true"></i></button>
-										  	</span>
+											
+										  	<span class="input-group-addon btn searchs" type="search" value="Search" id="sizing-addon1">
+												<i class="fa fa-search" aria-hidden="true"></i> &nbsp;
+												Search
+											</span>
 										</div>
 							      	</form>
-
-							      <ul class="nav navbar-nav navbar-right">
-							      	{% if user.is_authenticated %}
-									<li>
-										<span class="pu">
-								        	{% if user.socialaccount_set.all.0.get_avatar_url %}
-											<a href="{% url 'logout' %}"><img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" style="width:28px;max-width: 100%;border-radius: 100%;"></a> &nbsp;
-											{% else %}
-											<a href="{% url 'logout' %}"><img src="http://minorschool.net/user-avatar/avatar-placeholder.jpg" style="width:28px;max-width: 100%;border-radius: 100%;"></a> &nbsp; 
-											{% endif %}
-										</span>
-										<span class="su">
-							       			<a href="{% url 'logout' %}" style="text-decoration: none;color: #000;">{{ user.username }} &nbsp; ( <b>Logout</b> )</a>
-							       		</span>
-							       	</li>
-							        {% else %}
-							        <li>
-							        	<span class="pu">
-							        		<a href="{% url 'login' %}"><img src="http://minorschool.net/user-avatar/avatar-placeholder.jpg" style="width:28px;max-width: 100%;border-radius: 100%;"></a>
-							       		</span>
-							       		&nbsp; &nbsp; 
-							       		<span class="su">
-							       			<a href="{% url 'login' %}" style="text-decoration: none;color: #000;">Login</a>
-							       		</span>
-							       	</li>
-							        {% endif %}
-							      </ul>
-							    </div><!-- /.navbar-collapse -->
-						  	</div><!-- /.container-fluid -->
+								<!--<ul class="nav navbar-nav navbar-right">
+										<li class="dropdown">
+										  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Login / Signup</b> <span class="caret"></span></a>
+										  <ul class="dropdown-menu">
+											<li><a href="#">Action</a></li>
+											<li><a href="#">Another action</a></li>
+											<li><a href="#">Something else here</a></li>
+											<li role="separator" class="divider"></li>
+											<li><a href="#">Separated link</a></li>
+										  </ul>
+										</li>
+									</ul>-->
+								</div><!-- /.navbar-collapse -->
+								
+								<nav class="nav navbar-nav">
+									<ul class="nav nav-justified navbar-nav" style="float:none;">
+										{% for cat in navbar_category|slice:"5:7" %}
+										<li style="float:none;"><a href="{% url 'categorydetail' cat.category_slug %}">{{cat.category_name}}</a></li>
+										{% endfor %}
+										{% for cat in navbar_category|slice:"1:2" %}
+										<li style="float:none;"><a href="{% url 'categorydetail' cat.category_slug %}">{{cat.category_name}}</a></li>
+										{% endfor %}
+										{% for cat in navbar_category|slice:"10:11" %}
+										<li style="float:none;"><a href="{% url 'categorydetail' cat.category_slug %}">{{cat.category_name}}</a></li>
+										{% endfor %}
+										{% for cat in navbar_category|slice:"9:10" %}
+										<li style="float:none;"><a href="{% url 'categorydetail' cat.category_slug %}">{{cat.category_name}}</a></li>
+										{% endfor %}
+									</ul>
+								</nav>
+							</div><!-- /.container-fluid -->
 						</nav>
 					</div>
-					
-					<div class="listing hidden-sm hidden-xs">
-					 	<ul class="nav nav-sidebar">
-				            <li class="dropdown-submenu" style="outline:none;box-shadow:none;">
-				                <a tabindex="-1" style="text-decoration: none;color:#000;outline:none;box-shadow:none;">All Categories</a>
-				                 <ul class="dropdown-menu">
-				                 	{% for cat in navbar_category %}
-				                    <li class="dropdown-submenu">
-				                         <a href="{% url 'categorydetail' cat.id %}" style="text-decoration: none;color:#000;">{{cat.category_name}}</a>
-				                         <ul class="dropdown-menu">
-				                         	{% for sub in cat.get_subs %}
-				                             <li><a href="{% url 'subcategorydetail' cat.id sub.id %}" style="text-decoration: none;color:#000;">{{sub.subcategory_name}}</a></li>
-				                             {% endfor %}
-				                         </ul>
-				                    </li>
-				                    {% endfor %}
-				                </ul>
-				            </li>
-				            {% for cat in navbar_category|slice:"5:12" %}
-							<li class="item-lis first"><a href="{% url 'categorydetail' cat.id %}">{{cat.category_name}}</a></li>
-							{% endfor %}
-			          	</ul>
-					</div>
-
 				</header>
-
-				<section class="Bishopping-main">
-					<div class="container">
+				
+				<section class="top-content">
+					<div class="container-fluid">
 						<div class="row">
-							<div class="col-md-8">
-
-								<div class="main-wrap">
-									<div class="main-content">
-										<div class="main-products">
-											<div class="row  panel panel-default">
-												<div class="panel-body">Categories</div>
-												{% for cat in category %}
-												<div class="col-md-4">
-													<a href="{% url 'categorydetail' cat.id %}" style="text-decoration: none;">
-														<div class="thumbnail">
-																<img src={{cat.icon.url}} alt="item-imgs"/>
-															
-															<div class="caption">
-																<h5>{{cat.category_name}}</h5>
-															</div>
-														</div>
-													</a>
+							<div class="col-md-12">
+								<div class="col-md-3 cat-group">
+									<div class="top-one" style="padding:0 10px;">
+										<div class="list-group">
+											<h4 class="list-group-item active">
+												All Categories
+											</h4>
+											{% for cat in navbar_category %}
+											<a href="{% url 'categorydetail' cat.category_slug %}" class="list-group-item list-group-item-action">{{cat.category_name}}</a>
+											{% endfor %}
+										</div>
+									</div>
+								</div>
+								
+								<div class="col-md-9 fly-slider">
+									<div class="top-one top-two">
+										<div id="myCarousel" class="carousel slide" data-ride="carousel">
+										  <!-- Wrapper for slides -->
+										  <div class="carousel-inner">
+										  {% for sale in saleoffer|slice:":1" %}
+											<div class="item active">
+											  <a href="{{sale.link}}" style="color: #000;text-decoration: none;"><img src="{{sale.image}}" class="adv-slide"></a>
+											   <div class="carousel-caption">
 												</div>
+											</div><!-- End Item -->
+										  {% endfor %}	
+										  {% for sale in saleoffer|slice:"1:" %}
+											<div class="item">
+											  <a href="{{sale.link}}" style="color: #000;text-decoration: none;"><img src="{{sale.image}}" class="adv-slide"></a>
+											   <div class="carousel-caption">
+												</div>
+											</div><!-- End Item -->
+										  {% endfor %}			
+										  </div><!-- End Carousel Inner -->
+										</div><!-- End Carousel -->
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-9 articles-page">
+										<div class="artical artical-high">
+											<h4 class="inner-title">
+												Articles to help you shop
+											</h4>
+											<div id="owl-demo" class="owl-carousel owl-theme">
+												{% for new in news %}
+												<a href="{% url 'newsdetail' new.id %}" style="color: #000;text-decoration: none;"><div class="item">
+													<div class="column productbox">
+														<img src={{new.image_url}} class="img-responsive">
+														<div class="producttitle">{{new.title}}</div>
+													</div>
+												</div></a>
 												{% endfor %}
 											</div>
-										</div>
-										{% if news %}
-										<div class="panel panel-default hidden-xs hidden-sm">
-											<div class="panel-body">Articles to help you shop<a href="{% url 'news' %}"><span class="badge pull-right">Show More</span></a></div>
-											<div class="news-wraping">
-												
-												<div class="row">
-													{% for new in news|slice:":12" %}
-													<div class="col-md-4">
-														<div class="news-content">
-															<a href="{% url 'newsdetail' new.id %}" style="text-decoration: none;">
-																<div class="thumbnail">
-																		<img src={{new.image_url}} alt="item-imgs"/>
-																	
-																	<div class="caption">
-																		<h5 class="news-ttle">{{new.title}}</h5>
-																	</div>
-																</div>
-															</a>
-														</div>
-													</div>
-													{% endfor %}
-												</div>
-												
-											</div>
-										</div>
-										{% endif %}
-										<div clas="clearfix"></div>
-
-
-										<div class="panel panel-default hidden-lg hidden-md">
-											<div class="panel-body">Articles to help you shop
-												<a href="{% url 'news' %}">
-													<span class="badge pull-right">Show More</span>
-												</a>
-											</div>
-											<div id="owl-demo" class="owl-carousel owl-theme news-wraping">
-												{% for new in news|slice:":12" %}
-												<div class="news-content">
-													<a href="{% url 'newsdetail' new.id %}" style="text-decoration: none;">
-													  	<div class="item thumbnail">
-													  		<img src={{new.image_url}} alt="item-imgs"/>
-												  			<div class="caption">
-												  				<h5 class="news-ttle">{{new.title}}</h5>
-												  			</div>
-												  		</div>
-											  		</a>
-										  		</div>
-										  		{% endfor %}
-											</div>
-										</div>										
-									</div>
-								</div>
-							</div>
-							
-							<div class="col-md-4">
-								<div class="similar-content">
-									<div class="similar-content" style="margin-top: 40px;">
-										<div class="panel panel-default">
-											<div class="panel-body">Top 3 popular Products in Men</div>
-											{% for data in data1|slice:":3" %}
-											<a href="{% url 'productdetail' data.product.id %}" style="text-decoration: none;">
-												<div class="thumbnail">
-														<img src={{data.product.mainimage}} alt="item-imgs"/>
-													
-													<div class="caption announce">
-														<a href="{% url 'productdetail' data.product.id %}"><h5>{{data.product.title}}</h5></a>	
-														{% if data.product.offer_price %}
-															<h5> <i class="fa fa-inr" aria-hidden="true"></i> {{data.product.offer_price}} </h5>
-														{% else %}
-															<h5> <i class="fa fa-inr" aria-hidden="true"></i> {{data.product.sale_price}} </h5>
-														{% endif %}
-													</div>
-												</div>
-											</a>
-											{% endfor %}
-										</div>
-									</div>
-								</div>
-								<div class="similar-content">
-									<div class="similar-content">
-										<div class="panel panel-default">
-											<div class="panel-body">Top 3 popular Products in Women</div>
-											{% for data in data2|slice:":3" %}
-											<a href="{% url 'productdetail' data.product.id %}" style="text-decoration: none;">
-												<div class="thumbnail">
-														<img src={{data.product.mainimage}} alt="item-imgs"/>
-													
-													<div class="caption announce">
-														<a href="{% url 'productdetail' data.product.id %}"><h5>{{data.product.title}}</h5></a>	
-														{% if data.product.offer_price %}
-															<h5> <i class="fa fa-inr" aria-hidden="true"></i> {{data.product.offer_price}} </h5>
-														{% else %}
-															<h5> <i class="fa fa-inr" aria-hidden="true"></i> {{data.product.sale_price}} </h5>
-														{% endif %}
-													</div>
-												</div>
-											</a>
-											{% endfor %}
-										</div>
-									</div>
-								</div>
-								<div class="similar-content">
-									<div class="similar-content">
-										<div class="panel panel-default">
-											<div class="panel-body">Top 3 popular Products in Appliances</div>
-											{% for data in data3|slice:":3" %}
-											<a href="{% url 'productdetail' data.product.id %}" style="text-decoration: none;">
-												<div class="thumbnail">
-														<img src={{data.product.mainimage}} alt="item-imgs"/>
-													
-													<div class="caption announce">
-														<a href="{% url 'productdetail' data.product.id %}"><h5>{{data.product.title}}</h5></a>	
-														{% if data.product.offer_price %}
-															<h5> <i class="fa fa-inr" aria-hidden="true"></i> {{data.product.offer_price}} </h5>
-														{% else %}
-															<h5> <i class="fa fa-inr" aria-hidden="true"></i> {{data.product.sale_price}} </h5>
-														{% endif %}
-													</div>
-												</div>
-											</a>
-											{% endfor %}
-										</div>
-									</div>
-								</div>
-								<div class="similar-content">
-									<div class="similar-content">
-										<div class="panel panel-default">
-											<div class="panel-body">Top 3 popular Products in Home</div>
-											{% for data in data4|slice:":3" %}
-											<a href="{% url 'productdetail' data.product.id %}" style="text-decoration: none;">
-												<div class="thumbnail">
-														<img src={{data.product.mainimage}} alt="item-imgs"/>
-													
-													<div class="caption announce">
-														<a href="{% url 'productdetail' data.product.id %}"><h5>{{data.product.title}}</h5></a>	
-														{% if data.product.offer_price %}
-															<h5> <i class="fa fa-inr" aria-hidden="true"></i> {{data.product.offer_price}} </h5>
-														{% else %}
-															<h5> <i class="fa fa-inr" aria-hidden="true"></i> {{data.product.sale_price}} </h5>
-														{% endif %}
-													</div>
-												</div>
-											</a>
-											{% endfor %}
-										</div>
-									</div>
-								</div>
-								<div class="similar-content">
-									<div class="similar-content">
-										<div class="panel panel-default">
-											<div class="panel-body">Top 3 popular Products in Electronics</div>
-											{% for data in data5|slice:":3" %}
-											<a href="{% url 'productdetail' data.product.id %}" style="text-decoration: none;">
-												<div class="thumbnail">
-														<img src={{data.product.mainimage}} alt="item-imgs"/>
-													
-													<div class="caption announce">
-														<a href="{% url 'productdetail' data.product.id %}"><h5>{{data.product.title}}</h5></a>	
-														{% if data.product.offer_price %}
-															<h5> <i class="fa fa-inr" aria-hidden="true"></i> {{data.product.offer_price}} </h5>
-														{% else %}
-															<h5> <i class="fa fa-inr" aria-hidden="true"></i> {{data.product.sale_price}} </h5>
-														{% endif %}
-													</div>
-												</div>
-											</a>
-											{% endfor %}
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						
+					</div>
+				</section>
+				
+				<section class="top-main-second">
+					<div class="container-fluid">
+						<div class="row products-slider">
+							<div class="artical">
+								<h4 class="inner-title">
+									Trending in Men
+								</h4>
+								<div id="owl-demo-on" class="owl-carousel owl-theme">
+									{% for data in data1 %}
+									<div class="item">
+										<a href="{% url 'productdetail' data.product.id %}" style="text-decoration:none;color:#000;	">
+										<div class="column productbox">
+											<img src={{data.product.mainimage}} class="img-responsive">
+											<div class="producttitle">{{data.product.title}}</div>
+											<div class="productprice">
+												<!-- <div class="pull-right">
+													<a href="{% url 'productdetail' data.product.id %}" class="btn btn-sm" role="button"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+												</div> -->
+												{% if data.product.offer_price %}
+												<div class="pricetext"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{data.product.offer_price}}</div>
+												{% else %}
+												<div class="pricetext"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{data.product.sale_price}}</div>
+												{% endif %}
+												<div class="clearfix"></div>
+											</div>
+										</div></a>
+									</div>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				
+				<section class="top-main-second">
+					<div class="container-fluid">
+						<div class="row products-slider">
+							<div class="artical">
+								<h4 class="inner-title">
+									Trending in Women
+								</h4>
+								<div id="owl-demo-one" class="owl-carousel owl-theme">
+									{% for data in data2 %}
+									<div class="item">
+										<a href="{% url 'productdetail' data.product.id %}" style="text-decoration:none;color:#000;	">
+										<div class="column productbox">
+											<img src={{data.product.mainimage}} class="img-responsive">
+											<div class="producttitle">{{data.product.title}}</div>
+											<div class="productprice">
+												<!-- <div class="pull-right">
+													<a href="{% url 'productdetail' data.product.id %}" class="btn btn-sm" role="button"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+												</div> -->
+												{% if data.product.offer_price %}
+												<div class="pricetext"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{data.product.offer_price}}</div>
+												{% else %}
+												<div class="pricetext"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{data.product.sale_price}}</div>
+												{% endif %}
+												<div class="clearfix"></div>
+											</div>
+										</div></a>
+									</div>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section class="top-main-second">
+					<div class="container-fluid">
+						<div class="row products-slider">
+							<div class="artical">
+								<h4 class="inner-title">
+									Trending in Appliances
+								</h4>
+								<div id="owl-demo-two" class="owl-carousel owl-theme">
+									{% for data in data3 %}
+									<div class="item">
+										<a href="{% url 'productdetail' data.product.id %}" style="text-decoration:none;color:#000;	">
+										<div class="column productbox">
+											<img src={{data.product.mainimage}} class="img-responsive">
+											<div class="producttitle">{{data.product.title}}</div>
+											<div class="productprice">
+												<!-- <div class="pull-right">
+													<a href="{% url 'productdetail' data.product.id %}" class="btn btn-sm" role="button"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+												</div> -->
+												{% if data.product.offer_price %}
+												<div class="pricetext"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{data.product.offer_price}}</div>
+												{% else %}
+												<div class="pricetext"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{data.product.sale_price}}</div>
+												{% endif %}
+												<div class="clearfix"></div>
+											</div>
+										</div></a>
+									</div>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section class="top-main-second">
+					<div class="container-fluid">
+						<div class="row products-slider">
+							<div class="artical">
+								<h4 class="inner-title">
+									Trending in Home
+								</h4>
+								<div id="owl-demo-three" class="owl-carousel owl-theme">
+									{% for data in data4 %}
+									<div class="item">
+										<a href="{% url 'productdetail' data.product.id %}" style="text-decoration:none;color:#000;	">
+										<div class="column productbox">
+											<img src={{data.product.mainimage}} class="img-responsive">
+											<div class="producttitle">{{data.product.title}}</div>
+											<div class="productprice">
+												<!-- <div class="pull-right">
+													<a href="{% url 'productdetail' data.product.id %}" class="btn btn-sm" role="button"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+												</div> -->
+												{% if data.product.offer_price %}
+												<div class="pricetext"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{data.product.offer_price}}</div>
+												{% else %}
+												<div class="pricetext"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{data.product.sale_price}}</div>
+												{% endif %}
+												<div class="clearfix"></div>
+											</div>
+										</div></a>
+									</div>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section class="top-main-second">
+					<div class="container-fluid">
+						<div class="row products-slider">
+							<div class="artical">
+								<h4 class="inner-title">
+									Trending in Electronics
+								</h4>
+								<div id="owl-demo-four" class="owl-carousel owl-theme">
+									{% for data in data5 %}
+									<div class="item">
+										<a href="{% url 'productdetail' data.product.id %}" style="text-decoration:none;color:#000;	">
+										<div class="column productbox">
+											<img src={{data.product.mainimage}} class="img-responsive">
+											<div class="producttitle">{{data.product.title}}</div>
+											<div class="productprice">
+												<!-- <div class="pull-right">
+													<a href="{% url 'productdetail' data.product.id %}" class="btn btn-sm" role="button"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+												</div> -->
+												{% if data.product.offer_price %}
+												<div class="pricetext"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{data.product.offer_price}}</div>
+												{% else %}
+												<div class="pricetext"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{data.product.sale_price}}</div>
+												{% endif %}
+												<div class="clearfix"></div>
+											</div>
+										</div></a>
+									</div>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- <section class="top-main-second">
+					<div class="container-fluid">
+						<div class="row products-slider">
+							<div class="artical">
+								<div id="owl-demo-five" class="owl-carousel owl-theme">
+									<div class="item">
+										<a href="#" style="text-decoration:none;color:#000;	">
+											<div class="add-left">
+												<img src="http://g-ecx.images-amazon.com/images/G/31/img16/Xsite/GaS/Amazon_Cares_BB_NonART._UX440_SX440_CB277158458_.jpg" class="img-responsive"/>
+											</div>
+										</a>
+									</div>
+									<div class="item">
+										<a href="#" style="text-decoration:none;color:#000;	">
+											<div class="add-left">
+												<img src="http://g-ecx.images-amazon.com/images/G/31/img16/Xsite/GaS/Amazon_Cares_BB_NonART._UX440_SX440_CB277158458_.jpg" class="img-responsive"/>
+											</div>
+										</a>
+									</div>
+									<div class="item">
+										<a href="#" style="text-decoration:none;color:#000;	">
+											<div class="add-left">
+												<img src="http://g-ecx.images-amazon.com/images/G/31/img16/Xsite/GaS/Amazon_Cares_BB_NonART._UX440_SX440_CB277158458_.jpg" class="img-responsive"/>
+											</div>
+										</a>
+									</div>
+									<div class="item">
+										<a href="#" style="text-decoration:none;color:#000;	">
+											<div class="add-left">
+												<img src="http://g-ecx.images-amazon.com/images/G/31/img16/Xsite/GaS/Amazon_Cares_BB_NonART._UX440_SX440_CB277158458_.jpg" class="img-responsive"/>
+											</div>
+										</a>
+									</div>
+									<div class="item">
+										<a href="#" style="text-decoration:none;color:#000;	">
+											<div class="add-left">
+												<img src="http://g-ecx.images-amazon.com/images/G/31/img16/Xsite/GaS/Amazon_Cares_BB_NonART._UX440_SX440_CB277158458_.jpg" class="img-responsive"/>
+											</div>
+										</a>
+									</div>
+									<div class="item">
+										<a href="#" style="text-decoration:none;color:#000;	">
+											<div class="add-right">
+												<img src="http://g-ecx.images-amazon.com/images/G/31/img16/Xsite/GaS/Amazon_Cares_BB_NonART._UX440_SX440_CB277158458_.jpg" class="img-responsive"/>
+											</div>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section> -->
+
+				<section class="top-main-second">
+					<div class="container-fluid">
+						<div class="row products-slider">
+							<div class="offer-articals">
+								<div class="offers-add">
+									<div class="row">
+										{% for i in limitedoffer|slice:":3" %}
+										<div class="col-md-4">
+											<div class="add-left">
+												<a href="{{i.link}}"><img src={{i.image}} class="img-responsive"/></a>
+											</div>
+										</div>
+										{% endfor %}
+									</div>
+									<div class="row">
+										{% for j in limitedoffer|slice:"3:" %}
+										<div class="col-md-4">
+											<div class="add-left">
+												<a href="{{j.link}}"><img src={{j.image}} class="img-responsive"/></a>
+											</div>
+										</div>
+										{% endfor %}
+									</div>
+								</div>
+							</div>
+						</div>
+
 					</div>
 				</section>
 
 				<section class="genuine-products">
-					<div class="container">
+					<div class="container-fluid">
 						<div class="row">
 							<div class="col-md-4">
-								<div class="artical artical-base">
+								<div class="artical-base">
 									<div class="added-content">
-										<img src="{% static "images/product.png" %}" alt="product-img"/>
+										<img src="/static/images/product.png" alt="product-img">
 									</div>
 									<div class="added-contents">
 										<h4>Search millions of products from leading online stores.</h4>
@@ -789,9 +424,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 								</div>
 							</div>
 							<div class="col-md-4">
-								<div class="artical artical-base">
+								<div class="artical-base">
 									<div class="added-content">
-										<img src="{% static "images/articles.png" %}" alt="product-img"/>
+										<img src="/static/images/articles.png" alt="product-img">
 									</div>
 									<div class="added-contents">
 										<h4>Read articles and reviews to help you shop.</h4>
@@ -800,9 +435,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 								</div>
 							</div>
 							<div class="col-md-4">
-								<div class="artical artical-base">
+								<div class="artical-base">
 									<div class="added-content">
-										<img src="{% static "images/community.png" %}" alt="product-img"/>
+										<img src="/static/images/community.png" alt="product-img">
 									</div>
 									<div class="added-contents">
 										<h4>Get buying advice from active community.</h4>
@@ -810,55 +445,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 									<div class="clearfix"></div>
 								</div>
 							</div>
+							<p class="about-txt">
+								Serfo Shopping is your best guide to shop for online products. It aggregates products from all leading stores such as Flipkart, Amazon , Snapdeal and many more exclusive online stores in India to give you largest collection of products to choose from. We guarantee cheapest prices on all of our products. In Addition go through our growing collection of articles, reviews written by category experts to guide you in your shopping journey. Ask questions about what to buy from our active community who are there to help you out. Serfo Shopping is your starting point for online shopping journey.
+							</p>
+							<p class="foot-part">
+								Copyright &copy; 2016 Serfo Shopping, All rights reserved &reg; .
+							</p>
 						</div>
 					</div>
-				</section>	
+				</section>
 
-				<!-- Start Footer -->    
-				<footer>
-					<div claSS="container">
-						<div class="row">
-							<div class="col-md-8">
-								<div class="shopping-footer">
-									<h4>Categories</h4>
-									<div class="row">
-										<div class="col-md-4">
-											<ol class="list-unstyled">
-												{% for cat in navbar_category|slice:":5" %}
-												<li><a href="{% url 'categorydetail' cat.id %}">{{cat.category_name}}</a></li>
-												{% endfor %}
-											</ol>
-										</div>
-										<div class="col-md-4">
-											<ol class="list-unstyled">
-												{% for cat in navbar_category|slice:"5:10" %}
-												<li><a href="{% url 'categorydetail' cat.id %}">{{cat.category_name}}</a></li>
-												{% endfor %}
-											</ol>
-										</div>
-										<div class="col-md-4">
-											<ol class="list-unstyled">
-												{% for cat in navbar_category|slice:"10:" %}
-												<li><a href="{% url 'categorydetail' cat.id %}">{{cat.category_name}}</a></li>
-												{% endfor %}
-											</ol>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="about-shopping">
-									<h4 class="about-shp"><a href="{% url 'home' %}">Serfo Shopping</a></h4>
-									<p class="contents">
-										Serfo Shopping is your best guide to shop for online products. It aggregates products from all leading stores such as Flipkart, Amazon , Snapdeal and many more exclusive online stores in India to give you largest collection of products to choose from. We guarantee cheapest prices on all of our products. In Addition go through our growing collection of articles, reviews written by category experts to guide you in your shopping journey. Ask questions about what to buy from our active community who are there to help you out. Serfo Shopping is your starting point for online shopping journey.
-									</p>
-									<p class="copie">Copy &copy; 2016 Serfo Shopping, All rights reserved &reg; .</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</footer>
-				<!-- End Footer -->
 			</div>
 			<!-- initialize jQuery Library --> 
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -867,23 +463,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 			<!-- Bootstrap -->
 			<script src="{% static "js/bootstrap.min.js" %}"></script>
 			<script src="{% static "js/owl.carousel.min.js" %}"></script>
-
-			<script>
-				$(document).ready(function() {
- 
-				  $("#owl-demo").owlCarousel({
-				 
-			      	navigation : false, // Show next and prev buttons
-			 		autoPlay:false,
-			 		pagination:false,
-			      	slideSpeed : 300,
-			      	paginationSpeed : 400,
-			      	items : 2
-				 
-				  });
-				 
-				});
-			</script>
+			<script src="{% static "js/added.js" %}"></script>
+			
 		</body>
 	</html>
->>>>>>> 432653ba6fb6e1ba524fec8cd0d959b5f43f6584
