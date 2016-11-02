@@ -21,11 +21,18 @@ import datetime
 from datetime import date, timedelta
 from itertools import chain
 import json
-from uuid import getnode as get_mac
 
 """==============================="""
 """=========SEARCH METHOD========="""
 """==============================="""
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
 
 def Search(request):
 	"""Search."""
@@ -33,7 +40,7 @@ def Search(request):
 	navbar_category = Category.objects.all()
 	cat = Category.objects.all()
 	subcat = SubCategory.objects.all()
-	mac = get_mac()
+	mac = str(get_client_ip(request))
 
 	try:
 		q = request.GET.get('q')
@@ -95,6 +102,14 @@ def Search(request):
 """==============================="""
 """===========HOME PAGE==========="""
 """==============================="""
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
 
 def HomePage(request):
 	"""Home Page"""
@@ -452,7 +467,7 @@ def NewsPage(request, n_id):
 
 def ProductPage(request, p_id):
 	"""Product detail page"""
-	mac = get_mac()
+	mac = str(get_client_ip(request))
 	limitedoffer = LimitedOffer.objects.all()
 	navbar_category = Category.objects.all()
 	category = Category.objects.all()

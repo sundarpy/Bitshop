@@ -204,7 +204,7 @@ class SerfoProduct(models.Model):
 class Recommendation(models.Model):
 	"""Recommended Products"""
 	product = models.ForeignKey(Product, null=True, blank=True)
-	mac_address = models.IntegerField(null=True, default=0)
+	mac_address = models.CharField(max_length=255, null=True)
 	REC_TYPE = (
 		('P', 'Product Click'),
 		('S', 'Search Result'),
