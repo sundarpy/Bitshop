@@ -230,6 +230,14 @@ section css start
     width: 100%;
     max-height: 220px;
 }
+#owl-demo-five .item img{
+    /*display: block;
+    width: 100%;
+    height: auto;*/
+    display: block;
+    width: 100%;
+    max-height: 220px;
+}
 .products-slider {
     padding: 0 10px;
 }

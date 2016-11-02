@@ -321,6 +321,40 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 					</div>
 				</section>
 
+				<section class="top-main-second">
+					<div class="container-fluid">
+						<div class="row products-slider">
+							<div class="artical">
+								<h4 class="inner-title">
+									Recommended to You
+								</h4>
+								<div id="owl-demo-five" class="owl-carousel owl-theme">
+									{% for data in recoms %}
+									<div class="item">
+										<a href="{% url 'productdetail' data.product.id %}" style="text-decoration:none;color:#000;	">
+										<div class="column productbox">
+											<img src={{data.product.mainimage}} class="img-responsive">
+											<div class="producttitle">{{data.product.title}}</div>
+											<div class="productprice">
+												<!-- <div class="pull-right">
+													<a href="{% url 'productdetail' data.product.id %}" class="btn btn-sm" role="button"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+												</div> -->
+												{% if data.product.offer_price %}
+												<div class="pricetext"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{data.product.offer_price}}</div>
+												{% else %}
+												<div class="pricetext"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{data.product.sale_price}}</div>
+												{% endif %}
+												<div class="clearfix"></div>
+											</div>
+										</div></a>
+									</div>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
 				<!-- <section class="top-main-second">
 					<div class="container-fluid">
 						<div class="row products-slider">

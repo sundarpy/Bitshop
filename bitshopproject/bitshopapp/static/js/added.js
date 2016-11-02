@@ -130,6 +130,21 @@ $(document).ready(function() {
   });
  
 });
+
+$(document).ready(function() {
+ 
+  $("#owl-demo-five").owlCarousel({
+ 
+      navigation : true, // Show next and prev buttons
+      pagination:false,
+      slideSpeed : 300,
+      paginationSpeed : 400,
+    navigationText:["<i class='fa fa-chevron-left' aria-hidden='true'></i>","<i class='fa fa-chevron-right' aria-hidden='true'></i>"],
+      items : 5
+ 
+  });
+ 
+});
 /*owl-demo-on  carousel script end*/
 /*owl-demo-on carousel script start*/
 $(document).ready(function() {

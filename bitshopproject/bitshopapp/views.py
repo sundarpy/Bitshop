@@ -103,16 +103,9 @@ def Search(request):
 """===========HOME PAGE==========="""
 """==============================="""
 
-def get_client_ip(request):
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded_for:
-        ip = x_forwarded_for.split(',')[0]
-    else:
-        ip = request.META.get('REMOTE_ADDR')
-    return ip
-
 def HomePage(request):
 	"""Home Page"""
+	mac = str(get_client_ip(request))
 	navbar_category = Category.objects.all()
 	saleoffer = SaleOffer.objects.all()
 	limitedoffer = LimitedOffer.objects.all()
@@ -121,7 +114,7 @@ def HomePage(request):
 	subcategory = SubCategory.objects.filter(category=category)
 	products = Product.objects.filter(subcategory=subcategory)
 	news = New.objects.all().order_by('-id')
-
+	recommended_products = Recommendation.objects.filter(mac_address=mac)
 	men_prod = SerfoProduct.objects.filter(super_category='M')
 	women_prod = SerfoProduct.objects.filter(super_category='W')
 	appliances_prod = SerfoProduct.objects.filter(super_category='A')
@@ -142,7 +135,8 @@ def HomePage(request):
 				"news" : news,
 				"user" : request.user,
 				"saleoffer" : saleoffer,
-				"limitedoffer" : limitedoffer
+				"limitedoffer" : limitedoffer,
+				"recoms" : recommended_products,
 				}
 	template = 'home.html'
 	return render(request, template, context)
