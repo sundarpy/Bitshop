@@ -197,6 +197,18 @@ class SerfoProduct(models.Model):
 	def __str__(self):
 		return str(self.product.title)
 
+"""==================================="""
+"""===========RECOMMENDATIONS========="""
+"""==================================="""
+
+class Recommendation(models.Model):
+	"""Recommended Products"""
+	product = models.ForeignKey(Product, null=True, blank=True)
+	mac_address = models.IntegerField(null=True, default=0)
+
+	def __str__(self):
+		return str(self.product.title)
+
 """======================================"""
 """===========NEWS FOR PRODUCTS=========="""
 """======================================"""

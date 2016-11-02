@@ -21,6 +21,7 @@ import datetime
 from datetime import date, timedelta
 from itertools import chain
 import json
+from uuid import getnode as get_mac
 
 """==============================="""
 """=========SEARCH METHOD========="""
@@ -436,6 +437,7 @@ def NewsPage(request, n_id):
 
 def ProductPage(request, p_id):
 	"""Product detail page"""
+	mac = get_mac()
 	limitedoffer = LimitedOffer.objects.all()
 	navbar_category = Category.objects.all()
 	category = Category.objects.all()
@@ -456,6 +458,7 @@ def ProductPage(request, p_id):
 		else :
 			form = CommentForm()
 
+	recommended_products = Recommendation.objects.filter(mac_address=mac)
 	similar_products = Product.objects.filter(subcategory=product.subcategory).order_by('?')
 	if product.offer_price != None:
 		cheapers = Product.objects.filter(subcategory=product.subcategory, offer_price__lt=product.offer_price)
@@ -475,6 +478,7 @@ def ProductPage(request, p_id):
 				"user" : request.user,
 				"cheapers" : cheapers,
 				"form" : form,
+				"recoms" : recommended_products,
 				}
 	template = 'productpage.html'
 	return render(request, template, context)
