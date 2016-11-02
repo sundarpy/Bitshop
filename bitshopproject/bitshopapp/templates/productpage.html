@@ -287,8 +287,8 @@
 								<h4 class="inner-title">
 									Recommended Products
 								</h4>
-								<div id="owl-demo-one" class="owl-carousel owl-theme">
-									{% for data in recoms|slice:":7" %}
+								<div id="owl-demo-two" class="owl-carousel owl-theme">
+									{% for data in recoms %}
 									<div class="item">
 										<a href="{% url 'productdetail' data.product.id %}" style="text-decoration:none;color:#000;	">
 										<div class="column productbox">

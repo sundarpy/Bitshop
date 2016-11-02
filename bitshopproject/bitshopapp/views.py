@@ -33,6 +33,7 @@ def Search(request):
 	navbar_category = Category.objects.all()
 	cat = Category.objects.all()
 	subcat = SubCategory.objects.all()
+	mac = get_mac()
 
 	try:
 		q = request.GET.get('q')
@@ -40,7 +41,21 @@ def Search(request):
 		q = None
 
 	if q:
-		products_list = Product.objects.filter(title__icontains=q)
+		products_list = Product.objects.filter(title__icontains=q).order_by('?')
+
+		recom_temp2 = Recommendation.objects.filter(mac_address=mac, rectype="S")
+		count_temp2 = recom_temp2.count()
+		serch =  products_list.first()
+
+		if count_temp2 < 5:
+			recom2_type = Recommendation(product=serch, mac_address=mac, rectype="S")
+			recom2_type.save()
+		else : 
+			recom_x2 = Recommendation.objects.filter(mac_address=mac, rectype="S").first()
+			recom_x2.delete()
+			recom2_type = Recommendation(product=serch, mac_address=mac, rectype="S")
+			recom2_type.save()
+
 		productcount = products_list.count
 		paginator = Paginator(products_list, 25)
 		page = request.GET.get('page')
@@ -458,8 +473,23 @@ def ProductPage(request, p_id):
 		else :
 			form = CommentForm()
 
-	recommended_products = Recommendation.objects.filter(mac_address=mac)
 	similar_products = Product.objects.filter(subcategory=product.subcategory).order_by('?')
+
+	recom_temp1 = Recommendation.objects.filter(mac_address=mac, rectype="P")
+	count_temp1 = recom_temp1.count()
+	simi =  similar_products.first()
+
+	if count_temp1 < 5:
+		recom1_type = Recommendation(product=simi, mac_address=mac, rectype="P")
+		recom1_type.save()
+	else : 
+		recom_x1 = Recommendation.objects.filter(mac_address=mac, rectype="P").first()
+		recom_x1.delete()
+		recom1_type = Recommendation(product=simi, mac_address=mac, rectype="P")
+		recom1_type.save()
+
+	recommended_products = Recommendation.objects.filter(mac_address=mac)
+
 	if product.offer_price != None:
 		cheapers = Product.objects.filter(subcategory=product.subcategory, offer_price__lt=product.offer_price)
 	else:

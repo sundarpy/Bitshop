@@ -205,6 +205,11 @@ class Recommendation(models.Model):
 	"""Recommended Products"""
 	product = models.ForeignKey(Product, null=True, blank=True)
 	mac_address = models.IntegerField(null=True, default=0)
+	REC_TYPE = (
+		('P', 'Product Click'),
+		('S', 'Search Result'),
+	)
+	rectype = models.CharField(max_length=2, choices=REC_TYPE, blank=True, null=True)
 
 	def __str__(self):
 		return str(self.product.title)
