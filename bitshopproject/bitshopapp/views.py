@@ -440,6 +440,173 @@ def NewsPage(request, n_id):
 	template = 'newsdetail.html'
 	return render(request, template, context)
 
+"""==================================="""
+"""=====AMALGAMATED CATEGORY PAGE====="""
+"""==================================="""
+
+def Men(request):
+	"""Men's Detail Page"""
+	limitedoffer = LimitedOffer.objects.all()
+	navbar_category = Category.objects.all()
+	list1 = Product.objects.filter(subcategory__subcategory_name="Men").order_by('?')
+	list2 = Product.objects.filter(subcategory__subcategory_name="Men's Watches").order_by('?')
+	list3 = Product.objects.filter(subcategory__subcategory_name="Formals & Lace-ups").order_by('?')
+	list4 = Product.objects.filter(subcategory__subcategory_name="Men's Grooming").order_by('?')
+	count1 = list1.count()
+	count2 = list2.count()
+	count3 = list3.count()
+	count4 = list4.count()
+
+	products_list = list(chain(list1, list2, list3, list4))
+
+	paginator = Paginator(products_list, 25)
+	productcount = count1 + count2 + count3 + count4 
+	page = request.GET.get('page')
+	try:
+		products = paginator.page(page)
+	except PageNotAnInteger:
+		products = paginator.page(1)
+	except EmptyPage:
+		products = paginator.page(paginator.num_pages)
+	total_pages = products.paginator.num_pages+1
+
+	prodnum = products.number
+	x = products.number - 1
+	y = products.number + 7
+	sl = "%d:%d" % (x,y)
+	context = {"prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages)}
+	template = 'men.html'
+	return render(request, template, context)
+
+def Women(request):
+	"""Women's Detail Page"""
+	limitedoffer = LimitedOffer.objects.all()
+	navbar_category = Category.objects.all()
+	list1 = Product.objects.filter(subcategory__subcategory_name="Women").order_by('?')
+	list2 = Product.objects.filter(subcategory__subcategory_name="Women's Watches").order_by('?')
+	list3 = Product.objects.filter(subcategory__subcategory_name="Women's Jewellery").order_by('?')
+	list4 = Product.objects.filter(subcategory__subcategory_name="Ballerinas").order_by('?')
+	count1 = list1.count()
+	count2 = list2.count()
+	count3 = list3.count()
+	count4 = list4.count()
+
+	products_list = list(chain(list1, list2, list3, list4))
+
+	paginator = Paginator(products_list, 25)
+	productcount = count1 + count2 + count3 + count4 
+	page = request.GET.get('page')
+	try:
+		products = paginator.page(page)
+	except PageNotAnInteger:
+		products = paginator.page(1)
+	except EmptyPage:
+		products = paginator.page(paginator.num_pages)
+	total_pages = products.paginator.num_pages+1
+
+	prodnum = products.number
+	x = products.number - 1
+	y = products.number + 7
+	sl = "%d:%d" % (x,y)
+	context = {"prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages)}
+	template = 'women.html'
+	return render(request, template, context)
+
+def Appliances(request):
+	"""Appliances Detail Page"""
+	limitedoffer = LimitedOffer.objects.all()
+	navbar_category = Category.objects.all()
+	list1 = Product.objects.filter(subcategory__subcategory_name="Kitchen & Home Appliances").order_by('?')
+	list2 = Product.objects.filter(subcategory__subcategory_name="Large Appliances").order_by('?')
+	count1 = list1.count()
+	count2 = list2.count()
+
+	products_list = list(chain(list1, list2))
+
+	paginator = Paginator(products_list, 25)
+	productcount = count1 + count2
+	page = request.GET.get('page')
+	try:
+		products = paginator.page(page)
+	except PageNotAnInteger:
+		products = paginator.page(1)
+	except EmptyPage:
+		products = paginator.page(paginator.num_pages)
+	total_pages = products.paginator.num_pages+1
+
+	prodnum = products.number
+	x = products.number - 1
+	y = products.number + 7
+	sl = "%d:%d" % (x,y)
+	context = {"prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages)}
+	template = 'appliances.html'
+	return render(request, template, context)
+
+def Home2(request):
+	"""Home Detail Page"""
+	limitedoffer = LimitedOffer.objects.all()
+	navbar_category = Category.objects.all()
+	list1 = Product.objects.filter(subcategory__subcategory_name="Decor & Lighting").order_by('?')
+	list2 = Product.objects.filter(subcategory__subcategory_name="Kitchen & Dining").order_by('?')
+	list3 = Product.objects.filter(subcategory__subcategory_name="Home Improvement").order_by('?')
+	count1 = list1.count()
+	count2 = list2.count()
+	count3 = list3.count()
+
+	products_list = list(chain(list1, list2, list3))
+
+	paginator = Paginator(products_list, 25)
+	productcount = count1 + count2 + count3
+	page = request.GET.get('page')
+	try:
+		products = paginator.page(page)
+	except PageNotAnInteger:
+		products = paginator.page(1)
+	except EmptyPage:
+		products = paginator.page(paginator.num_pages)
+	total_pages = products.paginator.num_pages+1
+
+	prodnum = products.number
+	x = products.number - 1
+	y = products.number + 7
+	sl = "%d:%d" % (x,y)
+	context = {"prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages)}
+	template = 'home2.html'
+	return render(request, template, context)
+
+def Electronics(request):
+	"""Home Detail Page"""
+	limitedoffer = LimitedOffer.objects.all()
+	navbar_category = Category.objects.all()
+	list1 = Product.objects.filter(subcategory__subcategory_name="Android Mobiles").order_by('?')
+	list2 = Product.objects.filter(subcategory__subcategory_name="Tablets").order_by('?')
+	list3 = Product.objects.filter(subcategory__subcategory_name="Laptops").order_by('?')
+	list4 = Product.objects.filter(subcategory__subcategory_name="Digital SLRs").order_by('?')
+	count1 = list1.count()
+	count2 = list2.count()
+	count3 = list3.count()
+	count4 = list4.count()
+	products_list = list(chain(list1, list2, list3, list4))
+
+	paginator = Paginator(products_list, 25)
+	productcount = count1 + count2 + count3 + count4
+	page = request.GET.get('page')
+	try:
+		products = paginator.page(page)
+	except PageNotAnInteger:
+		products = paginator.page(1)
+	except EmptyPage:
+		products = paginator.page(paginator.num_pages)
+	total_pages = products.paginator.num_pages+1
+
+	prodnum = products.number
+	x = products.number - 1
+	y = products.number + 7
+	sl = "%d:%d" % (x,y)
+	context = {"prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages)}
+	template = 'electronics.html'
+	return render(request, template, context)
+
 """============================="""
 """=====PRODUCT DETAIL PAGE====="""
 """============================="""

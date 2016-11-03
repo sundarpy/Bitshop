@@ -2,7 +2,7 @@
 {% load static from staticfiles %}
 	<html lang="en">
 		<head>
-			<title>Serfo Shopping - {{prime_brand.brand_name}}, Price:{{title}}</title>
+			<title>Serfo Shopping - Electronics</title>
 			<!-- meta name -->
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 			<meta name="keywords" content="">
@@ -42,7 +42,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 									<span class="icon-bar"></span>
 									<span class="icon-bar"></span>
 								  </button>
-								  <a class="navbar-brand" href="{% url 'home' %}"><b>SerfoShopping</b></a>
+								  <a class="navbar-brand" href="{% url 'home' %}"><b>Serfo Shopping</b></a>
 								</div>
 
 								<!-- Collect the nav links, forms, and other content for toggling -->
@@ -51,7 +51,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 							         	<div class="input-group" style="z-index: 0;">
 											<input class="form-control" type="search" value="Search millions of products from leading online stores." name="q" placeholder="Search millions of products from leading online stores." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search millions of products from leading online stores.';}" required="" style="outline: none;box-shadow: none;">
 											
-										  	<button class="input-group-addon btn searchs" type="search" value="Search" id="sizing-addon1">
+										  	<button class="input-group-addon btn searchs" id="sizing-addon1" type="search" value="Search">
 												<i class="fa fa-search" aria-hidden="true"></i> &nbsp;
 												Search
 											</button>
@@ -72,7 +72,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 										<li style="float:none;"><a href="{% url 'women' %}">Women</a></li>
 										<li style="float:none;"><a href="{% url 'appliances' %}">Appliances</a></li>
 										<li style="float:none;"><a href="{% url 'home2' %}">Home</a></li>
-										<li style="float:none;"><a href="{% url 'electronics' %}">Electronics</a></li>
+										<li style="float:none;"><a href="{% url 'electronics' %}">Electronics</a></li>s
 									</ul>
 								</nav>
 							</div><!-- /.container-fluid -->
@@ -83,9 +83,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 				<section class="top-content">
 					<div class="container-fluid">
 						<ol class="breadcrumb">
-							<li><a href="{% url 'home' %}" style="text-decoration: none;">Home</a></li>
-						  	<li><a href="{% url 'brandetail' prime_brand.id %}" style="text-decoration: none;">{{prime_brand.brand_name}}</a></li>
-						  	<li class="active"><a href="{% url 'pricebranddetail' prime_brand.id selected_price.id %}" style="text-decoration: none;">{{title}} : {{lower}} - {{upper}}</a></li>
+						  	<li><a href="{% url 'home' %}" style="text-decoration: none;">Home</a></li>
+						  	<li class="active"><a href="{% url 'electronics' %}" style="text-decoration: none;">Electronics</a></li>
 						</ol>
 						<div class="row">
 							<div class="col-md-12">
@@ -93,59 +92,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 									<div class="top-one" style="padding:0 10px;">
 										<div class="list-group">
 											<h4 class="list-group-item active">
-												Browse by Category
+												All Categories
 											</h4>
-											{% for i in category %}
+											{% for i in navbar_category %}
 											<a href="{% url 'categorydetail' i.category_slug %}" class="list-group-item list-group-item-action">{{i.category_name}}</a>
 											{% endfor %}
 										</div>
 									</div>
-									
-									<div class="top-one" style="padding:0 10px;">
-										<div class="list-group">
-											<h4 class="list-group-item active">
-												Sort by Price
-											</h4>
-											{% for price in prices %}
-												{% if price.title == 'Very Low' %}
-													<a href="{% url 'pricebranddetail' prime_brand.id price.id %}" class="list-group-item list-group-item-action">Below Rs.{{price.upper_limit}}</a>
-												{% elif price.title == 'Very High' %}
-													<a href="{% url 'pricebranddetail' prime_brand.id price.id %}" class="list-group-item list-group-item-action">Above Rs.{{price.lower_limit}}</a>
-												{% else %}
-													<a href="{% url 'pricebranddetail' prime_brand.id price.id %}" class="list-group-item list-group-item-action">Rs.{{price.lower_limit}} - Rs.{{price.upper_limit}}</a>
-												{% endif %}
-											{% endfor %}
-										</div>
-									</div>
-									
-									<div class="top-one" style="padding:0 10px;">
-										<div class="list-group">
-											<h4 class="list-group-item active">
-												Sort by Brand
-											</h4>
-											{% for brand in brands|slice:":10" %}
-											<a href="{% url 'brandetail' brand.id %}" class="list-group-item list-group-item-action">{{brand.brand_name}}</a>
-											{% endfor %}
-										</div>
-									</div>
 								</div>
-
+								
 								<div class="row">
-									<div class="col-md-10 articles-page results">
-										<div class="category-artical">
-											{% if selected_price.title == 'Very Low' %}
+									<div class="col-md-12 articles-page">
+										<div class="category-artical results">
 											<h4 class="inner-title">
-												{{prime_brand.brand_name}}:<br> </br> Below Rs.{{upper}} : {{count}} Products
+												Electronics - {{count}} Products
 											</h4>
-											{% elif selected_price.title == 'Very High' %}
-											<h4 class="inner-title">
-												{{prime_brand.brand_name}}:<br> </br> Above Rs.{{lower}} : {{count}} Products
-											</h4>
-											{% else %}
-											<h4 class="inner-title">
-												{{prime_brand.brand_name}}:<br> </br> Rs.{{lower}} - Rs.{{upper}} : {{count}} Products
-											</h4>
-											{% endif %}
 											<div class="row category-one category-articals">
 												{% for product in products %}
 												<a href="{% url 'productdetail' product.id %}" style="color: #000;text-decoration: none;"><div class="col-md-2">
@@ -194,29 +155,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 											</div>
 										</div>
 									</div>
-								</div>
-								<div class="row">
-									{% if news %}
-									<div class="col-md-12">
-										<div class="top-one top-two">
-											<div class="artical">
-												<h4 class="inner-title">
-													Articles to help you shop
-												</h4>
-												<div id="owl-demo" class="owl-carousel owl-theme">
-													{% for new in news %}
-													<a href="{% url 'newsdetail' new.id %}" style="color: #000;text-decoration: none;"><div class="item">
-														<div class="column productbox">
-															<img src={{new.image_url}} class="img-responsive">
-															<div class="producttitle">{{new.title}}</div>
-														</div>
-													</div></a>
-													{% endfor %}
-												</div>
-											</div>
-										</div>
-									</div>
-									{% endif %}
 								</div>
 							</div>
 						</div>

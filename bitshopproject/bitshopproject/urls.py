@@ -18,6 +18,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^$', views.HomePage, name='home'),
+    url(r'^home/$', views.HomePage, name='home'),
+
     url(r'^category/(?P<slug>[-\w\d]+)/$', views.CategoryPage, name='categorydetail'),
     url(r'^subcategory/(?P<slug1>[-\w\d]+)/(?P<slug2>[-\w\d]+)/$', views.SubCategoryPage, name='subcategorydetail'),
     url(r'^article/(?P<n_id>\d+)/$', views.NewsPage, name='newsdetail'),
@@ -32,6 +34,12 @@ urlpatterns = [
     url(r'^read/', api.read_file, name='read_file'),
     url(r'^read2/', api.read_file2, name='read_file2'),
     url(r'^read3/', api.read_file3, name='read_file3'),
+
+    url(r'^categories/Men/$', views.Men, name='men'),
+    url(r'^categories/Women/$', views.Women, name='women'),
+    url(r'^categories/Appliances/$', views.Appliances, name='appliances'),
+    url(r'^categories/Home/$', views.Home2, name='home2'),
+    url(r'^categories/Electronics/$', views.Electronics, name='electronics'),
 
     url(r'^getmenproducts/', views.getmenproducts, name='getmenproducts'),
     url(r'^getwomenproducts/', views.getwomenproducts, name='getwomenproducts'),
