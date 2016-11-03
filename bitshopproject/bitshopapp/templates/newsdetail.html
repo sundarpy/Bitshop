@@ -99,6 +99,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 				
 				<section class="top-content">
 					<div class="container-fluid">
+						<ol class="breadcrumb">
+							<li><a href="{% url 'home' %}" style="text-decoration: none;">Home</a></li>
+						  	<li><a href="" style="text-decoration: none;">Articles</a></li>
+						  	<li class="active"><a href="{% url 'newsdetail' news.id %}" style="text-decoration: none;">{{news.title}}</a></li>
+						</ol>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="col-md-3 cat-group">

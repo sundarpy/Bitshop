@@ -96,6 +96,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 				
 				<section class="top-content">
 					<div class="container-fluid">
+						<ol class="breadcrumb">
+							<li><a href="{% url 'home' %}" style="text-decoration: none;">Home</a></li>
+						  	<li><a href="{% url 'categorydetail' category.category_slug %}" style="text-decoration: none;">{{category.category_name}}</a></li>
+						  	<li><a href="{% url 'subcategorydetail' category.category_slug subcat.subcategory_slug %}" style="text-decoration: none;">{{subcat.subcategory_name}}</a></li>
+						  	<li class="active"><a href="{% url 'pricesubcatdetail' category.category_slug subcat.subcategory_slug selected_price.id %}" style="text-decoration: none;">{{title}}</a></li>
+						</ol>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="col-md-3 cat-group">
@@ -140,7 +146,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 								</div>
 
 								<div class="row">
-									<div class="col-md-10 articles-page">
+									<div class="col-md-10 articles-page results">
 										<div class="category-artical">
 											{% if selected_price.title == 'Very Low' %}
 											<h4 class="inner-title">

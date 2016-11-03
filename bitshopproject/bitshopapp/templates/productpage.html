@@ -106,6 +106,12 @@
 				<!-- single -->
 				<section class="top-content single">
 					<div class="container-fluid">
+						<ol class="breadcrumb">
+						  	<li><a href="{% url 'home' %}" style="text-decoration: none;">Home</a></li>
+						  	<li><a href="{% url 'categorydetail' product.category.category_slug %}" style="text-decoration: none;">{{product.category.category_name}}</a></li>
+						  	<li class="active"><a href="{% url 'subcategorydetail' product.category.category_slug product.subcategory.subcategory_slug %}" style="text-decoration: none;">{{product.subcategory.subcategory_name}}</a></li>
+						  	<li class="active"><a href="{% url 'productdetail' product.id %}" style="text-decoration: none;">{{product.title}}</a></li>
+						</ol>
 						<div class="description-card">
 							<div class="row">
 								<div class="col-md-4 single-right-left animated wow slideInUp animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: slideInUp;">

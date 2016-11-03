@@ -95,6 +95,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 				</header>
 				<section class="top-content">
 					<div class="container-fluid">
+						<ol class="breadcrumb">
+							<li><a href="{% url 'home' %}" style="text-decoration: none;">Home</a></li>
+						  	<li><a href="" style="text-decoration: none;">Brands</a></li>
+						  	<li class="active"><a href="{% url 'brandetail' prime_brand.id %}" style="text-decoration: none;">{{prime_brand.brand_name}}</a></li>
+						  </ol>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="col-md-3 cat-group">
@@ -139,7 +144,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 								</div>
 
 								<div class="row">
-									<div class="col-md-10 articles-page">
+									<div class="col-md-10 articles-page results">
 										<div class="category-artical">
 											<h4 class="inner-title">
 												{{prime_brand.brand_name}} - {{count}} Products

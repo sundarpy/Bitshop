@@ -345,7 +345,7 @@ a.list-group-item:focus, a.list-group-item:hover, button.list-group-item:focus, 
 .offer-articals {
     display: block;
     background: #fff;
-    margin: -15px 0 15px 0;
+    margin: 10px 0;
     padding: 10px 10px;
     width: 100%;
     height: auto !important; 
@@ -1168,6 +1168,13 @@ section css End
         }
         .morelink {
             display: block;
+        }
+        .breadcrumb {
+            padding: 8px 15px;
+            margin-bottom: 2px;
+            list-style: none;
+            background-color: #fff;
+            border-radius: 0px;
         }
 
     }
