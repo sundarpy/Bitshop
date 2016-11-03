@@ -1157,5 +1157,11 @@ section css End
             border-right: transparent;
             border-radius: 1px;
         }
+        .category-one .productbox img {
+            display: block;
+            max-width: 100%;
+            height: 157px;
+            width: 100%;
+        }
 
     }
