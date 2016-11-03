@@ -54,14 +54,15 @@ def Search(request):
 		count_temp2 = recom_temp2.count()
 		serch =  products_list.first()
 
-		if count_temp2 < 5:
-			recom2_type = Recommendation(product=serch, mac_address=mac, rectype="S")
-			recom2_type.save()
-		else : 
-			recom_x2 = Recommendation.objects.filter(mac_address=mac, rectype="S").first()
-			recom_x2.delete()
-			recom2_type = Recommendation(product=serch, mac_address=mac, rectype="S")
-			recom2_type.save()
+		if serch:
+			if count_temp2 < 5:
+				recom2_type = Recommendation(product=serch, mac_address=mac, rectype="S")
+				recom2_type.save()
+			else : 
+				recom_x2 = Recommendation.objects.filter(mac_address=mac, rectype="S").first()
+				recom_x2.delete()
+				recom2_type = Recommendation(product=serch, mac_address=mac, rectype="S")
+				recom2_type.save()
 
 		productcount = products_list.count
 		paginator = Paginator(products_list, 25)
