@@ -50,20 +50,6 @@ def Search(request):
 	if q:
 		products_list = Product.objects.filter(title__icontains=q).order_by('?')
 
-		recom_temp2 = Recommendation.objects.filter(mac_address=mac, rectype="S")
-		count_temp2 = recom_temp2.count()
-		serch =  products_list.first()
-
-		if serch:
-			if count_temp2 < 5:
-				recom2_type = Recommendation(product=serch, mac_address=mac, rectype="S")
-				recom2_type.save()
-			else : 
-				recom_x2 = Recommendation.objects.filter(mac_address=mac, rectype="S").first()
-				recom_x2.delete()
-				recom2_type = Recommendation(product=serch, mac_address=mac, rectype="S")
-				recom2_type.save()
-
 		productcount = products_list.count
 		paginator = Paginator(products_list, 25)
 		page = request.GET.get('page')
@@ -106,7 +92,6 @@ def Search(request):
 
 def HomePage(request):
 	"""Home Page"""
-	mac = str(get_client_ip(request))
 	navbar_category = Category.objects.all()
 	saleoffer = SaleOffer.objects.all()
 	limitedoffer = LimitedOffer.objects.all()
@@ -115,7 +100,7 @@ def HomePage(request):
 	subcategory = SubCategory.objects.filter(category=category)
 	products = Product.objects.filter(subcategory=subcategory)
 	news = New.objects.all().order_by('-id')
-	recommended_products = Recommendation.objects.filter(mac_address=mac)
+
 	men_prod = SerfoProduct.objects.filter(super_category='M')
 	women_prod = SerfoProduct.objects.filter(super_category='W')
 	appliances_prod = SerfoProduct.objects.filter(super_category='A')
@@ -137,7 +122,6 @@ def HomePage(request):
 				"user" : request.user,
 				"saleoffer" : saleoffer,
 				"limitedoffer" : limitedoffer,
-				"recoms" : recommended_products,
 				}
 	template = 'home.html'
 	return render(request, template, context)
@@ -485,22 +469,6 @@ def ProductPage(request, p_id):
 
 	similar_products = Product.objects.filter(subcategory=product.subcategory).order_by('?')
 
-	recom_temp1 = Recommendation.objects.filter(mac_address=mac, rectype="P")
-	count_temp1 = recom_temp1.count()
-	simi =  similar_products.first()
-
-	if simi:
-		if count_temp1 < 5:
-			recom1_type = Recommendation(product=simi, mac_address=mac, rectype="P")
-			recom1_type.save()
-		else : 
-			recom_x1 = Recommendation.objects.filter(mac_address=mac, rectype="P").first()
-			recom_x1.delete()
-			recom1_type = Recommendation(product=simi, mac_address=mac, rectype="P")
-			recom1_type.save()
-
-	recommended_products = Recommendation.objects.filter(mac_address=mac)
-
 	if product.offer_price != None:
 		cheapers = Product.objects.filter(subcategory=product.subcategory, offer_price__lt=product.offer_price)
 	else:
@@ -515,7 +483,6 @@ def ProductPage(request, p_id):
 				"limitedoffer":limitedoffer,
 				"similars" : similar_products,
 				"cheapers" : cheapers,
-				"recoms" : recommended_products,
 				}
 	template = 'productpage.html'
 	return render(request, template, context)
