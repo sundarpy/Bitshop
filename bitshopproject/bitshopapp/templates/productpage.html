@@ -281,38 +281,6 @@
 						</div>
 					</div>
 				</section>
-				{% if recoms %}
-				<section class="top-main-second">
-					<div class="container-fluid">
-						<div class="row products-slider">
-							<div class="artical">
-								<h4 class="inner-title">
-									Recommended to You
-								</h4>
-								<div id="owl-demo-two" class="owl-carousel owl-theme">
-									{% for data in recoms %}
-									<div class="item">
-										<a href="{% url 'productdetail' data.product.id %}" style="text-decoration:none;color:#000;	">
-										<div class="column productbox">
-											<img src={{data.product.mainimage}} class="img-responsive">
-											<div class="producttitle">{{data.product.title}}</div>
-											<div class="productprice">
-												{% if data.product.offer_price %}
-												<div class="pricetext"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp; {{data.product.offer_price}}</div>
-												{% else %}
-												<div class="pricetext"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{data.product.sale_price}}</div>
-												{% endif %}
-												<div class="clearfix"></div>
-											</div>
-										</div></a>
-									</div>
-									{% endfor %}
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
-				{% endif %}
 				<section class="top-main-second">
 					<div class="container-fluid">
 						<div class="row products-slider">
