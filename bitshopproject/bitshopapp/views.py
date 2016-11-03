@@ -469,19 +469,19 @@ def ProductPage(request, p_id):
 	subcategory = SubCategory.objects.all()
 	product = Product.objects.get(pk=p_id)
 	image = ProductImage.objects.filter(product_name=product)
-	comments = Comment.objects.filter(product=product)
-	subcomments = SubComment.objects.filter(comment=comments)
-	form = CommentForm()
-	if request.user.is_authenticated():
-		if request.method == 'POST':
-			form = CommentForm(data=request.POST)
-			if form.is_valid():
-				content=form.cleaned_data.get('content')
-				comment = Comment(user=request.user, content=content, product=product)
-				comment.save()
-				return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-		else :
-			form = CommentForm()
+	# comments = Comment.objects.filter(product=product)
+	# subcomments = SubComment.objects.filter(comment=comments)
+	# form = CommentForm()
+	# if request.user.is_authenticated():
+	# 	if request.method == 'POST':
+	# 		form = CommentForm(data=request.POST)
+	# 		if form.is_valid():
+	# 			content=form.cleaned_data.get('content')
+	# 			comment = Comment(user=request.user, content=content, product=product)
+	# 			comment.save()
+	# 			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+	# 	else :
+	# 		form = CommentForm()
 
 	similar_products = Product.objects.filter(subcategory=product.subcategory).order_by('?')
 
@@ -513,12 +513,8 @@ def ProductPage(request, p_id):
 				"navbar_category":navbar_category,
 				"image" : image,
 				"limitedoffer":limitedoffer,
-				"comments" : comments,
-				"subcomments" : subcomments,
 				"similars" : similar_products,
-				"user" : request.user,
 				"cheapers" : cheapers,
-				"form" : form,
 				"recoms" : recommended_products,
 				}
 	template = 'productpage.html'
