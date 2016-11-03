@@ -489,14 +489,15 @@ def ProductPage(request, p_id):
 	count_temp1 = recom_temp1.count()
 	simi =  similar_products.first()
 
-	if count_temp1 < 5:
-		recom1_type = Recommendation(product=simi, mac_address=mac, rectype="P")
-		recom1_type.save()
-	else : 
-		recom_x1 = Recommendation.objects.filter(mac_address=mac, rectype="P").first()
-		recom_x1.delete()
-		recom1_type = Recommendation(product=simi, mac_address=mac, rectype="P")
-		recom1_type.save()
+	if simi:
+		if count_temp1 < 5:
+			recom1_type = Recommendation(product=simi, mac_address=mac, rectype="P")
+			recom1_type.save()
+		else : 
+			recom_x1 = Recommendation.objects.filter(mac_address=mac, rectype="P").first()
+			recom_x1.delete()
+			recom1_type = Recommendation(product=simi, mac_address=mac, rectype="P")
+			recom1_type.save()
 
 	recommended_products = Recommendation.objects.filter(mac_address=mac)
 
