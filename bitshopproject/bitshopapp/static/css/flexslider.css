@@ -234,8 +234,8 @@ max-height: 450px;
 .flex-control-thumbs {
   margin: 5px 0 0;
   position: relative;
-  overflow-y: scroll;
-  height: 372px;
+  overflow-y: scroll !important;
+  height: 372px !important;
 }
 .flex-control-thumbs li {
     width: 76%;
