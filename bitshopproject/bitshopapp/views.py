@@ -467,7 +467,7 @@ def ProductPage(request, p_id):
 	# 	else :
 	# 		form = CommentForm()
 
-	similar_products = Product.objects.filter(subcategory=product.subcategory).order_by('?')
+	similar_products = Product.objects.filter(subcategory=product.subcategory).exclude(title=product.title).order_by('?')
 
 	if product.offer_price != None:
 		cheapers = Product.objects.filter(subcategory=product.subcategory, offer_price__lt=product.offer_price)
