@@ -21,7 +21,7 @@ ITEM_PIPELINES = {
 DOWNLOAD_DELAY = 0.25
 FEED_FORMAT = 'json'
 FILES_EXPIRES = 6
-FEED_URI= 's3://AKIAJ4HPSETQVSPZMVPQ:ctkY2rzrYdh9C+xBo39g9THq0SqOv76wfBhw47Td@serfoshopping/newjson/%(name)s.json'
+FEED_URI= 's3://AKIAJ4HPSETQVSPZMVPQ:ctkY2rzrYdh9C+xBo39g9THq0SqOv76wfBhw47Td@serfoshop/newjson/%(name)s.json'
 AWS_S3_ACCESS_KEY_ID = 'AKIAJ4HPSETQVSPZMVPQ'
 AWS_S3_SECRET_ACCESS_KEY = 'ctkY2rzrYdh9C+xBo39g9THq0SqOv76wfBhw47Td'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent

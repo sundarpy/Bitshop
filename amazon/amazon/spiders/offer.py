@@ -33,12 +33,12 @@ class OfferItemY(scrapy.Spider):
 	start_urls = ["http://www.amazon.in/"]
 
 	def parse(self, response):
-		main = response.selector.xpath('//div[@class="a-section a-text-center shogun-widget scalable-image-map aui-desktop-link"]')
+		main = response.selector.xpath('//div[@class="billboard"]')
 		items = []
 		for j in main:
 			item = OfferItem()
-			item['image'] = j.xpath('a/img/@src').extract()
-			item['link'] = j.xpath('a/@href').extract()
+			item['image'] = j.xpath('div/a/img/@src').extract()
+			item['link'] = j.xpath('div/a/@href').extract()
 			items.append(item)
 		return items
 
