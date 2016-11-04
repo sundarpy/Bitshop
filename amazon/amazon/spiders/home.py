@@ -538,7 +538,7 @@ class SmallAnimals(scrapy.Spider):
 
 class Furniture1(scrapy.Spider):
 	"""BEDROOM FURNITURE"""
-	
+	handle_httpstatus_list = [400]
 	name = "home12"
 	next_page = 1
 	allowed_domains = ["amazon.in"]
@@ -586,7 +586,7 @@ class Furniture1(scrapy.Spider):
 
 class Furniture2(scrapy.Spider):
 	"""LIVING ROOM FURNITURE"""
-	
+	handle_httpstatus_list = [400]
 	name = "home13"
 	next_page = 1
 	allowed_domains = ["amazon.in"]
@@ -634,7 +634,7 @@ class Furniture2(scrapy.Spider):
 
 class Furniture3(scrapy.Spider):
 	"""OUTDOOR FURNITURE"""
-	
+	handle_httpstatus_list = [400]
 	name = "home14"
 	next_page = 1
 	allowed_domains = ["amazon.in"]
@@ -682,7 +682,7 @@ class Furniture3(scrapy.Spider):
 
 class Furniture4(scrapy.Spider):
 	"""DINING ROOM FURNITURE"""
-	
+	handle_httpstatus_list = [400]
 	name = "home15"
 	next_page = 1
 	allowed_domains = ["amazon.in"]

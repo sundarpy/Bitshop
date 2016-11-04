@@ -152,8 +152,20 @@ def CategoryPage(request, slug):
 	total_pages = products.paginator.num_pages+1
 
 	prodnum = products.number
-	x = products.number - 7
-	y = products.number + 7
+	
+	if prodnum == 1:
+		x = products.number - 1
+		y = products.number + 7
+	elif prodnum == 2:
+		x = products.number - 2
+		y = products.number + 6
+	elif prodnum == 3:
+		x = products.number - 3
+		y = products.number + 5
+	else:
+		x = products.number - 4
+		y = products.number + 4
+
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.filter(category=category).order_by('-id')
@@ -190,8 +202,18 @@ def PriceFilterCategory(request, slug, pr_id):
 	total_pages = products.paginator.num_pages+1
 
 	prodnum = products.number
-	x = products.number - 1
-	y = products.number + 7
+	if prodnum == 1:
+		x = products.number - 1
+		y = products.number + 7
+	elif prodnum == 2:
+		x = products.number - 2
+		y = products.number + 6
+	elif prodnum == 3:
+		x = products.number - 3
+		y = products.number + 5
+	else:
+		x = products.number - 4
+		y = products.number + 4
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.filter(category=category).order_by('-id')
@@ -224,8 +246,18 @@ def BrandsPage(request, b_id):
 	total_pages = products.paginator.num_pages+1
 
 	prodnum = products.number
-	x = products.number - 1
-	y = products.number + 7
+	if prodnum == 1:
+		x = products.number - 1
+		y = products.number + 7
+	elif prodnum == 2:
+		x = products.number - 2
+		y = products.number + 6
+	elif prodnum == 3:
+		x = products.number - 3
+		y = products.number + 5
+	else:
+		x = products.number - 4
+		y = products.number + 4
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.all().order_by('-id')
@@ -262,8 +294,18 @@ def PriceFilterBrands(request, b_id, pr_id):
 	total_pages = products.paginator.num_pages+1
 
 	prodnum = products.number
-	x = products.number - 1
-	y = products.number + 7
+	if prodnum == 1:
+		x = products.number - 1
+		y = products.number + 7
+	elif prodnum == 2:
+		x = products.number - 2
+		y = products.number + 6
+	elif prodnum == 3:
+		x = products.number - 3
+		y = products.number + 5
+	else:
+		x = products.number - 4
+		y = products.number + 4
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.all().order_by('-id')
@@ -297,8 +339,18 @@ def SubCategoryPage(request, slug1, slug2):
 	total_pages = products.paginator.num_pages+1
 
 	prodnum = products.number
-	x = products.number - 1
-	y = products.number + 7
+	if prodnum == 1:
+		x = products.number - 1
+		y = products.number + 7
+	elif prodnum == 2:
+		x = products.number - 2
+		y = products.number + 6
+	elif prodnum == 3:
+		x = products.number - 3
+		y = products.number + 5
+	else:
+		x = products.number - 4
+		y = products.number + 4
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.filter(category=category).order_by('-id')
@@ -336,8 +388,18 @@ def PriceFilterSubCategory(request, slug1, slug2, pr_id):
 	total_pages = products.paginator.num_pages+1
 
 	prodnum = products.number
-	x = products.number - 1
-	y = products.number + 7
+	if prodnum == 1:
+		x = products.number - 1
+		y = products.number + 7
+	elif prodnum == 2:
+		x = products.number - 2
+		y = products.number + 6
+	elif prodnum == 3:
+		x = products.number - 3
+		y = products.number + 5
+	else:
+		x = products.number - 4
+		y = products.number + 4
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.filter(category=category).order_by('-id')
@@ -475,8 +537,18 @@ def Men(request):
 	total_pages = products.paginator.num_pages+1
 
 	prodnum = products.number
-	x = products.number - 1
-	y = products.number + 7
+	if prodnum == 1:
+		x = products.number - 1
+		y = products.number + 7
+	elif prodnum == 2:
+		x = products.number - 2
+		y = products.number + 6
+	elif prodnum == 3:
+		x = products.number - 3
+		y = products.number + 5
+	else:
+		x = products.number - 4
+		y = products.number + 4
 	sl = "%d:%d" % (x,y)
 	context = {"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages), "sub1":sub1,"sub2":sub2,"sub3":sub3,"sub4":sub4}
 	template = 'men.html'
@@ -514,8 +586,18 @@ def Women(request):
 	total_pages = products.paginator.num_pages+1
 
 	prodnum = products.number
-	x = products.number - 1
-	y = products.number + 7
+	if prodnum == 1:
+		x = products.number - 1
+		y = products.number + 7
+	elif prodnum == 2:
+		x = products.number - 2
+		y = products.number + 6
+	elif prodnum == 3:
+		x = products.number - 3
+		y = products.number + 5
+	else:
+		x = products.number - 4
+		y = products.number + 4
 	sl = "%d:%d" % (x,y)
 	context = {"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages), "sub1":sub1,"sub2":sub2,"sub3":sub3,"sub4":sub4}
 	template = 'women.html'
@@ -547,8 +629,18 @@ def Appliances(request):
 	total_pages = products.paginator.num_pages+1
 
 	prodnum = products.number
-	x = products.number - 1
-	y = products.number + 7
+	if prodnum == 1:
+		x = products.number - 1
+		y = products.number + 7
+	elif prodnum == 2:
+		x = products.number - 2
+		y = products.number + 6
+	elif prodnum == 3:
+		x = products.number - 3
+		y = products.number + 5
+	else:
+		x = products.number - 4
+		y = products.number + 4
 	sl = "%d:%d" % (x,y)
 	context = {"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages), "sub1":sub1, "sub2":sub2}
 	template = 'appliances.html'
@@ -583,8 +675,18 @@ def Home2(request):
 	total_pages = products.paginator.num_pages+1
 
 	prodnum = products.number
-	x = products.number - 1
-	y = products.number + 7
+	if prodnum == 1:
+		x = products.number - 1
+		y = products.number + 7
+	elif prodnum == 2:
+		x = products.number - 2
+		y = products.number + 6
+	elif prodnum == 3:
+		x = products.number - 3
+		y = products.number + 5
+	else:
+		x = products.number - 4
+		y = products.number + 4
 	sl = "%d:%d" % (x,y)
 	context = {"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages), "sub1":sub1, "sub2":sub2, "sub3":sub3}
 	template = 'home2.html'
@@ -622,8 +724,18 @@ def Electronics(request):
 	total_pages = products.paginator.num_pages+1
 
 	prodnum = products.number
-	x = products.number - 1
-	y = products.number + 7
+	if prodnum == 1:
+		x = products.number - 1
+		y = products.number + 7
+	elif prodnum == 2:
+		x = products.number - 2
+		y = products.number + 6
+	elif prodnum == 3:
+		x = products.number - 3
+		y = products.number + 5
+	else:
+		x = products.number - 4
+		y = products.number + 4
 	sl = "%d:%d" % (x,y)
 	context = {"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages),  "sub1":sub1,"sub2":sub2,"sub3":sub3,"sub4":sub4}
 	template = 'electronics.html'

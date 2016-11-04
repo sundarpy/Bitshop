@@ -229,7 +229,7 @@
 									Similar Products
 								</h4>
 								<div id="owl-demo-on" class="owl-carousel owl-theme">
-									{% for data in similars|slice:":7" %}
+									{% for data in similars|slice:":15" %}
 									<div class="item">
 										<a href="{% url 'productdetail' data.id %}" style="text-decoration:none;color:#000;	">
 										<div class="column productbox">
@@ -259,7 +259,7 @@
 									Cheaper Alternatives
 								</h4>
 								<div id="owl-demo-one" class="owl-carousel owl-theme">
-									{% for data in cheapers|slice:":7" %}
+									{% for data in cheapers|slice:":15" %}
 									<div class="item">
 										<a href="{% url 'productdetail' data.id %}" style="text-decoration:none;color:#000;	">
 										<div class="column productbox">
