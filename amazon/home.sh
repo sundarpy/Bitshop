@@ -9,4 +9,3 @@ scrapy crawl home8
 scrapy crawl home9
 scrapy crawl home10
 scrapy crawl home11
-scrapy crawl home12
