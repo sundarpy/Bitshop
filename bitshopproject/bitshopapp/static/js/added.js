@@ -61,7 +61,7 @@ $(document).ready(function() {
       slideSpeed : 300,
       paginationSpeed : 400,
 	  navigationText:["<i class='fa fa-chevron-left' aria-hidden='true'></i>","<i class='fa fa-chevron-right' aria-hidden='true'></i>"],
-      items : 5
+      items : 6
  
   });
  
@@ -77,7 +77,7 @@ $(document).ready(function() {
       slideSpeed : 300,
       paginationSpeed : 400,
 	  navigationText:["<i class='fa fa-chevron-left' aria-hidden='true'></i>","<i class='fa fa-chevron-right' aria-hidden='true'></i>"],
-      items : 5
+      items : 6
  
   });
  
@@ -93,7 +93,7 @@ $(document).ready(function() {
       slideSpeed : 300,
       paginationSpeed : 400,
 	  navigationText:["<i class='fa fa-chevron-left' aria-hidden='true'></i>","<i class='fa fa-chevron-right' aria-hidden='true'></i>"],
-      items : 5
+      items : 6
  
   });
  
@@ -109,7 +109,7 @@ $(document).ready(function() {
       slideSpeed : 300,
       paginationSpeed : 400,
 	  navigationText:["<i class='fa fa-chevron-left' aria-hidden='true'></i>","<i class='fa fa-chevron-right' aria-hidden='true'></i>"],
-      items : 5
+      items : 6
  
   });
  
@@ -125,7 +125,7 @@ $(document).ready(function() {
       slideSpeed : 300,
       paginationSpeed : 400,
 	  navigationText:["<i class='fa fa-chevron-left' aria-hidden='true'></i>","<i class='fa fa-chevron-right' aria-hidden='true'></i>"],
-      items : 5
+      items : 6
  
   });
  
@@ -140,7 +140,7 @@ $(document).ready(function() {
       slideSpeed : 300,
       paginationSpeed : 400,
     navigationText:["<i class='fa fa-chevron-left' aria-hidden='true'></i>","<i class='fa fa-chevron-right' aria-hidden='true'></i>"],
-      items : 5
+      items : 6
  
   });
  

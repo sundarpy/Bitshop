@@ -152,7 +152,7 @@ def CategoryPage(request, slug):
 	total_pages = products.paginator.num_pages+1
 
 	prodnum = products.number
-	x = products.number - 1
+	x = products.number - 7
 	y = products.number + 7
 	sl = "%d:%d" % (x,y)
 
@@ -462,7 +462,7 @@ def Men(request):
 	sub3 = SubCategory.objects.get(subcategory_name="Formals & Lace-ups")
 	sub4 = SubCategory.objects.get(subcategory_name="Men's Grooming")
 	products_list = list(chain(list1, list2, list3, list4))
-	
+
 	paginator = Paginator(products_list, 25)
 	productcount = count1 + count2 + count3 + count4 
 	page = request.GET.get('page')
