@@ -536,52 +536,51 @@ class SmallAnimals(scrapy.Spider):
 
 """=======================================Spider End======================================="""
 
-class Furniture1(scrapy.Spider):
-	"""BEDROOM FURNITURE"""
-	handle_httpstatus_list = [400]
-	name = "home12"
-	next_page = 1
-	allowed_domains = ["amazon.in"]
-	start_urls = [
-		"http://www.amazon.in/s/ref=lp_5689357031_pg_1?rh=n%3A1380441031%2Cn%3A5689357031&page=1&ie=UTF8&qid=1478252983"
-		]
+# class Furniture1(scrapy.Spider):
+# 	"""BEDROOM FURNITURE"""
+# 	name = "home12"
+# 	next_page = 1
+# 	allowed_domains = ["amazon.in"]
+# 	start_urls = [
+# 		"http://www.amazon.in/s/ref=lp_5689357031_pg_1?rh=n%3A1380441031%2Cn%3A5689357031&page=1&ie=UTF8&qid=1478252983"
+# 		]
 
-	def create_ajax_request(self, page_number):
-		ajax_template = 'http://www.amazon.in/s/ref=lp_5689357031_pg_{pagenum}?rh=n%3A1380441031%2Cn%3A5689357031&page={pagenum}&ie=UTF8&qid=1478252983'
-		url = ajax_template.format(pagenum=page_number)
-		return Request(url, callback=self.parse)
+# 	def create_ajax_request(self, page_number):
+# 		ajax_template = 'http://www.amazon.in/s/ref=lp_5689357031_pg_{pagenum}?rh=n%3A1380441031%2Cn%3A5689357031&page={pagenum}&ie=UTF8&qid=1478252983'
+# 		url = ajax_template.format(pagenum=page_number)
+# 		return Request(url, callback=self.parse)
 
-	def parse(self, response):
-		ulink = response.xpath('//div[@class="a-section a-spacing-none a-inline-block s-position-relative"]/a/@href')
-		if self.next_page <= 50:
-			for href in ulink:
-				uRl = response.urljoin(href.extract())
-				yield scrapy.Request(uRl, callback=self.parse_products, meta={'url':href.extract()})
-			self.next_page += 1
-			yield self.create_ajax_request(self.next_page)
+# 	def parse(self, response):
+# 		ulink = response.xpath('//div[@class="a-section a-spacing-none a-inline-block s-position-relative"]/a/@href')
+# 		if self.next_page <= 50:
+# 			for href in ulink:
+# 				uRl = response.urljoin(href.extract())
+# 				yield scrapy.Request(uRl, callback=self.parse_products, meta={'url':href.extract()})
+# 			self.next_page += 1
+# 			yield self.create_ajax_request(self.next_page)
 
-	def parse_products(self, response):
-		hxs = HtmlXPathSelector(response)
-		items = []
-		item = AmazonItem()
-		item['title'] = hxs.select('//div[@class="a-section a-spacing-none"]/h1/span[@id="productTitle"]/text()').extract()
-		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
-		item['specs'] = hxs.select('//div[@class="pdTab"][1]//node()').extract()
-		item['offerprice'] = hxs.select('//span[@id="priceblock_ourprice"]/text()').extract()
-		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
-		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
-		item['feature'] = hxs.select('//ul[@class="a-vertical a-spacing-none"]/li/span/text()').extract()
-		item['image'] = hxs.select('//span[@class="a-button-text"]/img/@src').extract()
-		item['link'] = response.meta["url"]
-		item['seller'] = hxs.select('//div[@id="merchant-info"]/a[1]/text()').extract()
-		item['sellrating'] = hxs.select('//div[@id="merchant-info"]/text()').extract()
-		item['starating'] = hxs.select('//a[@class="a-link-normal"]/i/span/text()').extract()[0]
-		item['COD'] = "Available"
-		item['category'] = "Home, Kitchen & Pets"
-		item['subcategory'] = "Bedroom Furniture"
-		items.append(item)
-		return items
+# 	def parse_products(self, response):
+# 		hxs = HtmlXPathSelector(response)
+# 		items = []
+# 		item = AmazonItem()
+# 		item['title'] = hxs.select('//div[@class="a-section a-spacing-none"]/h1/span[@id="productTitle"]/text()').extract()
+# 		item['brand'] = hxs.select('//a[@id="brand"]/text()').extract()
+# 		item['specs'] = hxs.select('//div[@class="pdTab"][1]//node()').extract()
+# 		item['offerprice'] = hxs.select('//span[@id="priceblock_ourprice"]/text()').extract()
+# 		item['saleprice'] = hxs.select('//span[@id="priceblock_saleprice"]/text()').extract()
+# 		item['description'] = hxs.select('//div[@id="productDescription"]//text()').extract()
+# 		item['feature'] = hxs.select('//ul[@class="a-vertical a-spacing-none"]/li/span/text()').extract()
+# 		item['image'] = hxs.select('//span[@class="a-button-text"]/img/@src').extract()
+# 		item['link'] = response.meta["url"]
+# 		item['seller'] = hxs.select('//div[@id="merchant-info"]/a[1]/text()').extract()
+# 		item['sellrating'] = hxs.select('//div[@id="merchant-info"]/text()').extract()
+# 		item['starating'] = hxs.select('//a[@class="a-link-normal"]/i/span/text()').extract()[0]
+# 		item['COD'] = "Available"
+# 		item['category'] = "Home, Kitchen & Pets"
+# 		item['subcategory'] = "Furniture"
+# 		items.append(item)
+# 		return items
 
-"""=======================================Spider End======================================="""
+# """=======================================Spider End======================================="""
 
 
