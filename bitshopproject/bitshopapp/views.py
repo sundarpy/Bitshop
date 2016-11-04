@@ -456,9 +456,13 @@ def Men(request):
 	count2 = list2.count()
 	count3 = list3.count()
 	count4 = list4.count()
-
+	brands = Brand.objects.all().order_by('?')
+	sub1 = SubCategory.objects.get(subcategory_name="Men")
+	sub2 = SubCategory.objects.get(subcategory_name="Men's Watches")
+	sub3 = SubCategory.objects.get(subcategory_name="Formals & Lace-ups")
+	sub4 = SubCategory.objects.get(subcategory_name="Men's Grooming")
 	products_list = list(chain(list1, list2, list3, list4))
-
+	
 	paginator = Paginator(products_list, 25)
 	productcount = count1 + count2 + count3 + count4 
 	page = request.GET.get('page')
@@ -474,7 +478,7 @@ def Men(request):
 	x = products.number - 1
 	y = products.number + 7
 	sl = "%d:%d" % (x,y)
-	context = {"prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages)}
+	context = {"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages), "sub1":sub1,"sub2":sub2,"sub3":sub3,"sub4":sub4}
 	template = 'men.html'
 	return render(request, template, context)
 
@@ -490,6 +494,11 @@ def Women(request):
 	count2 = list2.count()
 	count3 = list3.count()
 	count4 = list4.count()
+	brands = Brand.objects.all().order_by('?')
+	sub1 = SubCategory.objects.get(subcategory_name="Women")
+	sub2 = SubCategory.objects.get(subcategory_name="Women's Watches")
+	sub3 = SubCategory.objects.get(subcategory_name="Women's Jewellery")
+	sub4 = SubCategory.objects.get(subcategory_name="Ballerinas")
 
 	products_list = list(chain(list1, list2, list3, list4))
 
@@ -508,7 +517,7 @@ def Women(request):
 	x = products.number - 1
 	y = products.number + 7
 	sl = "%d:%d" % (x,y)
-	context = {"prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages)}
+	context = {"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages), "sub1":sub1,"sub2":sub2,"sub3":sub3,"sub4":sub4}
 	template = 'women.html'
 	return render(request, template, context)
 
@@ -520,6 +529,9 @@ def Appliances(request):
 	list2 = Product.objects.filter(subcategory__subcategory_name="Large Appliances").order_by('?')
 	count1 = list1.count()
 	count2 = list2.count()
+	brands = Brand.objects.all().order_by('?')
+	sub1 = SubCategory.objects.get(subcategory_name="Kitchen & Home Appliances")
+	sub2 = SubCategory.objects.get(subcategory_name="Large Appliances")
 
 	products_list = list(chain(list1, list2))
 
@@ -538,7 +550,7 @@ def Appliances(request):
 	x = products.number - 1
 	y = products.number + 7
 	sl = "%d:%d" % (x,y)
-	context = {"prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages)}
+	context = {"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages), "sub1":sub1, "sub2":sub2}
 	template = 'appliances.html'
 	return render(request, template, context)
 
@@ -552,6 +564,10 @@ def Home2(request):
 	count1 = list1.count()
 	count2 = list2.count()
 	count3 = list3.count()
+	brands = Brand.objects.all().order_by('?')
+	sub1 = SubCategory.objects.get(subcategory_name="Decor & Lighting")
+	sub2 = SubCategory.objects.get(subcategory_name="Kitchen & Dining")
+	sub3 = SubCategory.objects.get(subcategory_name="Home Improvement")
 
 	products_list = list(chain(list1, list2, list3))
 
@@ -570,7 +586,7 @@ def Home2(request):
 	x = products.number - 1
 	y = products.number + 7
 	sl = "%d:%d" % (x,y)
-	context = {"prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages)}
+	context = {"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages), "sub1":sub1, "sub2":sub2, "sub3":sub3}
 	template = 'home2.html'
 	return render(request, template, context)
 
@@ -586,6 +602,12 @@ def Electronics(request):
 	count2 = list2.count()
 	count3 = list3.count()
 	count4 = list4.count()
+	brands = Brand.objects.all().order_by('?')
+	sub1 = SubCategory.objects.get(subcategory_name="Android Mobiles")
+	sub2 = SubCategory.objects.get(subcategory_name="Tablets")
+	sub3 = SubCategory.objects.get(subcategory_name="Laptops")
+	sub4 = SubCategory.objects.get(subcategory_name="Digital SLRs")
+
 	products_list = list(chain(list1, list2, list3, list4))
 
 	paginator = Paginator(products_list, 25)
@@ -603,7 +625,7 @@ def Electronics(request):
 	x = products.number - 1
 	y = products.number + 7
 	sl = "%d:%d" % (x,y)
-	context = {"prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages)}
+	context = {"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages),  "sub1":sub1,"sub2":sub2,"sub3":sub3,"sub4":sub4}
 	template = 'electronics.html'
 	return render(request, template, context)
 

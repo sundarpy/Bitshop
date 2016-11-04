@@ -2,7 +2,7 @@
 {% load static from staticfiles %}
 	<html lang="en">
 		<head>
-			<title>Serfo Shopping - Home</title>
+			<title>Serfo Shopping - Home & Furniture</title>
 			<!-- meta name -->
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 			<meta name="keywords" content="">
@@ -58,20 +58,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 										</div>
 							      	</form>
 									<ul class="nav navbar-nav navbar-right nav-justified hidden-lg hidden-md" style="float:none;">
+										{% for cat in navbar_category|slice:"2:3" %}
+										<li style="float:none;"><a href="{% url 'categorydetail' cat.category_slug %}">{{cat.category_name}}</a></li>
+										{% endfor %}
 										<li style="float:none;"><a href="{% url 'men' %}">Men</a></li>
 										<li style="float:none;"><a href="{% url 'women' %}">Women</a></li>
 										<li style="float:none;"><a href="{% url 'appliances' %}">Appliances</a></li>
-										<li style="float:none;"><a href="{% url 'home2' %}">Home</a></li>
+										<li style="float:none;"><a href="{% url 'home2' %}">Home & Furniture</a></li>
 										<li style="float:none;"><a href="{% url 'electronics' %}">Electronics</a></li>
 									</ul>
 								</div><!-- /.navbar-collapse -->
 								
 								<nav class="nav navbar-nav hidden-xs hidden-sm">
 									<ul class="nav nav-justified navbar-nav" style="float:none;">
+										{% for cat in navbar_category|slice:"2:3" %}
+										<li style="float:none;"><a href="{% url 'categorydetail' cat.category_slug %}">{{cat.category_name}}</a></li>
+										{% endfor %}
 										<li style="float:none;"><a href="{% url 'men' %}">Men</a></li>
 										<li style="float:none;"><a href="{% url 'women' %}">Women</a></li>
 										<li style="float:none;"><a href="{% url 'appliances' %}">Appliances</a></li>
-										<li style="float:none;"><a href="{% url 'home2' %}">Home</a></li>
+										<li style="float:none;"><a href="{% url 'home2' %}">Home & Furniture</a></li>
 										<li style="float:none;"><a href="{% url 'electronics' %}">Electronics</a></li>
 									</ul>
 								</nav>
@@ -84,7 +90,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 					<div class="container-fluid">
 						<ol class="breadcrumb">
 						  	<li><a href="{% url 'home' %}" style="text-decoration: none;">Home</a></li>
-						  	<li class="active"><a href="{% url 'home2' %}" style="text-decoration: none;">Home</a></li>
+						  	<li class="active"><a href="{% url 'home2' %}" style="text-decoration: none;">Home & Furniture</a></li>
 						</ol>
 						<div class="row">
 							<div class="col-md-12">
@@ -92,10 +98,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 									<div class="top-one" style="padding:0 10px;">
 										<div class="list-group">
 											<h4 class="list-group-item active">
-												All Categories
+												Shop by Category
 											</h4>
-											{% for i in navbar_category %}
-											<a href="{% url 'categorydetail' i.category_slug %}" class="list-group-item list-group-item-action">{{i.category_name}}</a>
+											<a href="{% url 'subcategorydetail' sub1.category.category_slug sub1.subcategory_slug %}" class="list-group-item list-group-item-action">{{sub1.subcategory_name}}</a>
+											<a href="{% url 'subcategorydetail' sub2.category.category_slug sub2.subcategory_slug %}" class="list-group-item list-group-item-action">{{sub2.subcategory_name}}</a>
+											<a href="{% url 'subcategorydetail' sub3.category.category_slug sub3.subcategory_slug %}" class="list-group-item list-group-item-action">{{sub3.subcategory_name}}</a>
+										</div>
+									</div>
+									<div class="top-one" style="padding:0 10px;">
+										<div class="list-group">
+											<h4 class="list-group-item active">
+												Sort by Brand
+											</h4>
+											{% for brand in brands|slice:":10" %}
+											<a href="{% url 'brandetail' brand.id %}" class="list-group-item list-group-item-action">{{brand.brand_name}}</a>
 											{% endfor %}
 										</div>
 									</div>
@@ -105,7 +121,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 									<div class="col-md-12 articles-page">
 										<div class="category-artical results">
 											<h4 class="inner-title">
-												Home - {{count}} Products
+												Home & Furniture - {{count}} Products
 											</h4>
 											<div class="row category-one category-articals">
 												{% for product in products %}
