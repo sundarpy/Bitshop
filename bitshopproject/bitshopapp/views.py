@@ -21,6 +21,7 @@ import datetime
 from datetime import date, timedelta
 from itertools import chain
 import json
+import ast
 
 """==============================="""
 """=========SEARCH METHOD========="""
@@ -135,10 +136,17 @@ def CategoryPage(request, slug):
 	limitedoffer = LimitedOffer.objects.all()
 	prices = Price.objects.all().order_by('-id')
 	navbar_category = Category.objects.all()
-	brands = Brand.objects.all().order_by('?')
 	category = Category.objects.get(category_slug=slug)
 	subcategory = SubCategory.objects.filter(category=category).order_by('id')
 	products_list = Product.objects.filter(category=category).order_by('?')
+
+	items = []
+	for i in products_list:
+		brands_dict = {}
+		brands_dict['id'] = i.brand.id
+		brands_dict['brand_name'] = i.brand.brand_name
+		items.append(brands_dict)
+	brands = [ast.literal_eval(el1) for el1 in set([str(el2) for el2 in items])]
 
 	paginator = Paginator(products_list, 25)
 	productcount = products_list.count
@@ -186,10 +194,19 @@ def PriceFilterCategory(request, slug, pr_id):
 	lower = selected_price.lower_limit
 	prices = Price.objects.all().order_by('-id')
 	navbar_category = Category.objects.all()
-	brands = Brand.objects.all().order_by('?')
+	
 	category = Category.objects.get(category_slug=slug)
 	subcategory = SubCategory.objects.filter(category=category).order_by('id')
 	products_list = Product.objects.filter(Q(category=category, offer_price__lte=upper, offer_price__gte=lower) | Q(category=category, sale_price__lte=upper, sale_price__gte=lower))
+
+	items = []
+	for i in products_list:
+		brands_dict = {}
+		brands_dict['id'] = i.brand.id
+		brands_dict['brand_name'] = i.brand.brand_name
+		items.append(brands_dict)
+	brands = [ast.literal_eval(el1) for el1 in set([str(el2) for el2 in items])]
+
 	paginator = Paginator(products_list, 25)
 	productcount = products_list.count
 	page = request.GET.get('page')
@@ -322,11 +339,19 @@ def SubCategoryPage(request, slug1, slug2):
 	limitedoffer = LimitedOffer.objects.all()
 	prices = Price.objects.all().order_by('-id')
 	navbar_category = Category.objects.all()
-	brands = Brand.objects.all().order_by('?')
 	category = Category.objects.get(category_slug=slug1)
 	subcategory = SubCategory.objects.filter(category=category).order_by('id')
 	subcat = SubCategory.objects.get(subcategory_slug=slug2, category=category)
 	products_list = Product.objects.filter(subcategory=subcat).order_by('id')
+
+	items = []
+	for i in products_list:
+		brands_dict = {}
+		brands_dict['id'] = i.brand.id
+		brands_dict['brand_name'] = i.brand.brand_name
+		items.append(brands_dict)
+	brands = [ast.literal_eval(el1) for el1 in set([str(el2) for el2 in items])]
+
 	paginator = Paginator(products_list, 25)
 	productcount = products_list.count
 	page = request.GET.get('page')
@@ -371,11 +396,19 @@ def PriceFilterSubCategory(request, slug1, slug2, pr_id):
 	upper = selected_price.upper_limit
 	lower = selected_price.lower_limit
 	navbar_category = Category.objects.all()
-	brands = Brand.objects.all().order_by('?')
 	category = Category.objects.get(category_slug=slug1)
 	subcategory = SubCategory.objects.filter(category=category).order_by('id')
 	subcat = SubCategory.objects.get(subcategory_slug=slug2, category=category)
 	products_list = Product.objects.filter(Q(subcategory=subcat, offer_price__lte=upper, offer_price__gte=lower) | Q(subcategory=subcat, sale_price__lte=upper, sale_price__gte=lower))
+
+	items = []
+	for i in products_list:
+		brands_dict = {}
+		brands_dict['id'] = i.brand.id
+		brands_dict['brand_name'] = i.brand.brand_name
+		items.append(brands_dict)
+	brands = [ast.literal_eval(el1) for el1 in set([str(el2) for el2 in items])]
+
 	paginator = Paginator(products_list, 25)
 	productcount = products_list.count
 	page = request.GET.get('page')
@@ -518,12 +551,21 @@ def Men(request):
 	count2 = list2.count()
 	count3 = list3.count()
 	count4 = list4.count()
-	brands = Brand.objects.all().order_by('?')
+
 	sub1 = SubCategory.objects.get(subcategory_name="Men")
 	sub2 = SubCategory.objects.get(subcategory_name="Men's Watches")
 	sub3 = SubCategory.objects.get(subcategory_name="Formals & Lace-ups")
 	sub4 = SubCategory.objects.get(subcategory_name="Men's Grooming")
 	products_list = list(chain(list1, list2, list3, list4))
+
+	items = []
+	for i in products_list:
+		brands_dict = {}
+		brands_dict['id'] = i.brand.id
+		brands_dict['brand_name'] = i.brand.brand_name
+		if brands_dict['brand_name'] not in items:
+			items.append(brands_dict)
+	brands = [ast.literal_eval(el1) for el1 in set([str(el2) for el2 in items])]
 
 	paginator = Paginator(products_list, 25)
 	productcount = count1 + count2 + count3 + count4 
@@ -566,13 +608,21 @@ def Women(request):
 	count2 = list2.count()
 	count3 = list3.count()
 	count4 = list4.count()
-	brands = Brand.objects.all().order_by('?')
+
 	sub1 = SubCategory.objects.get(subcategory_name="Women")
 	sub2 = SubCategory.objects.get(subcategory_name="Women's Watches")
 	sub3 = SubCategory.objects.get(subcategory_name="Women's Jewellery")
 	sub4 = SubCategory.objects.get(subcategory_name="Ballerinas")
 
 	products_list = list(chain(list1, list2, list3, list4))
+
+	items = []
+	for i in products_list:
+		brands_dict = {}
+		brands_dict['id'] = i.brand.id
+		brands_dict['brand_name'] = i.brand.brand_name
+		items.append(brands_dict)
+	brands = [ast.literal_eval(el1) for el1 in set([str(el2) for el2 in items])]
 
 	paginator = Paginator(products_list, 25)
 	productcount = count1 + count2 + count3 + count4 
@@ -611,11 +661,19 @@ def Appliances(request):
 	list2 = Product.objects.filter(subcategory__subcategory_name="Large Appliances").order_by('?')
 	count1 = list1.count()
 	count2 = list2.count()
-	brands = Brand.objects.all().order_by('?')
+
 	sub1 = SubCategory.objects.get(subcategory_name="Kitchen & Home Appliances")
 	sub2 = SubCategory.objects.get(subcategory_name="Large Appliances")
 
 	products_list = list(chain(list1, list2))
+
+	items = []
+	for i in products_list:
+		brands_dict = {}
+		brands_dict['id'] = i.brand.id
+		brands_dict['brand_name'] = i.brand.brand_name
+		items.append(brands_dict)
+	brands = [ast.literal_eval(el1) for el1 in set([str(el2) for el2 in items])]
 
 	paginator = Paginator(products_list, 25)
 	productcount = count1 + count2
@@ -656,12 +714,20 @@ def Home2(request):
 	count1 = list1.count()
 	count2 = list2.count()
 	count3 = list3.count()
-	brands = Brand.objects.all().order_by('?')
+
 	sub1 = SubCategory.objects.get(subcategory_name="Decor & Lighting")
 	sub2 = SubCategory.objects.get(subcategory_name="Kitchen & Dining")
 	sub3 = SubCategory.objects.get(subcategory_name="Home Improvement")
 
 	products_list = list(chain(list1, list2, list3))
+
+	items = []
+	for i in products_list:
+		brands_dict = {}
+		brands_dict['id'] = i.brand.id
+		brands_dict['brand_name'] = i.brand.brand_name
+		items.append(brands_dict)
+	brands = [ast.literal_eval(el1) for el1 in set([str(el2) for el2 in items])]
 
 	paginator = Paginator(products_list, 25)
 	productcount = count1 + count2 + count3
@@ -704,13 +770,21 @@ def Electronics(request):
 	count2 = list2.count()
 	count3 = list3.count()
 	count4 = list4.count()
-	brands = Brand.objects.all().order_by('?')
+
 	sub1 = SubCategory.objects.get(subcategory_name="Android Mobiles")
 	sub2 = SubCategory.objects.get(subcategory_name="Tablets")
 	sub3 = SubCategory.objects.get(subcategory_name="Laptops")
 	sub4 = SubCategory.objects.get(subcategory_name="Digital SLRs")
 
 	products_list = list(chain(list1, list2, list3, list4))
+
+	items = []
+	for i in products_list:
+		brands_dict = {}
+		brands_dict['id'] = i.brand.id
+		brands_dict['brand_name'] = i.brand.brand_name
+		items.append(brands_dict)
+	brands = [ast.literal_eval(el1) for el1 in set([str(el2) for el2 in items])]
 
 	paginator = Paginator(products_list, 25)
 	productcount = count1 + count2 + count3 + count4
@@ -747,7 +821,6 @@ def Electronics(request):
 
 def ProductPage(request, p_id):
 	"""Product detail page"""
-	mac = str(get_client_ip(request))
 	limitedoffer = LimitedOffer.objects.all()
 	navbar_category = Category.objects.all()
 	category = Category.objects.all()
@@ -769,7 +842,7 @@ def ProductPage(request, p_id):
 	# 		form = CommentForm()
 
 	similar_products = Product.objects.filter(subcategory=product.subcategory).exclude(title=product.title).order_by('?')
-
+	
 	if product.offer_price != None:
 		cheapers = Product.objects.filter(subcategory=product.subcategory, offer_price__lt=product.offer_price)
 	else:

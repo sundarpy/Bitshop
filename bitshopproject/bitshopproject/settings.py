@@ -112,6 +112,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+SESSION_COOKIE_HTTPONLY = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
