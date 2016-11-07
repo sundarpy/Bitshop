@@ -147,6 +147,15 @@ def CategoryPage(request, slug):
 		brands_dict['brand_name'] = i.brand.brand_name
 		items.append(brands_dict)
 	brands = [ast.literal_eval(el1) for el1 in set([str(el2) for el2 in items])]
+	column_count1 = len(brands)/4
+	column_count2 = column_count1 * 2
+	column_count3 = column_count1 * 3
+	column_count4 = column_count1 * 4
+
+	l1 = "%d:%d" % (0,column_count1)
+	l2 = "%d:%d" % (column_count1,column_count2)
+	l3 = "%d:%d" % (column_count2,column_count3)
+	l4 = "%d:%d" % (column_count3,column_count4)
 
 	paginator = Paginator(products_list, 25)
 	productcount = products_list.count
@@ -177,7 +186,7 @@ def CategoryPage(request, slug):
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.filter(category=category).order_by('-id')
-	context = {"prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category,"user" : request.user, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
+	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category,"user" : request.user, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
 	template = 'categorydetail.html'
 	return render(request, template, context)
 
@@ -207,6 +216,16 @@ def PriceFilterCategory(request, slug, pr_id):
 		items.append(brands_dict)
 	brands = [ast.literal_eval(el1) for el1 in set([str(el2) for el2 in items])]
 
+	column_count1 = len(brands)/4
+	column_count2 = column_count1 * 2
+	column_count3 = column_count1 * 3
+	column_count4 = column_count1 * 4
+
+	l1 = "%d:%d" % (0,column_count1)
+	l2 = "%d:%d" % (column_count1,column_count2)
+	l3 = "%d:%d" % (column_count2,column_count3)
+	l4 = "%d:%d" % (column_count3,column_count4)
+
 	paginator = Paginator(products_list, 25)
 	productcount = products_list.count
 	page = request.GET.get('page')
@@ -234,7 +253,7 @@ def PriceFilterCategory(request, slug, pr_id):
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.filter(category=category).order_by('-id')
-	context = {"prodnum":prodnum, "selected_price":selected_price, "limitedoffer":limitedoffer, "count":productcount, "category":category, "subcategory":subcategory, "products":products,"user" : request.user, "navbar_category":navbar_category, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title, "upper":upper, "lower":lower}
+	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4,"prodnum":prodnum, "selected_price":selected_price, "limitedoffer":limitedoffer, "count":productcount, "category":category, "subcategory":subcategory, "products":products,"user" : request.user, "navbar_category":navbar_category, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title, "upper":upper, "lower":lower}
 	template = 'pricecatdetail.html'
 	return render(request, template, context)
 
@@ -251,6 +270,16 @@ def BrandsPage(request, b_id):
 	prime_brand = Brand.objects.get(pk=b_id)
 	category = Category.objects.all()
 	products_list = Product.objects.filter(brand=prime_brand).order_by('id')
+	column_count1 = len(brands)/4
+	column_count2 = column_count1 * 2
+	column_count3 = column_count1 * 3
+	column_count4 = column_count1 * 4
+
+	l1 = "%d:%d" % (0,column_count1)
+	l2 = "%d:%d" % (column_count1,column_count2)
+	l3 = "%d:%d" % (column_count2,column_count3)
+	l4 = "%d:%d" % (column_count3,column_count4)
+
 	paginator = Paginator(products_list, 25)
 	productcount = products_list.count
 	page = request.GET.get('page')
@@ -278,7 +307,7 @@ def BrandsPage(request, b_id):
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.all().order_by('-id')
-	context = {"prodnum":prodnum, "limitedoffer":limitedoffer, "count":productcount, "category":category, "products":products, "navbar_category":navbar_category,"user" : request.user, "brands":brands, "prime_brand":prime_brand, "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
+	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4,"prodnum":prodnum, "limitedoffer":limitedoffer, "count":productcount, "category":category, "products":products, "navbar_category":navbar_category,"user" : request.user, "brands":brands, "prime_brand":prime_brand, "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
 	template = 'brandetail.html'
 	return render(request, template, context)
 
@@ -296,6 +325,15 @@ def PriceFilterBrands(request, b_id, pr_id):
 	prices = Price.objects.all().order_by('-id')
 	navbar_category = Category.objects.all()
 	brands = Brand.objects.all().order_by('?')
+	column_count1 = len(brands)/4
+	column_count2 = column_count1 * 2
+	column_count3 = column_count1 * 3
+	column_count4 = column_count1 * 4
+
+	l1 = "%d:%d" % (0,column_count1)
+	l2 = "%d:%d" % (column_count1,column_count2)
+	l3 = "%d:%d" % (column_count2,column_count3)
+	l4 = "%d:%d" % (column_count3,column_count4)
 	prime_brand = Brand.objects.get(pk=b_id)
 	category = Category.objects.all()
 	products_list = Product.objects.filter(Q(brand=prime_brand, offer_price__lte=upper, offer_price__gte=lower) | Q(brand=prime_brand, sale_price__lte=upper, sale_price__gte=lower))
@@ -326,7 +364,7 @@ def PriceFilterBrands(request, b_id, pr_id):
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.all().order_by('-id')
-	context = {"prodnum":prodnum, "selected_price":selected_price, "limitedoffer":limitedoffer, "count":productcount, "upper":upper, "lower":lower, "category":category, "products":products,"user" : request.user, "navbar_category":navbar_category, "brands":brands, "prime_brand":prime_brand, "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title}
+	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4,"prodnum":prodnum, "selected_price":selected_price, "limitedoffer":limitedoffer, "count":productcount, "upper":upper, "lower":lower, "category":category, "products":products,"user" : request.user, "navbar_category":navbar_category, "brands":brands, "prime_brand":prime_brand, "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title}
 	template = 'pricebranddetail.html'
 	return render(request, template, context)
 
@@ -351,6 +389,16 @@ def SubCategoryPage(request, slug1, slug2):
 		brands_dict['brand_name'] = i.brand.brand_name
 		items.append(brands_dict)
 	brands = [ast.literal_eval(el1) for el1 in set([str(el2) for el2 in items])]
+
+	column_count1 = len(brands)/4
+	column_count2 = column_count1 * 2
+	column_count3 = column_count1 * 3
+	column_count4 = column_count1 * 4
+
+	l1 = "%d:%d" % (0,column_count1)
+	l2 = "%d:%d" % (column_count1,column_count2)
+	l3 = "%d:%d" % (column_count2,column_count3)
+	l4 = "%d:%d" % (column_count3,column_count4)
 
 	paginator = Paginator(products_list, 25)
 	productcount = products_list.count
@@ -379,7 +427,7 @@ def SubCategoryPage(request, slug1, slug2):
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.filter(category=category).order_by('-id')
-	context = {"prodnum":prodnum, "limitedoffer":limitedoffer, "count":productcount, "category":category, "subcategory":subcategory, "products":products,"user" : request.user, "navbar_category":navbar_category,"subcat":subcat, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
+	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4,"prodnum":prodnum, "limitedoffer":limitedoffer, "count":productcount, "category":category, "subcategory":subcategory, "products":products,"user" : request.user, "navbar_category":navbar_category,"subcat":subcat, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
 	template = 'subcategorydetail.html'
 	return render(request, template, context)
 
@@ -409,6 +457,16 @@ def PriceFilterSubCategory(request, slug1, slug2, pr_id):
 		items.append(brands_dict)
 	brands = [ast.literal_eval(el1) for el1 in set([str(el2) for el2 in items])]
 
+	column_count1 = len(brands)/4
+	column_count2 = column_count1 * 2
+	column_count3 = column_count1 * 3
+	column_count4 = column_count1 * 4
+
+	l1 = "%d:%d" % (0,column_count1)
+	l2 = "%d:%d" % (column_count1,column_count2)
+	l3 = "%d:%d" % (column_count2,column_count3)
+	l4 = "%d:%d" % (column_count3,column_count4)
+
 	paginator = Paginator(products_list, 25)
 	productcount = products_list.count
 	page = request.GET.get('page')
@@ -436,7 +494,7 @@ def PriceFilterSubCategory(request, slug1, slug2, pr_id):
 	sl = "%d:%d" % (x,y)
 
 	news = New.objects.filter(category=category).order_by('-id')
-	context = {"prodnum":prodnum, "selected_price":selected_price, "limitedoffer":limitedoffer, "category":category, "subcategory":subcategory, "products":products,"user" : request.user, "navbar_category":navbar_category,"subcat":subcat, "count":productcount, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title, "upper":upper, "lower":lower}
+	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4,"prodnum":prodnum, "selected_price":selected_price, "limitedoffer":limitedoffer, "category":category, "subcategory":subcategory, "products":products,"user" : request.user, "navbar_category":navbar_category,"subcat":subcat, "count":productcount, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title, "upper":upper, "lower":lower}
 	template = 'pricesubcatdetail.html'
 	return render(request, template, context)
 
@@ -567,6 +625,16 @@ def Men(request):
 			items.append(brands_dict)
 	brands = [ast.literal_eval(el1) for el1 in set([str(el2) for el2 in items])]
 
+	column_count1 = len(brands)/4
+	column_count2 = column_count1 * 2
+	column_count3 = column_count1 * 3
+	column_count4 = column_count1 * 4
+
+	l1 = "%d:%d" % (0,column_count1)
+	l2 = "%d:%d" % (column_count1,column_count2)
+	l3 = "%d:%d" % (column_count2,column_count3)
+	l4 = "%d:%d" % (column_count3,column_count4)
+
 	paginator = Paginator(products_list, 25)
 	productcount = count1 + count2 + count3 + count4 
 	page = request.GET.get('page')
@@ -592,7 +660,7 @@ def Men(request):
 		x = products.number - 4
 		y = products.number + 4
 	sl = "%d:%d" % (x,y)
-	context = {"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages), "sub1":sub1,"sub2":sub2,"sub3":sub3,"sub4":sub4}
+	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4,"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages), "sub1":sub1,"sub2":sub2,"sub3":sub3,"sub4":sub4}
 	template = 'men.html'
 	return render(request, template, context)
 
@@ -624,6 +692,16 @@ def Women(request):
 		items.append(brands_dict)
 	brands = [ast.literal_eval(el1) for el1 in set([str(el2) for el2 in items])]
 
+	column_count1 = len(brands)/4
+	column_count2 = column_count1 * 2
+	column_count3 = column_count1 * 3
+	column_count4 = column_count1 * 4
+
+	l1 = "%d:%d" % (0,column_count1)
+	l2 = "%d:%d" % (column_count1,column_count2)
+	l3 = "%d:%d" % (column_count2,column_count3)
+	l4 = "%d:%d" % (column_count3,column_count4)
+
 	paginator = Paginator(products_list, 25)
 	productcount = count1 + count2 + count3 + count4 
 	page = request.GET.get('page')
@@ -649,7 +727,7 @@ def Women(request):
 		x = products.number - 4
 		y = products.number + 4
 	sl = "%d:%d" % (x,y)
-	context = {"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages), "sub1":sub1,"sub2":sub2,"sub3":sub3,"sub4":sub4}
+	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4,"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages), "sub1":sub1,"sub2":sub2,"sub3":sub3,"sub4":sub4}
 	template = 'women.html'
 	return render(request, template, context)
 
@@ -674,6 +752,16 @@ def Appliances(request):
 		brands_dict['brand_name'] = i.brand.brand_name
 		items.append(brands_dict)
 	brands = [ast.literal_eval(el1) for el1 in set([str(el2) for el2 in items])]
+
+	column_count1 = len(brands)/4
+	column_count2 = column_count1 * 2
+	column_count3 = column_count1 * 3
+	column_count4 = column_count1 * 4
+
+	l1 = "%d:%d" % (0,column_count1)
+	l2 = "%d:%d" % (column_count1,column_count2)
+	l3 = "%d:%d" % (column_count2,column_count3)
+	l4 = "%d:%d" % (column_count3,column_count4)
 
 	paginator = Paginator(products_list, 25)
 	productcount = count1 + count2
@@ -700,7 +788,7 @@ def Appliances(request):
 		x = products.number - 4
 		y = products.number + 4
 	sl = "%d:%d" % (x,y)
-	context = {"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages), "sub1":sub1, "sub2":sub2}
+	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4,"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages), "sub1":sub1, "sub2":sub2}
 	template = 'appliances.html'
 	return render(request, template, context)
 
@@ -728,6 +816,15 @@ def Home2(request):
 		brands_dict['brand_name'] = i.brand.brand_name
 		items.append(brands_dict)
 	brands = [ast.literal_eval(el1) for el1 in set([str(el2) for el2 in items])]
+	column_count1 = len(brands)/4
+	column_count2 = column_count1 * 2
+	column_count3 = column_count1 * 3
+	column_count4 = column_count1 * 4
+
+	l1 = "%d:%d" % (0,column_count1)
+	l2 = "%d:%d" % (column_count1,column_count2)
+	l3 = "%d:%d" % (column_count2,column_count3)
+	l4 = "%d:%d" % (column_count3,column_count4)
 
 	paginator = Paginator(products_list, 25)
 	productcount = count1 + count2 + count3
@@ -754,7 +851,7 @@ def Home2(request):
 		x = products.number - 4
 		y = products.number + 4
 	sl = "%d:%d" % (x,y)
-	context = {"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages), "sub1":sub1, "sub2":sub2, "sub3":sub3}
+	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4,"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages), "sub1":sub1, "sub2":sub2, "sub3":sub3}
 	template = 'home2.html'
 	return render(request, template, context)
 
@@ -786,6 +883,16 @@ def Electronics(request):
 		items.append(brands_dict)
 	brands = [ast.literal_eval(el1) for el1 in set([str(el2) for el2 in items])]
 
+	column_count1 = len(brands)/4
+	column_count2 = column_count1 * 2
+	column_count3 = column_count1 * 3
+	column_count4 = column_count1 * 4
+
+	l1 = "%d:%d" % (0,column_count1)
+	l2 = "%d:%d" % (column_count1,column_count2)
+	l3 = "%d:%d" % (column_count2,column_count3)
+	l4 = "%d:%d" % (column_count3,column_count4)
+
 	paginator = Paginator(products_list, 25)
 	productcount = count1 + count2 + count3 + count4
 	page = request.GET.get('page')
@@ -811,7 +918,7 @@ def Electronics(request):
 		x = products.number - 4
 		y = products.number + 4
 	sl = "%d:%d" % (x,y)
-	context = {"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages),  "sub1":sub1,"sub2":sub2,"sub3":sub3,"sub4":sub4}
+	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4,"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages),  "sub1":sub1,"sub2":sub2,"sub3":sub3,"sub4":sub4}
 	template = 'electronics.html'
 	return render(request, template, context)
 

@@ -103,6 +103,67 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 											{% for cat in category %}
 											<a href="{% url 'categorydetail' cat.category_slug %}" class="list-group-item list-group-item-action">{{cat.category_name}}</a>
 											{% endfor %}
+											<a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#myModal" style="box-shadow: none; outline:none;">More Brands...</a>
+										</div>
+											<!-- Brand Modal start-->
+										  	<div class="modal fade" id="myModal" role="dialog">
+											    <div class="modal-dialog">
+											    
+											      <!-- Modal content-->
+											      <div class="modal-content">
+											        <div class="modal-header">
+											          <button type="button" class="close" data-dismiss="modal" style="box-shadow: none; outline:none;">&times;</button>
+											          <h4 class="modal-title">All Brands</h4>
+											        </div>
+											        <div class="modal-body">
+										          		<div class="row">
+										          			<div class="col-md-3">
+										          				<div class="brand-mod">
+										          					<ul class="list-unstyled">
+										          						{% for brand in brands|slice:l1 %}
+																	  	<li><a href="{% url 'brandetail' brand.id %}">{{brand.brand_name}}</a></li>
+																	  	{% endfor %}
+																	</ul>
+										          				</div>
+										          			</div>
+										          			<div class="col-md-3">
+										          				<div class="brand-mod">
+										          					<ul class="list-unstyled">
+										          						{% for brand in brands|slice:l2 %}
+																	  	<li><a href="{% url 'brandetail' brand.id %}">{{brand.brand_name}}</a></li>
+																	  	{% endfor %}
+																	</ul>
+										          				</div>
+										          			</div>
+										          			<div class="col-md-3">
+										          				<div class="brand-mod">
+										          					<ul class="list-unstyled">
+										          						{% for brand in brands|slice:l3 %}
+																	  	<li><a href="{% url 'brandetail' brand.id %}">{{brand.brand_name}}</a></li>
+																	  	{% endfor %}
+																	</ul>
+										          				</div>
+										          			</div>
+										          			<div class="col-md-3">
+										          				<div class="brand-mod">
+										          					<ul class="list-unstyled">
+										          						{% for brand in brands|slice:l4 %}
+																	  	<li><a href="{% url 'brandetail' brand.id %}">{{brand.brand_name}}</a></li>
+																	  	{% endfor %}
+																	</ul>
+										          				</div>
+										          			</div>
+
+										          		</div>
+											        </div>
+											        <!-- <div class="modal-footer">
+											          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+											        </div> -->
+											      </div>
+											      
+											    </div>
+										  	</div>
+										  	<!-- Brand Modal end-->
 										</div>
 									</div>
 									
