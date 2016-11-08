@@ -103,9 +103,39 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 											{% for cat in category %}
 											<a href="{% url 'categorydetail' cat.category_slug %}" class="list-group-item list-group-item-action">{{cat.category_name}}</a>
 											{% endfor %}
+										</div>
+											
+										</div>
+									</div>
+									
+									<div class="top-one" style="padding:0 10px;">
+										<div class="list-group">
+											<h4 class="list-group-item active">
+												Sort by Price
+											</h4>
+											{% for price in prices %}
+												{% if price.title == 'Very Low' %}
+													<a href="{% url 'pricebranddetail' prime_brand.id price.id %}" class="list-group-item list-group-item-action">Below Rs.{{price.upper_limit}}</a>
+												{% elif price.title == 'Very High' %}
+													<a href="{% url 'pricebranddetail' prime_brand.id price.id %}" class="list-group-item list-group-item-action">Above Rs.{{price.lower_limit}}</a>
+												{% else %}
+													<a href="{% url 'pricebranddetail' prime_brand.id price.id %}" class="list-group-item list-group-item-action">Rs.{{price.lower_limit}} - Rs.{{price.upper_limit}}</a>
+												{% endif %}
+											{% endfor %}
+										</div>
+									</div>
+									
+									<div class="top-one" style="padding:0 10px;">
+										<div class="list-group">
+											<h4 class="list-group-item active">
+												Sort by Brand
+											</h4>
+											{% for brand in brands|slice:":10" %}
+											<a href="{% url 'brandetail' brand.id %}" class="list-group-item list-group-item-action">{{brand.brand_name}}</a>
+											{% endfor %}
 											<a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#myModal" style="box-shadow: none; outline:none;">More Brands...</a>
 										</div>
-											<!-- Brand Modal start-->
+										<!-- Brand Modal start-->
 										  	<div class="modal fade" id="myModal" role="dialog">
 											    <div class="modal-dialog">
 											    
@@ -164,35 +194,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 											    </div>
 										  	</div>
 										  	<!-- Brand Modal end-->
-										</div>
-									</div>
-									
-									<div class="top-one" style="padding:0 10px;">
-										<div class="list-group">
-											<h4 class="list-group-item active">
-												Sort by Price
-											</h4>
-											{% for price in prices %}
-												{% if price.title == 'Very Low' %}
-													<a href="{% url 'pricebranddetail' prime_brand.id price.id %}" class="list-group-item list-group-item-action">Below Rs.{{price.upper_limit}}</a>
-												{% elif price.title == 'Very High' %}
-													<a href="{% url 'pricebranddetail' prime_brand.id price.id %}" class="list-group-item list-group-item-action">Above Rs.{{price.lower_limit}}</a>
-												{% else %}
-													<a href="{% url 'pricebranddetail' prime_brand.id price.id %}" class="list-group-item list-group-item-action">Rs.{{price.lower_limit}} - Rs.{{price.upper_limit}}</a>
-												{% endif %}
-											{% endfor %}
-										</div>
-									</div>
-									
-									<div class="top-one" style="padding:0 10px;">
-										<div class="list-group">
-											<h4 class="list-group-item active">
-												Sort by Brand
-											</h4>
-											{% for brand in brands|slice:":10" %}
-											<a href="{% url 'brandetail' brand.id %}" class="list-group-item list-group-item-action">{{brand.brand_name}}</a>
-											{% endfor %}
-										</div>
 									</div>
 								</div>
 

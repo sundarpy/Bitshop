@@ -91,42 +91,6 @@ def Search(request):
 """===========HOME PAGE==========="""
 """==============================="""
 
-# def HomePage(request):
-# 	"""Home Page"""
-# 	navbar_category = Category.objects.all()
-# 	saleoffer = SaleOffer.objects.all()
-# 	limitedoffer = LimitedOffer.objects.all()
-# 	category = Category.objects.all()
-# 	sub_category = SubCategory.objects.all()
-# 	subcategory = SubCategory.objects.filter(category=category)
-# 	products = Product.objects.filter(subcategory=subcategory)
-# 	news = New.objects.all().order_by('-id')
-
-# 	men_prod = SerfoProduct.objects.filter(super_category='M')
-# 	women_prod = SerfoProduct.objects.filter(super_category='W')
-# 	appliances_prod = SerfoProduct.objects.filter(super_category='A')
-# 	home_prod = SerfoProduct.objects.filter(super_category='H')
-# 	electronics_prod = SerfoProduct.objects.filter(super_category='E')
-
-# 	context = {
-# 				"category":category, 
-# 				"subcategory":subcategory, 
-# 				"products":products, 
-# 				"sub_category":sub_category, 
-# 				"data1" : men_prod,
-# 				"data2" : women_prod,
-# 				"data3" : appliances_prod,
-# 				"data4" : home_prod,
-# 				"data5" : electronics_prod, 
-# 				"navbar_category" : navbar_category,
-# 				"news" : news,
-# 				"user" : request.user,
-# 				"saleoffer" : saleoffer,
-# 				"limitedoffer" : limitedoffer,
-# 				}
-# 	template = 'home.html'
-# 	return render(request, template, context)
-
 def HomePage(request):
 	"""Home Page"""
 	navbar_category = Category.objects.all()
@@ -140,7 +104,7 @@ def HomePage(request):
 	home_prod = SerfoProduct.objects.filter(super_category='H')
 	electronics_prod = SerfoProduct.objects.filter(super_category='E')
 
-	context = { 
+	context = {
 				"data1" : men_prod,
 				"data2" : women_prod,
 				"data3" : appliances_prod,
@@ -154,6 +118,104 @@ def HomePage(request):
 				}
 	template = 'home.html'
 	return render(request, template, context)
+
+# def serfoproductcoverter(prod_query):
+# 	xlist = []
+# 	for i in prod_query:
+# 		prod_dict = {}
+# 		prod_dict['id'] = str(i.product.id)
+# 		prod_dict['title'] = i.product.title
+# 		prod_dict['offer_price'] = str(i.product.offer_price)
+# 		prod_dict['sale_price'] = str(i.product.sale_price)
+# 		prod_dict['mainimage'] = i.product.mainimage
+# 		xlist.append(prod_dict)
+# 	return xlist
+
+# def productcoverter(prod_query):
+# 	xlist = []
+# 	for i in prod_query:
+# 		prod_dict = {}
+# 		prod_dict['id'] = str(i.id)
+# 		prod_dict['title'] = i.title
+# 		prod_dict['offer_price'] = str(i.offer_price)
+# 		prod_dict['sale_price'] = str(i.sale_price)
+# 		prod_dict['mainimage'] = i.mainimage
+# 		xlist.append(prod_dict)
+# 	return xlist
+
+
+# def HomePage(request):
+# 	"""Home Page"""
+# 	navbar_category = Category.objects.all()
+# 	catlist = []
+# 	for cat in navbar_category:
+# 		catdict = {}
+# 		catdict['id'] = str(cat.id)
+# 		catdict['category_name'] = cat.category_name
+# 		catdict['category_slug'] = str(cat.category_slug)
+# 		catlist.append(catdict)
+# 	navbar_category = catlist
+
+# 	saleoffer = SaleOffer.objects.all()
+# 	salelist = []
+# 	for sale in saleoffer:
+# 		saledict = {}
+# 		saledict['image'] = sale.image
+# 		saledict['link'] = sale.link
+# 		salelist.append(saledict)
+# 	saleoffer = salelist
+
+# 	limitedoffer = LimitedOffer.objects.all()
+# 	limlist = []
+# 	for lim in limitedoffer:
+# 		limdict = {}
+# 		limdict['image'] = lim.image
+# 		limdict['link'] = lim.link
+# 		limlist.append(limdict)
+# 	limitedoffer = limlist
+
+# 	news = New.objects.all().order_by('-id')
+# 	newslist = []
+# 	for new in news:
+# 		newsdict = {}
+# 		newsdict['id'] = str(new.id)
+# 		newsdict['title'] = new.title
+# 		newsdict['image_url'] = new.image_url
+# 		newslist.append(newsdict)
+# 	news = newslist
+
+# 	men_prod = SerfoProduct.objects.filter(super_category='M')
+# 	women_prod = SerfoProduct.objects.filter(super_category='W')
+# 	appliances_prod = SerfoProduct.objects.filter(super_category='A')
+# 	home_prod = SerfoProduct.objects.filter(super_category='H')
+# 	electronics_prod = SerfoProduct.objects.filter(super_category='E')
+
+# 	men_prod_list = serfoproductcoverter(men_prod)
+# 	women_prod_list = serfoproductcoverter(women_prod)
+# 	appliances_prod_list = serfoproductcoverter(appliances_prod)
+# 	home_prod_list = serfoproductcoverter(home_prod)
+# 	electronics_prod_list = serfoproductcoverter(electronics_prod)
+
+# 	men_prod = men_prod_list
+# 	women_prod = women_prod_list
+# 	appliances_prod = appliances_prod_list
+# 	home_prod = home_prod_list
+# 	electronics_prod = electronics_prod_list
+
+
+# 	context = { 
+# 				"data1" : men_prod,
+# 				"data2" : women_prod,
+# 				"data3" : appliances_prod,
+# 				"data4" : home_prod,
+# 				"data5" : electronics_prod, 
+# 				"navbar_category" : navbar_category,
+# 				"news" : news,
+# 				"saleoffer" : saleoffer,
+# 				"limitedoffer" : limitedoffer,
+# 				}
+# 	template = 'home.html'
+# 	return HttpResponse(json.dumps(context), content_type = 'application/json')
 
 """=================================="""
 """=====CATEGORY INDIVIDUAL PAGE====="""
