@@ -91,15 +91,47 @@ def Search(request):
 """===========HOME PAGE==========="""
 """==============================="""
 
+# def HomePage(request):
+# 	"""Home Page"""
+# 	navbar_category = Category.objects.all()
+# 	saleoffer = SaleOffer.objects.all()
+# 	limitedoffer = LimitedOffer.objects.all()
+# 	category = Category.objects.all()
+# 	sub_category = SubCategory.objects.all()
+# 	subcategory = SubCategory.objects.filter(category=category)
+# 	products = Product.objects.filter(subcategory=subcategory)
+# 	news = New.objects.all().order_by('-id')
+
+# 	men_prod = SerfoProduct.objects.filter(super_category='M')
+# 	women_prod = SerfoProduct.objects.filter(super_category='W')
+# 	appliances_prod = SerfoProduct.objects.filter(super_category='A')
+# 	home_prod = SerfoProduct.objects.filter(super_category='H')
+# 	electronics_prod = SerfoProduct.objects.filter(super_category='E')
+
+# 	context = {
+# 				"category":category, 
+# 				"subcategory":subcategory, 
+# 				"products":products, 
+# 				"sub_category":sub_category, 
+# 				"data1" : men_prod,
+# 				"data2" : women_prod,
+# 				"data3" : appliances_prod,
+# 				"data4" : home_prod,
+# 				"data5" : electronics_prod, 
+# 				"navbar_category" : navbar_category,
+# 				"news" : news,
+# 				"user" : request.user,
+# 				"saleoffer" : saleoffer,
+# 				"limitedoffer" : limitedoffer,
+# 				}
+# 	template = 'home.html'
+# 	return render(request, template, context)
+
 def HomePage(request):
 	"""Home Page"""
 	navbar_category = Category.objects.all()
 	saleoffer = SaleOffer.objects.all()
 	limitedoffer = LimitedOffer.objects.all()
-	category = Category.objects.all()
-	sub_category = SubCategory.objects.all()
-	subcategory = SubCategory.objects.filter(category=category)
-	products = Product.objects.filter(subcategory=subcategory)
 	news = New.objects.all().order_by('-id')
 
 	men_prod = SerfoProduct.objects.filter(super_category='M')
@@ -108,11 +140,7 @@ def HomePage(request):
 	home_prod = SerfoProduct.objects.filter(super_category='H')
 	electronics_prod = SerfoProduct.objects.filter(super_category='E')
 
-	context = {
-				"category":category, 
-				"subcategory":subcategory, 
-				"products":products, 
-				"sub_category":sub_category, 
+	context = { 
 				"data1" : men_prod,
 				"data2" : women_prod,
 				"data3" : appliances_prod,
