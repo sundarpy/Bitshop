@@ -41,12 +41,6 @@ urlpatterns = [
     url(r'^categories/Home/$', views.Home2, name='home2'),
     url(r'^categories/Electronics/$', views.Electronics, name='electronics'),
 
-    url(r'^getmenproducts/', views.getmenproducts, name='getmenproducts'),
-    url(r'^getwomenproducts/', views.getwomenproducts, name='getwomenproducts'),
-    url(r'^getappliancesproducts/', views.getappliancesproducts, name='getappliancesproducts'),
-    url(r'^gethomeproducts/', views.gethomeproducts, name='gethomeproducts'),
-    url(r'^getelectronicproducts/', views.getelectronicproducts, name='getelectronicproducts'),
-
     url(r'^getproducts/', views.getproducts, name='getproducts'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

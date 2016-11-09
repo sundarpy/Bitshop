@@ -100,7 +100,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 											<h4 class="list-group-item active">
 												Browse by Category
 											</h4>
-											{% for cat in category %}
+											{% for cat in navbar_category %}
 											<a href="{% url 'categorydetail' cat.category_slug %}" class="list-group-item list-group-item-action">{{cat.category_name}}</a>
 											{% endfor %}
 										</div>
