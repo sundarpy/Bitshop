@@ -91,98 +91,12 @@ def Search(request):
 """===========HOME PAGE==========="""
 """==============================="""
 
-def HomePage(request):
-	"""Home Page"""
-	navbar_category = Category.objects.all()
-	saleoffer = SaleOffer.objects.all()
-	limitedoffer = LimitedOffer.objects.all()
-	news = New.objects.all().order_by('-id')
-
-	men_prod = SerfoProduct.objects.filter(super_category='M')
-	women_prod = SerfoProduct.objects.filter(super_category='W')
-	appliances_prod = SerfoProduct.objects.filter(super_category='A')
-	home_prod = SerfoProduct.objects.filter(super_category='H')
-	electronics_prod = SerfoProduct.objects.filter(super_category='E')
-
-	context = {
-				"data1" : men_prod,
-				"data2" : women_prod,
-				"data3" : appliances_prod,
-				"data4" : home_prod,
-				"data5" : electronics_prod, 
-				"navbar_category" : navbar_category,
-				"news" : news,
-				"user" : request.user,
-				"saleoffer" : saleoffer,
-				"limitedoffer" : limitedoffer,
-				}
-	template = 'home.html'
-	return render(request, template, context)
-
-# def serfoproductcoverter(prod_query):
-# 	xlist = []
-# 	for i in prod_query:
-# 		prod_dict = {}
-# 		prod_dict['id'] = str(i.product.id)
-# 		prod_dict['title'] = i.product.title
-# 		prod_dict['offer_price'] = str(i.product.offer_price)
-# 		prod_dict['sale_price'] = str(i.product.sale_price)
-# 		prod_dict['mainimage'] = i.product.mainimage
-# 		xlist.append(prod_dict)
-# 	return xlist
-
-# def productcoverter(prod_query):
-# 	xlist = []
-# 	for i in prod_query:
-# 		prod_dict = {}
-# 		prod_dict['id'] = str(i.id)
-# 		prod_dict['title'] = i.title
-# 		prod_dict['offer_price'] = str(i.offer_price)
-# 		prod_dict['sale_price'] = str(i.sale_price)
-# 		prod_dict['mainimage'] = i.mainimage
-# 		xlist.append(prod_dict)
-# 	return xlist
-
-
 # def HomePage(request):
 # 	"""Home Page"""
 # 	navbar_category = Category.objects.all()
-# 	catlist = []
-# 	for cat in navbar_category:
-# 		catdict = {}
-# 		catdict['id'] = str(cat.id)
-# 		catdict['category_name'] = cat.category_name
-# 		catdict['category_slug'] = str(cat.category_slug)
-# 		catlist.append(catdict)
-# 	navbar_category = catlist
-
 # 	saleoffer = SaleOffer.objects.all()
-# 	salelist = []
-# 	for sale in saleoffer:
-# 		saledict = {}
-# 		saledict['image'] = sale.image
-# 		saledict['link'] = sale.link
-# 		salelist.append(saledict)
-# 	saleoffer = salelist
-
 # 	limitedoffer = LimitedOffer.objects.all()
-# 	limlist = []
-# 	for lim in limitedoffer:
-# 		limdict = {}
-# 		limdict['image'] = lim.image
-# 		limdict['link'] = lim.link
-# 		limlist.append(limdict)
-# 	limitedoffer = limlist
-
 # 	news = New.objects.all().order_by('-id')
-# 	newslist = []
-# 	for new in news:
-# 		newsdict = {}
-# 		newsdict['id'] = str(new.id)
-# 		newsdict['title'] = new.title
-# 		newsdict['image_url'] = new.image_url
-# 		newslist.append(newsdict)
-# 	news = newslist
 
 # 	men_prod = SerfoProduct.objects.filter(super_category='M')
 # 	women_prod = SerfoProduct.objects.filter(super_category='W')
@@ -190,20 +104,7 @@ def HomePage(request):
 # 	home_prod = SerfoProduct.objects.filter(super_category='H')
 # 	electronics_prod = SerfoProduct.objects.filter(super_category='E')
 
-# 	men_prod_list = serfoproductcoverter(men_prod)
-# 	women_prod_list = serfoproductcoverter(women_prod)
-# 	appliances_prod_list = serfoproductcoverter(appliances_prod)
-# 	home_prod_list = serfoproductcoverter(home_prod)
-# 	electronics_prod_list = serfoproductcoverter(electronics_prod)
-
-# 	men_prod = men_prod_list
-# 	women_prod = women_prod_list
-# 	appliances_prod = appliances_prod_list
-# 	home_prod = home_prod_list
-# 	electronics_prod = electronics_prod_list
-
-
-# 	context = { 
+# 	context = {
 # 				"data1" : men_prod,
 # 				"data2" : women_prod,
 # 				"data3" : appliances_prod,
@@ -211,11 +112,110 @@ def HomePage(request):
 # 				"data5" : electronics_prod, 
 # 				"navbar_category" : navbar_category,
 # 				"news" : news,
+# 				"user" : request.user,
 # 				"saleoffer" : saleoffer,
 # 				"limitedoffer" : limitedoffer,
 # 				}
 # 	template = 'home.html'
-# 	return HttpResponse(json.dumps(context), content_type = 'application/json')
+# 	return render(request, template, context)
+
+def serfoproductcoverter(prod_query):
+	xlist = []
+	for i in prod_query:
+		prod_dict = {}
+		prod_dict['id'] = str(i.product.id)
+		prod_dict['title'] = i.product.title
+		prod_dict['offer_price'] = str(i.product.offer_price)
+		prod_dict['sale_price'] = str(i.product.sale_price)
+		prod_dict['mainimage'] = i.product.mainimage
+		xlist.append(prod_dict)
+	return xlist
+
+def productcoverter(prod_query):
+	xlist = []
+	for i in prod_query:
+		prod_dict = {}
+		prod_dict['id'] = str(i.id)
+		prod_dict['title'] = i.title
+		prod_dict['offer_price'] = str(i.offer_price)
+		prod_dict['sale_price'] = str(i.sale_price)
+		prod_dict['mainimage'] = i.mainimage
+		xlist.append(prod_dict)
+	return xlist
+
+
+def HomePage(request):
+	"""Home Page"""
+	navbar_category = Category.objects.all()
+	catlist = []
+	for cat in navbar_category:
+		catdict = {}
+		catdict['id'] = str(cat.id)
+		catdict['category_name'] = cat.category_name
+		catdict['category_slug'] = str(cat.category_slug)
+		catlist.append(catdict)
+	navbar_category = catlist
+
+	saleoffer = SaleOffer.objects.all()
+	salelist = []
+	for sale in saleoffer:
+		saledict = {}
+		saledict['image'] = sale.image
+		saledict['link'] = sale.link
+		salelist.append(saledict)
+	saleoffer = salelist
+
+	limitedoffer = LimitedOffer.objects.all()
+	limlist = []
+	for lim in limitedoffer:
+		limdict = {}
+		limdict['image'] = lim.image
+		limdict['link'] = lim.link
+		limlist.append(limdict)
+	limitedoffer = limlist
+
+	news = New.objects.all().order_by('-id')
+	newslist = []
+	for new in news:
+		newsdict = {}
+		newsdict['id'] = str(new.id)
+		newsdict['title'] = new.title
+		newsdict['image_url'] = new.image_url
+		newslist.append(newsdict)
+	news = newslist
+
+	men_prod = SerfoProduct.objects.filter(super_category='M')
+	women_prod = SerfoProduct.objects.filter(super_category='W')
+	appliances_prod = SerfoProduct.objects.filter(super_category='A')
+	home_prod = SerfoProduct.objects.filter(super_category='H')
+	electronics_prod = SerfoProduct.objects.filter(super_category='E')
+
+	men_prod_list = serfoproductcoverter(men_prod)
+	women_prod_list = serfoproductcoverter(women_prod)
+	appliances_prod_list = serfoproductcoverter(appliances_prod)
+	home_prod_list = serfoproductcoverter(home_prod)
+	electronics_prod_list = serfoproductcoverter(electronics_prod)
+
+	men_prod = men_prod_list
+	women_prod = women_prod_list
+	appliances_prod = appliances_prod_list
+	home_prod = home_prod_list
+	electronics_prod = electronics_prod_list
+
+
+	context = { 
+				"data1" : men_prod,
+				"data2" : women_prod,
+				"data3" : appliances_prod,
+				"data4" : home_prod,
+				"data5" : electronics_prod, 
+				"navbar_category" : navbar_category,
+				"news" : news,
+				"saleoffer" : saleoffer,
+				"limitedoffer" : limitedoffer,
+				}
+	template = 'home.html'
+	return HttpResponse(json.dumps(context), content_type = 'application/json')
 
 """=================================="""
 """=====CATEGORY INDIVIDUAL PAGE====="""
@@ -279,6 +279,74 @@ def CategoryPage(request, slug):
 	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category,"user" : request.user, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
 	template = 'categorydetail.html'
 	return render(request, template, context)
+
+# def CategoryPage(request, slug):
+# 	"""Category Detail Page"""
+# 	limitedoffer = LimitedOffer.objects.all()
+# 	limlist = []
+# 	for lim in limitedoffer:
+# 		limdict = {}
+# 		limdict['image'] = lim.image
+# 		limdict['link'] = lim.link
+# 		limlist.append(limdict)
+# 	limitedoffer = limlist
+
+# 	prices = Price.objects.all().order_by('-id')
+	
+# 	navbar_category = Category.objects.all()
+# 	category = Category.objects.get(category_slug=slug)
+# 	subcategory = SubCategory.objects.filter(category=category).order_by('id')
+# 	products_list = Product.objects.filter(category=category).order_by('?')
+
+# 	items = []
+# 	for i in products_list:
+# 		brands_dict = {}
+# 		brands_dict['id'] = i.brand.id
+# 		brands_dict['brand_name'] = i.brand.brand_name
+# 		items.append(brands_dict)
+# 	brands = [ast.literal_eval(el1) for el1 in set([str(el2) for el2 in items])]
+# 	column_count1 = len(brands)/4
+# 	column_count2 = column_count1 * 2
+# 	column_count3 = column_count1 * 3
+# 	column_count4 = column_count1 * 4
+
+# 	l1 = "%d:%d" % (0,column_count1)
+# 	l2 = "%d:%d" % (column_count1,column_count2)
+# 	l3 = "%d:%d" % (column_count2,column_count3)
+# 	l4 = "%d:%d" % (column_count3,column_count4)
+
+# 	paginator = Paginator(products_list, 25)
+# 	productcount = products_list.count
+# 	page = request.GET.get('page')
+# 	try:
+# 		products = paginator.page(page)
+# 	except PageNotAnInteger:
+# 		products = paginator.page(1)
+# 	except EmptyPage:
+# 		products = paginator.page(paginator.num_pages)
+# 	total_pages = products.paginator.num_pages+1
+
+# 	prodnum = products.number
+	
+# 	if prodnum == 1:
+# 		x = products.number - 1
+# 		y = products.number + 7
+# 	elif prodnum == 2:
+# 		x = products.number - 2
+# 		y = products.number + 6
+# 	elif prodnum == 3:
+# 		x = products.number - 3
+# 		y = products.number + 5
+# 	else:
+# 		x = products.number - 4
+# 		y = products.number + 4
+
+# 	sl = "%d:%d" % (x,y)
+
+# 	news = New.objects.filter(category=category).order_by('-id')
+# 	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category,"user" : request.user, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
+# 	template = 'categorydetail.html'
+# 	return HttpResponse(json.dumps(context), content_type = 'application/json')
 
 """============================="""
 """=====CATEGORY PRICE PAGE====="""
