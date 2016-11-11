@@ -28,8 +28,8 @@ def serfoproductcoverter(prod_query):
 	xlist = []
 	for i in prod_query:
 		prod_dict = {}
-		prod_dict['id'] = str(i.product.id)
-		prod_dict['title'] = str(i.product.title)
+		prod_dict['id'] = i.product.id
+		prod_dict['title'] = i.product.title
 		prod_dict['offer_price'] = str(i.product.offer_price)
 		prod_dict['sale_price'] = str(i.product.sale_price)
 		prod_dict['mainimage'] = str(i.product.mainimage)
@@ -40,8 +40,8 @@ def productcoverter(prod_query):
 	xlist = []
 	for i in prod_query:
 		prod_dict = {}
-		prod_dict['id'] = str(i.id)
-		prod_dict['title'] = str(i.title)
+		prod_dict['id'] = i.id
+		prod_dict['title'] = i.title
 		prod_dict['offer_price'] = str(i.offer_price)
 		prod_dict['sale_price'] = str(i.sale_price)
 		prod_dict['mainimage'] = str(i.mainimage)
@@ -61,7 +61,7 @@ def newsconverter(prod_query):
 	newslist = []
 	for new in prod_query:
 		newsdict = {}
-		newsdict['id'] = str(new.id)
+		newsdict['id'] = new.id
 		newsdict['title'] = new.title
 		newsdict['image_url'] = new.image_url
 		newslist.append(newsdict)
@@ -71,7 +71,7 @@ def categoryconverter(prod_query):
 	catlist = []
 	for cat in prod_query:
 		catdict = {}
-		catdict['id'] = str(cat.id)
+		catdict['id'] = cat.id
 		catdict['category_name'] = cat.category_name
 		catdict['category_slug'] = str(cat.category_slug)
 		catlist.append(catdict)
@@ -81,23 +81,37 @@ def priceconverter(prod_query):
 	pricelist = []
 	for price in prod_query:
 		pricedict = {}
-		pricedict['id'] = str(price.id)
+		pricedict['id'] = price.id
 		pricedict['title'] = price.title
 		pricedict['upper_limit'] = str(price.upper_limit)
 		pricedict['lower_limit'] = str(price.lower_limit)
 		pricelist.append(pricedict)
 	return pricelist
 
-"""==============================="""
-"""=========SEARCH METHOD========="""
-"""==============================="""
+"""=============================="""
+"""=========SEARCH SERFO========="""
+"""=============================="""
 
 def Search(request):
 	"""Search."""
 	limitedoffer = LimitedOffer.objects.all()
+	limlist = []
+	for lim in limitedoffer:
+		limdict = {}
+		limdict['image'] = lim.image
+		limdict['link'] = lim.link
+		limlist.append(limdict)
+	limitedoffer = limlist
+
 	navbar_category = Category.objects.all()
-	cat = Category.objects.all()
-	subcat = SubCategory.objects.all()
+	catlist = []
+	for cat in navbar_category:
+		catdict = {}
+		catdict['id'] = cat.id
+		catdict['category_name'] = cat.category_name
+		catdict['category_slug'] = str(cat.category_slug)
+		catlist.append(catdict)
+	navbar_category = catlist
 
 	try:
 		q = request.GET.get('q')
@@ -106,8 +120,7 @@ def Search(request):
 
 	if q:
 		products_list = Product.objects.filter(title__icontains=q).order_by('?')
-
-		productcount = products_list.count
+		productcount = str(len(products_list))
 		paginator = Paginator(products_list, 25)
 		page = request.GET.get('page')
 		try:
@@ -119,119 +132,92 @@ def Search(request):
 		total_pages = products.paginator.num_pages+1
 
 		prodnum = products.number
-		x = products.number - 1
-		y = products.number + 7
+		
+		if prodnum == 1:
+			x = products.number - 1
+			y = products.number + 7
+		elif prodnum == 2:
+			x = products.number - 2
+			y = products.number + 6
+		elif prodnum == 3:
+			x = products.number - 3
+			y = products.number + 5
+		else:
+			x = products.number - 4
+			y = products.number + 4
+
+		ibool = False
+		jbool = False
+		if products.has_previous():
+			ibool = True
+		else:
+			ibool = False
+
+		if products.has_next():
+			jbool = True
+		else:
+			jbool = False
+
+		prev_bool = ibool
+		next_bool = jbool
+
 		sl = "%d:%d" % (x,y)
-		current_path = request.get_full_path()
+		prod_list = productcoverter(products)
+		products = prod_list
+
+		Xbool = False
+		if len(products_list) > 25:
+			Xbool = True
+		else:
+			Xbool = False
+
+		Ybool = str(Xbool)
+
 		context = {
 					"query": q, 
 					"count": productcount,
 					"products": products,
+					"nbool" : prev_bool,
+					"mbool" : next_bool,
 					"limitedoffer":limitedoffer,
-					"subcats":subcat, 
-					"cats":cat,
-					"user" : request.user,
 					"navbar_category" : navbar_category,
 					"sl":sl,
+					"Ybool":Ybool,
 					"prodnum":prodnum,
 					'range': range(1,total_pages),
-					'current_path': current_path,
 					}
 		template = 'results.html'
 	else:
 		template = 'home.html'
-		context = {"prodnum":prodnum, "subcats":subcat, "cat":cat, "navbar_category" : navbar_category,"user" : request.user,}
-	return render(request, template, context)
+		context = {"navbar_category" : navbar_category,}
+	return HttpResponse(json.dumps(context), content_type = 'application/json')
 
-"""=============================="""
-"""=========SEARCH SERFO========="""
-"""=============================="""
-
-# def Search(request):
-# 	"""Search."""
-# 	limitedoffer = LimitedOffer.objects.all()
-# 	limlist = []
-# 	for lim in limitedoffer:
-# 		limdict = {}
-# 		limdict['image'] = lim.image
-# 		limdict['link'] = lim.link
-# 		limlist.append(limdict)
-# 	limitedoffer = limlist
-
-# 	navbar_category = Category.objects.all()
-# 	catlist = []
-# 	for cat in navbar_category:
-# 		catdict = {}
-# 		catdict['id'] = str(cat.id)
-# 		catdict['category_name'] = cat.category_name
-# 		catdict['category_slug'] = str(cat.category_slug)
-# 		catlist.append(catdict)
-# 	navbar_category = catlist
-
-# 	try:
-# 		q = request.GET.get('q')
-# 	except:
-# 		q = None
-
-# 	if q:
-# 		products_list = Product.objects.filter(title__icontains=q).order_by('?')
-# 		prod_list = productcoverter(products_list)
-# 		productcount = str(products_list.count)
-# 		paginator = Paginator(products_list, 25)
-# 		page = request.GET.get('page')
-# 		try:
-# 			products = paginator.page(page)
-# 		except PageNotAnInteger:
-# 			products = paginator.page(1)
-# 		except EmptyPage:
-# 			products = paginator.page(paginator.num_pages)
-# 		total_pages = products.paginator.num_pages+1
-
-# 		prodnum = products.number
-		
-# 		if prodnum == 1:
-# 			x = products.number - 1
-# 			y = products.number + 7
-# 		elif prodnum == 2:
-# 			x = products.number - 2
-# 			y = products.number + 6
-# 		elif prodnum == 3:
-# 			x = products.number - 3
-# 			y = products.number + 5
-# 		else:
-# 			x = products.number - 4
-# 			y = products.number + 4
-
-# 		sl = "%d:%d" % (x,y)
-# 		products_list = prod_list
-# 		current_path = request.get_full_path()
-# 		context = {
-# 					"query": q, 
-# 					"count": productcount,
-# 					"products": products_list,
-# 					"limitedoffer":limitedoffer,
-# 					"navbar_category" : navbar_category,
-# 					"sl":sl,
-# 					"prodnum":prodnum,
-# 					'range': range(1,total_pages),
-# 					'current_path': current_path,
-# 					}
-# 		template = 'results.html'
-# 	else:
-# 		template = 'home.html'
-# 		context = {"navbar_category" : navbar_category,}
-# 	return HttpResponse(json.dumps(context), content_type = 'application/json')
-
-"""==============================="""
-"""===========HOME PAGE==========="""
-"""==============================="""
+"""====================================="""
+"""===========HOME PAGE SERFO==========="""
+"""====================================="""
 
 def HomePage(request):
 	"""Home Page"""
 	navbar_category = Category.objects.all()
+	catlist = categoryconverter(navbar_category)
+	navbar_category = catlist
+
 	saleoffer = SaleOffer.objects.all()
+	salelist = []
+	for sale in saleoffer:
+		saledict = {}
+		saledict['image'] = sale.image
+		saledict['link'] = sale.link
+		salelist.append(saledict)
+	saleoffer = salelist
+
 	limitedoffer = LimitedOffer.objects.all()
+	limlist = limitedconverter(limitedoffer)
+	limitedoffer = limlist
+
 	news = New.objects.all().order_by('-id')
+	newslist = newsconverter(news)
+	news = newslist
 
 	men_prod = SerfoProduct.objects.filter(super_category='M')
 	women_prod = SerfoProduct.objects.filter(super_category='W')
@@ -239,7 +225,20 @@ def HomePage(request):
 	home_prod = SerfoProduct.objects.filter(super_category='H')
 	electronics_prod = SerfoProduct.objects.filter(super_category='E')
 
-	context = {
+	men_prod_list = serfoproductcoverter(men_prod)
+	women_prod_list = serfoproductcoverter(women_prod)
+	appliances_prod_list = serfoproductcoverter(appliances_prod)
+	home_prod_list = serfoproductcoverter(home_prod)
+	electronics_prod_list = serfoproductcoverter(electronics_prod)
+
+	men_prod = men_prod_list
+	women_prod = women_prod_list
+	appliances_prod = appliances_prod_list
+	home_prod = home_prod_list
+	electronics_prod = electronics_prod_list
+
+
+	context = { 
 				"data1" : men_prod,
 				"data2" : women_prod,
 				"data3" : appliances_prod,
@@ -247,76 +246,15 @@ def HomePage(request):
 				"data5" : electronics_prod, 
 				"navbar_category" : navbar_category,
 				"news" : news,
-				"user" : request.user,
 				"saleoffer" : saleoffer,
 				"limitedoffer" : limitedoffer,
 				}
 	template = 'home.html'
-	return render(request, template, context)
+	return HttpResponse(json.dumps(context), content_type = 'application/json')
 
-"""====================================="""
-"""===========HOME PAGE SERFO==========="""
-"""====================================="""
-
-# def HomePage(request):
-# 	"""Home Page"""
-# 	navbar_category = Category.objects.all()
-# 	catlist = categoryconverter(navbar_category)
-# 	navbar_category = catlist
-
-# 	saleoffer = SaleOffer.objects.all()
-# 	salelist = []
-# 	for sale in saleoffer:
-# 		saledict = {}
-# 		saledict['image'] = sale.image
-# 		saledict['link'] = sale.link
-# 		salelist.append(saledict)
-# 	saleoffer = salelist
-
-# 	limitedoffer = LimitedOffer.objects.all()
-# 	limlist = limitedconverter(limitedoffer)
-# 	limitedoffer = limlist
-
-# 	news = New.objects.all().order_by('-id')
-# 	newslist = newsconverter(news)
-# 	news = newslist
-
-# 	men_prod = SerfoProduct.objects.filter(super_category='M')
-# 	women_prod = SerfoProduct.objects.filter(super_category='W')
-# 	appliances_prod = SerfoProduct.objects.filter(super_category='A')
-# 	home_prod = SerfoProduct.objects.filter(super_category='H')
-# 	electronics_prod = SerfoProduct.objects.filter(super_category='E')
-
-# 	men_prod_list = serfoproductcoverter(men_prod)
-# 	women_prod_list = serfoproductcoverter(women_prod)
-# 	appliances_prod_list = serfoproductcoverter(appliances_prod)
-# 	home_prod_list = serfoproductcoverter(home_prod)
-# 	electronics_prod_list = serfoproductcoverter(electronics_prod)
-
-# 	men_prod = men_prod_list
-# 	women_prod = women_prod_list
-# 	appliances_prod = appliances_prod_list
-# 	home_prod = home_prod_list
-# 	electronics_prod = electronics_prod_list
-
-
-# 	context = { 
-# 				"data1" : men_prod,
-# 				"data2" : women_prod,
-# 				"data3" : appliances_prod,
-# 				"data4" : home_prod,
-# 				"data5" : electronics_prod, 
-# 				"navbar_category" : navbar_category,
-# 				"news" : news,
-# 				"saleoffer" : saleoffer,
-# 				"limitedoffer" : limitedoffer,
-# 				}
-# 	template = 'home.html'
-# 	return HttpResponse(json.dumps(context), content_type = 'application/json')
-
-"""=================================="""
-"""=====CATEGORY INDIVIDUAL PAGE====="""
-"""=================================="""
+"""============================="""
+"""=====CATEGORY SERFO PAGE====="""
+"""============================="""
 
 def CategoryPage(request, slug):
 	"""Category Detail Page"""
@@ -326,6 +264,7 @@ def CategoryPage(request, slug):
 	category = Category.objects.get(category_slug=slug)
 	subcategory = SubCategory.objects.filter(category=category).order_by('id')
 	products_list = Product.objects.filter(category=category).order_by('?')
+	news = New.objects.filter(category=category).order_by('-id')
 
 	items = []
 	for i in products_list:
@@ -345,7 +284,7 @@ def CategoryPage(request, slug):
 	l4 = "%d:%d" % (column_count3,column_count4)
 
 	paginator = Paginator(products_list, 25)
-	productcount = products_list.count
+	productcount = str(len(products_list))
 	page = request.GET.get('page')
 	try:
 		products = paginator.page(page)
@@ -372,104 +311,61 @@ def CategoryPage(request, slug):
 
 	sl = "%d:%d" % (x,y)
 
-	news = New.objects.filter(category=category).order_by('-id')
-	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category,"user" : request.user, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
+	ibool = False
+	jbool = False
+	if products.has_previous():
+		ibool = True
+	else:
+		ibool = False
+
+	if products.has_next():
+		jbool = True
+	else:
+		jbool = False
+
+	prev_bool = ibool
+	next_bool = jbool
+
+	limlist = limitedconverter(limitedoffer)
+	pricelist = priceconverter(prices)
+	catlist = categoryconverter(navbar_category)
+	newslist = newsconverter(news)
+	prod_list = productcoverter(products)
+	news = newslist
+	limitedoffer = limlist
+	prices = pricelist
+	navbar_category = catlist
+	products = prod_list
+
+	catdict2 = {}
+	catdict2['category_slug'] = str(category.category_slug)
+	catdict2['category_name'] = category.category_name
+	category = catdict2
+	
+	subcatlist = []
+	for sub in subcategory:
+		subcatdict = {}
+		subcatdict['subcategory_name'] = sub.subcategory_name
+		subcatdict['subcategory_slug'] = sub.subcategory_slug
+		subcatdict['category'] = sub.category.category_name
+		subcatlist.append(subcatdict)
+	subcategory = subcatlist
+
+	Xbool = False
+	if len(products_list) > 25:
+		Xbool = True
+	else:
+		Xbool = False
+
+	Ybool = str(Xbool)
+
+	context = {"nbool" : prev_bool, "mbool" : next_bool, "Ybool":Ybool, "l1":l1,"l2":l2,"l3":l3,"l4":l4, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
 	template = 'categorydetail.html'
-	return render(request, template, context)
+	return HttpResponse(json.dumps(context), content_type = 'application/json')
 
-"""============================="""
-"""=====CATEGORY SERFO PAGE====="""
-"""============================="""
-
-# def CategoryPage(request, slug):
-# 	"""Category Detail Page"""
-# 	limitedoffer = LimitedOffer.objects.all()
-# 	prices = Price.objects.all().order_by('-id')
-# 	navbar_category = Category.objects.all()
-# 	category = Category.objects.get(category_slug=slug)
-# 	subcategory = SubCategory.objects.filter(category=category).order_by('id')
-# 	products_list = Product.objects.filter(category=category).order_by('?')
-# 	news = New.objects.filter(category=category).order_by('-id')
-
-# 	prod_list = productcoverter(products_list)
-
-# 	items = []
-# 	for i in products_list:
-# 		brands_dict = {}
-# 		brands_dict['id'] = i.brand.id
-# 		brands_dict['brand_name'] = i.brand.brand_name
-# 		items.append(brands_dict)
-# 	brands = [ast.literal_eval(el1) for el1 in set([str(el2) for el2 in items])]
-# 	column_count1 = len(brands)/4
-# 	column_count2 = column_count1 * 2
-# 	column_count3 = column_count1 * 3
-# 	column_count4 = column_count1 * 4
-
-# 	l1 = "%d:%d" % (0,column_count1)
-# 	l2 = "%d:%d" % (column_count1,column_count2)
-# 	l3 = "%d:%d" % (column_count2,column_count3)
-# 	l4 = "%d:%d" % (column_count3,column_count4)
-
-# 	paginator = Paginator(products_list, 25)
-# 	productcount = str(products_list.count)
-# 	page = request.GET.get('page')
-# 	try:
-# 		products = paginator.page(page)
-# 	except PageNotAnInteger:
-# 		products = paginator.page(1)
-# 	except EmptyPage:
-# 		products = paginator.page(paginator.num_pages)
-# 	total_pages = products.paginator.num_pages+1
-
-# 	prodnum = products.number
-	
-# 	if prodnum == 1:
-# 		x = products.number - 1
-# 		y = products.number + 7
-# 	elif prodnum == 2:
-# 		x = products.number - 2
-# 		y = products.number + 6
-# 	elif prodnum == 3:
-# 		x = products.number - 3
-# 		y = products.number + 5
-# 	else:
-# 		x = products.number - 4
-# 		y = products.number + 4
-
-# 	sl = "%d:%d" % (x,y)
-
-# 	limlist = limitedconverter(limitedoffer)
-# 	pricelist = priceconverter(prices)
-# 	catlist = categoryconverter(navbar_category)
-# 	newslist = newsconverter(news)
-
-# 	news = newslist
-# 	limitedoffer = limlist
-# 	prices = pricelist
-# 	navbar_category = catlist
-# 	products_list = prod_list
-
-# 	catdict2 = {}
-# 	catdict2['category_slug'] = str(category.category_slug)
-# 	catdict2['category_name'] = category.category_name
-# 	category = catdict2
-	
-# 	subcatlist = []
-# 	for sub in subcategory:
-# 		subcatdict = {}
-# 		subcatdict['subcategory_name'] = sub.subcategory_name
-# 		subcatdict['subcategory_slug'] = sub.subcategory_slug
-# 		subcatdict['category'] = sub.category.category_name
-# 		subcatlist.append(subcatdict)
-# 	subcategory = subcatlist
-
-# 	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "category":category, "subcategory":subcategory, "products":products_list, "navbar_category":navbar_category, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
-# 	template = 'categorydetail.html'
-# 	return HttpResponse(json.dumps(context), content_type = 'application/json')
-
-"""============================="""
-"""=====CATEGORY PRICE PAGE====="""
-"""============================="""
+"""==================================="""
+"""=====CATEGORY PRICE PAGE SERFO====="""
+"""==================================="""
 
 def PriceFilterCategory(request, slug, pr_id):
 	"""Price Filter Category Page"""
@@ -480,9 +376,19 @@ def PriceFilterCategory(request, slug, pr_id):
 	lower = selected_price.lower_limit
 	prices = Price.objects.all().order_by('-id')
 	navbar_category = Category.objects.all()
-	
 	category = Category.objects.get(category_slug=slug)
+	news = New.objects.filter(category=category).order_by('-id')
 	subcategory = SubCategory.objects.filter(category=category).order_by('id')
+
+	subcatlist = []
+	for sub in subcategory:
+		subcatdict = {}
+		subcatdict['subcategory_name'] = sub.subcategory_name
+		subcatdict['subcategory_slug'] = sub.subcategory_slug
+		subcatdict['category'] = sub.category.category_name
+		subcatlist.append(subcatdict)
+	subcategory = subcatlist
+
 	products_list = Product.objects.filter(Q(category=category, offer_price__lte=upper, offer_price__gte=lower) | Q(category=category, sale_price__lte=upper, sale_price__gte=lower))
 
 	items = []
@@ -492,7 +398,6 @@ def PriceFilterCategory(request, slug, pr_id):
 		brands_dict['brand_name'] = i.brand.brand_name
 		items.append(brands_dict)
 	brands = [ast.literal_eval(el1) for el1 in set([str(el2) for el2 in items])]
-
 	column_count1 = len(brands)/4
 	column_count2 = column_count1 * 2
 	column_count3 = column_count1 * 3
@@ -504,7 +409,7 @@ def PriceFilterCategory(request, slug, pr_id):
 	l4 = "%d:%d" % (column_count3,column_count4)
 
 	paginator = Paginator(products_list, 25)
-	productcount = products_list.count
+	productcount = str(len(products_list))
 	page = request.GET.get('page')
 	try:
 		products = paginator.page(page)
@@ -515,6 +420,7 @@ def PriceFilterCategory(request, slug, pr_id):
 	total_pages = products.paginator.num_pages+1
 
 	prodnum = products.number
+	
 	if prodnum == 1:
 		x = products.number - 1
 		y = products.number + 7
@@ -527,117 +433,62 @@ def PriceFilterCategory(request, slug, pr_id):
 	else:
 		x = products.number - 4
 		y = products.number + 4
+
 	sl = "%d:%d" % (x,y)
 
-	news = New.objects.filter(category=category).order_by('-id')
-	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4,"prodnum":prodnum, "selected_price":selected_price, "limitedoffer":limitedoffer, "count":productcount, "category":category, "subcategory":subcategory, "products":products,"user" : request.user, "navbar_category":navbar_category, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title, "upper":upper, "lower":lower}
+	ibool = False
+	jbool = False
+	if products.has_previous():
+		ibool = True
+	else:
+		ibool = False
+
+	if products.has_next():
+		jbool = True
+	else:
+		jbool = False
+
+	prev_bool = ibool
+	next_bool = jbool
+
+	catdict2 = {}
+	catdict2['category_slug'] = str(category.category_slug)
+	catdict2['category_name'] = category.category_name
+	category = catdict2
+
+	selected_price_dict = {}
+	selected_price_dict['id'] = selected_price.id
+	selected_price_dict['title'] = selected_price.title
+	selected_price_dict['upper_limit'] = str(selected_price.upper_limit)
+	selected_price_dict['lower_limit'] = str(selected_price.lower_limit)
+	selected_price = selected_price_dict
+	
+	limlist = limitedconverter(limitedoffer)
+	pricelist = priceconverter(prices)
+	catlist = categoryconverter(navbar_category)
+	newslist = newsconverter(news)
+	prod_list = productcoverter(products)
+	news = newslist
+	limitedoffer = limlist
+	prices = pricelist
+	navbar_category = catlist
+	products = prod_list
+
+	Xbool = False
+	if len(products_list) > 25:
+		Xbool = True
+	else:
+		Xbool = False
+
+	Ybool = str(Xbool)
+
+	context = {"nbool" : prev_bool, "mbool" : next_bool, "Ybool":Ybool,"l1":l1,"l2":l2,"l3":l3,"l4":l4,"prodnum":prodnum, "selected_price":selected_price, "limitedoffer":limitedoffer, "count":productcount, "category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
 	template = 'pricecatdetail.html'
-	return render(request, template, context)
+	return HttpResponse(json.dumps(context), content_type = 'application/json')
 
-"""==================================="""
-"""=====CATEGORY PRICE PAGE SERFO====="""
-"""==================================="""
-
-# def PriceFilterCategory(request, slug, pr_id):
-# 	"""Price Filter Category Page"""
-# 	limitedoffer = LimitedOffer.objects.all()
-# 	selected_price = Price.objects.get(pk=pr_id)
-# 	title = selected_price.title
-# 	upper = selected_price.upper_limit
-# 	lower = selected_price.lower_limit
-# 	prices = Price.objects.all().order_by('-id')
-# 	navbar_category = Category.objects.all()
-# 	category = Category.objects.get(category_slug=slug)
-# 	news = New.objects.filter(category=category).order_by('-id')
-# 	subcategory = SubCategory.objects.filter(category=category).order_by('id')
-
-# 	subcatlist = []
-# 	for sub in subcategory:
-# 		subcatdict = {}
-# 		subcatdict['subcategory_name'] = sub.subcategory_name
-# 		subcatdict['subcategory_slug'] = sub.subcategory_slug
-# 		subcatdict['category'] = sub.category.category_name
-# 		subcatlist.append(subcatdict)
-# 	subcategory = subcatlist
-
-# 	products_list = Product.objects.filter(Q(category=category, offer_price__lte=upper, offer_price__gte=lower) | Q(category=category, sale_price__lte=upper, sale_price__gte=lower))
-# 	prod_list = productcoverter(products_list)
-
-# 	items = []
-# 	for i in products_list:
-# 		brands_dict = {}
-# 		brands_dict['id'] = i.brand.id
-# 		brands_dict['brand_name'] = i.brand.brand_name
-# 		items.append(brands_dict)
-# 	brands = [ast.literal_eval(el1) for el1 in set([str(el2) for el2 in items])]
-# 	column_count1 = len(brands)/4
-# 	column_count2 = column_count1 * 2
-# 	column_count3 = column_count1 * 3
-# 	column_count4 = column_count1 * 4
-
-# 	l1 = "%d:%d" % (0,column_count1)
-# 	l2 = "%d:%d" % (column_count1,column_count2)
-# 	l3 = "%d:%d" % (column_count2,column_count3)
-# 	l4 = "%d:%d" % (column_count3,column_count4)
-
-# 	paginator = Paginator(products_list, 25)
-# 	productcount = str(products_list.count)
-# 	page = request.GET.get('page')
-# 	try:
-# 		products = paginator.page(page)
-# 	except PageNotAnInteger:
-# 		products = paginator.page(1)
-# 	except EmptyPage:
-# 		products = paginator.page(paginator.num_pages)
-# 	total_pages = products.paginator.num_pages+1
-
-# 	prodnum = products.number
-	
-# 	if prodnum == 1:
-# 		x = products.number - 1
-# 		y = products.number + 7
-# 	elif prodnum == 2:
-# 		x = products.number - 2
-# 		y = products.number + 6
-# 	elif prodnum == 3:
-# 		x = products.number - 3
-# 		y = products.number + 5
-# 	else:
-# 		x = products.number - 4
-# 		y = products.number + 4
-
-# 	sl = "%d:%d" % (x,y)
-
-# 	catdict2 = {}
-# 	catdict2['category_slug'] = str(category.category_slug)
-# 	catdict2['category_name'] = category.category_name
-# 	category = catdict2
-
-# 	selected_price_dict = {}
-# 	selected_price_dict['id'] = selected_price.id
-# 	selected_price_dict['title'] = selected_price.title
-# 	selected_price_dict['upper_limit'] = str(selected_price.upper_limit)
-# 	selected_price_dict['lower_limit'] = str(selected_price.lower_limit)
-# 	selected_price = selected_price_dict
-	
-# 	limlist = limitedconverter(limitedoffer)
-# 	pricelist = priceconverter(prices)
-# 	catlist = categoryconverter(navbar_category)
-# 	newslist = newsconverter(news)
-
-# 	news = newslist
-# 	limitedoffer = limlist
-# 	prices = pricelist
-# 	navbar_category = catlist
-# 	products_list = prod_list
-
-# 	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4,"prodnum":prodnum, "selected_price":selected_price, "limitedoffer":limitedoffer, "count":productcount, "category":category, "subcategory":subcategory, "products":products_list, "navbar_category":navbar_category, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
-# 	template = 'pricecatdetail.html'
-# 	return HttpResponse(json.dumps(context), content_type = 'application/json')
-
-"""=================================="""
-"""======BRANDS INDIVIDUAL PAGE======"""
-"""=================================="""
+"""============================="""
+"""======BRANDS SERFO PAGE======"""
+"""============================="""
 
 def BrandsPage(request, b_id):
 	"""Brands Detail Page"""
@@ -646,8 +497,9 @@ def BrandsPage(request, b_id):
 	navbar_category = Category.objects.all()
 	brands = Brand.objects.all().order_by('?')
 	prime_brand = Brand.objects.get(pk=b_id)
-	category = Category.objects.all()
+	news = New.objects.all().order_by('-id')
 	products_list = Product.objects.filter(brand=prime_brand).order_by('id')
+
 	column_count1 = len(brands)/4
 	column_count2 = column_count1 * 2
 	column_count3 = column_count1 * 3
@@ -659,7 +511,7 @@ def BrandsPage(request, b_id):
 	l4 = "%d:%d" % (column_count3,column_count4)
 
 	paginator = Paginator(products_list, 25)
-	productcount = products_list.count
+	productcount = str(len(products_list))
 	page = request.GET.get('page')
 	try:
 		products = paginator.page(page)
@@ -684,93 +536,61 @@ def BrandsPage(request, b_id):
 		y = products.number + 4
 	sl = "%d:%d" % (x,y)
 
-	news = New.objects.all().order_by('-id')
-	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4,"prodnum":prodnum, "limitedoffer":limitedoffer, "count":productcount, "category":category, "products":products, "navbar_category":navbar_category,"user" : request.user, "brands":brands, "prime_brand":prime_brand, "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
+	ibool = False
+	jbool = False
+	if products.has_previous():
+		ibool = True
+	else:
+		ibool = False
+
+	if products.has_next():
+		jbool = True
+	else:
+		jbool = False
+
+	prev_bool = ibool
+	next_bool = jbool
+
+	prod_list = productcoverter(products)
+	limlist = limitedconverter(limitedoffer)
+	pricelist = priceconverter(prices)
+	catlist = categoryconverter(navbar_category)
+	newslist = newsconverter(news)
+
+	news = newslist
+	limitedoffer = limlist
+	prices = pricelist
+	navbar_category = catlist
+	products = prod_list
+
+	brandslist = []
+	for i in brands:
+		brands_dict = {}
+		brands_dict['id'] = i.id
+		brands_dict['brand_name'] = i.brand_name
+		brandslist.append(brands_dict)
+	brands = brandslist
+
+	prime_brand_dict = {}
+	prime_brand_dict['id'] = prime_brand.id
+	prime_brand_dict['brand_name'] = prime_brand.brand_name
+	prime_brand = prime_brand_dict
+
+	Xbool = False
+	if len(products_list) > 25:
+		Xbool = True
+	else:
+		Xbool = False
+
+	Ybool = str(Xbool)
+
+	context = {"nbool" : prev_bool, "mbool" : next_bool, "Ybool":Ybool, "l1":l1,"l2":l2,"l3":l3,"l4":l4,"prodnum":prodnum, "limitedoffer":limitedoffer, "count":productcount, "products":products, "navbar_category":navbar_category,"brands":brands, "prime_brand":prime_brand, "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
 	template = 'brandetail.html'
-	return render(request, template, context)
+	return HttpResponse(json.dumps(context), content_type = 'application/json')
 
-"""============================="""
-"""======BRANDS SERFO PAGE======"""
-"""============================="""
-
-# def BrandsPage(request, b_id):
-# 	"""Brands Detail Page"""
-# 	limitedoffer = LimitedOffer.objects.all()
-# 	prices = Price.objects.all().order_by('-id')
-# 	navbar_category = Category.objects.all()
-# 	brands = Brand.objects.all().order_by('?')
-# 	prime_brand = Brand.objects.get(pk=b_id)
-# 	news = New.objects.all().order_by('-id')
-# 	products_list = Product.objects.filter(brand=prime_brand).order_by('id')
-
-# 	column_count1 = len(brands)/4
-# 	column_count2 = column_count1 * 2
-# 	column_count3 = column_count1 * 3
-# 	column_count4 = column_count1 * 4
-
-# 	l1 = "%d:%d" % (0,column_count1)
-# 	l2 = "%d:%d" % (column_count1,column_count2)
-# 	l3 = "%d:%d" % (column_count2,column_count3)
-# 	l4 = "%d:%d" % (column_count3,column_count4)
-
-# 	paginator = Paginator(products_list, 25)
-# 	productcount = str(products_list.count)
-# 	page = request.GET.get('page')
-# 	try:
-# 		products = paginator.page(page)
-# 	except PageNotAnInteger:
-# 		products = paginator.page(1)
-# 	except EmptyPage:
-# 		products = paginator.page(paginator.num_pages)
-# 	total_pages = products.paginator.num_pages+1
-
-# 	prodnum = products.number
-# 	if prodnum == 1:
-# 		x = products.number - 1
-# 		y = products.number + 7
-# 	elif prodnum == 2:
-# 		x = products.number - 2
-# 		y = products.number + 6
-# 	elif prodnum == 3:
-# 		x = products.number - 3
-# 		y = products.number + 5
-# 	else:
-# 		x = products.number - 4
-# 		y = products.number + 4
-# 	sl = "%d:%d" % (x,y)
-
-# 	prod_list = productcoverter(products_list)
-# 	limlist = limitedconverter(limitedoffer)
-# 	pricelist = priceconverter(prices)
-# 	catlist = categoryconverter(navbar_category)
-# 	newslist = newsconverter(news)
-
-# 	news = newslist
-# 	limitedoffer = limlist
-# 	prices = pricelist
-# 	navbar_category = catlist
-# 	products_list = prod_list
-
-# 	brandslist = []
-# 	for i in brands:
-# 		brands_dict = {}
-# 		brands_dict['id'] = i.id
-# 		brands_dict['brand_name'] = i.brand_name
-# 		brandslist.append(brands_dict)
-# 	brands = brandslist
-
-# 	prime_brand_dict = {}
-# 	prime_brand_dict['id'] = prime_brand.id
-# 	prime_brand_dict['brand_name'] = prime_brand.brand_name
-# 	prime_brand = prime_brand_dict
-
-# 	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4,"prodnum":prodnum, "limitedoffer":limitedoffer, "count":productcount, "products":products_list, "navbar_category":navbar_category,"brands":brands, "prime_brand":prime_brand, "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
-# 	template = 'brandetail.html'
-# 	return HttpResponse(json.dumps(context), content_type = 'application/json')
-
-"""============================="""
-"""======BRANDS PRICE PAGE======"""
-"""============================="""
+"""=============================="""
+"""======BRANDS PRICE SERFO======"""
+"""=============================="""
 
 def PriceFilterBrands(request, b_id, pr_id):
 	"""Brands Price Filter Page"""
@@ -782,6 +602,8 @@ def PriceFilterBrands(request, b_id, pr_id):
 	prices = Price.objects.all().order_by('-id')
 	navbar_category = Category.objects.all()
 	brands = Brand.objects.all().order_by('?')
+	news = New.objects.all().order_by('-id')
+
 	column_count1 = len(brands)/4
 	column_count2 = column_count1 * 2
 	column_count3 = column_count1 * 3
@@ -792,10 +614,9 @@ def PriceFilterBrands(request, b_id, pr_id):
 	l3 = "%d:%d" % (column_count2,column_count3)
 	l4 = "%d:%d" % (column_count3,column_count4)
 	prime_brand = Brand.objects.get(pk=b_id)
-	category = Category.objects.all()
 	products_list = Product.objects.filter(Q(brand=prime_brand, offer_price__lte=upper, offer_price__gte=lower) | Q(brand=prime_brand, sale_price__lte=upper, sale_price__gte=lower))
 	paginator = Paginator(products_list, 25)
-	productcount = products_list.count
+	productcount = str(len(products_list))
 	page = request.GET.get('page')
 	try:
 		products = paginator.page(page)
@@ -820,196 +641,184 @@ def PriceFilterBrands(request, b_id, pr_id):
 		y = products.number + 4
 	sl = "%d:%d" % (x,y)
 
-	news = New.objects.all().order_by('-id')
-	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4,"prodnum":prodnum, "selected_price":selected_price, "limitedoffer":limitedoffer, "count":productcount, "upper":upper, "lower":lower, "category":category, "products":products,"user" : request.user, "navbar_category":navbar_category, "brands":brands, "prime_brand":prime_brand, "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title}
+	ibool = False
+	jbool = False
+	if products.has_previous():
+		ibool = True
+	else:
+		ibool = False
+
+	if products.has_next():
+		jbool = True
+	else:
+		jbool = False
+
+	prev_bool = ibool
+	next_bool = jbool
+
+	limlist = limitedconverter(limitedoffer)
+	pricelist = priceconverter(prices)
+	catlist = categoryconverter(navbar_category)
+	newslist = newsconverter(news)
+	prod_list = productcoverter(products)
+	news = newslist
+	limitedoffer = limlist
+	prices = pricelist
+	navbar_category = catlist
+	products = prod_list
+
+	selected_price_dict = {}
+	selected_price_dict['id'] = selected_price.id
+	selected_price_dict['title'] = selected_price.title
+	selected_price_dict['upper_limit'] = str(selected_price.upper_limit)
+	selected_price_dict['lower_limit'] = str(selected_price.lower_limit)
+	selected_price = selected_price_dict
+
+	brandslist = []
+	for i in brands:
+		brands_dict = {}
+		brands_dict['id'] = i.id
+		brands_dict['brand_name'] = i.brand_name
+		brandslist.append(brands_dict)
+	brands = brandslist
+
+	prime_brand_dict = {}
+	prime_brand_dict['id'] = prime_brand.id
+	prime_brand_dict['brand_name'] = prime_brand.brand_name
+	prime_brand = prime_brand_dict
+
+	Xbool = False
+	if len(products_list) > 25:
+		Xbool = True
+	else:
+		Xbool = False
+
+	Ybool = str(Xbool)
+
+	context = {"nbool" : prev_bool, "mbool" : next_bool, "Ybool":Ybool,"l1":l1,"l2":l2,"l3":l3,"l4":l4,"prodnum":prodnum, "selected_price":selected_price, "limitedoffer":limitedoffer, "count":productcount, "products":products, "navbar_category":navbar_category, "brands":brands, "prime_brand":prime_brand, "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages),}
 	template = 'pricebranddetail.html'
-	return render(request, template, context)
-
-"""=============================="""
-"""======BRANDS PRICE SERFO======"""
-"""=============================="""
-
-# def PriceFilterBrands(request, b_id, pr_id):
-# 	"""Brands Price Filter Page"""
-# 	limitedoffer = LimitedOffer.objects.all()
-# 	selected_price = Price.objects.get(pk=pr_id)
-# 	title = selected_price.title
-# 	upper = selected_price.upper_limit
-# 	lower = selected_price.lower_limit
-# 	prices = Price.objects.all().order_by('-id')
-# 	navbar_category = Category.objects.all()
-# 	brands = Brand.objects.all().order_by('?')
-# 	news = New.objects.all().order_by('-id')
-
-# 	column_count1 = len(brands)/4
-# 	column_count2 = column_count1 * 2
-# 	column_count3 = column_count1 * 3
-# 	column_count4 = column_count1 * 4
-
-# 	l1 = "%d:%d" % (0,column_count1)
-# 	l2 = "%d:%d" % (column_count1,column_count2)
-# 	l3 = "%d:%d" % (column_count2,column_count3)
-# 	l4 = "%d:%d" % (column_count3,column_count4)
-# 	prime_brand = Brand.objects.get(pk=b_id)
-# 	products_list = Product.objects.filter(Q(brand=prime_brand, offer_price__lte=upper, offer_price__gte=lower) | Q(brand=prime_brand, sale_price__lte=upper, sale_price__gte=lower))
-# 	paginator = Paginator(products_list, 25)
-# 	productcount = str(products_list.count)
-# 	page = request.GET.get('page')
-# 	try:
-# 		products = paginator.page(page)
-# 	except PageNotAnInteger:
-# 		products = paginator.page(1)
-# 	except EmptyPage:
-# 		products = paginator.page(paginator.num_pages)
-# 	total_pages = products.paginator.num_pages+1
-
-# 	prodnum = products.number
-# 	if prodnum == 1:
-# 		x = products.number - 1
-# 		y = products.number + 7
-# 	elif prodnum == 2:
-# 		x = products.number - 2
-# 		y = products.number + 6
-# 	elif prodnum == 3:
-# 		x = products.number - 3
-# 		y = products.number + 5
-# 	else:
-# 		x = products.number - 4
-# 		y = products.number + 4
-# 	sl = "%d:%d" % (x,y)
-
-# 	limlist = limitedconverter(limitedoffer)
-# 	pricelist = priceconverter(prices)
-# 	catlist = categoryconverter(navbar_category)
-# 	newslist = newsconverter(news)
-# 	prod_list = productcoverter(products_list)
-# 	news = newslist
-# 	limitedoffer = limlist
-# 	prices = pricelist
-# 	navbar_category = catlist
-# 	products_list = prod_list
-
-# 	selected_price_dict = {}
-# 	selected_price_dict['id'] = selected_price.id
-# 	selected_price_dict['title'] = selected_price.title
-# 	selected_price_dict['upper_limit'] = str(selected_price.upper_limit)
-# 	selected_price_dict['lower_limit'] = str(selected_price.lower_limit)
-# 	selected_price = selected_price_dict
-
-# 	brandslist = []
-# 	for i in brands:
-# 		brands_dict = {}
-# 		brands_dict['id'] = i.id
-# 		brands_dict['brand_name'] = i.brand_name
-# 		brandslist.append(brands_dict)
-# 	brands = brandslist
-
-# 	prime_brand_dict = {}
-# 	prime_brand_dict['id'] = prime_brand.id
-# 	prime_brand_dict['brand_name'] = prime_brand.brand_name
-# 	prime_brand = prime_brand_dict
-
-# 	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4,"prodnum":prodnum, "selected_price":selected_price, "limitedoffer":limitedoffer, "count":productcount, "products":products_list, "navbar_category":navbar_category, "brands":brands, "prime_brand":prime_brand, "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages),}
-# 	template = 'pricebranddetail.html'
-# 	return HttpResponse(json.dumps(context), content_type = 'application/json')
+	return HttpResponse(json.dumps(context), content_type = 'application/json')
 
 """====================================="""
 """=====SUBCATEGORY INDIVIDUAL PAGE====="""
 """====================================="""
 
-# def SubCategoryPage(request, slug1, slug2):
-# 	"""SubCategory Detail Page"""
-# 	limitedoffer = LimitedOffer.objects.all()
-# 	prices = Price.objects.all().order_by('-id')
-# 	navbar_category = Category.objects.all()
-# 	category = Category.objects.get(category_slug=slug1)
-# 	subcategory = SubCategory.objects.filter(category=category).order_by('id')
-# 	subcat = SubCategory.objects.get(subcategory_slug=slug2, category=category)
-# 	products_list = Product.objects.filter(subcategory=subcat).order_by('id')
-# 	news = New.objects.filter(category=category).order_by('-id')
+def SubCategoryPage(request, slug1, slug2):
+	"""SubCategory Detail Page"""
+	limitedoffer = LimitedOffer.objects.all()
+	prices = Price.objects.all().order_by('-id')
+	navbar_category = Category.objects.all()
+	category = Category.objects.get(category_slug=slug1)
+	subcategory = SubCategory.objects.filter(category=category).order_by('id')
+	subcat = SubCategory.objects.get(subcategory_slug=slug2, category=category)
+	products_list = Product.objects.filter(subcategory=subcat).order_by('id')
+	news = New.objects.filter(category=category).order_by('-id')
 
-# 	items = []
-# 	for i in products_list:
-# 		brands_dict = {}
-# 		brands_dict['id'] = i.brand.id
-# 		brands_dict['brand_name'] = i.brand.brand_name
-# 		items.append(brands_dict)
-# 	brands = [ast.literal_eval(el1) for el1 in set([str(el2) for el2 in items])]
+	items = []
+	for i in products_list:
+		brands_dict = {}
+		brands_dict['id'] = i.brand.id
+		brands_dict['brand_name'] = i.brand.brand_name
+		items.append(brands_dict)
+	brands = [ast.literal_eval(el1) for el1 in set([str(el2) for el2 in items])]
 
-# 	column_count1 = len(brands)/4
-# 	column_count2 = column_count1 * 2
-# 	column_count3 = column_count1 * 3
-# 	column_count4 = column_count1 * 4
+	column_count1 = len(brands)/4
+	column_count2 = column_count1 * 2
+	column_count3 = column_count1 * 3
+	column_count4 = column_count1 * 4
 
-# 	l1 = "%d:%d" % (0,column_count1)
-# 	l2 = "%d:%d" % (column_count1,column_count2)
-# 	l3 = "%d:%d" % (column_count2,column_count3)
-# 	l4 = "%d:%d" % (column_count3,column_count4)
+	l1 = "%d:%d" % (0,column_count1)
+	l2 = "%d:%d" % (column_count1,column_count2)
+	l3 = "%d:%d" % (column_count2,column_count3)
+	l4 = "%d:%d" % (column_count3,column_count4)
 
-# 	paginator = Paginator(products_list, 25)
-# 	productcount = str(products_list.count)
-# 	page = request.GET.get('page')
-# 	try:
-# 		products = paginator.page(page)
-# 	except PageNotAnInteger:
-# 		products = paginator.page(1)
-# 	except EmptyPage:
-# 		products = paginator.page(paginator.num_pages)
-# 	total_pages = products.paginator.num_pages+1
+	paginator = Paginator(products_list, 25)
+	productcount = str(len(products_list))
+	page = request.GET.get('page')
+	try:
+		products = paginator.page(page)
+	except PageNotAnInteger:
+		products = paginator.page(1)
+	except EmptyPage:
+		products = paginator.page(paginator.num_pages)
+	total_pages = products.paginator.num_pages+1
 
-# 	prodnum = products.number
-# 	if prodnum == 1:
-# 		x = products.number - 1
-# 		y = products.number + 7
-# 	elif prodnum == 2:
-# 		x = products.number - 2
-# 		y = products.number + 6
-# 	elif prodnum == 3:
-# 		x = products.number - 3
-# 		y = products.number + 5
-# 	else:
-# 		x = products.number - 4
-# 		y = products.number + 4
-# 	sl = "%d:%d" % (x,y)
+	prodnum = products.number
+	if prodnum == 1:
+		x = products.number - 1
+		y = products.number + 7
+	elif prodnum == 2:
+		x = products.number - 2
+		y = products.number + 6
+	elif prodnum == 3:
+		x = products.number - 3
+		y = products.number + 5
+	else:
+		x = products.number - 4
+		y = products.number + 4
+	sl = "%d:%d" % (x,y)
 
-# 	limlist = limitedconverter(limitedoffer)
-# 	pricelist = priceconverter(prices)
-# 	catlist = categoryconverter(navbar_category)
-# 	newslist = newsconverter(news)
-# 	prod_list = productcoverter(products_list)
-# 	news = newslist
-# 	limitedoffer = limlist
-# 	prices = pricelist
-# 	navbar_category = catlist
-# 	products_list = prod_list
+	ibool = False
+	jbool = False
+	if products.has_previous():
+		ibool = True
+	else:
+		ibool = False
 
-# 	catdict = {}
-# 	catdict['category_name'] = category.category_name
-# 	catdict['category_slug'] = category.category_slug
-# 	category = catdict
+	if products.has_next():
+		jbool = True
+	else:
+		jbool = False
 
-# 	subcatlist = []
-# 	for sub in subcategory:
-# 		subcatdictx = {}
-# 		subcatdictx['subcategory_name'] = sub.subcategory_name
-# 		subcatdictx['subcategory_slug'] = sub.subcategory_slug
-# 		subcatdictx['category'] = sub.category.category_name
-# 		subcatlist.append(subcatdictx)
-# 	subcategory = subcatlist
+	prev_bool = ibool
+	next_bool = jbool
 
-# 	subcatdict = {}
-# 	subcatdict['subcategory_name'] = subcat.subcategory_name
-# 	subcatdict['subcategory_slug'] = subcat.subcategory_slug
-# 	subcatdict['category'] = subcat.category.category_name
-# 	subcat = subcatdict
+	limlist = limitedconverter(limitedoffer)
+	pricelist = priceconverter(prices)
+	catlist = categoryconverter(navbar_category)
+	newslist = newsconverter(news)
+	prod_list = productcoverter(products)
+	news = newslist
+	limitedoffer = limlist
+	prices = pricelist
+	navbar_category = catlist
+	products = prod_list
+
+	catdict = {}
+	catdict['category_name'] = category.category_name
+	catdict['category_slug'] = category.category_slug
+	category = catdict
+
+	subcatlist = []
+	for sub in subcategory:
+		subcatdictx = {}
+		subcatdictx['subcategory_name'] = sub.subcategory_name
+		subcatdictx['subcategory_slug'] = sub.subcategory_slug
+		subcatdictx['category'] = sub.category.category_name
+		subcatlist.append(subcatdictx)
+	subcategory = subcatlist
+
+	subcatdict = {}
+	subcatdict['subcategory_name'] = subcat.subcategory_name
+	subcatdict['subcategory_slug'] = subcat.subcategory_slug
+	subcatdict['category'] = subcat.category.category_name
+	subcat = subcatdict
+
+	Xbool = False
+	if len(products_list) > 25:
+		Xbool = True
+	else:
+		Xbool = False
+
+	Ybool = str(Xbool)
 	
-# 	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4,"prodnum":prodnum, "category":category, "limitedoffer":limitedoffer, "count":productcount, "subcategory":subcategory, "products":products_list, "navbar_category":navbar_category,"subcat":subcat, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
-# 	template = 'subcategorydetail.html'
-# 	return HttpResponse(json.dumps(context), content_type = 'application/json')
+	context = {"nbool" : prev_bool, "mbool" : next_bool, "Ybool":Ybool,"l1":l1,"l2":l2,"l3":l3,"l4":l4,"prodnum":prodnum, "category":category, "limitedoffer":limitedoffer, "count":productcount, "subcategory":subcategory, "products":products, "navbar_category":navbar_category,"subcat":subcat, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
+	template = 'subcategorydetail.html'
+	return HttpResponse(json.dumps(context), content_type = 'application/json')
 
-"""====================================="""
-"""=====SUBCATEGORY INDIVIDUAL PAGE====="""
-"""====================================="""
+"""======================================"""
+"""=====SUBCATEGORY PRICE SERFO PAGE====="""
+"""======================================"""
 
 def PriceFilterSubCategory(request, slug1, slug2, pr_id):
 	"""SubCategory Filter Page"""
@@ -1024,7 +833,7 @@ def PriceFilterSubCategory(request, slug1, slug2, pr_id):
 	subcategory = SubCategory.objects.filter(category=category).order_by('id')
 	subcat = SubCategory.objects.get(subcategory_slug=slug2, category=category)
 	products_list = Product.objects.filter(Q(subcategory=subcat, offer_price__lte=upper, offer_price__gte=lower) | Q(subcategory=subcat, sale_price__lte=upper, sale_price__gte=lower))
-
+	news = New.objects.filter(category=category).order_by('-id')
 	items = []
 	for i in products_list:
 		brands_dict = {}
@@ -1044,7 +853,7 @@ def PriceFilterSubCategory(request, slug1, slug2, pr_id):
 	l4 = "%d:%d" % (column_count3,column_count4)
 
 	paginator = Paginator(products_list, 25)
-	productcount = products_list.count
+	productcount = str(len(products_list))
 	page = request.GET.get('page')
 	try:
 		products = paginator.page(page)
@@ -1069,114 +878,70 @@ def PriceFilterSubCategory(request, slug1, slug2, pr_id):
 		y = products.number + 4
 	sl = "%d:%d" % (x,y)
 
-	news = New.objects.filter(category=category).order_by('-id')
-	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4,"prodnum":prodnum, "selected_price":selected_price, "limitedoffer":limitedoffer, "category":category, "subcategory":subcategory, "products":products,"user" : request.user, "navbar_category":navbar_category,"subcat":subcat, "count":productcount, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages), "title":title, "upper":upper, "lower":lower}
-	template = 'pricesubcatdetail.html'
-	return render(request, template, context)
+	ibool = False
+	jbool = False
+	if products.has_previous():
+		ibool = True
+	else:
+		ibool = False
 
-"""======================================"""
-"""=====SUBCATEGORY PRICE SERFO PAGE====="""
-"""======================================"""
+	if products.has_next():
+		jbool = True
+	else:
+		jbool = False
 
-# def PriceFilterSubCategory(request, slug1, slug2, pr_id):
-# 	"""SubCategory Filter Page"""
-# 	limitedoffer = LimitedOffer.objects.all()
-# 	prices = Price.objects.all().order_by('-id')
-# 	selected_price = Price.objects.get(pk=pr_id)
-# 	title = selected_price.title
-# 	upper = selected_price.upper_limit
-# 	lower = selected_price.lower_limit
-# 	navbar_category = Category.objects.all()
-# 	category = Category.objects.get(category_slug=slug1)
-# 	subcategory = SubCategory.objects.filter(category=category).order_by('id')
-# 	subcat = SubCategory.objects.get(subcategory_slug=slug2, category=category)
-# 	products_list = Product.objects.filter(Q(subcategory=subcat, offer_price__lte=upper, offer_price__gte=lower) | Q(subcategory=subcat, sale_price__lte=upper, sale_price__gte=lower))
-# 	news = New.objects.filter(category=category).order_by('-id')
-# 	items = []
-# 	for i in products_list:
-# 		brands_dict = {}
-# 		brands_dict['id'] = i.brand.id
-# 		brands_dict['brand_name'] = i.brand.brand_name
-# 		items.append(brands_dict)
-# 	brands = [ast.literal_eval(el1) for el1 in set([str(el2) for el2 in items])]
+	prev_bool = ibool
+	next_bool = jbool
 
-# 	column_count1 = len(brands)/4
-# 	column_count2 = column_count1 * 2
-# 	column_count3 = column_count1 * 3
-# 	column_count4 = column_count1 * 4
+	limlist = limitedconverter(limitedoffer)
+	pricelist = priceconverter(prices)
+	catlist = categoryconverter(navbar_category)
+	newslist = newsconverter(news)
+	prod_list = productcoverter(products)
+	news = newslist
+	limitedoffer = limlist
+	prices = pricelist
+	navbar_category = catlist
+	products = prod_list
 
-# 	l1 = "%d:%d" % (0,column_count1)
-# 	l2 = "%d:%d" % (column_count1,column_count2)
-# 	l3 = "%d:%d" % (column_count2,column_count3)
-# 	l4 = "%d:%d" % (column_count3,column_count4)
+	catdict = {}
+	catdict['category_name'] = category.category_name
+	catdict['category_slug'] = category.category_slug
+	category = catdict
 
-# 	paginator = Paginator(products_list, 25)
-# 	productcount = str(products_list.count)
-# 	page = request.GET.get('page')
-# 	try:
-# 		products = paginator.page(page)
-# 	except PageNotAnInteger:
-# 		products = paginator.page(1)
-# 	except EmptyPage:
-# 		products = paginator.page(paginator.num_pages)
-# 	total_pages = products.paginator.num_pages+1
+	subcatlist = []
+	for sub in subcategory:
+		subcatdictx = {}
+		subcatdictx['subcategory_name'] = sub.subcategory_name
+		subcatdictx['subcategory_slug'] = sub.subcategory_slug
+		subcatdictx['category'] = sub.category.category_name
+		subcatlist.append(subcatdictx)
+	subcategory = subcatlist
 
-# 	prodnum = products.number
-# 	if prodnum == 1:
-# 		x = products.number - 1
-# 		y = products.number + 7
-# 	elif prodnum == 2:
-# 		x = products.number - 2
-# 		y = products.number + 6
-# 	elif prodnum == 3:
-# 		x = products.number - 3
-# 		y = products.number + 5
-# 	else:
-# 		x = products.number - 4
-# 		y = products.number + 4
-# 	sl = "%d:%d" % (x,y)
+	subcatdict = {}
+	subcatdict['subcategory_name'] = subcat.subcategory_name
+	subcatdict['subcategory_slug'] = subcat.subcategory_slug
+	subcatdict['category'] = subcat.category.category_name
+	subcat = subcatdict
 
-# 	limlist = limitedconverter(limitedoffer)
-# 	pricelist = priceconverter(prices)
-# 	catlist = categoryconverter(navbar_category)
-# 	newslist = newsconverter(news)
-# 	prod_list = productcoverter(products_list)
-# 	news = newslist
-# 	limitedoffer = limlist
-# 	prices = pricelist
-# 	navbar_category = catlist
-# 	products_list = prod_list
+	selected_price_dict = {}
+	selected_price_dict['id'] = selected_price.id
+	selected_price_dict['title'] = selected_price.title
+	selected_price_dict['upper_limit'] = str(selected_price.upper_limit)
+	selected_price_dict['lower_limit'] = str(selected_price.lower_limit)
+	selected_price = selected_price_dict
 
-# 	catdict = {}
-# 	catdict['category_name'] = category.category_name
-# 	catdict['category_slug'] = category.category_slug
-# 	category = catdict
+	Xbool = False
+	if len(products_list) > 25:
+		Xbool = True
+	else:
+		Xbool = False
 
-# 	subcatlist = []
-# 	for sub in subcategory:
-# 		subcatdictx = {}
-# 		subcatdictx['subcategory_name'] = sub.subcategory_name
-# 		subcatdictx['subcategory_slug'] = sub.subcategory_slug
-# 		subcatdictx['category'] = sub.category.category_name
-# 		subcatlist.append(subcatdictx)
-# 	subcategory = subcatlist
-
-# 	subcatdict = {}
-# 	subcatdict['subcategory_name'] = subcat.subcategory_name
-# 	subcatdict['subcategory_slug'] = subcat.subcategory_slug
-# 	subcatdict['category'] = subcat.category.category_name
-# 	subcat = subcatdict
-
-# 	selected_price_dict = {}
-# 	selected_price_dict['id'] = selected_price.id
-# 	selected_price_dict['title'] = selected_price.title
-# 	selected_price_dict['upper_limit'] = str(selected_price.upper_limit)
-# 	selected_price_dict['lower_limit'] = str(selected_price.lower_limit)
-# 	selected_price = selected_price_dict
+	Ybool = str(Xbool)
 	
-# 	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4,"prodnum":prodnum, "selected_price":selected_price, "limitedoffer":limitedoffer, "category":category, "subcategory":subcategory, "products":products_list, "navbar_category":navbar_category,"subcat":subcat, "count":productcount, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
-# 	template = 'pricesubcatdetail.html'
-# 	return HttpResponse(json.dumps(context), content_type = 'application/json')
+	context = {"nbool" : prev_bool, "mbool" : next_bool, "Ybool":Ybool,"l1":l1,"l2":l2,"l3":l3,"l4":l4,"prodnum":prodnum, "selected_price":selected_price, "limitedoffer":limitedoffer, "category":category, "subcategory":subcategory, "products":products, "navbar_category":navbar_category,"subcat":subcat, "count":productcount, "brands":brands,  "news" : news, "prices":prices, "sl":sl, 'range': range(1,total_pages)}
+	template = 'pricesubcatdetail.html'
+	return HttpResponse(json.dumps(context), content_type = 'application/json')
 
 """=============================="""
 """=====NEWS INDIVIDUAL PAGE====="""
@@ -1188,7 +953,6 @@ def NewsPage(request, n_id):
 	navbar_category = Category.objects.all()
 	news = New.objects.get(pk=n_id)
 	multi_news = New.objects.all().order_by('?')
-	saleoffer = SaleOffer.objects.all()
 	product1 = []
 	product2 = []
 	product3 = []
@@ -1204,57 +968,162 @@ def NewsPage(request, n_id):
 		link1 = str(news.product_link1)
 		id1 = int(link1.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product1 = Product.objects.get(pk=id1)
+		dict1 = {}
+		dict1['title'] = product1.title
+		dict1['brand'] = product1.brand.brand_name
+		dict1['offer_price'] = str(product1.offer_price)
+		dict1['sale_price'] = str(product1.sale_price)
+		dict1['link'] = str(product1.link)
+		dict1['id'] = str(product1.id)
+		dict1['seller'] = product1.seller
+		product1 = dict1
+
 	if news.product_link2:
 		link2 = news.product_link2
 		id2 = int(link2.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product2 = Product.objects.get(pk=id2)
+		dict2 = {}
+		dict2['title'] = product2.title
+		dict2['brand'] = product2.brand.brand_name
+		dict2['offer_price'] = str(product2.offer_price)
+		dict2['sale_price'] = str(product2.sale_price)
+		dict2['link'] = str(product2.link)
+		dict2['id'] = str(product2.id)
+		dict2['seller'] = product2.seller
+		product2 = dict2
+
 	if news.product_link3:
 		link3 = news.product_link3
 		id3 = int(link3.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product3 = Product.objects.get(pk=id3)
+		dict3 = {}
+		dict3['title'] = product3.title
+		dict3['brand'] = product3.brand.brand_name
+		dict3['offer_price'] = str(product3.offer_price)
+		dict3['sale_price'] = str(product3.sale_price)
+		dict3['link'] = str(product3.link)
+		dict3['id'] = str(product3.id)
+		dict3['seller'] = product3.seller
+		product3 = dict3
+
 	if news.product_link4:
 		link4 = news.product_link4
 		id4 = int(link4.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product4 = Product.objects.get(pk=id4)
+		dict4 = {}
+		dict4['title'] = product4.title
+		dict4['brand'] = product4.brand.brand_name
+		dict4['offer_price'] = str(product4.offer_price)
+		dict4['sale_price'] = str(product4.sale_price)
+		dict4['link'] = str(product4.link)
+		dict4['id'] = str(product4.id)
+		dict4['seller'] = product4.seller
+		product4 = dict4
+
 	if news.product_link5:
 		link5 = news.product_link5
 		id5 = int(link5.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product5 = Product.objects.get(pk=id5)
+		dict5 = {}
+		dict5['title'] = product5.title
+		dict5['brand'] = product5.brand.brand_name
+		dict5['offer_price'] = str(product5.offer_price)
+		dict5['sale_price'] = str(product5.sale_price)
+		dict5['link'] = str(product5.link)
+		dict5['id'] = str(product5.id)
+		dict5['seller'] = product5.seller
+		product5 = dict5
+
 	if news.product_link6:
 		link6 = news.product_link6
 		id6 = int(link6.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product6 = Product.objects.get(pk=id6)
+		dict6 = {}
+		dict6['title'] = product6.title
+		dict6['brand'] = product6.brand.brand_name
+		dict6['offer_price'] = str(product6.offer_price)
+		dict6['sale_price'] = str(product6.sale_price)
+		dict6['link'] = str(product6.link)
+		dict6['id'] = str(product6.id)
+		dict6['seller'] = product6.seller
+		product6 = dict6
+
 	if news.product_link7:
 		link7 = news.product_link7
 		id7 = int(link7.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product7 = Product.objects.get(pk=id7)
+		dict7 = {}
+		dict7['title'] = product7.title
+		dict7['brand'] = product7.brand.brand_name
+		dict7['offer_price'] = str(product7.offer_price)
+		dict7['sale_price'] = str(product7.sale_price)
+		dict7['link'] = str(product7.link)
+		dict7['id'] = str(product7.id)
+		dict7['seller'] = product7.seller
+		product7 = dict7
+
 	if news.product_link8:
 		link8 = news.product_link8
 		id8 = int(link8.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product8 = Product.objects.get(pk=id8)
+		dict8 = {}
+		dict8['title'] = product8.title
+		dict8['brand'] = product8.brand.brand_name
+		dict8['offer_price'] = str(product8.offer_price)
+		dict8['sale_price'] = str(product8.sale_price)
+		dict8['link'] = str(product8.link)
+		dict8['id'] = str(product8.id)
+		dict8['seller'] = product8.seller
+		product8 = dict8
+
 	if news.product_link9:
 		link9 = news.product_link9
 		id9 = int(link9.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product9 = Product.objects.get(pk=id9)
+		dict9 = {}
+		dict9['title'] = product9.title
+		dict9['brand'] = product9.brand.brand_name
+		dict9['offer_price'] = str(product9.offer_price)
+		dict9['sale_price'] = str(product9.sale_price)
+		dict9['link'] = str(product9.link)
+		dict9['id'] = str(product9.id)
+		dict9['seller'] = product9.seller
+		product9 = dict9
+
 	if news.product_link10:
 		link10 = news.product_link10
 		id10 = int(link10.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product10 = Product.objects.get(pk=id10)
+		dict10 = {}
+		dict10['title'] = product10.title
+		dict10['brand'] = product10.brand.brand_name
+		dict10['offer_price'] = str(product10.offer_price)
+		dict10['sale_price'] = str(product10.sale_price)
+		dict10['link'] = str(product10.link)
+		dict10['id'] = str(product10.id)
+		dict10['seller'] = product10.seller
+		product10 = dict10
 
-	men_prod = SerfoProduct.objects.filter(super_category='M')
-	women_prod = SerfoProduct.objects.filter(super_category='W')
-	appliances_prod = SerfoProduct.objects.filter(super_category='A')
-	home_prod = SerfoProduct.objects.filter(super_category='H')
-	electronics_prod = SerfoProduct.objects.filter(super_category='E')
+	limlist = limitedconverter(limitedoffer)
+	catlist = categoryconverter(navbar_category)
+	newslist = newsconverter(multi_news)
+	multi_news = newslist
+	limitedoffer = limlist
+	navbar_category = catlist
+
+	newdict = {}
+	newdict['id'] = news.id
+	newdict['title'] = news.title
+	newdict['main_content'] = news.main_content
+	newdict['timestamp'] = str(news.timestamp)
+	newdict['image_url'] = news.image_url
+	newdict['category'] = news.category.category_name
+	newdict['subcategory'] = news.subcategory.subcategory_name
+	news = newdict
 	
 	context = {
 				"news":news, 
 				"navbar_category":navbar_category,
-				"data1" : men_prod,
-				"data2" : women_prod,
-				"data3" : appliances_prod,
-				"data4" : home_prod,
-				"data5" : electronics_prod,
 				"product1" : product1,
 				"product2" : product2,
 				"product3" : product3,
@@ -1266,12 +1135,10 @@ def NewsPage(request, n_id):
 				"product9" : product9,
 				"product10" : product10,
 				"multi_news" : multi_news,
-				"user" : request.user,
 				"limitedoffer":limitedoffer,
-				"saleoffer":saleoffer,
 				}
 	template = 'newsdetail.html'
-	return render(request, template, context)
+	return HttpResponse(json.dumps(context), content_type = 'application/json')
 
 """==================================="""
 """=====AMALGAMATED CATEGORY PAGE====="""
@@ -1316,7 +1183,7 @@ def Men(request):
 	l4 = "%d:%d" % (column_count3,column_count4)
 
 	paginator = Paginator(products_list, 25)
-	productcount = count1 + count2 + count3 + count4 
+	productcount = str(count1 + count2 + count3 + count4) 
 	page = request.GET.get('page')
 	try:
 		products = paginator.page(page)
@@ -1340,9 +1207,68 @@ def Men(request):
 		x = products.number - 4
 		y = products.number + 4
 	sl = "%d:%d" % (x,y)
-	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4,"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages), "sub1":sub1,"sub2":sub2,"sub3":sub3,"sub4":sub4}
+
+	ibool = False
+	jbool = False
+	if products.has_previous():
+		ibool = True
+	else:
+		ibool = False
+
+	if products.has_next():
+		jbool = True
+	else:
+		jbool = False
+
+	prev_bool = ibool
+	next_bool = jbool
+
+	limlist = limitedconverter(limitedoffer)
+	catlist = categoryconverter(navbar_category)
+	prod_list = productcoverter(products)
+	limitedoffer = limlist
+	navbar_category = catlist
+	products = prod_list
+
+	subcatdict1 = {}
+	subcatdict1['subcategory_name'] = sub1.subcategory_name
+	subcatdict1['subcategory_slug'] = sub1.subcategory_slug
+	subcatdict1['category'] = sub1.category.category_name
+	subcatdict1['category_slug'] = str(sub1.category.category_slug)
+	sub1 = subcatdict1
+
+	subcatdict2 = {}
+	subcatdict2['subcategory_name'] = sub2.subcategory_name
+	subcatdict2['subcategory_slug'] = sub2.subcategory_slug
+	subcatdict2['category'] = sub2.category.category_name
+	subcatdict2['category_slug'] = str(sub2.category.category_slug)
+	sub2 = subcatdict2
+
+	subcatdict3 = {}
+	subcatdict3['subcategory_name'] = sub3.subcategory_name
+	subcatdict3['subcategory_slug'] = sub3.subcategory_slug
+	subcatdict3['category'] = sub3.category.category_name
+	subcatdict3['category_slug'] = str(sub3.category.category_slug)
+	sub3 = subcatdict3
+
+	subcatdict4 = {}
+	subcatdict4['subcategory_name'] = sub4.subcategory_name
+	subcatdict4['subcategory_slug'] = sub4.subcategory_slug
+	subcatdict4['category'] = sub4.category.category_name
+	subcatdict4['category_slug'] = str(sub4.category.category_slug)
+	sub4 = subcatdict4
+
+	Xbool = False
+	if len(products_list) > 25:
+		Xbool = True
+	else:
+		Xbool = False
+
+	Ybool = str(Xbool)
+
+	context = {"nbool" : prev_bool, "mbool" : next_bool, "Ybool":Ybool,"l1":l1,"l2":l2,"l3":l3,"l4":l4,"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category, "sl":sl, 'range': range(1,total_pages), "sub1":sub1,"sub2":sub2,"sub3":sub3,"sub4":sub4}
 	template = 'men.html'
-	return render(request, template, context)
+	return HttpResponse(json.dumps(context), content_type = 'application/json')
 
 def Women(request):
 	"""Women's Detail Page"""
@@ -1383,7 +1309,7 @@ def Women(request):
 	l4 = "%d:%d" % (column_count3,column_count4)
 
 	paginator = Paginator(products_list, 25)
-	productcount = count1 + count2 + count3 + count4 
+	productcount = str(count1 + count2 + count3 + count4) 
 	page = request.GET.get('page')
 	try:
 		products = paginator.page(page)
@@ -1407,9 +1333,68 @@ def Women(request):
 		x = products.number - 4
 		y = products.number + 4
 	sl = "%d:%d" % (x,y)
-	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4,"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages), "sub1":sub1,"sub2":sub2,"sub3":sub3,"sub4":sub4}
+
+	ibool = False
+	jbool = False
+	if products.has_previous():
+		ibool = True
+	else:
+		ibool = False
+
+	if products.has_next():
+		jbool = True
+	else:
+		jbool = False
+
+	prev_bool = ibool
+	next_bool = jbool
+
+	limlist = limitedconverter(limitedoffer)
+	catlist = categoryconverter(navbar_category)
+	prod_list = productcoverter(products)
+	limitedoffer = limlist
+	navbar_category = catlist
+	products = prod_list
+
+	subcatdict1 = {}
+	subcatdict1['subcategory_name'] = sub1.subcategory_name
+	subcatdict1['subcategory_slug'] = sub1.subcategory_slug
+	subcatdict1['category'] = sub1.category.category_name
+	subcatdict1['category_slug'] = str(sub1.category.category_slug)
+	sub1 = subcatdict1
+
+	subcatdict2 = {}
+	subcatdict2['subcategory_name'] = sub2.subcategory_name
+	subcatdict2['subcategory_slug'] = sub2.subcategory_slug
+	subcatdict2['category'] = sub2.category.category_name
+	subcatdict2['category_slug'] = str(sub2.category.category_slug)
+	sub2 = subcatdict2
+
+	subcatdict3 = {}
+	subcatdict3['subcategory_name'] = sub3.subcategory_name
+	subcatdict3['subcategory_slug'] = sub3.subcategory_slug
+	subcatdict3['category'] = sub3.category.category_name
+	subcatdict3['category_slug'] = str(sub3.category.category_slug)
+	sub3 = subcatdict3
+
+	subcatdict4 = {}
+	subcatdict4['subcategory_name'] = sub4.subcategory_name
+	subcatdict4['subcategory_slug'] = sub4.subcategory_slug
+	subcatdict4['category'] = sub4.category.category_name
+	subcatdict4['category_slug'] = str(sub4.category.category_slug)
+	sub4 = subcatdict4
+
+	Xbool = False
+	if len(products_list) > 25:
+		Xbool = True
+	else:
+		Xbool = False
+
+	Ybool = str(Xbool)
+
+	context = {"nbool" : prev_bool, "mbool" : next_bool, "Ybool":Ybool,"l1":l1,"l2":l2,"l3":l3,"l4":l4,"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category, "sl":sl, 'range': range(1,total_pages), "sub1":sub1,"sub2":sub2,"sub3":sub3,"sub4":sub4}
 	template = 'women.html'
-	return render(request, template, context)
+	return HttpResponse(json.dumps(context), content_type = 'application/json')
 
 def Appliances(request):
 	"""Appliances Detail Page"""
@@ -1444,7 +1429,7 @@ def Appliances(request):
 	l4 = "%d:%d" % (column_count3,column_count4)
 
 	paginator = Paginator(products_list, 25)
-	productcount = count1 + count2
+	productcount = str(count1 + count2)
 	page = request.GET.get('page')
 	try:
 		products = paginator.page(page)
@@ -1468,9 +1453,54 @@ def Appliances(request):
 		x = products.number - 4
 		y = products.number + 4
 	sl = "%d:%d" % (x,y)
-	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4,"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages), "sub1":sub1, "sub2":sub2}
+
+	ibool = False
+	jbool = False
+	if products.has_previous():
+		ibool = True
+	else:
+		ibool = False
+
+	if products.has_next():
+		jbool = True
+	else:
+		jbool = False
+
+	prev_bool = ibool
+	next_bool = jbool
+
+	limlist = limitedconverter(limitedoffer)
+	catlist = categoryconverter(navbar_category)
+	prod_list = productcoverter(products)
+	limitedoffer = limlist
+	navbar_category = catlist
+	products = prod_list
+
+	subcatdict1 = {}
+	subcatdict1['subcategory_name'] = sub1.subcategory_name
+	subcatdict1['subcategory_slug'] = sub1.subcategory_slug
+	subcatdict1['category'] = sub1.category.category_name
+	subcatdict1['category_slug'] = str(sub1.category.category_slug)
+	sub1 = subcatdict1
+
+	subcatdict2 = {}
+	subcatdict2['subcategory_name'] = sub2.subcategory_name
+	subcatdict2['subcategory_slug'] = sub2.subcategory_slug
+	subcatdict2['category'] = sub2.category.category_name
+	subcatdict2['category_slug'] = str(sub2.category.category_slug)
+	sub2 = subcatdict2
+
+	Xbool = False
+	if len(products_list) > 25:
+		Xbool = True
+	else:
+		Xbool = False
+
+	Ybool = str(Xbool)
+
+	context = {"nbool" : prev_bool, "mbool" : next_bool, "Ybool":Ybool,"l1":l1,"l2":l2,"l3":l3,"l4":l4,"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category, "sl":sl, 'range': range(1,total_pages), "sub1":sub1, "sub2":sub2}
 	template = 'appliances.html'
-	return render(request, template, context)
+	return HttpResponse(json.dumps(context), content_type = 'application/json')
 
 def Home2(request):
 	"""Home Detail Page"""
@@ -1507,7 +1537,7 @@ def Home2(request):
 	l4 = "%d:%d" % (column_count3,column_count4)
 
 	paginator = Paginator(products_list, 25)
-	productcount = count1 + count2 + count3
+	productcount = str(count1 + count2 + count3)
 	page = request.GET.get('page')
 	try:
 		products = paginator.page(page)
@@ -1531,9 +1561,61 @@ def Home2(request):
 		x = products.number - 4
 		y = products.number + 4
 	sl = "%d:%d" % (x,y)
-	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4,"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages), "sub1":sub1, "sub2":sub2, "sub3":sub3}
+
+	ibool = False
+	jbool = False
+	if products.has_previous():
+		ibool = True
+	else:
+		ibool = False
+
+	if products.has_next():
+		jbool = True
+	else:
+		jbool = False
+
+	prev_bool = ibool
+	next_bool = jbool
+
+	limlist = limitedconverter(limitedoffer)
+	catlist = categoryconverter(navbar_category)
+	prod_list = productcoverter(products)
+	limitedoffer = limlist
+	navbar_category = catlist
+	products = prod_list
+
+	subcatdict1 = {}
+	subcatdict1['subcategory_name'] = sub1.subcategory_name
+	subcatdict1['subcategory_slug'] = sub1.subcategory_slug
+	subcatdict1['category'] = sub1.category.category_name
+	subcatdict1['category_slug'] = str(sub1.category.category_slug)
+	sub1 = subcatdict1
+
+	subcatdict2 = {}
+	subcatdict2['subcategory_name'] = sub2.subcategory_name
+	subcatdict2['subcategory_slug'] = sub2.subcategory_slug
+	subcatdict2['category'] = sub2.category.category_name
+	subcatdict2['category_slug'] = str(sub2.category.category_slug)
+	sub2 = subcatdict2
+
+	subcatdict3 = {}
+	subcatdict3['subcategory_name'] = sub3.subcategory_name
+	subcatdict3['subcategory_slug'] = sub3.subcategory_slug
+	subcatdict3['category'] = sub3.category.category_name
+	subcatdict3['category_slug'] = str(sub3.category.category_slug)
+	sub3 = subcatdict3
+
+	Xbool = False
+	if len(products_list) > 25:
+		Xbool = True
+	else:
+		Xbool = False
+
+	Ybool = str(Xbool)
+
+	context = {"nbool" : prev_bool, "mbool" : next_bool, "Ybool":Ybool,"l1":l1,"l2":l2,"l3":l3,"l4":l4,"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category, "sl":sl, 'range': range(1,total_pages), "sub1":sub1, "sub2":sub2, "sub3":sub3}
 	template = 'home2.html'
-	return render(request, template, context)
+	return HttpResponse(json.dumps(context), content_type = 'application/json')
 
 def Electronics(request):
 	"""Home Detail Page"""
@@ -1574,7 +1656,7 @@ def Electronics(request):
 	l4 = "%d:%d" % (column_count3,column_count4)
 
 	paginator = Paginator(products_list, 25)
-	productcount = count1 + count2 + count3 + count4
+	productcount = str(count1 + count2 + count3 + count4)
 	page = request.GET.get('page')
 	try:
 		products = paginator.page(page)
@@ -1598,9 +1680,68 @@ def Electronics(request):
 		x = products.number - 4
 		y = products.number + 4
 	sl = "%d:%d" % (x,y)
-	context = {"l1":l1,"l2":l2,"l3":l3,"l4":l4,"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category,"user" : request.user, "sl":sl, 'range': range(1,total_pages),  "sub1":sub1,"sub2":sub2,"sub3":sub3,"sub4":sub4}
+
+	ibool = False
+	jbool = False
+	if products.has_previous():
+		ibool = True
+	else:
+		ibool = False
+
+	if products.has_next():
+		jbool = True
+	else:
+		jbool = False
+
+	prev_bool = ibool
+	next_bool = jbool
+
+	limlist = limitedconverter(limitedoffer)
+	catlist = categoryconverter(navbar_category)
+	prod_list = productcoverter(products)
+	limitedoffer = limlist
+	navbar_category = catlist
+	products = prod_list
+
+	subcatdict1 = {}
+	subcatdict1['subcategory_name'] = sub1.subcategory_name
+	subcatdict1['subcategory_slug'] = sub1.subcategory_slug
+	subcatdict1['category'] = sub1.category.category_name
+	subcatdict1['category_slug'] = str(sub1.category.category_slug)
+	sub1 = subcatdict1
+
+	subcatdict2 = {}
+	subcatdict2['subcategory_name'] = sub2.subcategory_name
+	subcatdict2['subcategory_slug'] = sub2.subcategory_slug
+	subcatdict2['category'] = sub2.category.category_name
+	subcatdict2['category_slug'] = str(sub2.category.category_slug)
+	sub2 = subcatdict2
+
+	subcatdict3 = {}
+	subcatdict3['subcategory_name'] = sub3.subcategory_name
+	subcatdict3['subcategory_slug'] = sub3.subcategory_slug
+	subcatdict3['category'] = sub3.category.category_name
+	subcatdict3['category_slug'] = str(sub3.category.category_slug)
+	sub3 = subcatdict3
+
+	subcatdict4 = {}
+	subcatdict4['subcategory_name'] = sub4.subcategory_name
+	subcatdict4['subcategory_slug'] = sub4.subcategory_slug
+	subcatdict4['category'] = sub4.category.category_name
+	subcatdict4['category_slug'] = str(sub4.category.category_slug)
+	sub4 = subcatdict4
+
+	Xbool = False
+	if len(products_list) > 25:
+		Xbool = True
+	else:
+		Xbool = False
+
+	Ybool = str(Xbool)
+
+	context = {"nbool" : prev_bool, "mbool" : next_bool, "Ybool":Ybool, "l1":l1,"l2":l2,"l3":l3,"l4":l4,"brands":brands, "prodnum":prodnum, "count":productcount, "limitedoffer" : limitedoffer, "products":products, "navbar_category":navbar_category, "sl":sl, 'range': range(1,total_pages),  "sub1":sub1,"sub2":sub2,"sub3":sub3,"sub4":sub4}
 	template = 'electronics.html'
-	return render(request, template, context)
+	return HttpResponse(json.dumps(context), content_type = 'application/json')
 
 """============================="""
 """=====PRODUCT DETAIL PAGE====="""
@@ -1610,8 +1751,6 @@ def ProductPage(request, p_id):
 	"""Product detail page"""
 	limitedoffer = LimitedOffer.objects.all()
 	navbar_category = Category.objects.all()
-	category = Category.objects.all()
-	subcategory = SubCategory.objects.all()
 	product = Product.objects.get(pk=p_id)
 	image = ProductImage.objects.filter(product_name=product)
 
@@ -1622,9 +1761,44 @@ def ProductPage(request, p_id):
 	else:
 		cheapers = Product.objects.filter(subcategory=product.subcategory, sale_price__lt=product.sale_price)
 
-	context = {
-				"category":category,
-				"subcategory":subcategory, 
+	xlist = productcoverter(similar_products)
+	similar_products = xlist
+	ylist = productcoverter(cheapers)
+	cheapers = ylist
+
+	limlist = limitedconverter(limitedoffer)
+	catlist = categoryconverter(navbar_category)
+	limitedoffer = limlist
+	navbar_category = catlist
+
+	prod_dict = {}
+	prod_dict['id'] = product.id
+	prod_dict['title'] = product.title
+	prod_dict['brand'] = product.brand.brand_name
+	prod_dict['offer_price'] = str(product.offer_price)
+	prod_dict['sale_price'] = str(product.sale_price)
+	prod_dict['description'] = product.description
+	prod_dict['feature'] = product.feature
+	prod_dict['link'] = product.link
+	prod_dict['seller'] = product.seller
+	prod_dict['seller_rating'] = str(product.seller_rating)
+	prod_dict['star_rating'] = str(product.star_rating)
+	prod_dict['COD'] = product.COD
+	prod_dict['mainimage'] = product.mainimage
+	prod_dict['category_name'] = product.category.category_name
+	prod_dict['subcategory_name'] = product.subcategory.subcategory_name
+	prod_dict['category_slug'] = product.category.category_slug
+	prod_dict['subcategory_slug'] = product.subcategory.subcategory_slug
+	product = prod_dict
+
+	image_list = []
+	for i in image:
+		image_dict = {}
+		image_dict['image_url'] = i.image_url
+		image_list.append(image_dict)
+	image = image_list
+
+	context = { 
 				"product":product, 
 				"navbar_category":navbar_category,
 				"image" : image,
@@ -1633,7 +1807,7 @@ def ProductPage(request, p_id):
 				"cheapers" : cheapers,
 				}
 	template = 'productpage.html'
-	return render(request, template, context)
+	return HttpResponse(json.dumps(context), content_type = 'application/json')
 
 """============================"""
 """=====EXCEPTION HANDLING====="""
