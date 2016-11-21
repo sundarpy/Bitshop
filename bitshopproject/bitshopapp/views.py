@@ -966,10 +966,12 @@ def NewsPage(request, n_id):
 
 	if news.product_link1:
 		link1 = str(news.product_link1)
-		id1 = int(link1.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		id1 = int(link1.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://serfo.com/shop/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product1 = Product.objects.get(pk=id1)
 		dict1 = {}
+		dict1['id'] = str(product1.id)
 		dict1['title'] = product1.title
+		dict1['mainimage'] = product1.mainimage
 		dict1['brand'] = product1.brand.brand_name
 		dict1['offer_price'] = str(product1.offer_price)
 		dict1['sale_price'] = str(product1.sale_price)
@@ -980,10 +982,12 @@ def NewsPage(request, n_id):
 
 	if news.product_link2:
 		link2 = news.product_link2
-		id2 = int(link2.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		id2 = int(link2.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://serfo.com/shop/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product2 = Product.objects.get(pk=id2)
 		dict2 = {}
+		dict2['id'] = str(product2.id)
 		dict2['title'] = product2.title
+		dict2['mainimage'] = product2.mainimage
 		dict2['brand'] = product2.brand.brand_name
 		dict2['offer_price'] = str(product2.offer_price)
 		dict2['sale_price'] = str(product2.sale_price)
@@ -994,10 +998,12 @@ def NewsPage(request, n_id):
 
 	if news.product_link3:
 		link3 = news.product_link3
-		id3 = int(link3.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		id3 = int(link3.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://serfo.com/shop/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product3 = Product.objects.get(pk=id3)
 		dict3 = {}
+		dict3['id'] = str(product3.id)
 		dict3['title'] = product3.title
+		dict3['mainimage'] = product3.mainimage
 		dict3['brand'] = product3.brand.brand_name
 		dict3['offer_price'] = str(product3.offer_price)
 		dict3['sale_price'] = str(product3.sale_price)
@@ -1008,10 +1014,12 @@ def NewsPage(request, n_id):
 
 	if news.product_link4:
 		link4 = news.product_link4
-		id4 = int(link4.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		id4 = int(link4.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://serfo.com/shop/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product4 = Product.objects.get(pk=id4)
 		dict4 = {}
+		dict4['id'] = str(product4.id)
 		dict4['title'] = product4.title
+		dict4['mainimage'] = product4.mainimage
 		dict4['brand'] = product4.brand.brand_name
 		dict4['offer_price'] = str(product4.offer_price)
 		dict4['sale_price'] = str(product4.sale_price)
@@ -1022,10 +1030,12 @@ def NewsPage(request, n_id):
 
 	if news.product_link5:
 		link5 = news.product_link5
-		id5 = int(link5.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		id5 = int(link5.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://serfo.com/shop/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product5 = Product.objects.get(pk=id5)
 		dict5 = {}
 		dict5['title'] = product5.title
+		dict5['id'] = str(product5.id)
+		dict5['mainimage'] = product5.mainimage
 		dict5['brand'] = product5.brand.brand_name
 		dict5['offer_price'] = str(product5.offer_price)
 		dict5['sale_price'] = str(product5.sale_price)
@@ -1036,10 +1046,12 @@ def NewsPage(request, n_id):
 
 	if news.product_link6:
 		link6 = news.product_link6
-		id6 = int(link6.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		id6 = int(link6.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://serfo.com/shop/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product6 = Product.objects.get(pk=id6)
 		dict6 = {}
 		dict6['title'] = product6.title
+		dict6['id'] = str(product6.id)
+		dict6['mainimage'] = product6.mainimage
 		dict6['brand'] = product6.brand.brand_name
 		dict6['offer_price'] = str(product6.offer_price)
 		dict6['sale_price'] = str(product6.sale_price)
@@ -1050,10 +1062,12 @@ def NewsPage(request, n_id):
 
 	if news.product_link7:
 		link7 = news.product_link7
-		id7 = int(link7.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		id7 = int(link7.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://serfo.com/shop/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product7 = Product.objects.get(pk=id7)
 		dict7 = {}
 		dict7['title'] = product7.title
+		dict7['id'] = str(product7.id)
+		dict7['mainimage'] = product7.mainimage
 		dict7['brand'] = product7.brand.brand_name
 		dict7['offer_price'] = str(product7.offer_price)
 		dict7['sale_price'] = str(product7.sale_price)
@@ -1064,10 +1078,12 @@ def NewsPage(request, n_id):
 
 	if news.product_link8:
 		link8 = news.product_link8
-		id8 = int(link8.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		id8 = int(link8.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://serfo.com/shop/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product8 = Product.objects.get(pk=id8)
 		dict8 = {}
 		dict8['title'] = product8.title
+		dict8['id'] = str(product8.id)
+		dict8['mainimage'] = product8.mainimage
 		dict8['brand'] = product8.brand.brand_name
 		dict8['offer_price'] = str(product8.offer_price)
 		dict8['sale_price'] = str(product8.sale_price)
@@ -1078,10 +1094,12 @@ def NewsPage(request, n_id):
 
 	if news.product_link9:
 		link9 = news.product_link9
-		id9 = int(link9.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		id9 = int(link9.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://serfo.com/shop/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product9 = Product.objects.get(pk=id9)
 		dict9 = {}
 		dict9['title'] = product9.title
+		dict9['id'] = str(product9.id)
+		dict9['mainimage'] = product9.mainimage
 		dict9['brand'] = product9.brand.brand_name
 		dict9['offer_price'] = str(product9.offer_price)
 		dict9['sale_price'] = str(product9.sale_price)
@@ -1092,10 +1110,12 @@ def NewsPage(request, n_id):
 
 	if news.product_link10:
 		link10 = news.product_link10
-		id10 = int(link10.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
+		id10 = int(link10.replace("http://54.191.242.230:8000/productdetails/","").replace("http://shop.serfo.com/productdetails/","").replace("http://serfo.com/shop/productdetails/","").replace("http://127.0.0.1:8000/productdetails/","").replace("/",""))
 		product10 = Product.objects.get(pk=id10)
 		dict10 = {}
 		dict10['title'] = product10.title
+		dict10['id'] = str(product10.id)
+		dict10['mainimage'] = product10.mainimage
 		dict10['brand'] = product10.brand.brand_name
 		dict10['offer_price'] = str(product10.offer_price)
 		dict10['sale_price'] = str(product10.sale_price)
