@@ -1135,7 +1135,7 @@ def NewsPage(request, n_id):
 	newdict['id'] = news.id
 	newdict['title'] = news.title
 	newdict['main_content'] = news.main_content
-	newdict['timestamp'] = news.timestamp
+	newdict['timestamp'] = str(news.timestamp)
 	newdict['image_url'] = news.image_url
 	newdict['category'] = news.category.category_name
 	newdict['subcategory'] = news.subcategory.subcategory_name
