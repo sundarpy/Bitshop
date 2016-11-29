@@ -1773,6 +1773,7 @@ def ProductPage(request, p_id):
 	navbar_category = Category.objects.all()
 	product = Product.objects.get(pk=p_id)
 	image = ProductImage.objects.filter(product_name=product)
+	variants = Product.objects.filter(title=product.title).order_by('?')
 
 	similar_products = Product.objects.filter(subcategory=product.subcategory).exclude(title=product.title).order_by('?')
 	
@@ -1785,6 +1786,8 @@ def ProductPage(request, p_id):
 	similar_products = xlist
 	ylist = productcoverter(cheapers)
 	cheapers = ylist
+	zlist = productcoverter(variants)
+	varints = zlist
 
 	limlist = limitedconverter(limitedoffer)
 	catlist = categoryconverter(navbar_category)
@@ -1825,6 +1828,7 @@ def ProductPage(request, p_id):
 				"limitedoffer":limitedoffer,
 				"similars" : similar_products,
 				"cheapers" : cheapers,
+				"varints" : varints,
 				}
 	template = 'productpage.html'
 	return HttpResponse(json.dumps(context), content_type = 'application/json')
