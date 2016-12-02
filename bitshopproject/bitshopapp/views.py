@@ -94,6 +94,12 @@ def priceconverter(prod_query):
 
 def Search(request):
 	"""Search."""
+	user = None
+	if request.GET:
+		username = request.GET.get('username')
+		email  = request.GET.get('email')
+		user, s = User.objects.get_or_create(username = username, email = email)
+
 	limitedoffer = LimitedOffer.objects.all()
 	limlist = []
 	for lim in limitedoffer:
@@ -198,6 +204,12 @@ def Search(request):
 
 def HomePage(request):
 	"""Home Page"""
+	user = None
+	if request.GET:
+		username = request.GET.get('username')
+		email  = request.GET.get('email')
+		user, s = User.objects.get_or_create(username = username, email = email)
+
 	navbar_category = Category.objects.all()
 	catlist = categoryconverter(navbar_category)
 	navbar_category = catlist
@@ -258,6 +270,12 @@ def HomePage(request):
 
 def CategoryPage(request, slug):
 	"""Category Detail Page"""
+	user = None
+	if request.GET:
+		username = request.GET.get('username')
+		email  = request.GET.get('email')
+		user, s = User.objects.get_or_create(username = username, email = email)
+	
 	limitedoffer = LimitedOffer.objects.all()
 	prices = Price.objects.all().order_by('-id')
 	navbar_category = Category.objects.all()
@@ -369,6 +387,12 @@ def CategoryPage(request, slug):
 
 def PriceFilterCategory(request, slug, pr_id):
 	"""Price Filter Category Page"""
+	user = None
+	if request.GET:
+		username = request.GET.get('username')
+		email  = request.GET.get('email')
+		user, s = User.objects.get_or_create(username = username, email = email)
+	
 	limitedoffer = LimitedOffer.objects.all()
 	selected_price = Price.objects.get(pk=pr_id)
 	title = selected_price.title
@@ -492,6 +516,12 @@ def PriceFilterCategory(request, slug, pr_id):
 
 def BrandsPage(request, b_id):
 	"""Brands Detail Page"""
+	user = None
+	if request.GET:
+		username = request.GET.get('username')
+		email  = request.GET.get('email')
+		user, s = User.objects.get_or_create(username = username, email = email)
+	
 	limitedoffer = LimitedOffer.objects.all()
 	prices = Price.objects.all().order_by('-id')
 	navbar_category = Category.objects.all()
@@ -594,6 +624,12 @@ def BrandsPage(request, b_id):
 
 def PriceFilterBrands(request, b_id, pr_id):
 	"""Brands Price Filter Page"""
+	user = None
+	if request.GET:
+		username = request.GET.get('username')
+		email  = request.GET.get('email')
+		user, s = User.objects.get_or_create(username = username, email = email)
+	
 	limitedoffer = LimitedOffer.objects.all()
 	selected_price = Price.objects.get(pk=pr_id)
 	title = selected_price.title
@@ -705,6 +741,12 @@ def PriceFilterBrands(request, b_id, pr_id):
 
 def SubCategoryPage(request, slug1, slug2):
 	"""SubCategory Detail Page"""
+	user = None
+	if request.GET:
+		username = request.GET.get('username')
+		email  = request.GET.get('email')
+		user, s = User.objects.get_or_create(username = username, email = email)
+	
 	limitedoffer = LimitedOffer.objects.all()
 	prices = Price.objects.all().order_by('-id')
 	navbar_category = Category.objects.all()
@@ -822,6 +864,12 @@ def SubCategoryPage(request, slug1, slug2):
 
 def PriceFilterSubCategory(request, slug1, slug2, pr_id):
 	"""SubCategory Filter Page"""
+	user = None
+	if request.GET:
+		username = request.GET.get('username')
+		email  = request.GET.get('email')
+		user, s = User.objects.get_or_create(username = username, email = email)
+	
 	limitedoffer = LimitedOffer.objects.all()
 	prices = Price.objects.all().order_by('-id')
 	selected_price = Price.objects.get(pk=pr_id)
@@ -949,6 +997,12 @@ def PriceFilterSubCategory(request, slug1, slug2, pr_id):
 
 def NewsPage(request, n_id):
 	"""Product News Detail Page"""
+	user = None
+	if request.GET:
+		username = request.GET.get('username')
+		email  = request.GET.get('email')
+		user, s = User.objects.get_or_create(username = username, email = email)
+	
 	limitedoffer = LimitedOffer.objects.all()
 	navbar_category = Category.objects.all()
 	news = New.objects.get(pk=n_id)
@@ -1166,6 +1220,12 @@ def NewsPage(request, n_id):
 
 def Men(request):
 	"""Men's Detail Page"""
+	user = None
+	if request.GET:
+		username = request.GET.get('username')
+		email  = request.GET.get('email')
+		user, s = User.objects.get_or_create(username = username, email = email)
+	
 	limitedoffer = LimitedOffer.objects.all()
 	navbar_category = Category.objects.all()
 	list1 = Product.objects.filter(subcategory__subcategory_name="Men").order_by('?')
@@ -1292,6 +1352,12 @@ def Men(request):
 
 def Women(request):
 	"""Women's Detail Page"""
+	user = None
+	if request.GET:
+		username = request.GET.get('username')
+		email  = request.GET.get('email')
+		user, s = User.objects.get_or_create(username = username, email = email)
+	
 	limitedoffer = LimitedOffer.objects.all()
 	navbar_category = Category.objects.all()
 	list1 = Product.objects.filter(subcategory__subcategory_name="Women").order_by('?')
@@ -1418,6 +1484,12 @@ def Women(request):
 
 def Appliances(request):
 	"""Appliances Detail Page"""
+	user = None
+	if request.GET:
+		username = request.GET.get('username')
+		email  = request.GET.get('email')
+		user, s = User.objects.get_or_create(username = username, email = email)
+	
 	limitedoffer = LimitedOffer.objects.all()
 	navbar_category = Category.objects.all()
 	list1 = Product.objects.filter(subcategory__subcategory_name="Kitchen & Home Appliances").order_by('?')
@@ -1524,6 +1596,12 @@ def Appliances(request):
 
 def Home2(request):
 	"""Home Detail Page"""
+	user = None
+	if request.GET:
+		username = request.GET.get('username')
+		email  = request.GET.get('email')
+		user, s = User.objects.get_or_create(username = username, email = email)
+	
 	limitedoffer = LimitedOffer.objects.all()
 	navbar_category = Category.objects.all()
 	list1 = Product.objects.filter(subcategory__subcategory_name="Decor & Lighting").order_by('?')
@@ -1639,6 +1717,12 @@ def Home2(request):
 
 def Electronics(request):
 	"""Home Detail Page"""
+	user = None
+	if request.GET:
+		username = request.GET.get('username')
+		email  = request.GET.get('email')
+		user, s = User.objects.get_or_create(username = username, email = email)
+	
 	limitedoffer = LimitedOffer.objects.all()
 	navbar_category = Category.objects.all()
 	list1 = Product.objects.filter(subcategory__subcategory_name="Android Mobiles").order_by('?')
@@ -1769,6 +1853,12 @@ def Electronics(request):
 
 def ProductPage(request, p_id):
 	"""Product detail page"""
+	user = None
+	if request.GET:
+		username = request.GET.get('username')
+		email  = request.GET.get('email')
+		user, s = User.objects.get_or_create(username = username, email = email)
+	
 	limitedoffer = LimitedOffer.objects.all()
 	navbar_category = Category.objects.all()
 	product = Product.objects.get(pk=p_id)
