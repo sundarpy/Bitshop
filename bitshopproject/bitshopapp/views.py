@@ -95,10 +95,12 @@ def priceconverter(prod_query):
 def Search(request):
 	"""Search."""
 	user = None
-	if request.GET:
+	try:
 		username = request.GET.get('username')
 		email  = request.GET.get('email')
 		user, s = User.objects.get_or_create(username = username, email = email)
+	except Exception as e:
+		pass
 
 	limitedoffer = LimitedOffer.objects.all()
 	limlist = []
@@ -205,10 +207,12 @@ def Search(request):
 def HomePage(request):
 	"""Home Page"""
 	user = None
-	if request.GET:
+	try:
 		username = request.GET.get('username')
 		email  = request.GET.get('email')
 		user, s = User.objects.get_or_create(username = username, email = email)
+	except Exception as e:
+		pass
 
 	navbar_category = Category.objects.all()
 	catlist = categoryconverter(navbar_category)
@@ -271,10 +275,12 @@ def HomePage(request):
 def CategoryPage(request, slug):
 	"""Category Detail Page"""
 	user = None
-	if request.GET:
+	try:
 		username = request.GET.get('username')
 		email  = request.GET.get('email')
 		user, s = User.objects.get_or_create(username = username, email = email)
+	except Exception as e:
+		pass
 	
 	limitedoffer = LimitedOffer.objects.all()
 	prices = Price.objects.all().order_by('-id')
@@ -388,10 +394,12 @@ def CategoryPage(request, slug):
 def PriceFilterCategory(request, slug, pr_id):
 	"""Price Filter Category Page"""
 	user = None
-	if request.GET:
+	try:
 		username = request.GET.get('username')
 		email  = request.GET.get('email')
 		user, s = User.objects.get_or_create(username = username, email = email)
+	except Exception as e:
+		pass
 	
 	limitedoffer = LimitedOffer.objects.all()
 	selected_price = Price.objects.get(pk=pr_id)
@@ -517,10 +525,12 @@ def PriceFilterCategory(request, slug, pr_id):
 def BrandsPage(request, b_id):
 	"""Brands Detail Page"""
 	user = None
-	if request.GET:
+	try:
 		username = request.GET.get('username')
 		email  = request.GET.get('email')
 		user, s = User.objects.get_or_create(username = username, email = email)
+	except Exception as e:
+		pass
 	
 	limitedoffer = LimitedOffer.objects.all()
 	prices = Price.objects.all().order_by('-id')
@@ -625,10 +635,12 @@ def BrandsPage(request, b_id):
 def PriceFilterBrands(request, b_id, pr_id):
 	"""Brands Price Filter Page"""
 	user = None
-	if request.GET:
+	try:
 		username = request.GET.get('username')
 		email  = request.GET.get('email')
 		user, s = User.objects.get_or_create(username = username, email = email)
+	except Exception as e:
+		pass
 	
 	limitedoffer = LimitedOffer.objects.all()
 	selected_price = Price.objects.get(pk=pr_id)
@@ -742,10 +754,12 @@ def PriceFilterBrands(request, b_id, pr_id):
 def SubCategoryPage(request, slug1, slug2):
 	"""SubCategory Detail Page"""
 	user = None
-	if request.GET:
+	try:
 		username = request.GET.get('username')
 		email  = request.GET.get('email')
 		user, s = User.objects.get_or_create(username = username, email = email)
+	except Exception as e:
+		pass
 	
 	limitedoffer = LimitedOffer.objects.all()
 	prices = Price.objects.all().order_by('-id')
@@ -865,10 +879,12 @@ def SubCategoryPage(request, slug1, slug2):
 def PriceFilterSubCategory(request, slug1, slug2, pr_id):
 	"""SubCategory Filter Page"""
 	user = None
-	if request.GET:
+	try:
 		username = request.GET.get('username')
 		email  = request.GET.get('email')
 		user, s = User.objects.get_or_create(username = username, email = email)
+	except Exception as e:
+		pass
 	
 	limitedoffer = LimitedOffer.objects.all()
 	prices = Price.objects.all().order_by('-id')
@@ -998,10 +1014,12 @@ def PriceFilterSubCategory(request, slug1, slug2, pr_id):
 def NewsPage(request, n_id):
 	"""Product News Detail Page"""
 	user = None
-	if request.GET:
+	try:
 		username = request.GET.get('username')
 		email  = request.GET.get('email')
 		user, s = User.objects.get_or_create(username = username, email = email)
+	except Exception as e:
+		pass
 	
 	limitedoffer = LimitedOffer.objects.all()
 	navbar_category = Category.objects.all()
@@ -1221,10 +1239,12 @@ def NewsPage(request, n_id):
 def Men(request):
 	"""Men's Detail Page"""
 	user = None
-	if request.GET:
+	try:
 		username = request.GET.get('username')
 		email  = request.GET.get('email')
 		user, s = User.objects.get_or_create(username = username, email = email)
+	except Exception as e:
+		pass
 	
 	limitedoffer = LimitedOffer.objects.all()
 	navbar_category = Category.objects.all()
@@ -1353,10 +1373,12 @@ def Men(request):
 def Women(request):
 	"""Women's Detail Page"""
 	user = None
-	if request.GET:
+	try:
 		username = request.GET.get('username')
 		email  = request.GET.get('email')
 		user, s = User.objects.get_or_create(username = username, email = email)
+	except Exception as e:
+		pass
 	
 	limitedoffer = LimitedOffer.objects.all()
 	navbar_category = Category.objects.all()
@@ -1485,10 +1507,12 @@ def Women(request):
 def Appliances(request):
 	"""Appliances Detail Page"""
 	user = None
-	if request.GET:
+	try:
 		username = request.GET.get('username')
 		email  = request.GET.get('email')
 		user, s = User.objects.get_or_create(username = username, email = email)
+	except Exception as e:
+		pass
 	
 	limitedoffer = LimitedOffer.objects.all()
 	navbar_category = Category.objects.all()
@@ -1597,10 +1621,12 @@ def Appliances(request):
 def Home2(request):
 	"""Home Detail Page"""
 	user = None
-	if request.GET:
+	try:
 		username = request.GET.get('username')
 		email  = request.GET.get('email')
 		user, s = User.objects.get_or_create(username = username, email = email)
+	except Exception as e:
+		pass
 	
 	limitedoffer = LimitedOffer.objects.all()
 	navbar_category = Category.objects.all()
@@ -1718,10 +1744,12 @@ def Home2(request):
 def Electronics(request):
 	"""Home Detail Page"""
 	user = None
-	if request.GET:
+	try:
 		username = request.GET.get('username')
 		email  = request.GET.get('email')
 		user, s = User.objects.get_or_create(username = username, email = email)
+	except Exception as e:
+		pass
 	
 	limitedoffer = LimitedOffer.objects.all()
 	navbar_category = Category.objects.all()
@@ -1854,10 +1882,12 @@ def Electronics(request):
 def ProductPage(request, p_id):
 	"""Product detail page"""
 	user = None
-	if request.GET:
+	try:
 		username = request.GET.get('username')
 		email  = request.GET.get('email')
 		user, s = User.objects.get_or_create(username = username, email = email)
+	except Exception as e:
+		pass
 	
 	limitedoffer = LimitedOffer.objects.all()
 	navbar_category = Category.objects.all()
