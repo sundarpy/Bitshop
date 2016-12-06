@@ -23,7 +23,6 @@ from datetime import date, timedelta
 from itertools import chain
 import json
 import ast
-from django.views.decorators.cache import cache_page
 
 def serfoproductcoverter(prod_query):
 	xlist = []
@@ -1880,7 +1879,6 @@ def Electronics(request):
 """=====PRODUCT DETAIL PAGE====="""
 """============================="""
 
-@cache_page(60 * 45)
 def ProductPage(request, p_id):
 	"""Product detail page"""
 	user = None
