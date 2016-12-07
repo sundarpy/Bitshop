@@ -215,6 +215,18 @@ def Search(request):
 
 def HomePage(request):
 	"""Home Page"""
+	Recents = RecentlyViewed.objects.all()
+	recents_list = []
+	for i in Recents:
+		recent_dict = {}
+		recent_dict['id'] = i.product.id
+		recent_dict['title'] = i.product.title
+		recent_dict['offer_price'] = str(i.product.offer_price)
+		recent_dict['sale_price'] = str(i.product.sale_price)
+		recent_dict['mainimage'] = str(i.product.mainimage)
+		recents_list.append(recent_dict)
+	return recents_list
+
 	user = None
 	try:
 		username = request.GET.get('username')
@@ -261,6 +273,7 @@ def HomePage(request):
 	appliances_prod = appliances_prod_list
 	home_prod = home_prod_list
 	electronics_prod = electronics_prod_list
+	Recents = recents_list
 
 
 	context = { 
@@ -273,6 +286,7 @@ def HomePage(request):
 				"news" : news,
 				"saleoffer" : saleoffer,
 				"limitedoffer" : limitedoffer,
+				"recents" : Recents,
 				}
 	template = 'home.html'
 	return HttpResponse(json.dumps(context), content_type = 'application/json')
@@ -1950,7 +1964,7 @@ def ProductPage(request, p_id):
 		image_list.append(image_dict)
 	image = image_list
 
-
+	
 
 	context = { 
 				"product":product, 
