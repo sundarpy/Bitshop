@@ -220,8 +220,8 @@ def HomePage(request):
 
 	recoms = Recommendation.objects.filter(mac_address=mac_str, rectype='P').order_by('id')
 	if recoms and len(recoms) > 15:
-		recoms2 = Recommendation.objects.filter(mac_address=mac_str, rectype='P').order_by('id')[10:]
-		recoms2.delete()
+		recoms2 = Recommendation.objects.filter(mac_address=mac_str, rectype='P').order_by('-id')[10:].values_list("id", flat=True)
+		Recommendation.objects.exclude(pk__in=list(recoms2)).delete()
 
 	navbar_category = Category.objects.all()
 	catlist = categoryconverter(navbar_category)
