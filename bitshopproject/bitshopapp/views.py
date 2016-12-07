@@ -215,19 +215,19 @@ def Search(request):
 
 def HomePage(request):
 	"""Home Page"""
-	Recents = RecentlyViewed.objects.all()
-	recents_list = []
-	for i in Recents:
-		recent_dict = {}
-		recent_dict['id'] = i.product.id
-		recent_dict['title'] = i.product.title
-		recent_dict['offer_price'] = str(i.product.offer_price)
-		recent_dict['sale_price'] = str(i.product.sale_price)
-		recent_dict['mainimage'] = str(i.product.mainimage)
-		recents_list.append(recent_dict)
-	return recents_list
+	# Recents = RecentlyViewed.objects.all()
+	# recents_list = []
+	# for i in Recents:
+	# 	recent_dict = {}
+	# 	recent_dict['id'] = i.product.id
+	# 	recent_dict['title'] = i.product.title
+	# 	recent_dict['offer_price'] = str(i.product.offer_price)
+	# 	recent_dict['sale_price'] = str(i.product.sale_price)
+	# 	recent_dict['mainimage'] = str(i.product.mainimage)
+	# 	recents_list.append(recent_dict)
+	# return recents_list
 
-	Recents = recents_list
+	# Recents = recents_list
 
 	user = None
 	try:
@@ -287,7 +287,7 @@ def HomePage(request):
 				"news" : news,
 				"saleoffer" : saleoffer,
 				"limitedoffer" : limitedoffer,
-				"recents" : Recents,
+				# "recents" : Recents,
 				}
 	template = 'home.html'
 	return HttpResponse(json.dumps(context), content_type = 'application/json')
@@ -1918,12 +1918,6 @@ def ProductPage(request, p_id):
 	product = Product.objects.get(pk=p_id)
 	image = ProductImage.objects.filter(product_name=product)
 	variants = Product.objects.filter(title=product.title).order_by('?')[1:]
-
-	product_title = str(product.title)
-	request.session['product_title'] = product_title
-	product_cookie = Product.objects.get(title=request.session['product_title'])
-	recentlyviewed = RecentlyViewed(product=product_cookie)
-	recentlyviewed.save()
 
 	similar_products = Product.objects.filter(subcategory=product.subcategory).exclude(title=product.title).order_by('?')
 	

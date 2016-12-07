@@ -260,12 +260,12 @@ class LimitedOffer(models.Model):
 	def __str__(self):
 		return str(self.image)
 
-class RecentlyViewed(models.Model):
-	"Recently Viewed Products in current session"
-	product = models.ForeignKey(Product, null=True, blank=True)
+# class RecentlyViewed(models.Model):
+# 	"Recently Viewed Products in current session"
+# 	product = models.ForeignKey(Product, null=True, blank=True)
 
-	def __str__(self):
-		return str(self.product.title)
+# 	def __str__(self):
+# 		return str(self.product.title)
 
 
 
