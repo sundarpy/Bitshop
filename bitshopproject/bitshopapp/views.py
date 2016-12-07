@@ -215,6 +215,21 @@ def Search(request):
 
 def HomePage(request):
 	"""Home Page"""
+	if request.session:
+		Recents = RecentlyViewed.objects.filter(session_id=str(request.session.session_key))
+		recents_list = []
+		for i in Recents:
+			recent_dict = {}
+			recent_dict['id'] = i.product.id
+			recent_dict['title'] = i.product.title
+			recent_dict['offer_price'] = str(i.product.offer_price)
+			recent_dict['sale_price'] = str(i.product.sale_price)
+			recent_dict['mainimage'] = str(i.product.mainimage)
+			recents_list.append(recent_dict)
+		return recents_list
+
+	Recents = recents_list
+
 	user = None
 	try:
 		username = request.GET.get('username')
@@ -273,6 +288,7 @@ def HomePage(request):
 				"news" : news,
 				"saleoffer" : saleoffer,
 				"limitedoffer" : limitedoffer,
+				"recents" : Recents,
 				}
 	template = 'home.html'
 	return HttpResponse(json.dumps(context), content_type = 'application/json')
@@ -1906,7 +1922,10 @@ def ProductPage(request, p_id):
 
 	product_title = str(product.title)
 	request.session['product_title'] = product_title
-	print request.session['product_title'], request.session
+	session_id = str(request.session.session_key)
+	product_cookie = Product.objects.get(title=request.session['product_title'])
+	recentlyviewed = RecentlyViewed(product=product_cookie, session_id=session_id)
+	recentlyviewed.save()
 
 	similar_products = Product.objects.filter(subcategory=product.subcategory).exclude(title=product.title).order_by('?')
 	
