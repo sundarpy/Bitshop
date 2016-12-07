@@ -263,7 +263,6 @@ class LimitedOffer(models.Model):
 class RecentlyViewed(models.Model):
 	"Recently Viewed Products in current session"
 	product = models.ForeignKey(Product, null=True, blank=True)
-	session_id = models.CharField(max_length=255, null=True, blank=True)
 
 	def __str__(self):
 		return str(self.product.title)

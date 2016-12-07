@@ -216,7 +216,7 @@ def Search(request):
 def HomePage(request):
 	"""Home Page"""
 	if request.session:
-		Recents = RecentlyViewed.objects.filter(session_id=str(request.session.session_key))
+		Recents = RecentlyViewed.objects.all()
 		recents_list = []
 		for i in Recents:
 			recent_dict = {}
@@ -1922,9 +1922,8 @@ def ProductPage(request, p_id):
 
 	product_title = str(product.title)
 	request.session['product_title'] = product_title
-	session_id = str(request.session.session_key)
 	product_cookie = Product.objects.get(title=request.session['product_title'])
-	recentlyviewed = RecentlyViewed(product=product_cookie, session_id=session_id)
+	recentlyviewed = RecentlyViewed(product=product_cookie)
 	recentlyviewed.save()
 
 	similar_products = Product.objects.filter(subcategory=product.subcategory).exclude(title=product.title).order_by('?')
