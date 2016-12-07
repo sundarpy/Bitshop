@@ -23,6 +23,10 @@ from datetime import date, timedelta
 from itertools import chain
 import json
 import ast
+from uuid import getnode as get_mac
+
+mac = get_mac()
+mac_str = str(mac)
 
 def serfoproductcoverter(prod_query):
 	xlist = []
@@ -206,14 +210,6 @@ def Search(request):
 
 def HomePage(request):
 	"""Home Page"""
-	try:
-		# case server 200.000.02.001
-		client_address = request.META['HTTP_X_FORWARDED_FOR']
-	except:
-		# case localhost ou 127.0.0.1
-		client_address = request.META['REMOTE_ADDR']
-	print client_address
-
 	user = None
 	try:
 		username = request.GET.get('username')
@@ -222,9 +218,27 @@ def HomePage(request):
 	except Exception as e:
 		pass
 
+	recoms = Recommendation.objects.filter(mac_address=mac_str, rectype='P').order_by('id')
+	if len(recoms) > 15:
+		recoms2 = recoms[10:]
+		recoms2.delete()
+
 	navbar_category = Category.objects.all()
 	catlist = categoryconverter(navbar_category)
 	navbar_category = catlist
+
+	recom_list = []
+	for i in recoms:
+		recom_dict = {}
+		recom_dict['id'] = i.product.id
+		recom_dict['title'] = i.product.title
+		recom_dict['offer_price'] = str(i.product.offer_price)
+		recom_dict['sale_price'] = str(i.product.sale_price)
+		recom_dict['mainimage'] = str(i.product.mainimage)
+		recom_list.append(recom_dict)
+	return recom_list
+
+	recoms = recom_list
 
 	saleoffer = SaleOffer.objects.all()
 	salelist = []
@@ -272,6 +286,7 @@ def HomePage(request):
 				"news" : news,
 				"saleoffer" : saleoffer,
 				"limitedoffer" : limitedoffer,
+				"recents" : recoms,
 				}
 	template = 'home.html'
 	return HttpResponse(json.dumps(context), content_type = 'application/json')
@@ -1904,6 +1919,9 @@ def ProductPage(request, p_id):
 	variants = Product.objects.filter(title=product.title).order_by('?')[1:]
 
 	similar_products = Product.objects.filter(subcategory=product.subcategory).exclude(title=product.title).order_by('?')
+	similar_products2 = similar_products.first()
+	recoms = Recommendation(product=similar_products2, mac_address=mac_str, rectype='P')
+	recoms.save()
 	
 	if product.offer_price != None:
 		cheapers = Product.objects.filter(subcategory=product.subcategory, offer_price__lt=product.offer_price)
