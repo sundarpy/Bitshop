@@ -219,7 +219,7 @@ def HomePage(request):
 		pass
 
 	recoms = Recommendation.objects.filter(mac_address=mac_str, rectype='P').order_by('id')
-	if len(recoms) > 15:
+	if recoms and len(recoms) > 15:
 		recoms2 = recoms[10:]
 		recoms2.delete()
 
@@ -236,8 +236,6 @@ def HomePage(request):
 		recom_dict['sale_price'] = str(i.product.sale_price)
 		recom_dict['mainimage'] = str(i.product.mainimage)
 		recom_list.append(recom_dict)
-	return recom_list
-
 	recoms = recom_list
 
 	saleoffer = SaleOffer.objects.all()
@@ -274,7 +272,6 @@ def HomePage(request):
 	appliances_prod = appliances_prod_list
 	home_prod = home_prod_list
 	electronics_prod = electronics_prod_list
-
 
 	context = { 
 				"data1" : men_prod,
