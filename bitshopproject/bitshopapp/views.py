@@ -215,18 +215,17 @@ def Search(request):
 
 def HomePage(request):
 	"""Home Page"""
-	if request.session:
-		Recents = RecentlyViewed.objects.all()
-		recents_list = []
-		for i in Recents:
-			recent_dict = {}
-			recent_dict['id'] = i.product.id
-			recent_dict['title'] = i.product.title
-			recent_dict['offer_price'] = str(i.product.offer_price)
-			recent_dict['sale_price'] = str(i.product.sale_price)
-			recent_dict['mainimage'] = str(i.product.mainimage)
-			recents_list.append(recent_dict)
-		return recents_list
+	Recents = RecentlyViewed.objects.all()
+	recents_list = []
+	for i in Recents:
+		recent_dict = {}
+		recent_dict['id'] = i.product.id
+		recent_dict['title'] = i.product.title
+		recent_dict['offer_price'] = str(i.product.offer_price)
+		recent_dict['sale_price'] = str(i.product.sale_price)
+		recent_dict['mainimage'] = str(i.product.mainimage)
+		recents_list.append(recent_dict)
+	return recents_list
 
 	Recents = recents_list
 
