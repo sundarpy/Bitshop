@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, Http404, render_to_response, get_object_or_404
 from django.template.loader import get_template
 from django.template import Context, RequestContext, loader
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpRequest
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
@@ -23,15 +23,6 @@ from datetime import date, timedelta
 from itertools import chain
 import json
 import ast
-
-# def set_cookie(response, key, value, days_expire = 7):
-# 	if days_expire is None:
-# 		max_age = 365 * 24 * 60 * 60  #one year
-# 	else:
-# 		max_age = days_expire * 24 * 60 * 60 
-# 	expires = datetime.datetime.strftime(datetime.datetime.utcnow() + datetime.timedelta(seconds=max_age), "%a, %d-%b-%Y %H:%M:%S GMT")
-# 	response.set_cookie(key, value, max_age=max_age, expires=expires, domain=settings.SESSION_COOKIE_DOMAIN, secure=settings.SESSION_COOKIE_SECURE or None)
-
 
 def serfoproductcoverter(prod_query):
 	xlist = []
@@ -215,6 +206,14 @@ def Search(request):
 
 def HomePage(request):
 	"""Home Page"""
+	try:
+		# case server 200.000.02.001
+		client_address = request.META['HTTP_X_FORWARDED_FOR']
+	except:
+		# case localhost ou 127.0.0.1
+		client_address = request.META['REMOTE_ADDR']
+	print client_address
+
 	user = None
 	try:
 		username = request.GET.get('username')
