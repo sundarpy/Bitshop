@@ -24,6 +24,15 @@ from itertools import chain
 import json
 import ast
 
+# def set_cookie(response, key, value, days_expire = 7):
+# 	if days_expire is None:
+# 		max_age = 365 * 24 * 60 * 60  #one year
+# 	else:
+# 		max_age = days_expire * 24 * 60 * 60 
+# 	expires = datetime.datetime.strftime(datetime.datetime.utcnow() + datetime.timedelta(seconds=max_age), "%a, %d-%b-%Y %H:%M:%S GMT")
+# 	response.set_cookie(key, value, max_age=max_age, expires=expires, domain=settings.SESSION_COOKIE_DOMAIN, secure=settings.SESSION_COOKIE_SECURE or None)
+
+
 def serfoproductcoverter(prod_query):
 	xlist = []
 	for i in prod_query:
@@ -1894,6 +1903,10 @@ def ProductPage(request, p_id):
 	product = Product.objects.get(pk=p_id)
 	image = ProductImage.objects.filter(product_name=product)
 	variants = Product.objects.filter(title=product.title).order_by('?')[1:]
+
+	product_title = str(product.title)
+	request.session['product_title'] = product_title
+	print request.session['product_title'], request.session
 
 	similar_products = Product.objects.filter(subcategory=product.subcategory).exclude(title=product.title).order_by('?')
 	
