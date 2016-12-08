@@ -25,9 +25,6 @@ import json
 import ast
 from uuid import getnode as get_mac
 
-mac = get_mac()
-mac_str = str(mac)
-
 def serfoproductcoverter(prod_query):
 	xlist = []
 	for i in prod_query:
@@ -210,6 +207,9 @@ def Search(request):
 
 def HomePage(request):
 	"""Home Page"""
+	mac = get_mac()
+	mac_str = str(mac)
+
 	user = None
 	try:
 		username = request.GET.get('username')
@@ -1901,6 +1901,9 @@ def Electronics(request):
 
 def ProductPage(request, p_id):
 	"""Product detail page"""
+	mac = get_mac()
+	mac_str = str(mac)
+
 	user = None
 	try:
 		username = request.GET.get('username')
