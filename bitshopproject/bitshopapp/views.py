@@ -261,16 +261,18 @@ def HomePage(request):
 		if recoms and len(recoms) > 15:
 			recoms2 = Recommendation.objects.filter(user=request.user, rectype='P').order_by('-id')[10:].values_list("id", flat=True)
 			Recommendation.objects.exclude(pk__in=list(recoms2)).delete()
-			recom_list = []
-			for i in recoms:
-				recom_dict = {}
-				recom_dict['id'] = i.product.id
-				recom_dict['title'] = i.product.title
-				recom_dict['offer_price'] = str(i.product.offer_price)
-				recom_dict['sale_price'] = str(i.product.sale_price)
-				recom_dict['mainimage'] = str(i.product.mainimage)
-				recom_list.append(recom_dict)
-			recoms = recom_list
+
+		recom_list = []
+		for i in recoms:
+			recom_dict = {}
+			recom_dict['id'] = i.product.id
+			recom_dict['title'] = i.product.title
+			recom_dict['offer_price'] = str(i.product.offer_price)
+			recom_dict['sale_price'] = str(i.product.sale_price)
+			recom_dict['mainimage'] = str(i.product.mainimage)
+			recom_list.append(recom_dict)
+		recoms = recom_list
+
 		context = { 
 					"data1" : men_prod,
 					"data2" : women_prod,
@@ -283,6 +285,7 @@ def HomePage(request):
 					"limitedoffer" : limitedoffer,
 					"recoms" : recoms,
 					}
+					
 	else:
 		context = { 
 					"data1" : men_prod,
