@@ -256,10 +256,10 @@ def HomePage(request):
 	electronics_prod = electronics_prod_list
 
 
-	if request.user.is_authenticated():
-		recoms = Recommendation.objects.filter(user=request.user, rectype='P').order_by('id')
+	if user.is_authenticated():
+		recoms = Recommendation.objects.filter(user=user, rectype='P').order_by('id')
 		if recoms and len(recoms) > 15:
-			recoms2 = Recommendation.objects.filter(user=request.user, rectype='P').order_by('-id')[10:].values_list("id", flat=True)
+			recoms2 = Recommendation.objects.filter(user=user, rectype='P').order_by('-id')[10:].values_list("id", flat=True)
 			Recommendation.objects.exclude(pk__in=list(recoms2)).delete()
 
 		recom_list = []
@@ -1931,9 +1931,9 @@ def ProductPage(request, p_id):
 	variants = Product.objects.filter(title=product.title).exclude(pk=p_id)
 
 	similar_products = Product.objects.filter(subcategory=product.subcategory).exclude(title=product.title).order_by('?')
-	if request.user.is_authenticated():
+	if user.is_authenticated():
 		similar_products2 = similar_products.first()
-		recoms = Recommendation(product=similar_products2, user=request.user, rectype='P')
+		recoms = Recommendation(product=similar_products2, user=user, rectype='P')
 		recoms.save()
 	
 	if product.offer_price != None:
