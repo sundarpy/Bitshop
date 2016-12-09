@@ -216,25 +216,25 @@ def HomePage(request):
 	except Exception as e:
 		pass
 
-	# recoms = Recommendation.objects.filter(mac_address=mac_str, rectype='P').order_by('id')
-	# if recoms and len(recoms) > 15:
-	# 	recoms2 = Recommendation.objects.filter(mac_address=mac_str, rectype='P').order_by('-id')[10:].values_list("id", flat=True)
-	# 	Recommendation.objects.exclude(pk__in=list(recoms2)).delete()
+	recoms = Recommendation.objects.filter(user=request.user, rectype='P').order_by('id')
+	if recoms and len(recoms) > 15:
+		recoms2 = Recommendation.objects.filter(user=request.user, rectype='P').order_by('-id')[10:].values_list("id", flat=True)
+		Recommendation.objects.exclude(pk__in=list(recoms2)).delete()
 
 	navbar_category = Category.objects.all()
 	catlist = categoryconverter(navbar_category)
 	navbar_category = catlist
 
-	# recom_list = []
-	# for i in recoms:
-	# 	recom_dict = {}
-	# 	recom_dict['id'] = i.product.id
-	# 	recom_dict['title'] = i.product.title
-	# 	recom_dict['offer_price'] = str(i.product.offer_price)
-	# 	recom_dict['sale_price'] = str(i.product.sale_price)
-	# 	recom_dict['mainimage'] = str(i.product.mainimage)
-	# 	recom_list.append(recom_dict)
-	# recoms = recom_list
+	recom_list = []
+	for i in recoms:
+		recom_dict = {}
+		recom_dict['id'] = i.product.id
+		recom_dict['title'] = i.product.title
+		recom_dict['offer_price'] = str(i.product.offer_price)
+		recom_dict['sale_price'] = str(i.product.sale_price)
+		recom_dict['mainimage'] = str(i.product.mainimage)
+		recom_list.append(recom_dict)
+	recoms = recom_list
 
 	saleoffer = SaleOffer.objects.all()
 	salelist = []
@@ -281,7 +281,7 @@ def HomePage(request):
 				"news" : news,
 				"saleoffer" : saleoffer,
 				"limitedoffer" : limitedoffer,
-				# "recoms" : recoms,
+				"recoms" : recoms,
 				}
 	template = 'home.html'
 	return HttpResponse(json.dumps(context), content_type = 'application/json')
@@ -1915,9 +1915,9 @@ def ProductPage(request, p_id):
 	variants = Product.objects.filter(title=product.title).order_by('?')[1:]
 
 	similar_products = Product.objects.filter(subcategory=product.subcategory).exclude(title=product.title).order_by('?')
-	# similar_products2 = similar_products.first()
-	# recoms = Recommendation(product=similar_products2, mac_address=mac_str, rectype='P')
-	# recoms.save()
+	similar_products2 = similar_products.first()
+	recoms = Recommendation(product=similar_products2, user=request.user, rectype='P')
+	recoms.save()
 	
 	if product.offer_price != None:
 		cheapers = Product.objects.filter(subcategory=product.subcategory, offer_price__lt=product.offer_price)
