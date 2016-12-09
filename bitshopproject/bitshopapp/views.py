@@ -269,6 +269,10 @@ def HomePage(request):
 			recoms2 = Recommendation.objects.filter(user=user).order_by('-id')[10:].values_list("id", flat=True)
 			Recommendation.objects.exclude(pk__in=list(recoms2)).delete()
 
+		recoms3 = Recommendation.objects.filter(user=user, rectype='R').order_by('id')
+		if recoms3 and len(recoms3) > 5:
+			Recommendation.objects.filter(user=user, rectype='R').delete()
+
 		recom_list = []
 		for i in recoms:
 			recom_dict = {}
@@ -1942,6 +1946,8 @@ def ProductPage(request, p_id):
 		similar_products2 = similar_products.first()
 		recoms = Recommendation(product=similar_products2, user=user, rectype='P')
 		recoms.save()
+		recoms2 = Recommendation(product=product, user=user, rectype='R')
+		recoms2.save()
 	
 	if product.offer_price != None:
 		cheapers = Product.objects.filter(subcategory=product.subcategory, offer_price__lt=product.offer_price)

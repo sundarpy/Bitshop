@@ -208,6 +208,7 @@ class Recommendation(models.Model):
 	REC_TYPE = (
 		('P', 'Product Click'),
 		('S', 'Search Result'),
+		('R', 'Recently Viewed')
 	)
 	rectype = models.CharField(max_length=2, choices=REC_TYPE, blank=True, null=True)
 
