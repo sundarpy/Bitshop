@@ -285,7 +285,7 @@ def HomePage(request):
 					"limitedoffer" : limitedoffer,
 					"recoms" : recoms,
 					}
-					
+
 	else:
 		context = { 
 					"data1" : men_prod,
@@ -1928,7 +1928,7 @@ def ProductPage(request, p_id):
 	navbar_category = Category.objects.all()
 	product = Product.objects.get(pk=p_id)
 	image = ProductImage.objects.filter(product_name=product)
-	variants = Product.objects.filter(title=product.title).order_by('?')[1:]
+	variants = Product.objects.filter(title=product.title).exclude(pk=p_id)
 
 	similar_products = Product.objects.filter(subcategory=product.subcategory).exclude(title=product.title).order_by('?')
 	if request.user.is_authenticated():
