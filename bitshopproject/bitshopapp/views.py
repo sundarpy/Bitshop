@@ -216,22 +216,6 @@ def HomePage(request):
 	except Exception as e:
 		pass
 
-	if request.user.is_authenticated():
-		recoms = Recommendation.objects.filter(user=request.user, rectype='P').order_by('id')
-		if recoms and len(recoms) > 15:
-			recoms2 = Recommendation.objects.filter(user=request.user, rectype='P').order_by('-id')[10:].values_list("id", flat=True)
-			Recommendation.objects.exclude(pk__in=list(recoms2)).delete()
-			recom_list = []
-			for i in recoms:
-				recom_dict = {}
-				recom_dict['id'] = i.product.id
-				recom_dict['title'] = i.product.title
-				recom_dict['offer_price'] = str(i.product.offer_price)
-				recom_dict['sale_price'] = str(i.product.sale_price)
-				recom_dict['mainimage'] = str(i.product.mainimage)
-				recom_list.append(recom_dict)
-			recoms = recom_list
-
 	navbar_category = Category.objects.all()
 	catlist = categoryconverter(navbar_category)
 	navbar_category = catlist
@@ -271,18 +255,47 @@ def HomePage(request):
 	home_prod = home_prod_list
 	electronics_prod = electronics_prod_list
 
-	context = { 
-				"data1" : men_prod,
-				"data2" : women_prod,
-				"data3" : appliances_prod,
-				"data4" : home_prod,
-				"data5" : electronics_prod, 
-				"navbar_category" : navbar_category,
-				"news" : news,
-				"saleoffer" : saleoffer,
-				"limitedoffer" : limitedoffer,
-				"recoms" : recoms,
-				}
+
+	if request.user.is_authenticated():
+		recoms = Recommendation.objects.filter(user=request.user, rectype='P').order_by('id')
+		if recoms and len(recoms) > 15:
+			recoms2 = Recommendation.objects.filter(user=request.user, rectype='P').order_by('-id')[10:].values_list("id", flat=True)
+			Recommendation.objects.exclude(pk__in=list(recoms2)).delete()
+			recom_list = []
+			for i in recoms:
+				recom_dict = {}
+				recom_dict['id'] = i.product.id
+				recom_dict['title'] = i.product.title
+				recom_dict['offer_price'] = str(i.product.offer_price)
+				recom_dict['sale_price'] = str(i.product.sale_price)
+				recom_dict['mainimage'] = str(i.product.mainimage)
+				recom_list.append(recom_dict)
+			recoms = recom_list
+		context = { 
+					"data1" : men_prod,
+					"data2" : women_prod,
+					"data3" : appliances_prod,
+					"data4" : home_prod,
+					"data5" : electronics_prod, 
+					"navbar_category" : navbar_category,
+					"news" : news,
+					"saleoffer" : saleoffer,
+					"limitedoffer" : limitedoffer,
+					"recoms" : recoms,
+					}
+	else:
+		context = { 
+					"data1" : men_prod,
+					"data2" : women_prod,
+					"data3" : appliances_prod,
+					"data4" : home_prod,
+					"data5" : electronics_prod, 
+					"navbar_category" : navbar_category,
+					"news" : news,
+					"saleoffer" : saleoffer,
+					"limitedoffer" : limitedoffer,
+					}
+
 	template = 'home.html'
 	return HttpResponse(json.dumps(context), content_type = 'application/json')
 
