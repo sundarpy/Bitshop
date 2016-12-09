@@ -129,6 +129,13 @@ def Search(request):
 
 	if q:
 		products_list = Product.objects.filter(title__icontains=q).order_by('?')
+		products_list2 = products_list.first()
+		similar_products = Product.objects.filter(subcategory=products_list2.subcategory).exclude(title=products_list2.title).order_by('?')
+		if user:
+			similar_products2 = similar_products.first()
+			recoms = Recommendation(product=similar_products2, user=user, rectype='S')
+			recoms.save()
+
 		productcount = str(len(products_list))
 		paginator = Paginator(products_list, 25)
 		page = request.GET.get('page')
@@ -257,9 +264,9 @@ def HomePage(request):
 
 
 	if user:
-		recoms = Recommendation.objects.filter(user=user, rectype='P').order_by('id')
+		recoms = Recommendation.objects.filter(user=user).order_by('id')
 		if recoms and len(recoms) > 15:
-			recoms2 = Recommendation.objects.filter(user=user, rectype='P').order_by('-id')[10:].values_list("id", flat=True)
+			recoms2 = Recommendation.objects.filter(user=user).order_by('-id')[10:].values_list("id", flat=True)
 			Recommendation.objects.exclude(pk__in=list(recoms2)).delete()
 
 		recom_list = []
