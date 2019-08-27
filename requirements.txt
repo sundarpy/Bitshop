@@ -24,7 +24,7 @@ PyDispatcher==2.0.5
 pyOpenSSL==16.0.0
 python-openid==2.2.5
 queuelib==1.4.2
-requests==2.10.0
+requests==2.20.0
 requests-oauthlib==0.6.2
 Scrapy==1.2.0
 service-identity==16.0.0
